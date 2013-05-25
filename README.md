@@ -31,6 +31,8 @@ The following options can be passed to the installer script:
 ***`-h, --help`***<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Show a list of the options and a brief explanation of what they do.
 
+The `--force` and `--quiet` options can also be used together to not output anything, but automatically overwrite any files that conflict with those in the repository.
+
 ## Credits
 
 Several other projects have provided me with ideas (and sometimes just a little code!) for this project:

@@ -105,6 +105,10 @@ def create_symlinks(dotfiles, force=False, quiet=False):
         force: Whether to force overwriting of clashing files. If set to True,
             the script will not ask if the user wants to backup any files that
             already exist; they will just be overwritten.
+        quiet: Whether or not to output anything. If set to True, the script
+            will automatically back up all file clashes without asking the
+            user. If force is also True, there will still be no output, but the
+            script will automatically overwrite everything.
     """
 
     if not quiet: print 'Linking files into home directory...'
