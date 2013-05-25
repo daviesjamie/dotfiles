@@ -2,7 +2,7 @@
 
 This ~~is~~ *will be* a collection of the [dotfiles](http://dotfiles.github.io/) that I use to set up a system just the way I like it.
 
-I am currently only using this repository on OS X, but I plan to one day get around to using it on Linux as well.
+I am currently only using this repository on OS X, but I plan to one day get around to using it on Linux as well - and so there shouldn't be any issues running it on a Linux system.
 
 ## Installation
 
@@ -10,7 +10,7 @@ To install these dotfiles on your system, simply:
 
 ```
 $ git clone https://github.com/daviesjamie/dotfiles.git ~/.dotfiles
-$ cd .dotfiles
+$ cd ~/.dotfiles
 $ python install.py
 ```
 
@@ -22,10 +22,10 @@ The script will also ask if you want to install the dependencies for these dotfi
 
 The following options can be passed to the installer script:
 
-*`-f, --force`*<br />
+***`-f, --force`***<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Automatically overwrite any files, instead of asking you whether to back up or not (Use with **caution**!).
 
-*`-h, --help`*<br />
+***`-h, --help`***<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Show a list of the options and a brief explanation of what they do.
 
 ## Credits
