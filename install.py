@@ -1,18 +1,41 @@
-from glob import iglob
-from os import listdir, remove, symlink
-from os.path import basename, dirname, exists, expanduser, isdir, join, realpath
-from shutil import rmtree
+import glob, os, shutil, sys
 
-IGNORED_FILES = [__file__, '.git', 'README.md']
+IGNORED_FILES = [__file__, '.git', 'installerlib', 'README.md']
+BACKUP_SUFFIX = '~'
+
+################################################################################
+# Helper Functions
+################################################################################
+
+def ask_yn(question):
+    question += ' (y/n):  '
+    answer = None
+
+    while answer not in ['yes', 'y', 'no', 'n']:
+        answer = raw_input(question).lower()
+
+    return answer.startswith('y')
+
+
+def pretty_basename(path):
+    name = os.path.basename(path)
+    if os.path.isdir(path):
+        name += '/'
+    return name
+
+
+################################################################################
+# Dotfiles Functions
+################################################################################
 
 def get_dotfiles(dotfiles_dir):
     # Get all files in the current directory
-    dot_all = listdir(dotfiles_dir)
+    dot_all = os.listdir(dotfiles_dir)
 
     # Ignore all files that match a dotfiles/.gitignore pattern
-    gitignore = join(dotfiles_dir, '.gitignore')
+    gitignore = os.path.join(dotfiles_dir, '.gitignore')
     dot_actual = dot_all[:]
-    if exists(gitignore):
+    if os.path.exists(gitignore):
         with open(gitignore) as gi:
             for line in gi:
                 if line != '\n' and not line.startswith('#'):
@@ -26,8 +49,8 @@ def get_dotfiles(dotfiles_dir):
                         patterns.append(pattern[1:])  # *.b == *.b and .b
 
                     for pattern in patterns:
-                        for path in iglob(join(dotfiles_dir, pattern)):
-                            name = basename(path)
+                        for path in glob.iglob(os.path.join(dotfiles_dir, pattern)):
+                            name = os.path.basename(path)
                             if name in dot_actual:
                                 dot_actual.remove(name)
 
@@ -37,46 +60,56 @@ def get_dotfiles(dotfiles_dir):
             dot_actual.remove(igf)
 
     # Return a list of the actual dotfiles (with their paths)
-    return [join(dotfiles_dir, name) for name in dot_actual]
+    return [os.path.join(dotfiles_dir, name) for name in dot_actual]
 
 
 def create_symlinks(dotfiles):
-    home_dir = expanduser('~')
+    print 'Linking files into home directory...'
+    home_dir = os.path.expanduser('~')
 
     for path in sorted(dotfiles):
-        dest = join(home_dir, basename(path))
-        name = _pretty_basename(path)
+        dest = os.path.join(home_dir, os.path.basename(path))
+        name = pretty_basename(path)
         installed = False
 
         while not installed:
             try:
-                symlink(path, dest)
+                os.symlink(path, dest)
             except OSError:
-                # If dest already exists
-                if isdir(dest) and not islink(dest):
-                    rmtree(dest)
+                # If dest already exists, offer to back it up
+                if os.path.isdir(dest) and not islink(dest):
+                    shutil.rmtree(dest)
                 else:
-                    remove(dest)
+                    backup = ask_yn(name + ' already exists, back it up?' )
+                    
+                    if backup:
+                        # Back up dest, using BACKUP_SUFFIX
+                        backup_dest = dest + BACKUP_SUFFIX
+                        while os.path.exists(backup_dest):
+                            backup_dest += BACKUP_SUFFIX
 
-                print "REMOVED - " + name
+                        os.rename(dest, backup_dest)
+                        print 'BACKED UP - ' + name + ' to ' + backup_dest
+                    else:
+                        # Replace dest
+                        os.remove(dest)
+
+                print 'REMOVED - ' + name
             else:
                 # Sucessfully linked
-                print "LINKED - " + name
+                print 'LINKED - ' + name
                 installed = True
 
-    print "Linking Complete: " + str(len(dotfiles)) + " files were linked."
+    print 'Linking complete! ' + str(len(dotfiles)) + ' files were linked.'
 
 
-def _pretty_basename(path):
-    name = basename(path)
-    if isdir(path):
-        name += '/'
-    return name
-
+################################################################################
+# Main Function
+################################################################################
 
 def main():
     # Get dotfiles directory
-    dot_dir = dirname(realpath(__file__))
+    dot_dir = os.path.dirname(os.path.realpath(__file__))
 
     # Get a list of all the dotfiles
     dot_names = get_dotfiles(dot_dir)
