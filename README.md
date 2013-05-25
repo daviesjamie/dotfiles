@@ -2,7 +2,7 @@
 
 This ~~is~~ *will be* a collection of the [dotfiles](http://dotfiles.github.io/) that I use to set up a system just the way I like it.
 
-I am currently only using this repository on OS X, but I plan to one day get around to using it on Linux as well - and so there shouldn't be any issues running it on a Linux system.
+I am currently only using this repository on OS X, but I plan to one day get around to using it on Linux as well - so there shouldn't be any issues running it on a Linux system.
 
 ## Installation
 
@@ -14,7 +14,7 @@ $ cd ~/.dotfiles
 $ ./install.py
 ```
 
-The installer script will create a symlink to each dotfile in your home directory, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
+The installer script will create a symlink in your home directory to each dotfile, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
 
 The script will also ask if you want to install the dependencies for these dotfiles, such as [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
@@ -32,6 +32,16 @@ The following options can be passed to the installer script:
 &nbsp;&nbsp;&nbsp;&nbsp;Show a list of the options and a brief explanation of what they do.
 
 The `--force` and `--quiet` options can also be used together to not output anything, but automatically overwrite any files that conflict with those in the repository.
+
+### Manual Installation
+
+If you don't want to use the script to install the dotfiles, then you can manually create a symlink to each file yourself with the following command:
+
+```
+ln -s ~/.dotfiles/.gitignore ~/.gitignore
+```
+
+Rinse and repeat for each file in this repository that you wish to use.
 
 ## Credits
 
