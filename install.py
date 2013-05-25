@@ -1,4 +1,4 @@
-import glob, os, shutil, sys
+import argparse, glob, os, shutil, sys
 
 IGNORED_FILES = [__file__, '.git', 'installerlib', 'README.md']
 BACKUP_SUFFIX = '~'
@@ -63,7 +63,7 @@ def get_dotfiles(dotfiles_dir):
     return [os.path.join(dotfiles_dir, name) for name in dot_actual]
 
 
-def create_symlinks(dotfiles):
+def create_symlinks(dotfiles, force=False):
     print 'Linking files into home directory...'
     home_dir = os.path.expanduser('~')
 
@@ -80,7 +80,10 @@ def create_symlinks(dotfiles):
                 if os.path.isdir(dest) and not islink(dest):
                     shutil.rmtree(dest)
                 else:
-                    backup = ask_yn(name + ' already exists, back it up?' )
+                    if not force:
+                        backup = ask_yn(name + ' already exists, back it up?' )
+                    else:
+                        backup = False
                     
                     if backup:
                         # Back up dest, using BACKUP_SUFFIX
@@ -108,6 +111,11 @@ def create_symlinks(dotfiles):
 ################################################################################
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--force', help='Automatically overwrite any files, instead of asking you whether to back up or not (Use with CAUTION!)', action='store_true')
+
+    args = parser.parse_args()
+
     # Get dotfiles directory
     dot_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -115,7 +123,7 @@ def main():
     dot_names = get_dotfiles(dot_dir)
 
     # Create the symlinks to those files
-    create_symlinks(dot_names)
+    create_symlinks(dot_names, force=args.force)
     
 
 if __name__ == '__main__':
