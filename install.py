@@ -142,6 +142,12 @@ def main():
 
     # Create the symlinks to those files
     create_symlinks(dot_names, force=args.force)
+
+    print '\nInstallation Complete.'
+
+    # Print tips
+    if not installed_oh_my_zsh:
+        print "You didn't install oh-my-zsh, so you probably want to remove the oh-my-zsh lines from .zshrc!"
     
 
 if __name__ == '__main__':
