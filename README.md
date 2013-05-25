@@ -11,7 +11,7 @@ To install these dotfiles on your system, simply:
 ```
 $ git clone https://github.com/daviesjamie/dotfiles.git ~/.dotfiles
 $ cd ~/.dotfiles
-$ ./install
+$ ./install.py
 ```
 
 The installer script will create a symlink to each dotfile in your home directory, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
