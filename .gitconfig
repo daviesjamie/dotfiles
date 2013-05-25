@@ -1,0 +1,5 @@
+[user]
+	name = Jamie Davies
+	email = jamie@jamiedavies.me
+[core]
+	excludesfile = /Users/jamie/.gitignore
