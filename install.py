@@ -4,7 +4,7 @@ import argparse, glob, os, shutil, subprocess, sys
 
 # List of files inside the dotfiles folder to ignore (and not link), that
 # aren't specified through .gitignore
-IGNORED_FILES = [__file__, '.git', 'README.md']
+IGNORED_FILES = [os.path.basename(__file__), '.git', 'README.md']
 
 # Suffix to use when creating a backup of a file
 BACKUP_SUFFIX = '~'
@@ -91,7 +91,7 @@ def get_dotfiles(dotfiles_dir):
     return [os.path.join(dotfiles_dir, name) for name in dot_actual]
 
 
-def create_symlinks(dotfiles, force=False):
+def create_symlinks(dotfiles, force=False, quiet=False):
     """Creates links to the specified dotfiles in the user's home directory.
 
     Goes through a list of files/directories and creates a symlink in the user's
@@ -107,7 +107,7 @@ def create_symlinks(dotfiles, force=False):
             already exist; they will just be overwritten.
     """
 
-    print 'Linking files into home directory...'
+    if not quiet: print 'Linking files into home directory...'
     home_dir = os.path.expanduser('~')
 
     for path in sorted(dotfiles):
@@ -124,7 +124,10 @@ def create_symlinks(dotfiles, force=False):
                     shutil.rmtree(dest)
                 else:
                     if not force:
-                        backup = ask_yn(name + ' already exists, back it up?' )
+                        if not quiet:
+                            backup = ask_yn(name + ' already exists, back it up?' )
+                        else:
+                            backup = True
                     else:
                         backup = False
                     
@@ -135,29 +138,48 @@ def create_symlinks(dotfiles, force=False):
                             backup_dest += BACKUP_SUFFIX
 
                         os.rename(dest, backup_dest)
-                        print 'BACKED UP - ' + name + ' to ' + backup_dest
+                        if not quiet: print 'BACKED UP - ' + name + ' to ' + backup_dest
                     else:
                         # Replace dest
                         os.remove(dest)
 
-                print 'REMOVED - ' + name
+                if not quiet: print 'REMOVED - ' + name
             else:
                 # Sucessfully linked
-                print 'LINKED - ' + name
+                if not quiet: print 'LINKED - ' + name
                 installed = True
 
-    print 'Linking complete! ' + str(len(dotfiles)) + ' files were linked.'
+    if not quiet: print 'Linking complete! ' + str(len(dotfiles)) + ' files were linked.'
 
 
 ################################################################################
 # Installation Functions
 ################################################################################
 
-def install_oh_my_zsh():
-    """Installs oh-my-zsh from GitHub."""
+def install_oh_my_zsh(quiet=False):
+    """Installs oh-my-zsh from GitHub.
 
-    run('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
-    run('chsh -s /bin/zsh')
+    If the user doesn't already have oh-my-zsh installed, it asks them if they
+    would like to install it. If they answer yes, then install it (respecting
+    the quiet option).
+
+    Returns a boolean representing whether oh-my-zsh is installed.
+    """
+
+    installed_oh_my_zsh = os.path.exists(os.path.join(os.path.expanduser('~'), '.oh-my-zsh'))
+    
+    if not installed_oh_my_zsh:
+        if not quiet:
+            if ask_yn('Install oh-my-zsh?'):
+                run('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
+                run('chsh -s /bin/zsh')
+                installed_oh_my_zsh = True
+        else:
+            run('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &> /dev/null')
+            run('chsh -s /bin/zsh &> /dev/null')
+            installed_oh_my_zsh = True
+
+    return installed_oh_my_zsh
 
 
 ################################################################################
@@ -171,14 +193,11 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--force', help='Automatically overwrite any files, instead of asking you whether to back up or not (Use with CAUTION!)', action='store_true')
-
+    parser.add_argument('-q', '--quiet', help='The script will not output anything. It will automatically backup all files and install all dependencies.', action='store_true')
     args = parser.parse_args()
 
     # Install oh-my-zsh (if not already installed)?
-    installed_oh_my_zsh = os.path.exists(os.path.join(os.path.expanduser('~'), '.oh-my-zsh'))
-    if not installed_oh_my_zsh and ask_yn('Install oh-my-zsh?'):
-        install_oh_my_zsh()
-        installed_oh_my_zsh = True
+    installed_oh_my_zsh = install_oh_my_zsh(quiet=args.quiet)
 
     # Get dotfiles directory
     dot_dir = os.path.dirname(os.path.realpath(__file__))
@@ -187,13 +206,13 @@ def main():
     dot_names = get_dotfiles(dot_dir)
 
     # Create the symlinks to those files
-    create_symlinks(dot_names, force=args.force)
+    create_symlinks(dot_names, force=args.force, quiet=args.quiet)
 
-    print '\nInstallation Complete.'
-
-    # Print tips
-    if not installed_oh_my_zsh:
-        print "You didn't install oh-my-zsh, so you probably want to remove the oh-my-zsh lines from .zshrc!"
+    # Print done message(s).
+    if not args.quiet:
+        print '\nInstallation Complete.'
+        if not installed_oh_my_zsh:
+            print "You didn't install oh-my-zsh, so you probably want to remove the oh-my-zsh lines from .zshrc!"
     
 
 if __name__ == '__main__':

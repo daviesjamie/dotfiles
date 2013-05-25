@@ -25,6 +25,9 @@ The following options can be passed to the installer script:
 ***`-f, --force`***<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Automatically overwrite any files, instead of asking you whether to back up or not (Use with **caution**!).
 
+***`-q, --quiet`***<br />
+&nbsp;&nbsp;&nbsp;&nbsp;The script will not output anything. It will automatically backup all files and install all dependencies.
+
 ***`-h, --help`***<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Show a list of the options and a brief explanation of what they do.
 
