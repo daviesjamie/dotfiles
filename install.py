@@ -1,13 +1,22 @@
 import argparse, glob, os, shutil, subprocess, sys
 
+# List of files inside the dotfiles folder to ignore (and not link), that
+# aren't specified through .gitignore
 IGNORED_FILES = [__file__, '.git', 'README.md']
+
+# Suffix to use when creating a backup of a file
 BACKUP_SUFFIX = '~'
+
 
 ################################################################################
 # Helper Functions
 ################################################################################
 
 def ask_yn(question):
+    """Presents the user with a question, and takes a yes (True) or no (False)
+    answer in response.
+    """
+
     question += ' (y/n):  '
     answer = None
 
@@ -18,12 +27,17 @@ def ask_yn(question):
 
 
 def pretty_basename(path):
+    """Returns the basename of the given path, with a trailing '/' if the
+    basename of the path is a directory.
+    """
     name = os.path.basename(path)
     if os.path.isdir(path):
         name += '/'
     return name
 
+
 def run(command):
+    """Runs a given command externally in the shell."""
     return subprocess.call(command, shell=True)
 
 
@@ -32,6 +46,15 @@ def run(command):
 ################################################################################
 
 def get_dotfiles(dotfiles_dir):
+    """Returns a list of the files in the dotfiles directory that are actually
+    valid dotfiles.
+
+    A list of all the files in the dotfiles directory is narrowed down, with all
+    files specified by the .gitignore file removed. All files that are
+    arbitrarily specified in the IGNORED_FILES list are also removed. The
+    resulting list is then returned.
+    """
+
     # Get all files in the current directory
     dot_all = os.listdir(dotfiles_dir)
 
@@ -67,6 +90,21 @@ def get_dotfiles(dotfiles_dir):
 
 
 def create_symlinks(dotfiles, force=False):
+    """Creates links to the specified dotfiles in the user's home directory.
+
+    Goes through a list of files/directories and creates a symlink in the user's
+    home directory to each one. If a file/directory with the same name already
+    exists in the user's home directory, it will ask the user if they wish to
+    back up that file (by appending BACKUP_SUFFIX to the filename) before
+    creating the link.
+
+    Args:
+        dotfiles: A list of the files/directories to create links for.
+        force: Whether to force overwriting of clashing files. If set to True,
+            the script will not ask if the user wants to backup any files that
+            already exist; they will just be overwritten.
+    """
+
     print 'Linking files into home directory...'
     home_dir = os.path.expanduser('~')
 
@@ -114,8 +152,10 @@ def create_symlinks(dotfiles, force=False):
 ################################################################################
 
 def install_oh_my_zsh():
-    run("git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh")
-    run("chsh -s /bin/zsh")
+    """Installs oh-my-zsh from GitHub."""
+
+    run('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
+    run('chsh -s /bin/zsh')
 
 
 ################################################################################
@@ -123,6 +163,10 @@ def install_oh_my_zsh():
 ################################################################################
 
 def main():
+    """The function called when the script is executed. Controls the main flow
+    of the program.
+    """
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--force', help='Automatically overwrite any files, instead of asking you whether to back up or not (Use with CAUTION!)', action='store_true')
 
