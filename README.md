@@ -11,7 +11,7 @@ To install these dotfiles on your system, simply:
 ```
 $ git clone https://github.com/daviesjamie/dotfiles.git ~/.dotfiles
 $ cd ~/.dotfiles
-$ python install.py
+$ ./install
 ```
 
 The installer script will create a symlink to each dotfile in your home directory, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
@@ -33,4 +33,4 @@ The following options can be passed to the installer script:
 Several other projects have provided me with ideas (and sometimes just a little code!) for this project:
  - Maciej Konieczny's [dotfiles installer script](https://github.com/narfdotpl/dotfiles).
  - Jon Bernard's [Python dotfiles management system](https://github.com/jbernard/dotfiles).
- - Mathias Bynens' [excellent collection OS X defaults](https://github.com/mathiasbynens/dotfiles/blob/master/.osx).
+ - Mathias Bynens' [excellent collection of OS X defaults](https://github.com/mathiasbynens/dotfiles/blob/master/.osx).

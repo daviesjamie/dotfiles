@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import argparse, glob, os, shutil, subprocess, sys
 
 # List of files inside the dotfiles folder to ignore (and not link), that
