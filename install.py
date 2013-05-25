@@ -1,6 +1,6 @@
-import argparse, glob, os, shutil, sys
+import argparse, glob, os, shutil, subprocess, sys
 
-IGNORED_FILES = [__file__, '.git', 'installerlib', 'README.md']
+IGNORED_FILES = [__file__, '.git', 'README.md']
 BACKUP_SUFFIX = '~'
 
 ################################################################################
@@ -22,6 +22,9 @@ def pretty_basename(path):
     if os.path.isdir(path):
         name += '/'
     return name
+
+def run(command):
+    return subprocess.call(command, shell=True)
 
 
 ################################################################################
@@ -107,6 +110,15 @@ def create_symlinks(dotfiles, force=False):
 
 
 ################################################################################
+# Installation Functions
+################################################################################
+
+def install_oh_my_zsh():
+    run("git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh")
+    run("chsh -s /bin/zsh")
+
+
+################################################################################
 # Main Function
 ################################################################################
 
@@ -115,6 +127,12 @@ def main():
     parser.add_argument('-f', '--force', help='Automatically overwrite any files, instead of asking you whether to back up or not (Use with CAUTION!)', action='store_true')
 
     args = parser.parse_args()
+
+    # Install oh-my-zsh (if not already installed)?
+    installed_oh_my_zsh = os.path.exists(os.path.join(os.path.expanduser('~'), '.oh-my-zsh'))
+    if not installed_oh_my_zsh and ask_yn('Install oh-my-zsh?'):
+        install_oh_my_zsh()
+        installed_oh_my_zsh = True
 
     # Get dotfiles directory
     dot_dir = os.path.dirname(os.path.realpath(__file__))
