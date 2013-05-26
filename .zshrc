@@ -6,3 +6,5 @@ plugins=(brew extract git nyan osx sublime svn zsh)
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# Load $PATH
+[ -f ~/.path ] && source ~/.path

@@ -1,0 +1,6 @@
+PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+# Uncomment the line below to add Enthought Python to the path (breaks homebrew)
+#PATH="$PATH:/Library/Frameworks/Python.framework/Versions/Current/bin"
+
+export PATH
