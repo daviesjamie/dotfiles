@@ -8,3 +8,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Load $PATH
 [ -f ~/.path ] && source ~/.path
+
+# Load Aliases
+[ -f ~/.aliases ] && source ~/.aliases
