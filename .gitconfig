@@ -1,13 +1,13 @@
 [user]
-	name = Jamie Davies
-	email = jamie@jamiedavies.me
+    name = Jamie Davies
+    email = jamie@jamiedavies.me
 
 [core]
-	editor = vim --noplugin
-	excludesfile = /Users/jamie/.gitignore
+    editor = vim --noplugin
+    excludesfile = /Users/jamie/.gitignore
 
 [alias]
-	la = !git config -l | grep alias | cut -c 7-
+    la = !git config -l | grep alias | cut -c 7-
     ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %Creset%s%Cblue\\ [%cn]\\ %Cgreen(%cr)%Creset" --decorate --numstat
     r = reset --hard
