@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse, glob, os, shutil, subprocess, sys
+import argparse, distutils.spawn, distutils.util, glob, os, shutil, subprocess, sys
 
 # List of files inside the dotfiles folder to ignore (and not link), that
 # aren't specified through .gitignore
@@ -70,7 +70,7 @@ def get_dotfiles(dotfiles_dir):
                     pattern = line.rstrip('\n')
                     patterns = [pattern]
 
-                    # use git smart wildcards
+                    # Use wildcards found in git
                     if pattern.startswith('*'):
                         patterns.append('.' + pattern)  # *a == *a and .*a
                     if pattern.startswith('*.'):
@@ -186,6 +186,30 @@ def install_oh_my_zsh(quiet=False):
     return installed_oh_my_zsh
 
 
+def install_homebrew(quiet=False):
+    """Installs homebrew using it's ruby script.
+
+    If the user doesn't already have homebrew installed and they are using a
+    mac, it asks them if they would like to install it. If they answer yes, then
+    install it (respecting the quiet option).
+
+    Returns a boolean representing whether homebrew is installed.
+    """
+
+    installed_brew = distutils.spawn.find_executable('brew')
+    
+    if not installed_brew and "macosx" in distutils.util.get_platform():
+        if not quiet:
+            if ask_yn('Install homebrew?'):
+                run('ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"')
+                installed_brew = True
+        else:
+            run('ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &> /dev/null')
+            installed_brew = True
+
+    return installed_brew
+
+
 ################################################################################
 # Main Function
 ################################################################################
@@ -203,6 +227,9 @@ def main():
     # Install oh-my-zsh (if not already installed)?
     installed_oh_my_zsh = install_oh_my_zsh(quiet=args.quiet)
 
+    # Install homebrew (if not already installed)?
+    installed_brew = install_homebrew(quiet=args.quiet)
+
     # Get dotfiles directory
     dot_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -217,6 +244,8 @@ def main():
         print '\nInstallation Complete.'
         if not installed_oh_my_zsh:
             print "You didn't install oh-my-zsh, so you probably want to remove the oh-my-zsh lines from .zshrc!"
+        elif not installed_brew:
+            print "You didn't install homebrew, so you probably want to remove homebrew from the oh-my-zsh plugins!"
     
 
 if __name__ == '__main__':
