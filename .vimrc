@@ -1,3 +1,6 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic options
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -26,5 +29,32 @@ set smarttab            " make adding/removing tabs (spaces) smarter
 
 syntax on               " turn on syntax highlighting
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set up Vundle
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install with:
+" $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" :BundleInstall
+
+filetype on
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Let vundle manage vundle (required)
+Bundle 'gmarik/vundle'
+
+" My bundles
+Bundle 'vim-scripts/wombat256.vim'
+Bundle 'w0ng/vim-hybrid'
+
 " Enable file-specific indenting and plugins
 filetype plugin indent on
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Color scheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256
+color hybrid
