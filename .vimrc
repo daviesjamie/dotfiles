@@ -60,13 +60,19 @@ Bundle 'gmarik/vundle'
 " My bundles
 Bundle 'vim-scripts/wombat256.vim'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'Lokaltog/vim-powerline'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color scheme
+" Vundle Package settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Color scheme (installed as a vundle)
 set t_Co=256
 color hybrid
+
+" Powerline settings
+let g:Powerline_symbols = 'fancy'
+set noshowmode          " stop vim displaying the mode, as powerline now shows it
