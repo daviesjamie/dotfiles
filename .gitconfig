@@ -3,7 +3,7 @@
     email = jamie@jamiedavies.me
 
 [core]
-    editor = vim --noplugin
+    editor = vim
     excludesfile = /Users/jamie/.gitignore
 
 [alias]
