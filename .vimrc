@@ -28,6 +28,10 @@ set autoindent          " automatically indent new lines
 set expandtab           " use spaces instead of <tab>s
 set smarttab            " make adding/removing tabs (spaces) smarter
 
+set noesckeys           " Remove the delay when hitting esc in insert mode
+set ttimeout
+set ttimeoutlen=1
+
 syntax on               " turn on syntax highlighting
 
 
