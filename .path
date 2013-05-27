@@ -1,6 +1,10 @@
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
-# Uncomment the line below to add Enthought Python to the path (breaks homebrew)
+# This line adds the homebrew python to the path
+PATH="$PATH:/usr/local/share/python"
+
+# This line adds Enthought Python Distribution (EPD) to the path
+# CAUTION: This has tendencies to conflict with homebrew!
 #PATH="$PATH:/Library/Frameworks/Python.framework/Versions/Current/bin"
 
 export PATH
