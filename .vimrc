@@ -9,6 +9,7 @@ set nocompatible
 set backspace=indent,eol,start
 
 set history=500         " keep 500 lines of command line history
+set undolevels=500      " keep 500 steps in the undo history
 
 set number              " show line numbers
 set ruler               " show the cursor position all the time
