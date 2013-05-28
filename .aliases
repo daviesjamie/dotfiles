@@ -1,1 +1,4 @@
 alias git=hub
+
+# Clean Finder's 'Open With...' menu
+alias owclean='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain user;killall Finder'
