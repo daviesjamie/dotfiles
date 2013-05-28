@@ -24,6 +24,9 @@ set directory=~/.tmp    " save swp files to ~/.tmp
 
 set autoread            " re-read an open file that has changed outside vim
 
+set tabstop=4           " set hard tabstop size to 4
+set softtabstop=4       " set soft tabstop size to 4
+set shiftwidth=4        " set size of an 'indent' to 4
 set autoindent          " automatically indent new lines
 set expandtab           " use spaces instead of <tab>s
 set smarttab            " make adding/removing tabs (spaces) smarter
