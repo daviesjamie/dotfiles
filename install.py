@@ -124,7 +124,7 @@ def create_symlinks(dotfiles, force=False, quiet=False):
                 os.symlink(path, dest)
             except OSError:
                 # If dest already exists, offer to back it up
-                if os.path.isdir(dest) and not islink(dest):
+                if os.path.isdir(dest) and not os.path.islink(dest):
                     shutil.rmtree(dest)
                 else:
                     if not force:
