@@ -209,6 +209,14 @@ def install_homebrew(quiet=False):
 
     return installed_brew
 
+def install_homebrew_apps(quiet=False):
+    """Installs some essential homebrew apps."""
+
+    if quiet or ask_yn('Install essential homebrew apps?'):
+        run('brew install hub')
+        run('brew install python')
+        run('brew install macvim --env-std --override-system-vim')
+
 
 ################################################################################
 # Main Function
@@ -229,6 +237,10 @@ def main():
 
     # Install homebrew (if not already installed)?
     installed_brew = install_homebrew(quiet=args.quiet)
+
+    # If homebrew was installed, install essential apps?
+    if installed_brew:
+        install_homebrew_apps(quiet=args.quiet)
 
     # Get dotfiles directory
     dot_dir = os.path.dirname(os.path.realpath(__file__))
