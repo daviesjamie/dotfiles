@@ -18,7 +18,6 @@ set relativenumber      " use relative line numbers
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
-set laststatus=2        " always display the status line
 
 set incsearch           " search incrementally as you type
 set hlsearch            " highlight search matches
@@ -78,9 +77,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
-Bundle 'vim-scripts/wombat256.vim'
 Bundle 'w0ng/vim-hybrid'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/powerline'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -94,5 +92,6 @@ set t_Co=256
 color hybrid
 
 " Powerline settings
-let g:Powerline_symbols = 'fancy'
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set noshowmode          " stop vim displaying the mode, as powerline now shows it
+set laststatus=2        " always display the status line
