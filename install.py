@@ -217,6 +217,16 @@ def install_homebrew_apps(quiet=False):
         run('brew install python')
         run('brew install macvim --env-std --override-system-vim')
 
+def install_vundle(quiet=False):
+    """Installs Vundle.
+
+    Vundle is a Vim package manager. This method will install it, and then
+    install the Bundles specified in .vimrc
+    """
+    if quiet or ask_yn('Install Vundle?'):
+        run('git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle')
+        run('vim +BundleInstall +qall')
+
 
 ################################################################################
 # Main Function
@@ -250,6 +260,9 @@ def main():
 
     # Create the symlinks to those files
     create_symlinks(dot_names, force=args.force, quiet=args.quiet)
+
+    # Install Vundle?
+    install_vundle(quiet=args.quiet)
 
     # Print done message(s).
     if not args.quiet:
