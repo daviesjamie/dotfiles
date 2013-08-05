@@ -10,14 +10,21 @@ set backspace=indent,eol,start
 
 set history=500         " keep 500 lines of command line history
 set undolevels=500      " keep 500 steps in the undo history
+set encoding=utf-8      " use utf-8 character set by default
+
 
 set number              " show line numbers
+set relativenumber      " use relative line numbers
+set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
 set laststatus=2        " always display the status line
 
 set incsearch           " search incrementally as you type
 set hlsearch            " highlight search matches
+set ignorecase          " use case-insensitive search
+set smartcase           " automatically decide to search with case or not
+set gdefault            " global substitution by default
 
 set backupdir=~/.tmp    " save tmp files to ~/.tmp
 set directory=~/.tmp    " save swp files to ~/.tmp
