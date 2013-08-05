@@ -58,6 +58,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" Make j and k work on screen lines, not file lines
+nnoremap j gj
+nnoremap k gk
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set up Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
