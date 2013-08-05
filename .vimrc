@@ -8,10 +8,10 @@ set nocompatible
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set history=500         " keep 500 lines of command line history
-set undolevels=500      " keep 500 steps in the undo history
 set encoding=utf-8      " use utf-8 character set by default
 
+set history=1000        " keep 1000 lines of command line history
+set undolevels=1000     " keep 1000 steps in the undo history
 
 set number              " show line numbers
 set relativenumber      " use relative line numbers
