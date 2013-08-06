@@ -18,6 +18,7 @@ set relativenumber      " use relative line numbers
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
+set scrolloff=5         " keep 5 lines visible around cursor (if possible)
 
 set incsearch           " search incrementally as you type
 set hlsearch            " highlight search matches
