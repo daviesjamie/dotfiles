@@ -216,6 +216,7 @@ def install_homebrew_apps(quiet=False):
         run('brew install hub')
         run('brew install python')
         run('brew install macvim --env-std --override-system-vim')
+        run('brew install wget')
 
 def install_vundle(quiet=False):
     """Installs Vundle.
