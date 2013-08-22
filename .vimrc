@@ -93,6 +93,7 @@ Bundle 'gmarik/vundle'
 " My bundles
 Bundle 'w0ng/vim-hybrid'
 Bundle 'Lokaltog/powerline'
+Bundle 'cakebaker/scss-syntax.vim'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
