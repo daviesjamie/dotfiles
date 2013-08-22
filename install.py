@@ -4,7 +4,7 @@ import argparse, distutils.spawn, distutils.util, glob, os, shutil, subprocess, 
 
 # List of files inside the dotfiles folder to ignore (and not link), that
 # aren't specified through .gitignore
-IGNORED_FILES = [os.path.basename(__file__), '.git', 'README.md']
+IGNORED_FILES = [os.path.basename(__file__), '.git', 'README.md', 'osx.sh']
 
 # Suffix to use when creating a backup of a file
 BACKUP_SUFFIX = '~'
