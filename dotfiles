@@ -10,6 +10,9 @@ import os
 # aren't specified through .gitignore
 IGNORED_FILES = [os.path.basename( __file__ ), '.git', 'README.md', 'osx.sh']
 
+# Suffix to use when creating a backup of a file
+BACKUP_SUFFIX = '~'
+
 class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
     def _format_action( self, action ):
         parts = super( argparse.RawDescriptionHelpFormatter, self )._format_action( action )
@@ -69,7 +72,8 @@ def _all_dotfiles():
 
 def _dotfile_paths( files ):
     """ Returns a list containing the absolute paths to each of the files in the
-    passed array."""
+    passed array.
+    """
     return [_dotfile_path( file ) for file in files]
 
 def _dotfile_path( filename ):
@@ -79,10 +83,69 @@ def _dotfile_path( filename ):
     dotfiles_repo = os.path.dirname( os.path.realpath( __file__ ) )
     return os.path.join( dotfiles_repo, filename )
 
+def _ask_yn( question ):
+    """Presents the user with a question, and takes a yes (True) or no (False)
+    answer in response.
+    """
+    
+    question += ' (y/n):  '
+    answer = None
+
+    while answer not in ['yes', 'y', 'no', 'n']:
+        answer = raw_input( question ).lower()
+
+    return answer.startswith( 'y' )
+
+def _pretty_basename( path ):
+    """Returns the basename of the given path, with a trailing '/' if the
+    basename of the path is a directory.
+    """
+    name = os.path.basename( path )
+    if os.path.isdir( path ):
+        name += '/'
+    return name
+
 
 def link( args ):
-    print args
-    return
+    """ Creates links to the specified dotfiles in the user's home directory."""
+    
+    home_dir = os.path.expanduser( '~' )
+
+    for dotfile in sorted( args.files ):
+        dest = os.path.join( home_dir, os.path.basename( dotfile ) )
+        name = _pretty_basename( dotfile )
+        installed = False
+
+        while not installed:
+            try:
+                os.symlink( dotfile, dest )
+            except OSError:
+                # If the dest already exists, offer to back it up
+                if not os.path.islink( dest ):
+                    if not args.force:
+                        backup = _ask_yn( name + ' already exists, back it up?' )
+                    else:
+                        backup = True
+                    
+                    if backup:
+                        # Back up dest, using BACKUP_SUFFIX
+                        backup_dest = dest + BACKUP_SUFFIX
+                        while os.path.exists( backup_dest ):
+                            backup_dest += BACKUP_SUFFIX
+
+                        os.rename( dest, backup_dest )
+                    else:
+                        # Replace dest
+                        os.remove( dest )
+                else:
+                    print name + 'is a link, deleting.'
+                    os.remove( dest )
+            else:
+                # Successfully linked
+                print name + ' linked.'
+                installed = True
+
+    print 'Done!'
 
 def list( args ):
     print args
