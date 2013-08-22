@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" Dotfiles management system. """
+"""Dotfiles management system."""
 
 import argparse
 
@@ -19,21 +19,28 @@ def _build_parser():
 
     # LINK
     parser_link = subparsers.add_parser( 'link' )
-    parser_link.add_argument( 'file' )
-    parser_link.add_argument( '-f', '--force' )
-
-    # ADD
-    parser_add = subparsers.add_parser( 'add' )
-    parser_add.add_argument( 'file', required=False )
+    parser_link.add_argument( 'files', nargs='?', default=all_dotfiles() )
+    parser_link.add_argument( '-f', '--force', action='store_true' )
 
     # LIST
     parser_list = subparsers.add_parser( 'list' )
-    parser_list.add_argument( '-u', '--unlinked' )
+    parser_list.add_argument( '-u', '--unlinked', action='store_true' )
+
+    # ADD
+    parser_add = subparsers.add_parser( 'add' )
+    parser_add.add_argument( 'files', nargs='?', default=all_dotfiles() )
+    
+    # EDIT
+    parser_edit = subparsers.add_parser( 'edit' )
+    parser_edit.add_argument( 'file' )
 
     # REMOVE
-    parser_remove = subparsers.add_parser( 'remove')
+    parser_remove = subparsers.add_parser( 'remove' )
     
     return parser
+
+def all_dotfiles():
+    return
 
 def _main():
     """Runs the command-line interface."""
