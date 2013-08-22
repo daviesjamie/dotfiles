@@ -3,14 +3,31 @@
     email = jamie@jamiedavies.me
 
 [core]
+    pager = cat
     editor = vim
     excludesfile = /Users/jamie/.gitignore
 
 [alias]
-    la = !git config -l | grep alias | cut -c 7-
-    ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-    ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %Creset%s%Cblue\\ [%cn]\\ %Cgreen(%cr)%Creset" --decorate --numstat
-    r = reset --hard
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
+    a = add
+
+    c = commit
+    cm = commit -m
+
+    d = difftool
+
+    s = status
+
+    unstage = reset HEAD
+    uns = reset HEAD
+
+    l = log -18 --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
+    ll = log --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
+    gl = log -12 --color=always --all --graph --topo-order --pretty='format:%Cgreen%h%Creset %s %C(black bold)(by %an)%Creset%C(yellow bold)%d%Creset%n'
+    gll = log --color=always --all --graph --topo-order --pretty='format:%Cgreen%h%Creset %s %C(black bold)(%cr by %an)%Creset%C(yellow bold)%d%Creset%n'
 
 [push]
     default = simple
