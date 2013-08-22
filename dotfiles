@@ -3,6 +3,12 @@
 """Dotfiles management system."""
 
 import argparse
+import glob
+import os
+
+# List of files inside the dotfiles repo to ignore (and not link), that
+# aren't specified through .gitignore
+IGNORED_FILES = [os.path.basename( __file__ ), '.git', 'README.md', 'osx.sh']
 
 class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
     def _format_action( self, action ):
@@ -10,6 +16,10 @@ class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
         if action.nargs == argparse.PARSER:
             parts = "\n".join( parts.split( "\n" )[1:] )
         return parts
+
+class GetFilePathAction( argparse.Action ):
+    def __call__( self, parser, namespace, values, option_string=None ):
+        setattr( namespace, self.dest, dotfile_paths( values ) )
 
 def _build_parser():
     """Constructs a parser for the command-line interface."""
@@ -19,7 +29,7 @@ def _build_parser():
 
     # LINK
     parser_link = subparsers.add_parser( 'link' )
-    parser_link.add_argument( 'files', nargs='?', default=all_dotfiles() )
+    parser_link.add_argument( 'files', nargs='*', default=all_dotfiles(), action=GetFilePathAction )
     parser_link.add_argument( '-f', '--force', action='store_true' )
 
     # LIST
@@ -28,7 +38,7 @@ def _build_parser():
 
     # ADD
     parser_add = subparsers.add_parser( 'add' )
-    parser_add.add_argument( 'files', nargs='?', default=all_dotfiles() )
+    parser_add.add_argument( 'files', nargs='*', default=all_dotfiles() )
     
     # EDIT
     parser_edit = subparsers.add_parser( 'edit' )
@@ -40,7 +50,63 @@ def _build_parser():
     return parser
 
 def all_dotfiles():
-    return
+    """Returns a list of the files in the dotfiles repository (assumed to be
+    where this script is running from) that are actually valid dotfiles.
+
+    A list of all the files in the dotfiles directory is narrowed down, with all
+    files specified by the .gitignore file removed. All files that are
+    arbitrarily specified in the IGNORED_FILES list are also removed. The
+    resulting list is then returned.
+    """
+
+    # The dotfiles repo directory (assumed to be where this script is)
+    dotfiles_repo = os.path.dirname( os.path.realpath( __file__ ) )
+
+    # Get all files in the current directory
+    dot_all = os.listdir( dotfiles_repo )
+
+    # Ignore all files that match a .gitignore pattern
+    gitignore = os.path.join( dotfiles_repo, '.gitignore' )
+    dot_actual = dot_all[:]
+    if os.path.exists( gitignore ):
+        with open( gitignore ) as gi:
+            for line in gi:
+                if line != '\n' and not line.startswith( '#' ):
+                    pattern = line.rstrip( '\n' )
+                    patterns = [ pattern ]
+
+                    # Use wildcards found in git
+                    if pattern.startswith( '*' ):
+                        patterns.append( '.' + pattern )    # *a == *a and .*a
+                    if pattern.startswith( '*.' ):
+                        patterns.append( pattern[1:] )      # *.b == *.b and .b
+
+                    for pattern in patterns:
+                        for path in glob.iglob( os.path.join( dotfiles_repo, pattern ) ):
+                            name = os.path.basename( path )
+                            if name in dot_actual:
+                                dot_actual.remove( name )
+
+    # Ignore any extra files that we have specified in the IGNORED_FILES list
+    for igf in IGNORED_FILES:
+        if igf in dot_actual:
+            dot_actual.remove( igf )
+
+    # Return a list of the actual dotfiles (with their paths)
+    return dot_actual
+
+def dotfile_paths( files ):
+    """ Returns a list containing the absolute paths to each of the files in the
+    passed array."""
+    return [dotfile_path( file ) for file in files]
+
+def dotfile_path( filename ):
+    """Returns the absolute path to a file in the dotfiles repo.
+    Assumes that the dotfiles repo is the directory this script is in.
+    """
+
+    dotfiles_repo = os.path.dirname( os.path.realpath( __file__ ) )
+    return os.path.join( dotfiles_repo, filename )
 
 def _main():
     """Runs the command-line interface."""
