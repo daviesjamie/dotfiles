@@ -12,24 +12,14 @@
     ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %Creset%s%Cblue\\ [%cn]\\ %Cgreen(%cr)%Creset" --decorate --numstat
     r = reset --hard
 
-[diff]
-    tool = Kaleidoscope
-
-[difftool]
-    prompt = false
-
 [push]
     default = simple
 
-[difftool "Kaleidoscope"]
-    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[credential]
+    helper = osxkeychain
 
-[mergetool "Kaleidoscope"]
-    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-    trustExitCode = true
+[diff]
+    tool = vimdiff
 
-[mergetool]
+[difftool]
     prompt = false
-
-[merge]
-    tool = Kaleidoscope
