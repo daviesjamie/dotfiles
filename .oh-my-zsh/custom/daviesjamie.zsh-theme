@@ -1,5 +1,5 @@
 PROMPT='%{$fg[cyan]%}%m: %{$fg[yellow]%}${PWD/#$HOME/~}
-%{$reset_color%}→ '
+%{$reset_color%}➜ '
 
 RPROMPT='$(fixed_git_prompt_info)'
 
