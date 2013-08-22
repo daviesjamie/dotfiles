@@ -19,37 +19,9 @@ class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
 
 class GetFilePathAction( argparse.Action ):
     def __call__( self, parser, namespace, values, option_string=None ):
-        setattr( namespace, self.dest, dotfile_paths( values ) )
+        setattr( namespace, self.dest, _dotfile_paths( values ) )
 
-def _build_parser():
-    """Constructs a parser for the command-line interface."""
-
-    parser = argparse.ArgumentParser( formatter_class=SubcommandHelpFormatter )
-    subparsers = parser.add_subparsers( title='commands' )
-
-    # LINK
-    parser_link = subparsers.add_parser( 'link' )
-    parser_link.add_argument( 'files', nargs='*', default=all_dotfiles(), action=GetFilePathAction )
-    parser_link.add_argument( '-f', '--force', action='store_true' )
-
-    # LIST
-    parser_list = subparsers.add_parser( 'list' )
-    parser_list.add_argument( '-u', '--unlinked', action='store_true' )
-
-    # ADD
-    parser_add = subparsers.add_parser( 'add' )
-    parser_add.add_argument( 'files', nargs='*', default=all_dotfiles() )
-    
-    # EDIT
-    parser_edit = subparsers.add_parser( 'edit' )
-    parser_edit.add_argument( 'file' )
-
-    # REMOVE
-    parser_remove = subparsers.add_parser( 'remove' )
-    
-    return parser
-
-def all_dotfiles():
+def _all_dotfiles():
     """Returns a list of the files in the dotfiles repository (assumed to be
     where this script is running from) that are actually valid dotfiles.
 
@@ -95,24 +67,78 @@ def all_dotfiles():
     # Return a list of the actual dotfiles (with their paths)
     return dot_actual
 
-def dotfile_paths( files ):
+def _dotfile_paths( files ):
     """ Returns a list containing the absolute paths to each of the files in the
     passed array."""
-    return [dotfile_path( file ) for file in files]
+    return [_dotfile_path( file ) for file in files]
 
-def dotfile_path( filename ):
+def _dotfile_path( filename ):
     """Returns the absolute path to a file in the dotfiles repo.
     Assumes that the dotfiles repo is the directory this script is in.
     """
-
     dotfiles_repo = os.path.dirname( os.path.realpath( __file__ ) )
     return os.path.join( dotfiles_repo, filename )
+
+
+def link( args ):
+    print args
+    return
+
+def list( args ):
+    print args
+    return
+
+def add( args ):
+    print args
+    return
+
+def edit( args ):
+    print args
+    return
+
+def remove( args ):
+    print args
+    return
+
+
+def _build_parser():
+    """Constructs a parser for the command-line interface."""
+
+    parser = argparse.ArgumentParser( formatter_class=SubcommandHelpFormatter )
+    subparsers = parser.add_subparsers( title='commands' )
+
+    # LINK
+    parser_link = subparsers.add_parser( 'link' )
+    parser_link.add_argument( 'files', nargs='*', default=_all_dotfiles(), action=GetFilePathAction )
+    parser_link.add_argument( '-f', '--force', action='store_true' )
+    parser_link.set_defaults( func=link )
+
+    # LIST
+    parser_list = subparsers.add_parser( 'list' )
+    parser_list.add_argument( '-u', '--unlinked', action='store_true' )
+    parser_list.set_defaults( func=list )
+
+    # ADD
+    parser_add = subparsers.add_parser( 'add' )
+    parser_add.add_argument( 'files', nargs='*', default=_all_dotfiles(), action=GetFilePathAction )
+    parser_add.set_defaults( func=add )
+    
+    # EDIT
+    parser_edit = subparsers.add_parser( 'edit' )
+    parser_edit.add_argument( 'file' )
+    parser_edit.set_defaults( func=edit )
+
+    # REMOVE
+    parser_remove = subparsers.add_parser( 'remove' )
+    parser_remove.set_defaults( func=remove )
+    
+    return parser
 
 def _main():
     """Runs the command-line interface."""
     parser = _build_parser()
     args = parser.parse_args()
-    print args
+    args.func( args )
 
 
 if __name__ == '__main__':
