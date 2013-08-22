@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+""" Dotfiles management system. """
+
+import argparse
+
+class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
+    def _format_action( self, action ):
+        parts = super( argparse.RawDescriptionHelpFormatter, self )._format_action( action )
+        if action.nargs == argparse.PARSER:
+            parts = "\n".join( parts.split( "\n" )[1:] )
+        return parts
+
+def _build_parser():
+    """Constructs a parser for the command-line interface."""
+
+    parser = argparse.ArgumentParser( formatter_class=SubcommandHelpFormatter )
+    subparsers = parser.add_subparsers( title='commands' )
+
+    # LINK
+    parser_link = subparsers.add_parser( 'link' )
+    parser_link.add_argument( 'file' )
+    parser_link.add_argument( '-f', '--force' )
+
+    # ADD
+    parser_add = subparsers.add_parser( 'add' )
+    parser_add.add_argument( 'file', required=False )
+
+    # LIST
+    parser_list = subparsers.add_parser( 'list' )
+    parser_list.add_argument( '-u', '--unlinked' )
+
+    # REMOVE
+    parser_remove = subparsers.add_parser( 'remove')
+    
+    return parser
+
+def _main():
+    """Runs the command-line interface."""
+    parser = _build_parser()
+    args = parser.parse_args()
+    print args
+
+
+if __name__ == '__main__':
+    _main()
