@@ -120,7 +120,7 @@ def _build_parser():
 
     # ADD
     parser_add = subparsers.add_parser( 'add' )
-    parser_add.add_argument( 'files', nargs='*', default=_all_dotfiles(), action=GetFilePathAction )
+    parser_add.add_argument( 'files', nargs='+' )
     parser_add.set_defaults( func=add )
     
     # EDIT
