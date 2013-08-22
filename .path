@@ -4,4 +4,7 @@ PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 # CAUTION: This has tendencies to conflict with homebrew!
 #PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:$PATH"
 
+# Add homebrew ruby gem directory to the path
+PATH="/usr/local/opt/ruby/bin:$PATH"
+
 export PATH
