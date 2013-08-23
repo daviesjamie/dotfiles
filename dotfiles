@@ -162,10 +162,11 @@ def list( args ):
         # Get the path of the dotfile if it was in the home directory
         install_path = os.path.join( home_dir, os.path.basename( dotfile ) )
 
-        # TODO: Check if link actually points to dotfile in this repo!
         if os.path.islink( install_path ):
-            if not args.unlinked:
-                print dotfile
+            # Check if link actually points to the dotfile in the repo
+            if os.readlink( install_path ) == _dotfile_path( dotfile ):
+                if not args.unlinked:
+                    print dotfile
         else:
             if args.unlinked:
                 print dotfile
