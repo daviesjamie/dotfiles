@@ -138,7 +138,7 @@ def link( args ):
                         # Replace dest
                         os.remove( dest )
                 else:
-                    print name + 'is a link, deleting.'
+                    print name + ' is a link, deleting.'
                     os.remove( dest )
             else:
                 # Successfully linked
@@ -148,8 +148,21 @@ def link( args ):
     print 'Done!'
 
 def list( args ):
-    print args
-    return
+    """ Lists all the dotfiles in the repository that have been installed."""
+
+    home_dir = os.path.expanduser( '~' )
+
+    for dotfile in _all_dotfiles():
+        # Get the path of the dotfile if it was in the home directory
+        install_path = os.path.join( home_dir, os.path.basename( dotfile ) )
+
+        # TODO: Check if link actually points to dotfile in this repo!
+        if os.path.islink( install_path ):
+            if not args.unlinked:
+                print dotfile
+        else:
+            if args.unlinked:
+                print dotfile
 
 def add( args ):
     print args
