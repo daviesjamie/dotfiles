@@ -113,7 +113,7 @@ def link( args ):
     all_dots = _all_dotfiles()
 
     for dotfile in sorted( args.files ):
-        if dotfile not in all_dots:
+        if os.path.basename( dotfile ) not in all_dots:
             print dotfile + " is not in the repository!"
             print "Try using the add command to add the file to the repository first."
             return
