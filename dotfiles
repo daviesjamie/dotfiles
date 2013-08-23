@@ -110,8 +110,14 @@ def link( args ):
     """ Creates links to the specified dotfiles in the user's home directory."""
     
     home_dir = os.path.expanduser( '~' )
+    all_dots = _all_dotfiles()
 
     for dotfile in sorted( args.files ):
+        if dotfile not in all_dots:
+            print dotfile + " is not in the repository!"
+            print "Try using the add command to add the file to the repository first."
+            return
+
         dest = os.path.join( home_dir, os.path.basename( dotfile ) )
         name = _pretty_basename( dotfile )
         installed = False
