@@ -5,6 +5,7 @@
 import argparse
 import glob
 import os
+import subprocess
 
 # List of files inside the dotfiles repo to ignore (and not link), that
 # aren't specified through .gitignore
@@ -105,6 +106,10 @@ def _pretty_basename( path ):
         name += '/'
     return name
 
+def _run(command):
+    """Runs a given command externally in the shell."""
+    return subprocess.call(command, shell=True)
+
 
 def link( args ):
     """ Creates links to the specified dotfiles in the user's home directory."""
@@ -176,8 +181,16 @@ def add( args ):
     return
 
 def edit( args ):
-    print args
-    return
+    editor = os.getenv( 'EDITOR' )
+    if not editor:
+        editor = 'vim'
+
+    if args.file not in _all_dotfiles():
+        print args.file + " is not in the repository!"
+        print "Try using the add command to add the file to the repository first."
+        return
+    else:
+        _run( editor + " " + _dotfile_path( args.file ) )
 
 def remove( args ):
     print args
