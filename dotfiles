@@ -14,6 +14,10 @@ IGNORED_FILES = [os.path.basename( __file__ ), '.git', 'README.md', 'osx.sh']
 # Suffix to use when creating a backup of a file
 BACKUP_SUFFIX = '~'
 
+################################################################################
+# Helper Functions
+################################################################################
+
 class SubcommandHelpFormatter( argparse.RawDescriptionHelpFormatter ):
     def _format_action( self, action ):
         parts = super( argparse.RawDescriptionHelpFormatter, self )._format_action( action )
@@ -110,9 +114,12 @@ def _run(command):
     """Runs a given command externally in the shell."""
     return subprocess.call(command, shell=True)
 
+################################################################################
+# Command Functions
+################################################################################
 
 def link( args ):
-    """ Creates links to the specified dotfiles in the user's home directory."""
+    """Creates links to the specified dotfiles in the user's home directory."""
     
     home_dir = os.path.expanduser( '~' )
     all_dots = _all_dotfiles()
@@ -159,7 +166,7 @@ def link( args ):
     print 'Done!'
 
 def list( args ):
-    """ Lists all the dotfiles in the repository that have been installed."""
+    """Lists all the dotfiles in the repository that have been installed."""
 
     home_dir = os.path.expanduser( '~' )
 
@@ -177,7 +184,8 @@ def list( args ):
                 print dotfile
 
 def add( args ):
-    print args
+    """Moves an existing dotfile to the repository."""
+
     return
 
 def edit( args ):
@@ -196,6 +204,9 @@ def remove( args ):
     print args
     return
 
+################################################################################
+# Program Functions
+################################################################################
 
 def _build_parser():
     """Constructs a parser for the command-line interface."""
