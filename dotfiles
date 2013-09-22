@@ -6,6 +6,7 @@ import argparse
 import glob
 import os
 import subprocess
+import shutil
 
 # List of files inside the dotfiles repo to ignore (and not link), that
 # aren't specified through .gitignore
@@ -156,8 +157,14 @@ def link( args ):
                         # Replace dest
                         os.remove( dest )
                 else:
-                    print name + ' is a link, deleting.'
-                    os.remove( dest )
+                    # If it's already installed
+                    if os.readlink( dest ) == _dotfile_path( dotfile ):
+                        print name + ' is already installed.'
+                        installed = True
+                    else:
+                        # Otherwise, delete the existing link
+                        print name + ' is a link, deleting.'
+                        os.remove( dest )
             else:
                 # Successfully linked
                 print name + ' linked.'
@@ -186,7 +193,16 @@ def list( args ):
 def add( args ):
     """Moves an existing dotfile to the repository."""
 
-    return
+    dotfiles_repo = os.path.dirname( os.path.realpath( __file__ ) )
+
+    for file in args.files:
+        print "Moving " + file + " into the repository..."
+        if os.path.isfile( file ):
+            shutil.move( file, dotfiles_repo )
+        else:
+            print file + " could not be added, as it is not a file."
+
+    print "Done! Use the 'link' command to install the new dotfiles."
 
 def edit( args ):
     editor = os.getenv( 'EDITOR' )
