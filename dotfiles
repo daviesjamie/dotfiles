@@ -205,6 +205,8 @@ def add( args ):
     print "Done! Use the 'link' command to install the new dotfiles."
 
 def edit( args ):
+    """Opens a dotfile in the repo in an editor for editing."""
+
     editor = os.getenv( 'EDITOR' )
     if not editor:
         editor = 'vim'
@@ -216,10 +218,7 @@ def edit( args ):
     else:
         _run( editor + " " + _dotfile_path( args.file ) )
 
-def remove( args ):
-    print args
-    return
-
+    
 ################################################################################
 # Program Functions
 ################################################################################
@@ -251,10 +250,6 @@ def _build_parser():
     parser_edit.add_argument( 'file' )
     parser_edit.set_defaults( func=edit )
 
-    # REMOVE
-    parser_remove = subparsers.add_parser( 'remove' )
-    parser_remove.set_defaults( func=remove )
-    
     return parser
 
 def _main():
