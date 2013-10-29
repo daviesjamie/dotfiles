@@ -20,6 +20,9 @@
     d = difftool
     dk = difftool -y -t Kaleidoscope
 
+    pu = push
+    pl = pull
+
     s = status
 
     unstage = reset HEAD
