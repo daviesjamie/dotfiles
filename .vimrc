@@ -117,6 +117,36 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" Set leader keys
+let mapleader=","
+let maplocalleader="\\"
+
+" Move between buffers a bit easier
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" Toggle line numbers
+nnoremap <leader>n :setlocal number!<cr>
+
+" System clipboard
+nnoremap <leader>y "*y
+vnoremap <leader>y "*y
+nnoremap <leader>p "*p
+vnoremap <leader>p "*p
+
+" Select contents of current line (excluding indentation)
+nnoremap vv ^vg_
+
+" Quickly edit main dotfiles
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>eg :vsplit ~/.gitconfig<cr>
+nnoremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
+
+" Turn off search highlighting
+nnoremap <leader><leader> :nohlsearch<cr>
+
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
 
