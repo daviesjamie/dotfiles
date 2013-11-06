@@ -1,0 +1,172 @@
+#!/usr/bin/env python
+
+"""Dotfiles management system."""
+
+import argparse
+import os
+import shutil
+import subprocess
+
+# The path to the root of the folder containing all of the dotfiles.
+# (Set by default to the parent folder of the folder this script is in)
+DOTFILES_REPO = os.path.dirname( os.path.dirname( os.path.realpath( __file__ ) ) )
+
+# List of files to ignore (doesn't support nesting :( )
+IGNORED_FILES = ['README.md', 'osx.sh']
+
+# List of directories to ignore (doesn't support nesting :( )
+IGNORED_DIRS = ['.git']
+
+# Suffix to use when creating a backup of a file
+BACKUP_SUFFIX = '~'
+
+def _crawl_files( dirpath ):
+    """Descends the directory tree starting at the specified folder and returns
+    a list of all files (not directories) that it finds, with paths relative to
+    the specified folder.
+    """
+
+    files = []
+    for f in os.listdir( dirpath ):
+        fullname = os.path.join( dirpath, f )
+        if os.path.isdir( fullname ):
+            if not f in IGNORED_DIRS:
+                files.extend( [ os.path.relpath( os.path.join( fullname, subf ), dirpath )
+                        for subf in _crawl_files( fullname ) ] )
+        else:
+            if not f in IGNORED_FILES:
+                files.append( os.path.relpath( fullname, dirpath ) )
+
+    return files
+
+def _ask_yn( question ):
+    """Presents the user with a question, and takes a yes (True) or no (False)
+    answer in response.
+    """
+    
+    question += ' (y/n):  '
+    answer = None
+
+    while answer not in ['yes', 'y', 'no', 'n']:
+        answer = raw_input( question ).lower()
+
+    return answer.startswith( 'y' )
+
+def link( args ):
+    """Creates links to the specified dotfiles in the user's home directory."""
+
+    for dotfile in _crawl_files( DOTFILES_REPO ):
+        if not os.path.basename( dotfile ) in args.files:
+            continue;
+
+        src = os.path.join( DOTFILES_REPO, dotfile )
+        dest = os.path.join( os.path.expanduser( '~' ), dotfile )
+
+        if os.path.exists( dest ):
+            if not os.path.islink( dest ):
+                # If not a link, offer to back it up
+                if args.force or _ask_yn( dest + ' exists, back it up?' ):
+                    backup_dest = dest + BACKUP_SUFFIX
+                    while os.path.exists( backup_dest ):
+                        backup_dest += BACKUP_SUFFIX
+
+                    # Copy file to backup location
+                    shutil.copy( dest, backup_dest )
+
+            # Remove file
+            os.remove( dest )
+
+        # Link new file
+        os.symlink( src, dest )
+
+        print dest + ' linked!'
+
+    print 'Done.'
+
+def list( args ):
+    """Lists all the dotfiles in the repository that have been installed."""
+    home_dir = os.path.expanduser( '~' )
+    for f in _crawl_files( DOTFILES_REPO ):
+        if args.unlinked:
+            if not os.path.exists( os.path.join( home_dir, f ) ):
+                print f
+        else:
+            if os.path.exists( os.path.join( home_dir, f ) ):
+                print f
+
+def add( args ):
+    """Moves an existing dotfile to the repository."""
+    srcs = [ os.path.join( os.getcwd(), f ) for f in args.files ]
+    home_dir = os.path.expanduser( '~' )
+
+    for src in srcs:
+        if os.path.islink( src ):
+            print "This script can't move links into the repository!"
+            return
+
+        relpath = os.path.relpath( src, home_dir )
+        dest = os.path.join( DOTFILES_REPO, relpath )
+
+        if os.path.exists( dest ):
+            print "It appears that file is already in the repository!"
+            return
+
+        shutil.move( src, dest )
+
+        print src + ' was successfully moved into the repository.'
+
+    print "Done! Use the 'link' command to install the new dotfiles."
+
+def edit( args ):
+    """Opens a dotfile in the repo in an editor for editing."""
+
+    editor = os.getenv( 'EDITOR' )
+    if not editor:
+        editor = 'vim'
+
+    if args.file not in _crawl_files( DOTFILES_REPO ):
+        print args.file + " is not in the repository!"
+        print "Try using the add command to add the file to the repository first."
+        return
+    else:
+        subprocess.call( editor + " " + os.path.join( DOTFILES_REPO, args.file ), shell=True )
+
+def _build_parser():
+    """Constructs a parser for the command-line interface."""
+
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers()
+
+    # LINK
+    parser_link = subparsers.add_parser( 'link' )
+    parser_link.add_argument( 'files', nargs='*', default=_crawl_files( DOTFILES_REPO ) )
+    parser_link.add_argument( '-f', '--force', action='store_true' )
+    parser_link.set_defaults( func=link )
+
+    # LIST
+    parser_list = subparsers.add_parser( 'list' )
+    parser_list.add_argument( '-u', '--unlinked', action='store_true' )
+    parser_list.set_defaults( func=list )
+
+    # ADD
+    parser_add = subparsers.add_parser( 'add' )
+    parser_add.add_argument( 'files', nargs='+' )
+    parser_add.set_defaults( func=add )
+    
+    # EDIT
+    parser_edit = subparsers.add_parser( 'edit' )
+    parser_edit.add_argument( 'file' )
+    parser_edit.set_defaults( func=edit )
+
+    return parser
+
+def _main():
+    """Runs the command-line interface."""
+    parser = _build_parser()
+    args = parser.parse_args()
+    args.func( args )
+
+
+if __name__ == '__main__':
+    _main()
+
