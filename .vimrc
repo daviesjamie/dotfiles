@@ -1,4 +1,4 @@
-" GENERAL OPTIONS ---------------------------------------------------------- {{{
+" BASIC OPTIONS ------------------------------------------------------------ {{{
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -6,15 +6,34 @@ set nocompatible
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set modelines=0         " explicity turn off vim modelines (for security)
 set encoding=utf-8      " use utf-8 character set by default
 syntax on               " turn on syntax highlighting
+set synmaxcol=800       " don't highlight lines longer than 800 characters
+
+set ttyfast             " use a fast terminal connection
+set visualbell          " use a visual bell instead of annoying beep
+set title               " update the terminal title with file name
 
 set number              " show line numbers
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
 set scrolloff=5         " keep 5 lines visible around cursor (if possible)
-set colorcolumn=80      " draw a right margin at the 80th character
+set matchtime=3         " highlight matching parens for 3 seconds
+
+set textwidth=80        " set maximum line width to 80 characters
+set colorcolumn=+1      " draw a right margin at the end of textwidth
+set linebreak           " use soft-wrapping on long lines
+set formatoptions=crqn1j " see :h formatoptions, there's too much to explain
+
+set tabstop=4           " set hard tabstop size to 4
+set softtabstop=4       " set soft tabstop size to 4
+set shiftwidth=4        " set size of an 'indent' to 4
+set shiftround          " when shifting, always use a multiple of shiftwidth
+set autoindent          " automatically indent new lines
+set expandtab           " use spaces instead of <tab>s
+set smarttab            " make adding/removing tabs (spaces) smarter
 
 set incsearch           " search incrementally as you type
 set hlsearch            " highlight search matches
@@ -24,16 +43,15 @@ set gdefault            " global substitution by default
 
 set autoread            " re-read an open file that has changed outside vim
 
-set tabstop=4           " set hard tabstop size to 4
-set softtabstop=4       " set soft tabstop size to 4
-set shiftwidth=4        " set size of an 'indent' to 4
-set autoindent          " automatically indent new lines
-set expandtab           " use spaces instead of <tab>s
-set smarttab            " make adding/removing tabs (spaces) smarter
-
 set noesckeys           " remove the delay when hitting esc in insert mode
+set notimeout           " timeout out on keycodes, but not mappings
 set ttimeout
-set ttimeoutlen=1
+set ttimeoutlen=10      " wait 10ms for a keycode to complete
+
+" }}}
+" ADVANCED OPTIONS --------------------------------------------------------- {{{
+"Highlight VCS conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Make vim return to the same line when reopening a file
 augroup line_return
@@ -42,6 +60,13 @@ augroup line_return
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \     execute 'normal! g`"zvzz' |
         \ endif
+augroup END
+
+" Only show cursorline in normal mode and in the current window
+augroup cline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
 augroup END
 
 " }}}
