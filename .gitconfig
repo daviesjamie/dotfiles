@@ -17,6 +17,8 @@
     c = commit
     cm = commit -m
 
+    co = checkout
+
     d = difftool
     dk = difftool -y -t Kaleidoscope
 
