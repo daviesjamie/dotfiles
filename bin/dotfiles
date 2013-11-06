@@ -5,6 +5,7 @@
 import argparse
 import os
 import shutil
+import subprocess
 
 # The path to the root of the folder containing all of the dotfiles.
 # (Set by default to the parent folder of the folder this script is in)
@@ -82,6 +83,53 @@ def link( args ):
 
     print 'Done.'
 
+def list( args ):
+    """Lists all the dotfiles in the repository that have been installed."""
+    home_dir = os.path.expanduser( '~' )
+    for f in _crawl_files( DOTFILES_REPO ):
+        if args.unlinked:
+            if not os.path.exists( os.path.join( home_dir, f ) ):
+                print f
+        else:
+            if os.path.exists( os.path.join( home_dir, f ) ):
+                print f
+
+def add( args ):
+    """Moves an existing dotfile to the repository."""
+    srcs = [ os.path.join( os.getcwd(), f ) for f in args.files ]
+    home_dir = os.path.expanduser( '~' )
+
+    for src in srcs:
+        if os.path.islink( src ):
+            print "This script can't move links into the repository!"
+            return
+
+        relpath = os.path.relpath( src, home_dir )
+        dest = os.path.join( DOTFILES_REPO, relpath )
+
+        if os.path.exists( dest ):
+            print "It appears that file is already in the repository!"
+            return
+
+        shutil.move( src, dest )
+
+        print src + ' was successfully moved into the repository.'
+
+    print "Done! Use the 'link' command to install the new dotfiles."
+
+def edit( args ):
+    """Opens a dotfile in the repo in an editor for editing."""
+
+    editor = os.getenv( 'EDITOR' )
+    if not editor:
+        editor = 'vim'
+
+    if args.file not in _crawl_files( DOTFILES_REPO ):
+        print args.file + " is not in the repository!"
+        print "Try using the add command to add the file to the repository first."
+        return
+    else:
+        subprocess.call( editor + " " + os.path.join( DOTFILES_REPO, args.file ), shell=True )
 
 def _build_parser():
     """Constructs a parser for the command-line interface."""
@@ -94,6 +142,21 @@ def _build_parser():
     parser_link.add_argument( 'files', nargs='*', default=_crawl_files( DOTFILES_REPO ) )
     parser_link.add_argument( '-f', '--force', action='store_true' )
     parser_link.set_defaults( func=link )
+
+    # LIST
+    parser_list = subparsers.add_parser( 'list' )
+    parser_list.add_argument( '-u', '--unlinked', action='store_true' )
+    parser_list.set_defaults( func=list )
+
+    # ADD
+    parser_add = subparsers.add_parser( 'add' )
+    parser_add.add_argument( 'files', nargs='+' )
+    parser_add.set_defaults( func=add )
+    
+    # EDIT
+    parser_edit = subparsers.add_parser( 'edit' )
+    parser_edit.add_argument( 'file' )
+    parser_edit.set_defaults( func=edit )
 
     return parser
 
