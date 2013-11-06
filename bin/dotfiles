@@ -111,6 +111,9 @@ def add( args ):
             print "It appears that file is already in the repository!"
             return
 
+        if not os.path.exists( os.path.dirname( dest ) ):
+            os.makedirs( os.path.dirname( dest ) )
+
         shutil.move( src, dest )
 
         print src + ' was successfully moved into the repository.'
