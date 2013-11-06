@@ -48,6 +48,9 @@ set notimeout           " timeout out on keycodes, but not mappings
 set ttimeout
 set ttimeoutlen=10      " wait 10ms for a keycode to complete
 
+set splitbelow          " always make new splits below, not above
+set splitright          " always make new splits on the right, not on the left
+
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
 "Highlight VCS conflicts
@@ -165,9 +168,14 @@ call vundle#rc()
 " Let vundle manage vundle (required)
 Bundle 'gmarik/vundle'
 
-" My bundles
+" Hybrid colour scheme
 Bundle 'w0ng/vim-hybrid'
+
+" Airline status bar
 Bundle 'bling/vim-airline'
+
+" Fugitive.vim, an awesome git wrapper
+Bundle 'tpope/vim-fugitive'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -183,6 +191,7 @@ color hybrid    " Use hybrid as colour scheme (installed through Vundle)
 
 set noshowmode          " stop vim displaying the mode, as powerline now shows it
 set laststatus=2        " always display the status line
+
 let g:airline_powerline_fonts=1 " Use powerline font symbols
 let g:airline_theme='zenburn'   " Use zenburn theme
 
