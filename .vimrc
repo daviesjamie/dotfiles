@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Basic options
+" General options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -56,6 +56,14 @@ if !isdirectory( expand( &directory ) )
     call mkdir( expand( &directory ), "p" )
 endif
 
+" Make vim return to the same line when reopening a file
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Bindings
@@ -82,6 +90,9 @@ nnoremap k gk
 " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " :BundleInstall
 
+" Use ZSH as shell (vundle doesn't like fish!)
+set shell=/bin/zsh
+
 filetype on
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -92,8 +103,7 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 Bundle 'w0ng/vim-hybrid'
-Bundle 'Lokaltog/powerline'
-Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'bling/vim-airline'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -106,7 +116,8 @@ filetype plugin indent on
 set t_Co=256
 color hybrid
 
-" Powerline settings
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" Airline settings
 set noshowmode          " stop vim displaying the mode, as powerline now shows it
 set laststatus=2        " always display the status line
+let g:airline_powerline_fonts=1 " Use powerline font symbols
+let g:airline_theme='zenburn'   " Use zenburn theme
