@@ -56,7 +56,7 @@ def link( args ):
     """Creates links to the specified dotfiles in the user's home directory."""
 
     for dotfile in _crawl_files( DOTFILES_REPO ):
-        if not os.path.basename( dotfile ) in args.files:
+        if not dotfile in args.files:
             continue;
 
         src = os.path.join( DOTFILES_REPO, dotfile )
