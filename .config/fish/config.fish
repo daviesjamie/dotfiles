@@ -15,6 +15,8 @@ function lla; ls -la $argv; end
 function pbc; pbcopy; end
 function pbp; pbpaste; end
 
+function take; mkdir -p $argv; cd $argv; end
+
 # Completions
 function make_completion --argument alias command
     complete -c $alias -xa "(
