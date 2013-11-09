@@ -20,16 +20,16 @@ Once installed, the `dotfiles` tool will be on your `$PATH`, and accessible from
 ### Usage
 The following commands can be used with the `dotfiles` tool:
 
-`link [-f|--force] [files]`<br />
+**`link [-f|--force] [files]`**<br />
 Creates symlinks for the specified dotfiles, or all files if none are specified. Prompts user to backup existing files in the home directory. Can be used with the force option to automatically overwrite any existing files.
 
-`list [-u|--unlinked]`<br />
+**`list [-u|--unlinked]`**<br />
 Lists all dotfiles in the repo that have been linked into the user's home directory. Can be used with the unlinked option to instead list all dotfiles that haven't been linked into the home directory.
 
-`add <files>`<br />
+**`add <files>`**<br />
 Moves the specified configuration file(s) to the dotfiles repository. Will automatically create the appropriate folder structure inside the dotfiles repo. *Warning:* likely to die horrifically if used on a file outside of the the home directory tree!
 
-`edit <dotfile>`<br />
+**`edit <dotfile>`**<br />
 Opens up the system `$EDITOR` (or `vim`, if `$EDITOR` doesn't exist) to edit the specified dotfile.
 
 **Note:** All dotfiles are specified by their path relative to the root of the repository, e.g., `.vimrc` or `bin/git_prompt_status`
