@@ -1,6 +1,6 @@
 # Jamie's Dotfiles
 
-This ~~is~~ *will be* a collection of the [dotfiles](http://dotfiles.github.io/) that I use to set up a system just the way I like it.
+This is a collection of the [dotfiles](http://dotfiles.github.io/) that I use to set up a system just the way I like it.
 
 I am currently only using this repository on OS X, but I plan to one day get around to using it on Linux as well - so there shouldn't be any issues running it on a Linux system.
 
@@ -10,32 +10,34 @@ To install these dotfiles on your system, simply:
 
 ```
 $ git clone https://github.com/daviesjamie/dotfiles.git ~/.dotfiles
-$ cd ~/.dotfiles
-$ ./install.py
+$ ~/.dotfiles/bin/dotfiles link
 ```
 
-The installer script will create a symlink in your home directory to each dotfile, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
+The script will create a symlink in the correct place in your home directory to each dotfile, asking if you want to back up any files already in your home directory that conflict with the ones in this repository.
 
-The script will also ask if you want to install the dependencies for these dotfiles, such as [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
+Once installed, the `dotfiles` tool will be on your `$PATH`, and accessible from anywhere on your system.
 
-### Options
+### Usage
+The following commands can be used with the `dotfiles` tool:
 
-The following options can be passed to the installer script:
+`link [-f|--force] [files]`<br />
+Creates symlinks for the specified dotfiles, or all files if none are specified. Prompts user to backup existing files in the home directory. Can be used with the force option to automatically overwrite any existing files.
 
-***`-f, --force`***<br />
-&nbsp;&nbsp;&nbsp;&nbsp;Automatically overwrite any files, instead of asking you whether to back up or not (Use with **caution**!).
+`list [-u|--unlinked]`<br />
+Lists all dotfiles in the repo that have been linked into the user's home directory. Can be used with the unlinked option to instead list all dotfiles that haven't been linked into the home directory.
 
-***`-q, --quiet`***<br />
-&nbsp;&nbsp;&nbsp;&nbsp;The script will not output anything. It will automatically backup all files and install all dependencies.
+`add <files>`<br />
+Moves the specified configuration file(s) to the dotfiles repository. Will automatically create the appropriate folder structure inside the dotfiles repo. *Warning:* likely to die horrifically if used on a file outside of the the home directory tree!
 
-***`-h, --help`***<br />
-&nbsp;&nbsp;&nbsp;&nbsp;Show a list of the options and a brief explanation of what they do.
+`edit <dotfile>`<br />
+Opens up the system `$EDITOR` (or `vim`, if `$EDITOR` doesn't exist) to edit the specified dotfile.
 
-The `--force` and `--quiet` options can also be used together to not output anything, but automatically overwrite any files that conflict with those in the repository.
+**Note:** All dotfiles are specified by their path relative to the root of the repository, e.g., `.vimrc` or `bin/git_prompt_status`
 
 ### Manual Installation
 
-If you don't want to use the script to install the dotfiles, then you can manually create a symlink to each file yourself with the following command:
+If you don't want to use the tool to install the dotfiles, then you can
+manually create a symlink to each file yourself with the following command:
 
 ```
 ln -s ~/.dotfiles/.gitignore ~/.gitignore
@@ -45,7 +47,9 @@ Rinse and repeat for each file in this repository that you wish to use.
 
 ## Credits
 
-Several other projects have provided me with ideas (and sometimes just a little code!) for this project:
- - Maciej Konieczny's [dotfiles installer script](https://github.com/narfdotpl/dotfiles).
- - Jon Bernard's [Python dotfiles management system](https://github.com/jbernard/dotfiles).
- - Mathias Bynens' [excellent collection of OS X defaults](https://github.com/mathiasbynens/dotfiles/blob/master/.osx).
+Several other projects have provided me with ideas (and sometimes just a little
+code!) for this project:
+ - Mathias Bynens' [excellent collection of OS
+   X defaults](https://github.com/mathiasbynens/dotfiles/blob/master/.osx).
+ - Steve Losh's [detailed and lengthy
+   dotfiles](https://bitbucket.org/sjl/dotfiles).
