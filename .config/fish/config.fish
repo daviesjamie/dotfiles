@@ -8,9 +8,9 @@ function git; hub $argv; end
 function g; git $argv; end
 
 function l; ls $argv; end
-function la; ls -a $argv; end
+function la; ls -A $argv; end
 function ll; ls -l $argv; end
-function lla; ls -la $argv; end
+function lla; ls -lA $argv; end
 
 function pbc; pbcopy; end
 function pbp; pbpaste; end
