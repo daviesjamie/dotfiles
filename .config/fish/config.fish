@@ -3,7 +3,7 @@ function ef; vim ~/.config/fish/config.fish; end
 function ev; vim ~/.vimrc; end
 function eg; vim ~/.gitconfig; end
 
-# Genearl shortcuts
+# General shortcuts
 function git; hub $argv; end
 function g; git $argv; end
 
@@ -30,9 +30,9 @@ make_completion g "git"
 # Environment Variables
 function prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
     if test -d $argv[1]
-        if not contains $argv[1] $PATH
+        #if not contains $argv[1] $PATH
             set -gx PATH "$argv[1]" $PATH
-        end
+        #end
     end
 end
 
@@ -50,11 +50,14 @@ set BROWSER open
 set -gx fish_greeting ''
 set -gx EDITOR vim
 
+# Virtualfish
+. ~/.config/fish/virtualfish/virtual.fish
+. ~/.config/fish/virtualfish/auto_activation.fish
+
 # Prompt
 function pwd_prompt -d 'Print current working directory, using ~ instead of $HOME'
     echo $PWD | sed -e "s|^$HOME|~|"
 end
-    
 
 function git_prompt
     if git rev-parse --show-toplevel >/dev/null 2>&1
@@ -70,7 +73,7 @@ end
 
 function virtualenv_prompt
     if [ -n "$VIRTUAL_ENV" ]
-        printf '(%s) ' (basename "$VIRTUAL_ENV")
+        printf '%s ' (basename "$VIRTUAL_ENV")
     end
 end
 
@@ -95,7 +98,9 @@ function fish_prompt
 
     echo
 
+    set_color 515151
     virtualenv_prompt
+    set_color normal
 
     printf '→ '
 
