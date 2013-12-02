@@ -23,7 +23,7 @@ set scrolloff=5         " keep 5 lines visible around cursor (if possible)
 set matchtime=3         " highlight matching parens for 3 seconds
 
 set textwidth=80        " set maximum line width to 80 characters
-set colorcolumn=+1      " draw a right margin at the end of textwidth
+"set colorcolumn=+1      " draw a right margin at the end of textwidth
 set linebreak           " use soft-wrapping on long lines
 set formatoptions=crqn1j " see :h formatoptions, there's too much to explain
 
@@ -50,7 +50,6 @@ set ttimeoutlen=10      " wait 10ms for a keycode to complete
 
 set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
-
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
 "Highlight VCS conflicts
@@ -71,7 +70,6 @@ augroup cline
     au WinLeave,InsertEnter * set nocursorline
     au WinEnter,InsertLeave * set cursorline
 augroup END
-
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 set history=1000                " keep 1000 lines of command line history
@@ -92,17 +90,12 @@ endif
 if !isdirectory( expand( &directory ) )
     call mkdir( expand( &directory ), "p" )
 endif
-
 " }}}
 " FOLDING ------------------------------------------------------------------ {{{
-
 set foldlevelstart=0
 
 " Use space to toggle folds
 nnoremap <Space> za
-
-
-
 " }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
 
@@ -149,7 +142,6 @@ nnoremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
 
 " Turn off search highlighting
 nnoremap <leader><leader> :nohlsearch<cr>
-
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
 
