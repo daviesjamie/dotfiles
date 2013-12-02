@@ -171,22 +171,20 @@ Bundle 'tpope/vim-fugitive'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
-
 " }}}
 " COLOUR SCHEME ------------------------------------------------------------ {{{
-
 set t_Co=256    " Enable 256 colours
 color hybrid    " Use hybrid as colour scheme (installed through Vundle)
-
 " }}}
 " AIRLINE ------------------------------------------------------------------ {{{
-
 set noshowmode          " stop vim displaying the mode, as powerline now shows it
 set laststatus=2        " always display the status line
 
-let g:airline_powerline_fonts=1 " Use powerline font symbols
+let g:airline_powerline_fonts=0 " Use powerline font symbols
 let g:airline_theme='zenburn'   " Use zenburn theme
 
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 " }}}
 " FILETYPE SPECIFIC SETTINGS ----------------------------------------------- {{{
 " Fish {{{
