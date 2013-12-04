@@ -101,8 +101,6 @@ set foldlevelstart=0
 " Use space to toggle folds
 nnoremap <Space> za
 
-
-
 " }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
 
@@ -148,7 +146,7 @@ nnoremap <leader>eg :vsplit ~/.gitconfig<cr>
 nnoremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
 
 " Turn off search highlighting
-nnoremap <leader><leader> :nohlsearch<cr>
+nnoremap <leader><space> :nohlsearch<cr>
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
