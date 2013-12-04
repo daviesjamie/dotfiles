@@ -17,7 +17,8 @@ function pbp; pbpaste; end
 
 function take; mkdir -p $argv; cd $argv; end
 
-function stex; latexmk -pdf -pvc $argv >- ^- &; end
+function mtex; latexmk -pdf -pvc $argv; end
+function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
 # Completions
 function make_completion --argument alias command
