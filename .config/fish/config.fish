@@ -1,3 +1,4 @@
+# ALIASES ------------------------------------------------------------------ {{{
 # Dotfiles shortcuts
 function ef; vim ~/.config/fish/config.fish; end
 function ev; vim ~/.vimrc; end
@@ -19,8 +20,8 @@ function take; mkdir -p $argv; cd $argv; end
 
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
-
-# Completions
+# }}}
+# COMPLETIONS -------------------------------------------------------------- {{{
 function make_completion --argument alias command
     complete -c $alias -xa "(
         set -l cmd (commandline -pc | sed -e 's/^ *\S\+ *//' );
@@ -29,35 +30,31 @@ function make_completion --argument alias command
 end
 
 make_completion g "git"
-
-# Environment Variables
-function prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
+# }}}
+# ENVIRONMENT VARIABLES ---------------------------------------------------- {{{
+function _prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
     if test -d $argv[1]
-        #if not contains $argv[1] $PATH
+        if not contains $argv[1] $PATH
             set -gx PATH "$argv[1]" $PATH
-        #end
+        end
     end
 end
 
 set -gx PATH "/usr/texbin"
-prepend_to_path "/sbin"
-prepend_to_path "/usr/sbin"
-prepend_to_path "/bin"
-prepend_to_path "/usr/bin"
-prepend_to_path "/usr/local/bin"
-prepend_to_path "/usr/local/share/python"
-prepend_to_path "/usr/local/opt/ruby/bin"
-prepend_to_path "$HOME/bin"
+_prepend_to_path "/sbin"
+_prepend_to_path "/usr/sbin"
+_prepend_to_path "/bin"
+_prepend_to_path "/usr/bin"
+_prepend_to_path "/usr/local/bin"
+_prepend_to_path "/usr/local/share/python"
+_prepend_to_path "/usr/local/opt/ruby/bin"
+_prepend_to_path "$HOME/bin"
 
 set BROWSER open
 set -gx fish_greeting ''
 set -gx EDITOR vim
-
-# Virtualfish
-. ~/.config/fish/virtualfish/virtual.fish
-. ~/.config/fish/virtualfish/auto_activation.fish
-
-# Prompt
+# }}}
+# PROMPT ------------------------------------------------------------------- {{{
 function pwd_prompt -d 'Print current working directory, using ~ instead of $HOME'
     echo $PWD | sed -e "s|^$HOME|~|"
 end
@@ -109,5 +106,8 @@ function fish_prompt
 
     set_color normal
 end
-
-true
+# }}}
+# VIRTUALFISH -------------------------------------------------------------- {{{
+. ~/.config/fish/virtualfish/virtual.fish
+. ~/.config/fish/virtualfish/auto_activation.fish
+# }}}
