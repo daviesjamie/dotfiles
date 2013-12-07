@@ -1,4 +1,10 @@
 # ALIASES ------------------------------------------------------------------ {{{
+# Directories
+function ..; cd ..; end
+function ...; cd ../..; end
+function ....; cd ../../..; end
+function .....; cd ../../../..; end
+
 # Dotfiles shortcuts
 function ef; vim ~/.config/fish/config.fish; end
 function ev; vim ~/.vimrc; end
