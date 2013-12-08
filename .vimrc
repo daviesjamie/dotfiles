@@ -50,6 +50,10 @@ set ttimeoutlen=10      " wait 10ms for a keycode to complete
 
 set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
+
+" Set dictonary files
+set dictionary=/usr/share/dict/words
+set spellfile=~/.vim/custom-dictionary.utf-8.add
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
 "Highlight VCS conflicts
@@ -192,6 +196,12 @@ augroup ft_fish
     au!
     au BufNewFile,BufRead *.fish setlocal filetype=fish
     au FileType fish setlocal foldmethod=marker foldmarker={{{,}}}
+augroup END
+" }}}
+" TeX/LaTeX {{{
+augroup ft_tex
+    au!
+    au FileType tex setlocal spell spelllang=en_gb
 augroup END
 " }}}
 " Vim {{{
