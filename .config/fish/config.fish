@@ -52,7 +52,6 @@ _prepend_to_path "/usr/sbin"
 _prepend_to_path "/bin"
 _prepend_to_path "/usr/bin"
 _prepend_to_path "/usr/local/bin"
-_prepend_to_path "/usr/local/share/python"
 _prepend_to_path "/usr/local/opt/ruby/bin"
 _prepend_to_path "$HOME/bin"
 
