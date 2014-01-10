@@ -26,6 +26,9 @@ function lla; ls -lA $argv; end
 function pbc; pbcopy; end
 function pbp; pbpaste; end
 
+# Homebrew shortcuts
+function bu; brew update; brew upgrade; brew cleanup; end
+
 # Latex compilation
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
