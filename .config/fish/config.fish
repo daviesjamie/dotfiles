@@ -14,6 +14,7 @@ function eg; vim ~/.gitconfig; end
 # Git shortcuts
 function git; hub $argv; end
 function g; git $argv; end
+function gi; curl http://www.gitignore.io/api/$argv; end
 
 # Directory listings
 function l; ls $argv; end
