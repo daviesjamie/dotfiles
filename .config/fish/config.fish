@@ -7,7 +7,8 @@ function .....; cd ../../../..; end
 function take; mkdir -p $argv; cd $argv; end
 
 # Dotfiles shortcuts
-function ef; vim ~/.config/fish/config.fish; end
+function reloadf; source ~/.config/fish/config.fish; end
+function ef; vim ~/.config/fish/config.fish; reloadf; end
 function ev; vim ~/.vimrc; end
 function eg; vim ~/.gitconfig; end
 
@@ -119,6 +120,6 @@ function fish_prompt
 end
 # }}}
 # VIRTUALFISH -------------------------------------------------------------- {{{
-. ~/.config/fish/virtualfish/virtual.fish
-. ~/.config/fish/virtualfish/auto_activation.fish
+source ~/.config/fish/virtualfish/virtual.fish
+source ~/.config/fish/virtualfish/auto_activation.fish
 # }}}
