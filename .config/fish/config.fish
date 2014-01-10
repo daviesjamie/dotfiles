@@ -4,26 +4,28 @@ function ..; cd ..; end
 function ...; cd ../..; end
 function ....; cd ../../..; end
 function .....; cd ../../../..; end
+function take; mkdir -p $argv; cd $argv; end
 
 # Dotfiles shortcuts
 function ef; vim ~/.config/fish/config.fish; end
 function ev; vim ~/.vimrc; end
 function eg; vim ~/.gitconfig; end
 
-# General shortcuts
+# Git shortcuts
 function git; hub $argv; end
 function g; git $argv; end
 
+# Directory listings
 function l; ls $argv; end
 function la; ls -A $argv; end
 function ll; ls -l $argv; end
 function lla; ls -lA $argv; end
 
+# Clipboard
 function pbc; pbcopy; end
 function pbp; pbpaste; end
 
-function take; mkdir -p $argv; cd $argv; end
-
+# Latex compilation
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 # }}}
