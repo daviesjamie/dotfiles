@@ -11,6 +11,7 @@ function reloadf; source ~/.config/fish/config.fish; end
 function ef; vim ~/.config/fish/config.fish; reloadf; end
 function ev; vim ~/.vimrc; end
 function eg; vim ~/.gitconfig; end
+function essh; vim ~/.ssh/config; end
 
 # Git shortcuts
 function git; hub $argv; end
