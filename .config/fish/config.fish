@@ -29,7 +29,7 @@ function pbc; pbcopy; end
 function pbp; pbpaste; end
 
 # Homebrew shortcuts
-function bu; brew update; brew upgrade; brew cleanup; end
+function brup; brew update; brew upgrade; brew cleanup; end
 
 # Latex compilation
 function mtex; latexmk -pdf -pvc $argv; end
