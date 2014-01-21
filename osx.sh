@@ -32,17 +32,11 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Disable the "Are you sure..." dialog when opening downloaded applications
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Disable computer sleep
-systemsetup -setcomputersleep Off > /dev/null
-
 # Enable full keyboard access for all controls
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSAWindowResizeTime -float 0.001
-
-# Check for software updates daily
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Stop Time Machine from prompting to use new hard drives as backups
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -114,9 +108,6 @@ defaults write com.apple.dock autohide-delay -float 0
 
 # Enable auto-hide
 defaults write com.apple.dock autohide -bool true
-
-# Make icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool true
 
 ################################################################################
 # Kill affected applications
