@@ -1,4 +1,5 @@
 # ALIASES ------------------------------------------------------------------ {{{
+
 # Directories
 function ..; cd ..; end
 function ...; cd ../..; end
@@ -34,8 +35,10 @@ function brup; brew update; brew upgrade; brew cleanup; end
 # Latex compilation
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
+
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
+
 function make_completion --argument alias command
     complete -c $alias -xa "(
         set -l cmd (commandline -pc | sed -e 's/^ *\S\+ *//' );
@@ -44,8 +47,10 @@ function make_completion --argument alias command
 end
 
 make_completion g "git"
+
 # }}}
 # ENVIRONMENT VARIABLES ---------------------------------------------------- {{{
+
 function _prepend_to_path -d "Prepend the given dir to PATH if it exists and is not already in it"
     if test -d $argv[1]
         if not contains $argv[1] $PATH
@@ -66,8 +71,10 @@ _prepend_to_path "$HOME/bin"
 set BROWSER open
 set -gx fish_greeting ''
 set -gx EDITOR vim
+
 # }}}
 # PROMPT ------------------------------------------------------------------- {{{
+
 function pwd_prompt -d 'Print current working directory, using ~ instead of $HOME'
     echo $PWD | sed -e "s|^$HOME|~|"
 end
@@ -111,7 +118,7 @@ function fish_prompt
 
     echo
 
-    set_color 515151
+    set_color blue
     virtualenv_prompt
     set_color normal
 
@@ -119,8 +126,11 @@ function fish_prompt
 
     set_color normal
 end
+
 # }}}
 # VIRTUALFISH -------------------------------------------------------------- {{{
+
 source ~/.config/fish/virtualfish/virtual.fish
 source ~/.config/fish/virtualfish/auto_activation.fish
+
 # }}}

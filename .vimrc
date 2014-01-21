@@ -1,4 +1,5 @@
 " BASIC OPTIONS ------------------------------------------------------------ {{{
+
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -54,8 +55,10 @@ set splitright          " always make new splits on the right, not on the left
 " Set dictonary files
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
+
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
+
 "Highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -74,8 +77,10 @@ augroup cline
     au WinLeave,InsertEnter * set nocursorline
     au WinEnter,InsertLeave * set cursorline
 augroup END
+
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
+
 set history=1000                " keep 1000 lines of command line history
 set undofile                    " save undo history to a file
 set undoreload=10000            " save 10000 lines of undo history
@@ -94,12 +99,15 @@ endif
 if !isdirectory( expand( &directory ) )
     call mkdir( expand( &directory ), "p" )
 endif
+
 " }}}
 " FOLDING ------------------------------------------------------------------ {{{
+
 set foldlevelstart=0
 
 " Use space to toggle folds
 nnoremap <Space> za
+
 " }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
 
@@ -149,6 +157,7 @@ nnoremap <leader><space> :nohlsearch<cr>
 
 " Write to protected file (request sudo)
 noremap <leader>W :w !sudo tee %<cr>
+
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
 
@@ -178,12 +187,16 @@ Bundle 'tpope/vim-fugitive'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
+
 " }}}
 " COLOUR SCHEME ------------------------------------------------------------ {{{
+
 set t_Co=256    " Enable 256 colours
 color hybrid    " Use hybrid as colour scheme (installed through Vundle)
+
 " }}}
 " AIRLINE ------------------------------------------------------------------ {{{
+
 set noshowmode          " stop vim displaying the mode, as powerline now shows it
 set laststatus=2        " always display the status line
 
@@ -192,25 +205,34 @@ let g:airline_theme='zenburn'   " Use zenburn theme
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
 " }}}
 " FILETYPE SPECIFIC SETTINGS ----------------------------------------------- {{{
+
 " Fish {{{
+
 augroup ft_fish
     au!
     au BufNewFile,BufRead *.fish setlocal filetype=fish
     au FileType fish setlocal foldmethod=marker foldmarker={{{,}}}
 augroup END
+
 " }}}
 " TeX/LaTeX {{{
+
 augroup ft_tex
     au!
     au FileType tex setlocal spell spelllang=en_gb
 augroup END
+
 " }}}
 " Vim {{{
+
 augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker foldmarker={{{,}}}
 augroup END
+
 " }}}
+
 " }}}
