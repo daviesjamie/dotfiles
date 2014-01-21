@@ -146,6 +146,9 @@ nnoremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
 
 " Turn off search highlighting
 nnoremap <leader><space> :nohlsearch<cr>
+
+" Write to protected file (request sudo)
+noremap <leader>W :w !sudo tee %<cr>
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
 
