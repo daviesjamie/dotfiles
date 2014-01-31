@@ -59,7 +59,7 @@ set spellfile=~/.vim/custom-dictionary.utf-8.add
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
 
-"Highlight VCS conflicts
+" Highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Make vim return to the same line when reopening a file
@@ -120,6 +120,10 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+vnoremap <up> <nop>
+vnoremap <down> <nop>
+vnoremap <left> <nop>
+vnoremap <right> <nop>
 
 " Make j and k work on screen lines, not file lines
 nnoremap j gj
