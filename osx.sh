@@ -41,6 +41,9 @@ defaults write NSGlobalDomain NSAWindowResizeTime -float 0.001
 # Stop Time Machine from prompting to use new hard drives as backups
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Disable shadows in screen shots
+defaults write com.apple.screencapture disable-shadow -bool true
+
 ################################################################################
 # Input
 ################################################################################
