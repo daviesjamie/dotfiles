@@ -189,6 +189,9 @@ Bundle 'bling/vim-airline'
 " Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
 
+" Syntastic syntax checking
+Bundle 'scrooloose/syntastic'
+
 " Enable file-specific indenting and plugins
 filetype plugin indent on
 
@@ -209,6 +212,24 @@ let g:airline_theme='zenburn'   " Use zenburn theme
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" }}}
+" SYNTAX CHECKING ---------------------------------------------------------- {{{
+
+" Check syntax when opening files
+let g:syntastic_check_on_open=1
+
+" Gutter sign symbols to use
+let g:syntastic_error_symbol='▸'
+let g:syntastic_style_error_symbol='▸'
+let g:syntastic_warning_symbol='▹'
+let g:syntastic_style_warning_symbol='▹'
+
+" Disable error message balloons on mouse hover
+let g:syntastic_enable_balloons=0
+
+" Automatically open/close the error window when errors are detected
+let g:syntastic_auto_loc_list=1
 
 " }}}
 " FILETYPE SPECIFIC SETTINGS ----------------------------------------------- {{{
