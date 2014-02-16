@@ -222,6 +222,14 @@ augroup ft_fish
 augroup END
 
 " }}}
+" Python {{{
+
+augroup ft_python
+    au!
+    au FileType python setlocal foldmethod=indent foldlevel=99
+augroup END
+
+" }}}
 " TeX/LaTeX {{{
 
 augroup ft_tex
