@@ -36,6 +36,8 @@ function brup; brew update; brew upgrade; brew cleanup; end
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
+function sudo!!; eval sudo $history[1]; end
+
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
 
