@@ -38,6 +38,9 @@ function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
 function sudo!!; eval sudo $history[1]; end
 
+# Try out GUI-based vim instead!
+function vim; mvim $argv; end
+
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
 
@@ -72,7 +75,7 @@ _prepend_to_path "$HOME/bin"
 
 set BROWSER open
 set -gx fish_greeting ''
-set -gx EDITOR vim
+set -gx EDITOR mvim
 
 # }}}
 # PROMPT ------------------------------------------------------------------- {{{
