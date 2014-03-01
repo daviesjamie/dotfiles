@@ -183,6 +183,9 @@ Bundle 'gmarik/vundle'
 " Hybrid colour scheme
 Bundle 'w0ng/vim-hybrid'
 
+" Solarized colour schemes
+Bundle 'altercation/vim-colors-solarized'
+
 " Airline status bar
 Bundle 'bling/vim-airline'
 
@@ -211,10 +214,33 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 " }}}
+" GUI / MACVIM ------------------------------------------------------------- {{{
 
+if has("gui_running")
+    set guioptions-=T   " Hide toolbar
+    set guioptions-=r   " Hide right scrollbar
+    set guioptions-=b   " Hide bottom scrollbar
+    set guioptions-=l   " Hide left scrollbar
 
+    " Set default window size
+    set columns=200 lines=50
 
+    " Configure font
+    set guifont=Inconsolata:h14
+    set antialias
 
+    " Hide solarized menu
+    let g:solarized_menu=0
+
+    " Enable solarized theme
+    syntax enable
+    set background=light
+    colorscheme solarized
+
+    " Toggle between light/dark theme with <leader>b or F5
+    so ~/.vim/bundle/vim-colors-solarized/autoload/togglebg.vim
+    nnoremap <leader>b :ToggleBG<cr>
+endif
 
 " }}}
 " FILETYPE SPECIFIC SETTINGS ----------------------------------------------- {{{
