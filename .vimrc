@@ -78,6 +78,9 @@ augroup cline
     au WinEnter,InsertLeave * set cursorline
 augroup END
 
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 
@@ -138,6 +141,12 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" Resize buffers more easily
+noremap <C-w>h <C-w>10>
+noremap <C-w>j <C-w>10-
+noremap <C-w>k <C-w>10+
+noremap <C-w>l <C-w>10<
 
 " Toggle line numbers
 nnoremap <leader>n :setlocal number!<cr>
