@@ -39,7 +39,7 @@ function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 function sudo!!; eval sudo $history[1]; end
 
 # Try out GUI-based vim instead!
-function vim; mvim $argv; end
+function v; mvim $argv; end
 
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
