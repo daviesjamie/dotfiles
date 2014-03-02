@@ -162,6 +162,10 @@ nnoremap <leader><space> :nohlsearch<cr>
 " Write to protected file (request sudo)
 noremap <leader>W :w !sudo tee %<cr>
 
+" Toggle NERDTree
+noremap <F2> :NERDTreeToggle<cr>
+noremap <leader>n :NERDTreeToggle<cr>
+
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
 
@@ -192,6 +196,9 @@ Bundle 'bling/vim-airline'
 " Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
 
+" NerdTREE file tree browser
+Bundle 'scrooloose/nerdtree'
+
 " Enable file-specific indenting and plugins
 filetype plugin indent on
 
@@ -210,8 +217,36 @@ set laststatus=2        " always display the status line
 let g:airline_powerline_fonts=0 " Use powerline font symbols
 let g:airline_theme='zenburn'   " Use zenburn theme
 
+" Turn on fancy separators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" }}}
+" NERDTREE ----------------------------------------------------------------- {{{
+
+" Highlight the line the cursor is on
+let NERDTreeHighlightCursorline=1
+
+" Hide unecessary help message and 'Bookmarks' title
+let NERDTreeMinimalUI=1
+
+" Use arrow/triangle symbols instead of | and +
+let NERDTreeDirArrows=1
+
+" Use more colours
+let NERDChristmasTree=1
+
+" Change Vim's working directory whenever NERDTree's directory is changed
+let NERDTreeChDirMode=2
+
+" Leave NERDTree open after selecting a file
+let NERDTreeQuitOnOpen=0
+
+" Ignore (don't display) some files
+let NERDTreeIgnore = ['\.pyc$']
+
+" Automatically open NERDTree if no arguments are given to vim
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " }}}
 " GUI / MACVIM ------------------------------------------------------------- {{{
