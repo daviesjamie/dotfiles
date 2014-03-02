@@ -9,10 +9,10 @@ function take; mkdir -p $argv; cd $argv; end
 
 # Dotfiles shortcuts
 function reloadf; source ~/.config/fish/config.fish; end
-function ef; vim ~/.config/fish/config.fish; reloadf; end
-function ev; vim ~/.vimrc; end
-function eg; vim ~/.gitconfig; end
-function essh; vim ~/.ssh/config; end
+function ef; eval $EDITOR ~/.config/fish/config.fish; reloadf; end
+function ev; eval $EDITOR ~/.vimrc; end
+function eg; eval $EDITOR ~/.gitconfig; end
+function essh; eval $EDITOR ~/.ssh/config; end
 
 # Git shortcuts
 function git; hub $argv; end
