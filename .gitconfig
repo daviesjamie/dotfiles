@@ -30,6 +30,9 @@
     unstage = reset HEAD
     uns = reset HEAD
 
+    untrack = rm --cached
+    unt = rm --cached
+
     l = log -18 --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
     ll = log --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
     gl = log -12 --color=always --all --graph --topo-order --pretty='format:%Cgreen%h%Creset %s %C(black bold)(by %an)%Creset%C(yellow bold)%d%Creset%n'
@@ -63,6 +66,7 @@
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     keepBackup = false
     trustExitCode = true
+
 [filter "media"]
-    clean = git-media-clean %f
-    smudge = git-media-smudge %f
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
