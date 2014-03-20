@@ -18,6 +18,7 @@ function essh; eval $EDITOR ~/.ssh/config; end
 function git; hub $argv; end
 function g; git $argv; end
 function gi; curl http://www.gitignore.io/api/$argv; end
+function gist; command gist -c $argv; end
 
 # Directory listings
 function l; ls $argv; end
