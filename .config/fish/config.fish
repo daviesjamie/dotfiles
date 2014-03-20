@@ -37,7 +37,12 @@ function brup; brew update; brew upgrade; brew cleanup; end
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
+# Execute last command with root privileges
 function sudo!!; eval sudo $history[1]; end
+
+# Python shortcuts
+function py; python $argv; end
+function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
 
 # Try out GUI-based vim instead!
 function v; mvim $argv; end
