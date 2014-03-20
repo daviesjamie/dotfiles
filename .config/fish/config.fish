@@ -77,6 +77,8 @@ set BROWSER open
 set -gx fish_greeting ''
 set -gx EDITOR mvim
 
+set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
+
 # }}}
 # PROMPT ------------------------------------------------------------------- {{{
 
