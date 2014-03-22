@@ -11,6 +11,7 @@
     tags = tag -l
     branches = branch -a
     remotes = remote -v
+    commits = shortlog -s -n
 
     a = add
 
