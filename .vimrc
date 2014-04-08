@@ -114,35 +114,29 @@ nnoremap <Space> za
 " }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
 
-" Stop using the cursor keys once and for all! (Unbind them)
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-vnoremap <up> <nop>
-vnoremap <down> <nop>
-vnoremap <left> <nop>
-vnoremap <right> <nop>
-
-" Make j and k work on screen lines, not file lines
-nnoremap j gj
-nnoremap k gk
-
 " Set leader keys
 let mapleader=","
 let maplocalleader="\\"
 
-" Move between buffers a bit easier
+" Stop using the cursor keys once and for all! (Unbind them)
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+" Make j and k work on screen lines, not file lines
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+" Move between windows a bit easier
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Resize buffers more easily
+" Resize splits more easily
 noremap <C-w>h <C-w>10>
 noremap <C-w>j <C-w>10-
 noremap <C-w>k <C-w>10+
@@ -152,10 +146,8 @@ noremap <C-w>l <C-w>10<
 nnoremap <leader>n :setlocal number!<cr>
 
 " System clipboard
-nnoremap <leader>y "*y
-vnoremap <leader>y "*y
-nnoremap <leader>p "*p
-vnoremap <leader>p "*p
+noremap <leader>y "*y
+noremap <leader>p "*p
 
 " Select contents of current line (excluding indentation)
 nnoremap vv ^vg_
@@ -173,7 +165,6 @@ noremap <leader>W :w !sudo tee %<cr>
 
 " Toggle NERDTree
 noremap <F2> :NERDTreeToggle<cr>
-noremap <leader>n :NERDTreeToggle<cr>
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
