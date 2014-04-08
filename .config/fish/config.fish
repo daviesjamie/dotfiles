@@ -44,6 +44,10 @@ function sudo!!; eval sudo $history[1]; end
 function py; python $argv; end
 function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
 
+# Todor shortcuts
+function todor; /Users/jamie/Code/todor/todor.py $argv; end
+function t; todor $argv; end
+
 # Sick of GUI-based vim, stick to the classic!
 function v; vim $argv; end
 
