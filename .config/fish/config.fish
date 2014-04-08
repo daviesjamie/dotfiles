@@ -44,8 +44,8 @@ function sudo!!; eval sudo $history[1]; end
 function py; python $argv; end
 function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
 
-# Try out GUI-based vim instead!
-function v; mvim $argv; end
+# Sick of GUI-based vim, stick to the classic!
+function v; vim $argv; end
 
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
@@ -81,7 +81,7 @@ _prepend_to_path "$HOME/bin"
 
 set BROWSER open
 set -gx fish_greeting ''
-set -gx EDITOR mvim
+set -gx EDITOR vim
 
 set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 
