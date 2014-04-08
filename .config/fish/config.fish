@@ -42,6 +42,7 @@ function sudo!!; eval sudo $history[1]; end
 
 # Python shortcuts
 function py; python $argv; end
+function ipy; ipython $argv; end
 function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
 
 # Todor shortcuts
