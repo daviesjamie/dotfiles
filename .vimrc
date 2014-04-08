@@ -193,6 +193,9 @@ Bundle 'altercation/vim-colors-solarized'
 " Airline status bar
 Bundle 'bling/vim-airline'
 
+" Show buffers in the status bar
+Bundle 'bling/vim-bufferline'
+
 " Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
 
@@ -212,18 +215,27 @@ set t_Co=256
 colorscheme luna-term
 
 " }}}
-" AIRLINE ------------------------------------------------------------------ {{{
+" AIRLINE / BUFFERLINE ----------------------------------------------------- {{{
 
-set noshowmode          " stop vim displaying the mode, as powerline now shows it
-set laststatus=2        " always display the status line
+set noshowmode      " stop vim displaying the mode, as airline now shows it
+set laststatus=2    " always display the status line
 
-let g:airline_powerline_fonts=0 " Use powerline font symbols
 " Use luna theme
 let g:airline_theme='luna'
 
 " Turn on fancy separators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" Stop bufferline showing on command line
+let g:bufferline_echo=0
+
+" Don't use separators on active buffer
+let g:bufferline_active_buffer_left=''
+let g:bufferline_active_buffer_right=''
+
+" Don't display buffer numbers
+let g:bufferline_show_bufnr=0
 
 " }}}
 " NERDTREE ----------------------------------------------------------------- {{{
