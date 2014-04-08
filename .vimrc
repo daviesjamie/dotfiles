@@ -184,8 +184,8 @@ call vundle#rc()
 " Let vundle manage vundle (required)
 Bundle 'gmarik/vundle'
 
-" Hybrid colour scheme
-Bundle 'w0ng/vim-hybrid'
+" Luna colour scheme
+Bundle 'Pychimp/vim-luna'
 
 " Solarized colour schemes
 Bundle 'altercation/vim-colors-solarized'
@@ -204,9 +204,12 @@ filetype plugin indent on
 
 " }}}
 " COLOUR SCHEME ------------------------------------------------------------ {{{
-
-set t_Co=256    " Enable 256 colours
-color hybrid    " Use hybrid as colour scheme (installed through Vundle)
+"
+" Enable 256 colours
+set t_Co=256
+"
+" Use luna as colour scheme (installed through Vundle)
+colorscheme luna-term
 
 " }}}
 " AIRLINE ------------------------------------------------------------------ {{{
@@ -215,7 +218,8 @@ set noshowmode          " stop vim displaying the mode, as powerline now shows i
 set laststatus=2        " always display the status line
 
 let g:airline_powerline_fonts=0 " Use powerline font symbols
-let g:airline_theme='zenburn'   " Use zenburn theme
+" Use luna theme
+let g:airline_theme='luna'
 
 " Turn on fancy separators
 let g:airline_left_sep=''
