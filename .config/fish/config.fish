@@ -37,9 +37,6 @@ function brup; brew update; brew upgrade; brew cleanup; end
 function mtex; latexmk -pdf -pvc $argv; end
 function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
-# Execute last command with root privileges
-function sudo!!; eval sudo $history[1]; end
-
 # Python shortcuts
 function py; python $argv; end
 function ipy; ipython $argv; end
@@ -51,6 +48,15 @@ function t; todor $argv; end
 
 # Sick of GUI-based vim, stick to the classic!
 function v; vim $argv; end
+
+# Make `sudo !!` work again!
+function sudo
+    if test "$argv" = !!
+        eval command sudo $history[1]
+    else
+        command sudo $argv
+    end
+end
 
 # }}}
 # COMPLETIONS -------------------------------------------------------------- {{{
