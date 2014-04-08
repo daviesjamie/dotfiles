@@ -21,10 +21,10 @@ function gi; curl http://www.gitignore.io/api/$argv; end
 function gist; command gist -c $argv; end
 
 # Directory listings
-function l; ls $argv; end
-function la; ls -A $argv; end
-function ll; ls -l $argv; end
-function lla; ls -lA $argv; end
+function l; ls -p $argv; end
+function la; ls -Ap $argv; end
+function ll; ls -hlp $argv; end
+function lla; ls -Alp $argv; end
 
 # Clipboard
 function pbc; pbcopy; end
