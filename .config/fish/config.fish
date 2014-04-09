@@ -134,7 +134,7 @@ function fish_prompt
     set_color normal
     printf ' in '
 
-    set_color $fish_color_cwd
+    set_color green
     printf '%s' (pwd_prompt)
     set_color normal
 
@@ -156,10 +156,5 @@ end
 
 source ~/.config/fish/virtualfish/virtual.fish
 source ~/.config/fish/virtualfish/auto_activation.fish
-
-# }}}
-# BASE 16 COLOURS ---------------------------------------------------------- {{{
-
-eval sh ~/.base16/base16-shell/base16-default.dark.sh
 
 # }}}
