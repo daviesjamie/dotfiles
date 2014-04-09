@@ -142,6 +142,16 @@ noremap <C-w>j <C-w>10-
 noremap <C-w>k <C-w>10+
 noremap <C-w>l <C-w>10<
 
+" Open a new empty buffer
+noremap <leader>T :enew<cr>
+
+" Move to next/previous buffers easier
+noremap <leader>l :bnext<cr>
+noremap <leader>h :bprevious<cr>
+
+" Close the current buffer and switch back to the old one
+noremap <leader>bq :bp <bar> bd #<cr>
+
 " Toggle line numbers
 nnoremap <leader>n :setlocal number!<cr>
 
