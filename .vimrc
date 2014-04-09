@@ -221,7 +221,7 @@ set noshowmode      " stop vim displaying the mode, as airline now shows it
 set laststatus=2    " always display the status line
 
 " Use base16 theme
-let g:airline_theme='bubblegum'
+let g:airline_theme='hybridalt'
 
 " Turn on fancy separators
 let g:airline_left_sep=''
