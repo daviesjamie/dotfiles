@@ -230,12 +230,33 @@ let g:airline_right_sep=''
 " Stop bufferline showing on command line
 let g:bufferline_echo=0
 
-" Don't use separators on active buffer
-let g:bufferline_active_buffer_left=''
-let g:bufferline_active_buffer_right=''
+" Put [ ] around the active buffer (but only when there's more than one)
+let g:bufferline_active_buffer_left='['
+let g:bufferline_active_buffer_right=']'
 
 " Don't display buffer numbers
 let g:bufferline_show_bufnr=0
+
+" Custom airline layout
+" mode (short) | buffers/filename                   branch
+"       a      |        c                              z
+let g:airline_section_b = ''
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
+
+" Default airline layout
+" mode | branch | buffers/filename               filetype | file encoding | %, line, char
+"  a       b            c                            x            y               z
+
+" let g:airline_section_a = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
+" let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
+" let g:airline_section_c = '%<%{bufferline#refresh_status()}%#airline_c#%{g:bufferline_status_info.before}%#bufferline_selected# %{g:bufferline_status_info.current} %#airline_c#%{g:bufferline_status_info.after} %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+" let g:airline_section_gutter = '%='
+" let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
+" let g:airline_section_y = '%{airline#parts#ffenc(),0)}'
+" let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%41%__restore__#:%3c'
+" let g:airline_section_warning = '%{airline#util#wrap(airline#entensions#whitespace#check(),0)}'
 
 " }}}
 " NERDTREE ----------------------------------------------------------------- {{{
