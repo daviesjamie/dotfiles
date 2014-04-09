@@ -162,19 +162,23 @@ noremap <leader>p "*p
 " Select contents of current line (excluding indentation)
 nnoremap vv ^vg_
 
-" Quickly edit main dotfiles
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>eg :vsplit ~/.gitconfig<cr>
-nnoremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
-
 " Turn off search highlighting
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Write to protected file (request sudo)
-noremap <leader>W :w !sudo tee %<cr>
-
 " Toggle NERDTree
 noremap <F2> :NERDTreeToggle<cr>
+
+" }}}
+" :COMMAND SHORTCUTS ------------------------------------------------------- {{{
+
+" Quickly edit main dotfiles
+cnoremap ev vsplit $MYVIMRC<cr>
+cnoremap eg vsplit ~/.gitconfig<cr>
+cnoremap ef vsplit ~/.config/fish/config.fish<cr>
+cnoremap essh vsplit ~/.ssh/config<cr>
+"
+" Write to protected file (request sudo)
+cnoremap w!! w !sudo tee %<cr>
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
@@ -249,7 +253,7 @@ let g:bufferline_show_bufnr=0
 
 " Custom airline layout
 " mode | buffers/filename [RO]                  branch | [warnings]
-"  a                c                              z       warning
+"  a                c                              z      warning
 let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
