@@ -36,25 +36,25 @@ let s:cterm_dpurple = "53"
 let g:airline#themes#hybridalt#palette = {}
 
 " Normal mode
-let s:N1 = [s:gui_green, s:gui_dgrey, s:cterm_green, s:cterm_dgrey]
+let s:N1 = [s:gui_bg, s:gui_grey, s:cterm_bg, s:cterm_grey]
 let s:N2 = [s:gui_lgrey, s:gui_dgrey, s:cterm_lgrey, s:cterm_dgrey]
 let s:N3 = [s:gui_lgrey, s:gui_bg, s:cterm_lgrey, s:cterm_bg]
 let g:airline#themes#hybridalt#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 
 " Insert mode
-let s:I1 = [s:gui_blue, s:gui_dgrey, s:cterm_blue, s:cterm_dgrey]
+let s:I1 = [s:gui_bg, s:gui_blue, s:cterm_bg, s:cterm_blue]
 let s:I2 = [s:gui_lgrey, s:gui_dgrey, s:cterm_lgrey, s:cterm_dgrey]
 let s:I3 = [s:gui_lgrey, s:gui_bg, s:cterm_lgrey, s:cterm_bg]
 let g:airline#themes#hybridalt#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
 
 " Replace mode
-let s:R1 = [s:gui_red, s:gui_dgrey, s:cterm_red, s:cterm_dgrey]
+let s:R1 = [s:gui_bg, s:gui_red, s:cterm_bg, s:cterm_red]
 let s:R2 = [s:gui_lgrey, s:gui_dgrey, s:cterm_lgrey, s:cterm_dgrey]
 let s:R3 = [s:gui_lgrey, s:gui_bg, s:cterm_lgrey, s:cterm_bg]
 let g:airline#themes#hybridalt#palette.replace = airline#themes#generate_color_map(s:R1, s:R2, s:R3)
 
 " Visual mode
-let s:V1 = [s:gui_orange, s:gui_dgrey, s:cterm_orange, s:cterm_dgrey]
+let s:V1 = [s:gui_bg, s:gui_orange, s:cterm_bg, s:cterm_orange]
 let s:V2 = [s:gui_lgrey, s:gui_dgrey, s:cterm_lgrey, s:cterm_dgrey]
 let s:V3 = [s:gui_lgrey, s:gui_bg, s:cterm_lgrey, s:cterm_bg]
 let g:airline#themes#hybridalt#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
@@ -63,4 +63,24 @@ let g:airline#themes#hybridalt#palette.visual = airline#themes#generate_color_ma
 let s:IA1 = [s:gui_bg, s:gui_dgrey, s:cterm_bg, s:cterm_dgrey]
 let s:IA2 = [s:gui_lgrey, s:gui_dgrey, s:cterm_lgrey, s:cterm_dgrey]
 let s:IA3 = [s:gui_lgrey, s:gui_bg, s:cterm_lgrey, s:cterm_bg]
-let g:airline#themes#hybridalt#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:N3)
+let g:airline#themes#hybridalt#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
+
+" Warning
+let s:WI = [s:gui_fg, s:gui_dred, s:cterm_fg, s:cterm_dred]
+let g:airline#themes#hybridalt#palette.normal.airline_warning = [
+     \ s:WI[0], s:WI[1], s:WI[2], s:WI[3]
+     \ ]
+
+let g:airline#themes#hybridalt#palette.insert.airline_warning =
+     \ g:airline#themes#hybridalt#palette.normal.airline_warning
+
+let g:airline#themes#hybridalt#palette.replace.airline_warning =
+     \ g:airline#themes#hybridalt#palette.normal.airline_warning
+
+let g:airline#themes#hybridalt#palette.visual.airline_warning =
+     \ g:airline#themes#hybridalt#palette.normal.airline_warning
+
+" Accents
+let g:airline#themes#hybridalt#palette.accents = {
+     \ 'red': [s:gui_dred, s:gui_bg, s:cterm_dred, s:cterm_bg]
+     \ }
