@@ -184,8 +184,8 @@ call vundle#rc()
 " Let vundle manage vundle (required)
 Bundle 'gmarik/vundle'
 
-" Base16 colour schemes
-Bundle 'chriskempson/base16-vim'
+" Hybrid colour scheme
+Bundle 'w0ng/vim-hybrid'
 
 " Solarized colour schemes
 Bundle 'altercation/vim-colors-solarized'
@@ -211,10 +211,8 @@ filetype plugin indent on
 " Enable 256 colours
 set t_Co=256
 "
-" Enable base16 theme
-set background=dark
-let base16colorspace=256
-colorscheme base16-default
+" Enable hybrid theme
+colorscheme hybrid
 
 " }}}
 " AIRLINE / BUFFERLINE ----------------------------------------------------- {{{
@@ -223,7 +221,7 @@ set noshowmode      " stop vim displaying the mode, as airline now shows it
 set laststatus=2    " always display the status line
 
 " Use base16 theme
-let g:airline_theme='base16'
+let g:airline_theme='bubblegum'
 
 " Turn on fancy separators
 let g:airline_left_sep=''
