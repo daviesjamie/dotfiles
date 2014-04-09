@@ -184,8 +184,8 @@ call vundle#rc()
 " Let vundle manage vundle (required)
 Bundle 'gmarik/vundle'
 
-" Luna colour scheme
-Bundle 'Pychimp/vim-luna'
+" Base16 colour schemes
+Bundle 'chriskempson/base16-vim'
 
 " Solarized colour schemes
 Bundle 'altercation/vim-colors-solarized'
@@ -207,12 +207,14 @@ filetype plugin indent on
 
 " }}}
 " COLOUR SCHEME ------------------------------------------------------------ {{{
-"
+
 " Enable 256 colours
 set t_Co=256
 "
-" Use luna as colour scheme (installed through Vundle)
-colorscheme luna-term
+" Enable base16 theme
+set background=dark
+let base16colorspace=256
+colorscheme base16-default
 
 " }}}
 " AIRLINE / BUFFERLINE ----------------------------------------------------- {{{
@@ -220,8 +222,8 @@ colorscheme luna-term
 set noshowmode      " stop vim displaying the mode, as airline now shows it
 set laststatus=2    " always display the status line
 
-" Use luna theme
-let g:airline_theme='luna'
+" Use base16 theme
+let g:airline_theme='base16'
 
 " Turn on fancy separators
 let g:airline_left_sep=''

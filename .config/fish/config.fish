@@ -158,3 +158,8 @@ source ~/.config/fish/virtualfish/virtual.fish
 source ~/.config/fish/virtualfish/auto_activation.fish
 
 # }}}
+# BASE 16 COLOURS ---------------------------------------------------------- {{{
+
+eval sh ~/.base16/base16-shell/base16-default.dark.sh
+
+# }}}
