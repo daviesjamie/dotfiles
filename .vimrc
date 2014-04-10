@@ -295,9 +295,6 @@ let NERDTreeQuitOnOpen=0
 " Ignore (don't display) some files
 let NERDTreeIgnore = ['\.pyc$']
 
-" Automatically open NERDTree if no arguments are given to vim
-autocmd vimenter * if !argc() | NERDTree | endif
-
 " }}}
 " GUI / MACVIM ------------------------------------------------------------- {{{
 
