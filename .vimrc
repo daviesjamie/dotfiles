@@ -149,9 +149,9 @@ noremap <leader>h :bprevious<cr>
 " Toggle line numbers
 nnoremap <leader>n :setlocal number!<cr>
 
-" System clipboard
+" Copying to/from system clipboard
 noremap <leader>y "*y
-noremap <leader>p "*p
+noremap <leader>p :set paste<cr>o<esc>"*]p:set nopaste<cr>
 
 " Select contents of current line (excluding indentation)
 nnoremap vv ^vg_
