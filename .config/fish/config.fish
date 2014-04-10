@@ -16,7 +16,13 @@ function essh; eval $EDITOR ~/.ssh/config; end
 
 # Git shortcuts
 function git; hub $argv; end
-function g; git $argv; end
+function g
+    if test (count $argv) -gt 0
+        git $argv
+    else
+        git status
+    end
+end
 function gi; curl http://www.gitignore.io/api/$argv; end
 function gist; command gist -c $argv; end
 
