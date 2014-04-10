@@ -203,6 +203,9 @@ Bundle 'altercation/vim-colors-solarized'
 " Airline status bar
 Bundle 'bling/vim-airline'
 
+" Alternative hybrid theme for airline
+Bundle 'daviesjamie/airline-hybrid-alt'
+
 " Show buffers in the status bar
 Bundle 'bling/vim-bufferline'
 
