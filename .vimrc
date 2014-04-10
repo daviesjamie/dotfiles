@@ -154,17 +154,14 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " Resize splits more easily
-noremap <C-w>h <C-w>10>
+noremap <C-w>h <C-w>10<
 noremap <C-w>j <C-w>10-
 noremap <C-w>k <C-w>10+
-noremap <C-w>l <C-w>10<
+noremap <C-w>l <C-w>10>
 
 " Move to next/previous buffers easier
-noremap <leader>l :bnext<cr>
-noremap <leader>h :bprevious<cr>
-
-" Toggle line numbers
-nnoremap <leader>n :setlocal number!<cr>
+noremap <leader>x :bnext<cr>
+noremap <leader>z :bprevious<cr>
 
 " Copying to/from system clipboard
 noremap <leader>y "*y
