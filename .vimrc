@@ -187,7 +187,6 @@ cnoremap w!! w !sudo tee %
 " Use ZSH as shell (vundle doesn't like fish!)
 set shell=/bin/zsh
 
-filetype on
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -237,6 +236,9 @@ let g:airline_theme='hybridalt'
 " Turn on fancy separators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" Don't collapse left section of airline when inactive
+let g:airline_inactive_collapse=0
 
 " Stop bufferline showing on command line
 let g:bufferline_echo=0
