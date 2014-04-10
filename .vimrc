@@ -142,15 +142,9 @@ noremap <C-w>j <C-w>10-
 noremap <C-w>k <C-w>10+
 noremap <C-w>l <C-w>10<
 
-" Open a new empty buffer
-noremap <leader>T :enew<cr>
-
 " Move to next/previous buffers easier
 noremap <leader>l :bnext<cr>
 noremap <leader>h :bprevious<cr>
-
-" Close the current buffer and switch back to the old one
-noremap <leader>bq :bp <bar> bd #<cr>
 
 " Toggle line numbers
 nnoremap <leader>n :setlocal number!<cr>
@@ -171,14 +165,17 @@ noremap <F2> :NERDTreeToggle<cr>
 " }}}
 " :COMMAND SHORTCUTS ------------------------------------------------------- {{{
 
+" Close the current buffer and switch back to the old one
+cnoremap bq bp <bar> bd #
+
 " Quickly edit main dotfiles
-cnoremap ev vsplit $MYVIMRC<cr>
-cnoremap eg vsplit ~/.gitconfig<cr>
-cnoremap ef vsplit ~/.config/fish/config.fish<cr>
-cnoremap essh vsplit ~/.ssh/config<cr>
+cnoremap ev vsplit $MYVIMRC
+cnoremap eg vsplit ~/.gitconfig
+cnoremap ef vsplit ~/.config/fish/config.fish
+cnoremap essh vsplit ~/.ssh/config
 "
 " Write to protected file (request sudo)
-cnoremap w!! w !sudo tee %<cr>
+cnoremap w!! w !sudo tee %
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
