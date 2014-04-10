@@ -16,7 +16,9 @@ set ttyfast             " use a fast terminal connection
 set visualbell          " use a visual bell instead of annoying beep
 set title               " update the terminal title with file name
 
-set number              " show line numbers
+set hidden              " Allow buffers to exist in the background
+
+set number              " show absolute line number on current line
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
@@ -26,7 +28,7 @@ set matchtime=3         " highlight matching parens for 3 seconds
 set textwidth=80        " set maximum line width to 80 characters
 "set colorcolumn=+1      " draw a right margin at the end of textwidth
 set linebreak           " use soft-wrapping on long lines
-set formatoptions=crqn1j " see :h formatoptions, there's too much to explain
+set formatoptions=cqanb1j " see :h formatoptions, there's too much to explain
 
 set tabstop=4           " set hard tabstop size to 4
 set softtabstop=4       " set soft tabstop size to 4
