@@ -156,8 +156,8 @@ noremap <leader>p :set paste<cr>o<esc>"*]p:set nopaste<cr>
 " Select contents of current line (excluding indentation)
 nnoremap vv ^vg_
 
-" Turn off search highlighting
-nnoremap <leader><space> :nohlsearch<cr>
+" Clear search highlighting
+nnoremap <cr> :nohlsearch<cr>
 
 " Toggle NERDTree
 noremap <F2> :NERDTreeToggle<cr>
