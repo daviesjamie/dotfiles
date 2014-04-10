@@ -114,6 +114,21 @@ set foldlevelstart=0
 nnoremap <Space> za
 
 " }}}
+" COMPLETION --------------------------------------------------------------- {{{
+
+" When tab-completing with more than one match, list all matches and complete
+" till longest common string
+set wildmode=list:longest
+
+" Use a menu for command-line completion
+set wildmenu
+
+" Stuff to ignore when tab-completing
+set wildignore+=*DS_Store*
+set wildignore+=*.pyc
+set wildignore+=*.png,*.jpg,*.gif
+
+" }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
 
 " Set leader keys
