@@ -110,11 +110,11 @@ function pwd_prompt -d 'Print current working directory, using ~ instead of $HOM
 end
 
 function git_prompt
-    if git rev-parse --show-toplevel >/dev/null 2>&1
+    if command git rev-parse --show-toplevel >/dev/null 2>&1
         set_color normal
         printf ' on '
         set_color magenta
-        printf '%s' (git rev-parse --abbrev-ref HEAD ^/dev/null)
+        printf '%s' (command git rev-parse --abbrev-ref HEAD ^/dev/null)
         set_color red
         git_prompt_status
         set_color normal
