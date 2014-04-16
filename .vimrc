@@ -54,6 +54,8 @@ set ttimeoutlen=10      " wait 10ms for a keycode to complete
 set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
 
+set spelllang=en_gb     " set spelling to use British English
+
 " Set dictonary files
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
@@ -344,7 +346,7 @@ augroup END
 
 augroup ft_tex
     au!
-    au FileType tex setlocal spell spelllang=en_gb
+    au FileType tex setlocal spell
 augroup END
 
 " }}}
