@@ -18,6 +18,7 @@ set title               " update the terminal title with file name
 
 set hidden              " Allow buffers to exist in the background
 
+set relativenumber      " use relative line numbers
 set number              " show absolute line number on current line
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
@@ -80,6 +81,13 @@ augroup cline
     au!
     au WinLeave,InsertEnter * set nocursorline
     au WinEnter,InsertLeave * set cursorline
+augroup END
+
+" Only show relative line numbers in normal mode and in the current window
+augroup relnumbers
+    au!
+    au WinLeave,InsertEnter * set norelativenumber
+    au WinEnter,InsertLeave * set relativenumber
 augroup END
 
 " Resize splits when the window is resized
