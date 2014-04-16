@@ -243,6 +243,9 @@ Bundle 'tpope/vim-fugitive'
 " NerdTREE file tree browser
 Bundle 'scrooloose/nerdtree'
 
+" Supertab - use tab for all auto-completion in insert mode
+Bundle 'ervandew/supertab'
+
 " Enable file-specific indenting and plugins
 filetype plugin indent on
 
