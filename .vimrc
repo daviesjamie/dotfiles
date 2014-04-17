@@ -251,8 +251,8 @@ Bundle 'tpope/vim-fugitive'
 " NerdTREE file tree browser
 Bundle 'scrooloose/nerdtree'
 
-" Supertab - use tab for all auto-completion in insert mode
-Bundle 'ervandew/supertab'
+" UltiSnip snippet manager
+Bundle 'Sirver/ultisnips'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -323,6 +323,19 @@ let NERDTreeQuitOnOpen=0
 
 " Ignore (don't display) some files
 let NERDTreeIgnore = ['\.pyc$']
+
+" }}}
+" ULTISNIPS ---------------------------------------------------------------- {{{
+
+" Use tab to expand snippets
+let g:UltiSnipsExpandTrigger='<tab>'
+
+" Use tab and shift+tab for jumping between tabstops/placeholders
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+
+" Use vertical split for :UltiSnipsEdit
+let g:UltiSnipsEditSplit='vertical'
 
 " }}}
 " GUI / MACVIM ------------------------------------------------------------- {{{
