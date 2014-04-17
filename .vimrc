@@ -29,7 +29,12 @@ set matchtime=3         " highlight matching parens for 3 seconds
 set textwidth=80        " set maximum line width to 80 characters
 "set colorcolumn=+1      " draw a right margin at the end of textwidth
 set linebreak           " use soft-wrapping on long lines
-set formatoptions=cqanb1j " see :h formatoptions, there's too much to explain
+
+set formatoptions=q     " Allow formatting of comments with gq
+set formatoptions+=n    " Recognise numbered lists when formatting
+set formatoptions+=l    " Don't automatically format/wrap already too-long lines
+set formatoptions+=1    " Don't break lines after a one-letter word
+set formatoptions+=j    " Remove comment markup when joining lines
 
 set tabstop=4           " set hard tabstop size to 4
 set softtabstop=4       " set soft tabstop size to 4
