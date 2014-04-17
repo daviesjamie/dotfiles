@@ -206,9 +206,12 @@ cnoremap ev vsplit $MYVIMRC
 cnoremap eg vsplit ~/.gitconfig
 cnoremap ef vsplit ~/.config/fish/config.fish
 cnoremap essh vsplit ~/.ssh/config
-"
+
 " Write to protected file (request sudo)
 cnoremap w!! w !sudo tee %
+
+" Prefer help in horizontal splits
+cnoremap h vert help
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
