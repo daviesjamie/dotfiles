@@ -248,9 +248,6 @@ Bundle 'bling/vim-bufferline'
 " Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
 
-" NerdTREE file tree browser
-Bundle 'scrooloose/nerdtree'
-
 " UltiSnip snippet manager
 Bundle 'Sirver/ultisnips'
 
@@ -299,30 +296,6 @@ let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
-
-" }}}
-" NERDTREE ----------------------------------------------------------------- {{{
-
-" Highlight the line the cursor is on
-let NERDTreeHighlightCursorline=1
-
-" Hide unecessary help message and 'Bookmarks' title
-let NERDTreeMinimalUI=1
-
-" Use arrow/triangle symbols instead of | and +
-let NERDTreeDirArrows=1
-
-" Use more colours
-let NERDChristmasTree=1
-
-" Change Vim's working directory whenever NERDTree's directory is changed
-let NERDTreeChDirMode=2
-
-" Leave NERDTree open after selecting a file
-let NERDTreeQuitOnOpen=0
-
-" Ignore (don't display) some files
-let NERDTreeIgnore = ['\.pyc$']
 
 " }}}
 " ULTISNIPS ---------------------------------------------------------------- {{{
