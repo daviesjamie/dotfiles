@@ -190,7 +190,7 @@ noremap <leader>p :set paste<cr>"*]p:set nopaste<cr>
 nnoremap vv ^vg_
 
 " Clear search highlighting
-nnoremap <cr> :nohlsearch<cr>
+nnoremap <leader><space> :nohlsearch<cr>
 
 " Toggle NERDTree
 noremap <F2> :NERDTreeToggle<cr>
