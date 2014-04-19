@@ -245,6 +245,9 @@ Bundle 'daviesjamie/airline-hybrid-alt'
 " Show buffers in the status bar
 Bundle 'bling/vim-bufferline'
 
+" Ctrlp.vim - fuzzy file/buffer/MRU/tag finder
+Bundle 'kien/ctrlp.vim'
+
 " Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
 
