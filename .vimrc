@@ -252,7 +252,10 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 
 " UltiSnip snippet manager
-Bundle 'Sirver/ultisnips'
+Bundle 'sirver/ultisnips'
+
+" YouCompleteMe tab completion
+Bundle 'valloric/youcompleteme'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -312,6 +315,12 @@ let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " Use vertical split for :UltiSnipsEdit
 let g:UltiSnipsEditSplit='vertical'
+
+" }}}
+" YOUCOMPLETEME ------------------------------------------------------------ {{{
+
+" Remove unused mapping
+let g:ycm_key_detailed_diagnostics=''
 
 " }}}
 " GUI / MACVIM ------------------------------------------------------------- {{{
