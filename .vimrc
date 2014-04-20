@@ -307,7 +307,7 @@ let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_hea
 " ULTISNIPS ---------------------------------------------------------------- {{{
 
 " Use tab to expand snippets
-let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsExpandTrigger='<leader><tab>'
 
 " Use tab and shift+tab for jumping between tabstops/placeholders
 let g:UltiSnipsJumpForwardTrigger='<tab>'
