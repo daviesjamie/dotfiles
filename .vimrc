@@ -199,19 +199,23 @@ noremap <F2> :NERDTreeToggle<cr>
 " :COMMAND SHORTCUTS ------------------------------------------------------- {{{
 
 " Close the current buffer and switch back to the old one
-cnoremap bq bp <bar> bd #
+cabbrev bq bp <bar> bd #
 
 " Quickly edit main dotfiles
-cnoremap ev vsplit $MYVIMRC
-cnoremap eg vsplit ~/.gitconfig
-cnoremap ef vsplit ~/.config/fish/config.fish
-cnoremap essh vsplit ~/.ssh/config
+cabbrev ev e $MYVIMRC
+cabbrev eg e ~/.gitconfig
+cabbrev ef e ~/.config/fish/config.fish
+cabbrev essh e ~/.ssh/config
+cabbrev vv vsplit $MYVIMRC
+cabbrev vg vsplit ~/.gitconfig
+cabbrev vf vsplit ~/.config/fish/config.fish
+cabbrev vssh vsplit ~/.ssh/config
 
 " Write to protected file (request sudo)
-cnoremap w!! w !sudo tee %
+cabbrev w!! w !sudo tee %
 
 " Prefer help in horizontal splits
-cnoremap h vert help
+cabbrev h vert help
 
 " }}}
 " VUNDLE ------------------------------------------------------------------- {{{
