@@ -272,8 +272,3 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 
 # }}}
-# WELCOME MESSAGE ---------------------------------------------------------- {{{
-
-fortune -s -n 300 | cowsay | lolcat
-
-# }}}
