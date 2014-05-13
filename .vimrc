@@ -371,5 +371,13 @@ augroup ft_vim
 augroup END
 
 " }}}
+" ZSH {{{
+
+augroup ft_zsh
+    au!
+    au FileType zsh setlocal foldmethod=marker foldmarker={{{,}}}
+augroup END
+
+" }}}
 
 " }}}
