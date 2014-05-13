@@ -17,26 +17,58 @@ if [[ -x `which apt-get` ]]; then
 fi
 
 # }}}
-# COLORS ------------------------------------------------------------------- {{{
+# ALIASES ------------------------------------------------------------------ {{{
 
-autoload colors; colors
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+function take { mkdir -p $1 && cd $1 }
 
-# Export some useful color presets
-for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-    eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
-    eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done
+# Dotfiles shortcuits
+alias eg='$EDITOR ~/.gitconfig'
+alias essh='$EDITOR ~/.ssh/config'
+alias ev='$EDITOR ~/.vimrc'
+alias ez='$EDITOR ~/.zshrc'
 
-# Clear LSCOLORS
-unset LSCOLORS
+# Git shortcuts
+alias git='hub'
+function g() {
+    if [[ -z $1 ]]; then
+        git status
+    else
+        git $*
+    fi
+}
 
-# Set LSCOLORS
-export CLICOLOR=1
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+# Directory listings
+alias l='ls -p'
+alias la='ls -Ap'
+alias ll='ls -hlp'
+alias lla='ls -Alp'
 
-# Enable color in grep
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='3;33'
+# Clipboard
+alias pbc='pbcopy'
+alias pbp='pbpaste'
+
+# Homebrew
+alias brup='brew update && brew upgrade && brew cleanup'
+
+# Latex compilation
+alias mtex='latexmk -pdf -pvc'
+
+# Python
+alias py='python'
+alias ipy='ipython'
+alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs pip install -U"
+
+# Todor
+alias todor='/Users/jamie/Code/todor/todor.py'
+alias t='todor'
+
+# Vim
+alias v='vim'
 
 # }}}
 # OPTIONS ------------------------------------------------------------------ {{{
@@ -69,6 +101,8 @@ setopt transient_rprompt    # Only show rprompt on the current prompt
 
 setopt multios              # Implicitly allow multiple redirections
 
+autoload -U zcalc           # Use the commandline as a calculator
+
 # }}}
 # EXPORTS ------------------------------------------------------------------ {{{
 
@@ -82,11 +116,37 @@ PATH="/usr/local/opt/ruby/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 export PATH
 
+export HISTSIZE=10000
+export SAVEHIST=9000
+export HISTFILE=~/.zsh_history
+
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home'
 
 export BROWSER='open'
 export EDITOR='vim'
 export PAGER='less'
+
+# }}}
+# COLORS ------------------------------------------------------------------- {{{
+
+autoload colors; colors
+
+# Export some useful color presets
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+    eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
+    eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+done
+
+# Clear LSCOLORS
+unset LSCOLORS
+
+# Set LSCOLORS
+export CLICOLOR=1
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+
+# Enable color in grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='3;33'
 
 # }}}
 # PROMPT ------------------------------------------------------------------- {{{
@@ -197,57 +257,23 @@ zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipa
 zstyle '*' single-ignored show
 
 # }}}
-# ALIASES ------------------------------------------------------------------ {{{
+# ANTIGEN ------------------------------------------------------------------ {{{
 
-# Directories
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-function take { mkdir -p $1 && cd $1 }
+# Load antigen script
+source ~/.antigen/antigen.zsh
 
-# Dotfiles shortcuits
-alias eg='$EDITOR ~/.gitconfig'
-alias essh='$EDITOR ~/.ssh/config'
-alias ev='$EDITOR ~/.vimrc'
-alias ez='$EDITOR ~/.zshrc'
+# Syntax highlighting
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Git shortcuts
-alias git='hub'
-function g() {
-    if [[ -z $1 ]]; then
-        git status
-    else
-        git $*
-    fi
-}
+# Extra completions
+antigen bundle zsh-users/zsh-completions
 
-# Directory listings
-alias l='ls -p'
-alias la='ls -Ap'
-alias ll='ls -hlp'
-alias lla='ls -Alp'
+# Apply changes
+antigen apply
 
-# Clipboard
-alias pbc='pbcopy'
-alias pbp='pbpaste'
+# }}}
+# WELCOME MESSAGE ---------------------------------------------------------- {{{
 
-# Homebrew
-alias brup='brew update && brew upgrade && brew cleanup'
-
-# Latex compilation
-alias mtex='latexmk -pdf -pvc'
-
-# Python
-alias py='python'
-alias ipy='ipython'
-alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs pip install -U"
-
-# Todor
-alias todor='/Users/jamie/Code/todor/todor.py'
-alias t='todor'
-
-# Vim
-alias v='vim'
+fortune -s -n 300 | cowsay | lolcat
 
 # }}}
