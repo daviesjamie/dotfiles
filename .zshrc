@@ -168,7 +168,7 @@ function _prompt_virtualenv {
 }
 
 PROMPT='
-${PR_MAGENTA}%n%{$reset_color%} at ${PR_YELLOW}%m%{$reset_color%} in ${PR_GREEN}$(_prompt_pwd)%{$reset_color%}$(_prompt_git_branch)
+${PR_MAGENTA}%n%{$reset_color%} at ${PR_BLUE}%m%{$reset_color%} in ${PR_CYAN}$(_prompt_pwd)%{$reset_color%}$(_prompt_git_branch)
 $(_prompt_char) '
 
 RPROMPT='${PR_BLUE}$(_prompt_virtualenv)%{$reset_color%}'
