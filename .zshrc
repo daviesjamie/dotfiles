@@ -101,8 +101,6 @@ setopt transient_rprompt    # Only show rprompt on the current prompt
 
 setopt multios              # Implicitly allow multiple redirections
 
-autoload -U zcalc           # Use the commandline as a calculator
-
 # }}}
 # EXPORTS ------------------------------------------------------------------ {{{
 
@@ -264,9 +262,6 @@ source ~/.antigen/antigen.zsh
 
 # Syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Extra completions
-antigen bundle zsh-users/zsh-completions
 
 # Apply changes
 antigen apply
