@@ -92,6 +92,7 @@ setopt hist_find_no_dups    # When searching history don't display duplicates
 setopt hist_reduce_blanks   # Trim whitespace when adding to history
 setopt hist_verify          # Don't execute, just expand history
 setopt share_history        # Imports new and appends typed commands to history
+HISTSIZE=1000               # Keep 1000 commands in history
 
 setopt correct              # Spelling correction for commands
 setopt correctall           # Spelling correction for arguments
@@ -255,13 +256,26 @@ zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipa
 zstyle '*' single-ignored show
 
 # }}}
-# ANTIGEN ------------------------------------------------------------------ {{{
+# ANTIGEN PLUGINS ---------------------------------------------------------- {{{
 
 # Load antigen script
 source ~/.antigen/antigen.zsh
 
 # Syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
+
+    # Set highlighters to use
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
+
+# Up/down history completion
+antigen bundle zsh-users/zsh-history-substring-search
+
+    # Bind up/down arrow keys
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
 
 # Apply changes
 antigen apply
