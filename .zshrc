@@ -277,6 +277,9 @@ antigen bundle zsh-users/zsh-history-substring-search
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
 
+# oh-my-zsh `brew` completions
+antigen bundle robbyrussell/oh-my-zsh.git plugins/brew
+
 # Apply changes
 antigen apply
 
