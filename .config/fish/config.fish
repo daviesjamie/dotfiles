@@ -158,9 +158,3 @@ function fish_prompt
 end
 
 # }}}
-# VIRTUALFISH -------------------------------------------------------------- {{{
-
-source ~/.config/fish/virtualfish/virtual.fish
-source ~/.config/fish/virtualfish/auto_activation.fish
-
-# }}}
