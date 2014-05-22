@@ -29,9 +29,16 @@ function g
         git status
     end
 end
-function gi; curl http://www.gitignore.io/api/$argv; end
-function gist; command gist -c $argv; end
 
+# Gitignore.io CLI
+function gi
+    set -l params (echo $argv|tr ' ' ',')
+    if test "$params" = list
+        curl -s http://www.gitignore.io/api/$params | tr ',' '\n' | column
+    else
+        curl -s http://www.gitignore.io/api/$params
+    end
+end
 
 # Clipboard
 function pbc; pbcopy; end
