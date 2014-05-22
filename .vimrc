@@ -224,9 +224,6 @@ cabbrev h vert help
 " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " :BundleInstall
 
-" Use ZSH as shell (vundle doesn't like fish!)
-set shell=/bin/zsh
-
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -234,32 +231,22 @@ call vundle#rc()
 " Let vundle manage vundle (required)
 Bundle 'gmarik/vundle'
 
-" Hybrid colour scheme
+" Colour schemes
 Bundle 'w0ng/vim-hybrid'
-
-" Solarized colour schemes
 Bundle 'altercation/vim-colors-solarized'
-
-" Airline status bar
-Bundle 'bling/vim-airline'
-
-" Alternative hybrid theme for airline
 Bundle 'daviesjamie/airline-hybrid-alt'
 
-" Show buffers in the status bar
+" Core plugins
+Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
-
-" Ctrlp.vim - fuzzy file/buffer/MRU/tag finder
 Bundle 'kien/ctrlp.vim'
-
-" Fugitive.vim, an awesome git wrapper
 Bundle 'tpope/vim-fugitive'
-
-" UltiSnip snippet manager
 Bundle 'sirver/ultisnips'
 
-" YouCompleteMe tab completion
-Bundle 'valloric/youcompleteme'
+" Experimental plugins
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -311,7 +298,7 @@ let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_hea
 " ULTISNIPS ---------------------------------------------------------------- {{{
 
 " Use tab to expand snippets
-let g:UltiSnipsExpandTrigger='<leader><tab>'
+let g:UltiSnipsExpandTrigger='<tab>'
 
 " Use tab and shift+tab for jumping between tabstops/placeholders
 let g:UltiSnipsJumpForwardTrigger='<tab>'
@@ -319,12 +306,6 @@ let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " Use vertical split for :UltiSnipsEdit
 let g:UltiSnipsEditSplit='vertical'
-
-" }}}
-" YOUCOMPLETEME ------------------------------------------------------------ {{{
-
-" Remove unused mapping
-let g:ycm_key_detailed_diagnostics=''
 
 " }}}
 " GUI / MACVIM ------------------------------------------------------------- {{{
