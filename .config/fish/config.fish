@@ -7,6 +7,12 @@ function ....; cd ../../..; end
 function .....; cd ../../../..; end
 function take; mkdir -p $argv; cd $argv; end
 
+# Directory listings
+function l; ls -p $argv; end
+function la; ls -Ap $argv; end
+function ll; ls -hlp $argv; end
+function lla; ls -Alp $argv; end
+
 # Dotfiles shortcuts
 function reloadf; source ~/.config/fish/config.fish; end
 function ef; eval $EDITOR ~/.config/fish/config.fish; reloadf; end
@@ -26,11 +32,6 @@ end
 function gi; curl http://www.gitignore.io/api/$argv; end
 function gist; command gist -c $argv; end
 
-# Directory listings
-function l; ls -p $argv; end
-function la; ls -Ap $argv; end
-function ll; ls -hlp $argv; end
-function lla; ls -Alp $argv; end
 
 # Clipboard
 function pbc; pbcopy; end
@@ -51,9 +52,6 @@ function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip
 # Todor shortcuts
 function todor; /Users/jamie/Code/todor/todor.py $argv; end
 function t; todor $argv; end
-
-# Sick of GUI-based vim, stick to the classic!
-function v; vim $argv; end
 
 # Make `sudo !!` work again!
 function sudo
