@@ -288,6 +288,16 @@ let g:airline_inactive_collapse=0
 " Stop bufferline showing on command line
 let g:bufferline_echo=0
 
+" Stop airline overwriting bufferline settings
+let g:airline#extensions#bufferline#overwrite_variables = 0
+
+" Set highlight colors for bufferline
+highlight bufferline_selected gui=bold cterm=bold term=bold
+highlight link bufferline_selected_inactive airline_c_inactive
+let g:bufferline_inactive_highlight = 'airline_c'
+let g:bufferline_active_highlight = 'bufferline_selected'
+let g:bufferline_separator = ' '
+
 " Put [ ] around the active buffer (but only when there's more than one)
 let g:bufferline_active_buffer_left='['
 let g:bufferline_active_buffer_right=']'
