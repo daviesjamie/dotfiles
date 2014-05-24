@@ -192,8 +192,13 @@ nnoremap vv ^vg_
 " Clear search highlighting
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Toggle NERDTree
-noremap <F2> :NERDTreeToggle<cr>
+" Change options (largely stolen from tpope's unimpaired.vim)
+nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
+nnoremap coc :set cursorline!<CR>
+nnoremap con :set number!<CR>
+nnoremap cor :set relativenumber!<CR>
+nnoremap cos :set spell!<CR>
+nnoremap cow :set wrap!<CR>
 
 " }}}
 " :COMMAND SHORTCUTS ------------------------------------------------------- {{{
