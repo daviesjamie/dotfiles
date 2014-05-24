@@ -229,6 +229,9 @@ cabbrev h vert help
 " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " :BundleInstall
 
+" Use ZSH as shell (vundle doesn't like fish!)
+set shell=/bin/zsh
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -238,7 +241,7 @@ Bundle 'gmarik/vundle'
 
 " Colour schemes
 Bundle 'w0ng/vim-hybrid'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'jonathanfilip/vim-lucius'
 Bundle 'daviesjamie/airline-hybrid-alt'
 
 " Core plugins
@@ -261,9 +264,10 @@ filetype plugin indent on
 
 " Enable 256 colours
 set t_Co=256
-"
-" Enable hybrid theme
-colorscheme hybrid
+
+" Enable lucius theme
+colorscheme lucius
+set background=dark
 
 " }}}
 " AIRLINE / BUFFERLINE ----------------------------------------------------- {{{
@@ -272,7 +276,7 @@ set noshowmode      " stop vim displaying the mode, as airline now shows it
 set laststatus=2    " always display the status line
 
 " Use base16 theme
-let g:airline_theme='hybridalt'
+let g:airline_theme='lucius'
 
 " Turn on fancy separators
 let g:airline_left_sep=''
@@ -320,6 +324,7 @@ if has("gui_running")
     set guioptions-=rR  " Hide right scrollbar
     set guioptions-=b   " Hide bottom scrollbar
     set guioptions-=lL  " Hide left scrollbar
+    set guioptions+=c   " Use vim-style prompts instead of popup dialog boxes
 
     " Set default window size
     set columns=100 lines=30
