@@ -244,17 +244,28 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'jonathanfilip/vim-lucius'
 Bundle 'daviesjamie/airline-hybrid-alt'
 
-" Core plugins
+" Status bar plugins
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'sirver/ultisnips'
 
-" Experimental plugins
+" File-based plugins
+Bundle 'kien/ctrlp.vim'
+
+" Tim Pope goodness
 Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+
+" Editing plugins
+Bundle 'godlygeek/tabular'
+Bundle 'sirver/ultisnips'
+Bundle 'wellle/targets.vim'
+
+" Experimental plugs
+Bundle 'suan/vim-instant-markdown'
+let g:instant_markdown_slow = 1
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
@@ -285,26 +296,6 @@ let g:airline_right_sep=''
 " Don't collapse left section of airline when inactive
 let g:airline_inactive_collapse=0
 
-" Stop bufferline showing on command line
-let g:bufferline_echo=0
-
-" Stop airline overwriting bufferline settings
-let g:airline#extensions#bufferline#overwrite_variables = 0
-
-" Set highlight colors for bufferline
-highlight bufferline_selected gui=bold cterm=bold term=bold
-highlight link bufferline_selected_inactive airline_c_inactive
-let g:bufferline_inactive_highlight = 'airline_c'
-let g:bufferline_active_highlight = 'bufferline_selected'
-let g:bufferline_separator = ' '
-
-" Put [ ] around the active buffer (but only when there's more than one)
-let g:bufferline_active_buffer_left='['
-let g:bufferline_active_buffer_right=']'
-
-" Don't display buffer numbers
-let g:bufferline_show_bufnr=0
-
 " Custom airline layout
 " mode | buffers/filename [RO]                  branch | [warnings]
 let g:airline_section_a = '%{airline#util#wrap(airline#parts#mode(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
@@ -312,6 +303,25 @@ let g:airline_section_b = ''
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
+
+" Stop airline overwriting bufferline settings
+let g:airline#extensions#bufferline#overwrite_variables = 0
+
+" Stop bufferline showing on command line
+let g:bufferline_echo=0
+
+" Set highlight colors for bufferline
+highlight bufferline_selected gui=bold cterm=bold term=bold
+highlight link bufferline_selected_inactive airline_c_inactive
+let g:bufferline_inactive_highlight = 'airline_c'
+let g:bufferline_active_highlight = 'bufferline_selected'
+
+" Put [ ] around the active buffer (but only when there's more than one)
+let g:bufferline_active_buffer_left='['
+let g:bufferline_active_buffer_right=']'
+
+" Don't display buffer numbers
+let g:bufferline_show_bufnr=0
 
 " }}}
 " ULTISNIPS ---------------------------------------------------------------- {{{
