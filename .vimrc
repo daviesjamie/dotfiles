@@ -215,7 +215,7 @@ cabbrev h vert help
 
 " Install with:
 " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" :BundleInstall
+" :PluginInstall
 
 " Use ZSH as shell (vundle doesn't like fish!)
 set shell=/bin/zsh
@@ -225,34 +225,34 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Let vundle manage vundle (required)
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Colour schemes
-Bundle 'w0ng/vim-hybrid'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'daviesjamie/airline-hybrid-alt'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'daviesjamie/airline-hybrid-alt'
 
 " Status bar plugins
-Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
 
 " File-based plugins
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Tim Pope goodness
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 
 " Editing plugins
-Bundle 'godlygeek/tabular'
-Bundle 'sirver/ultisnips'
-Bundle 'wellle/targets.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'sirver/ultisnips'
+Plugin 'wellle/targets.vim'
 
 " Experimental plugs
-Bundle 'suan/vim-instant-markdown'
+Plugin 'suan/vim-instant-markdown'
 let g:instant_markdown_slow = 1
 
 " Enable file-specific indenting and plugins
