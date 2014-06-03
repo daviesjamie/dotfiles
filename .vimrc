@@ -16,7 +16,7 @@ set ttyfast             " use a fast terminal connection
 set visualbell          " use a visual bell instead of annoying beep
 set title               " update the terminal title with file name
 
-set hidden              " Allow buffers to exist in the background
+set hidden              " Allow unsaved buffers to exist in the background
 
 set relativenumber      " use relative line numbers
 set number              " show absolute line number on current line
@@ -184,21 +184,9 @@ noremap <leader>z :bprevious<cr>
 
 " Copying to/from system clipboard
 noremap <leader>y "*y
-noremap <leader>p :set paste<cr>"*]p:set nopaste<cr>
-
-" Select contents of current line (excluding indentation)
-nnoremap vv ^vg_
 
 " Clear search highlighting
 nnoremap <leader><space> :nohlsearch<cr>
-
-" Change options (largely stolen from tpope's unimpaired.vim)
-nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
-nnoremap coc :set cursorline!<CR>
-nnoremap con :set number!<CR>
-nnoremap cor :set relativenumber!<CR>
-nnoremap cos :set spell!<CR>
-nnoremap cow :set wrap!<CR>
 
 " }}}
 " :COMMAND SHORTCUTS ------------------------------------------------------- {{{
