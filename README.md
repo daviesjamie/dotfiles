@@ -8,8 +8,8 @@ system. Maybe.
 
 This repo now uses [Dotbot](https://github.com/anishathalye/dotbot) to handle
 the installation and management of the dotfiles symlinks. To view the
-purpose-built tool that I wrote to manage the files before Dotbot, view the
-[my_tool](https://github.com/daviesjamie/dotfiles/tree/my_tool) branch.
+purpose-built tool that I wrote to manage the files before Dotbot, take a look
+at the [my_tool](https://github.com/daviesjamie/dotfiles/tree/my_tool) branch.
 
 ## Installation
 
@@ -24,6 +24,10 @@ This will create a symlink in the correct place in your home directory to each
 dotfile. The install script is idempotent - running it multiple times won't
 cause any issues, it will just update the git submodules.
 
+If using the dotfiles in this repository as-is, make sure to update
+[`gitconfig`](https://github.com/daviesjamie/dotfiles/blob/master/gitconfig) to
+reflect your name and email address!
+
 ### Manual Installation
 
 If you don't want to use Dotbot to install the dotfiles, then you can manually
@@ -37,6 +41,7 @@ Rinse and repeat for each file in this repository that you wish to use.
 
 Several other projects have provided me with ideas (and sometimes just a little
 code!) for this project:
+
  - Mathias Bynens' [excellent collection of OS
    X defaults](https://github.com/mathiasbynens/dotfiles/blob/master/.osx).
  - Steve Losh's [detailed and lengthy
