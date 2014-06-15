@@ -1,7 +1,10 @@
 " BASIC OPTIONS ------------------------------------------------------------ {{{
 
+" Recognise function keys that start with <Esc> in insert mode
+" Allows use/mapping of cursor keys, and removes delay when hitting escape
+set noesckeys
+
 " Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 set nocompatible
 
 " Allow backspacing over everything in insert mode
@@ -52,7 +55,6 @@ set gdefault            " global substitution by default
 
 set autoread            " re-read an open file that has changed outside vim
 
-set noesckeys           " remove the delay when hitting esc in insert mode
 set notimeout           " timeout out on keycodes, but not mappings
 set ttimeout
 set ttimeoutlen=10      " wait 10ms for a keycode to complete
@@ -159,6 +161,10 @@ noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " Make j and k work on screen lines, not file lines
 nnoremap j gj
