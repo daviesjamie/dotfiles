@@ -27,7 +27,9 @@ directory that conflict with the ones in this repository.
 Once installed, the `dotfiles` tool will be on your `$PATH`, and accessible from
 anywhere on your system.
 
-### Usage The following commands can be used with the `dotfiles` tool:
+### Usage
+
+The following commands can be used with the `dotfiles` tool:
 
  - `link [-f|--force] [files]`<br /> Creates symlinks for the specified
    dotfiles, or all files if none are specified. Prompts user to backup existing
