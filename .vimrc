@@ -90,13 +90,6 @@ augroup cline
     au WinEnter,InsertLeave * set cursorline
 augroup END
 
-" Only show relative line numbers in normal mode and in the current window
-augroup relnumbers
-    au!
-    au WinLeave,InsertEnter * set norelativenumber
-    au WinEnter,InsertLeave * set relativenumber
-augroup END
-
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
