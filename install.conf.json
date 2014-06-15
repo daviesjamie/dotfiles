@@ -1,6 +1,10 @@
 [
     {
-        "clean": ["~"]
+        "clean": [
+            "~",
+            "~/.config/fish",
+            "~/.vim/syntax"
+        ]
     },
     {
         "link": {
