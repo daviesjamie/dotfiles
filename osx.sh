@@ -17,14 +17,22 @@ sudo scutil --set HostName $name
 sudo scutil --set LocalHostName $name
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $name
 
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
 # Disable menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
+# Set highlight colour to green
+defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -41,18 +49,42 @@ defaults write NSGlobalDomain NSAWindowResizeTime -float 0.001
 # Stop Time Machine from prompting to use new hard drives as backups
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-# Disable shadows in screen shots
-defaults write com.apple.screencapture disable-shadow -bool true
+################################################################################
+# SSDs
+################################################################################
+
+# Disable local Time Machine snapshots
+sudo tmutil disablelocal
+
+# Disable the sudden motion sensor as it's not useful for SSDs
+sudo pmset -a sms 0
 
 ################################################################################
 # Input
 ################################################################################
+
+# Tap to click for this user and for login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a REALLY fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
+
+# Set up British English locale
+defaults write NSGlobalDomain AppleLanguages -array "en"
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=GBP"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Use London timezone
+systemsetup -settimezone "Europe/London" > /dev/null
+
+# Disable automatic emoji substitution in Messages
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 ################################################################################
 # Screen
@@ -90,12 +122,15 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 # Show ~/Library folder
 chflags nohidden ~/Library
 
+# Always expand "General", "Open With" and "Sharing & Permissions" in Get Info
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+    General -bool true \
+    OpenWith -bool true \
+    Privileges -bool true
+
 ################################################################################
 # Dock
 ################################################################################
-
-# Set dock icon size to 36 pixels
-defaults write com.apple.dock tilesize -int 36
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -119,7 +154,7 @@ defaults write com.apple.dock autohide -bool true
 # Reset launchpad
 [ -e ~/Library/Application\ Support/Dock*.db ] && rm ~/Library/Application\ Support/Dock*.db
 
-for app in "Dashboard" "Dock" "Finder" "SystemUIServer"; do
+for app in "Dashboard" "Dock" "Finder" "Messages" "SystemUIServer"; do
     killall "$app" > /dev/null 2>&1
 done
 
