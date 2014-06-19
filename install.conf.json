@@ -14,6 +14,7 @@
             "~/.latexmkrc"               : ".latexmkrc",
             "~/.vim/syntax/fish.vim"     : ".vim/syntax/fish.vim",
             "~/.vimrc"                   : ".vimrc",
+            "~/.wgetrc"                  : ".wgetrc",
             "~/.bin"                     : "bin/"
         }
     },
