@@ -147,7 +147,6 @@ set wildignore+=*.png,*.jpg,*.gif
 
 " Set leader keys
 let mapleader=","
-let maplocalleader="\\"
 
 " Stop using the cursor keys once and for all! (Unbind them)
 noremap <up> <nop>
@@ -190,9 +189,6 @@ nnoremap <leader><space> :nohlsearch<cr>
 " }}}
 " :COMMAND SHORTCUTS ------------------------------------------------------- {{{
 
-" Close the current buffer and switch back to the old one
-cabbrev bq bp <bar> bd #
-
 " Quickly edit main dotfiles
 cabbrev ev e $MYVIMRC
 cabbrev eg e ~/.gitconfig
@@ -206,7 +202,7 @@ cabbrev vssh vsplit ~/.ssh/config
 " Write to protected file (request sudo)
 cabbrev w!! w !sudo tee %
 
-" Prefer help in horizontal splits
+" Prefer help in vertical splits
 cabbrev h vert help
 
 " }}}
