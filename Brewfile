@@ -7,6 +7,7 @@ upgrade
 # INSTALLS
 install hub
 install --HEAD fish
+install irssi
 install macvim --override-system-vim --with-lua --custom-icons
 install node
 install python
