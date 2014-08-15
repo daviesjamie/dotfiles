@@ -212,8 +212,8 @@ cabbrev h vert help
 " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " :PluginInstall
 
-" Use ZSH as shell (vundle doesn't like fish!)
-set shell=/bin/zsh
+" Use Bash as shell (vundle doesn't like fish!)
+set shell=/bin/bash
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
