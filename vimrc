@@ -51,7 +51,6 @@ set incsearch           " search incrementally as you type
 set hlsearch            " highlight search matches
 set ignorecase          " use case-insensitive search
 set smartcase           " automatically decide to search with case or not
-set gdefault            " global substitution by default
 
 set autoread            " re-read an open file that has changed outside vim
 
