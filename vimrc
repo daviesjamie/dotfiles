@@ -82,6 +82,9 @@ augroup line_return
         \ endif
 augroup END
 
+" Strip trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
 " Only show cursorline in normal mode and in the current window
 augroup cline
     au!
@@ -92,7 +95,7 @@ augroup END
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
-" Change cursor to | when in insert mode
+" Change cursor to | when in insert mode (for iTerm2)
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
