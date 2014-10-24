@@ -29,8 +29,8 @@ set showcmd             " display incomplete commands at the bottom
 set scrolloff=5         " keep 5 lines visible around cursor (if possible)
 set matchtime=3         " highlight matching parens for 3 seconds
 
-set textwidth=80        " set maximum line width to 80 characters
-"set colorcolumn=+1      " draw a right margin at the end of textwidth
+set textwidth=100       " set maximum line width to 80 characters
+set colorcolumn=+1      " draw a right margin at the end of textwidth
 set linebreak           " use soft-wrapping on long lines
 
 set formatoptions=q     " Allow formatting of comments with gq
