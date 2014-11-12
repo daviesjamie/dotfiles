@@ -34,9 +34,9 @@ end
 function gi
     set -l params (echo $argv|tr ' ' ',')
     if test "$params" = list
-        curl -s http://www.gitignore.io/api/$params | tr ',' '\n' | column
+        curl -s https://www.gitignore.io/api/$params | tr ',' '\n' | column
     else
-        curl -s http://www.gitignore.io/api/$params
+        curl -s https://www.gitignore.io/api/$params
     end
 end
 
