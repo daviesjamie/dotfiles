@@ -12,6 +12,7 @@
             "~/.gitconfig"               : "gitconfig",
             "~/.gitignore"               : "gitignore",
             "~/.latexmkrc"               : "latexmkrc",
+            "~/.tmux.conf"               : "tmux.conf",
             "~/.vim/syntax/fish.vim"     : "vim/syntax/fish.vim",
             "~/.vimrc"                   : "vimrc",
             "~/.wgetrc"                  : "wgetrc",
