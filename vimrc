@@ -347,7 +347,6 @@ endif
 augroup ft_fish
     au!
     au BufNewFile,BufRead *.fish setlocal filetype=fish
-    au FileType fish setlocal foldmethod=marker foldmarker={{{,}}}
 augroup END
 
 " }}}
@@ -359,13 +358,11 @@ augroup ft_tex
 augroup END
 
 " }}}
-" Vim {{{
-
-augroup ft_vim
+" Folding Files {{{
+augroup fold_ft
     au!
-    au FileType vim setlocal foldmethod=marker foldmarker={{{,}}}
+    au FileType conf,fish,vim setlocal foldmethod=marker foldmarker={{{,}}}
 augroup END
-
 " }}}
 
 " }}}
