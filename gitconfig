@@ -71,7 +71,9 @@
 	required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
+
 [github]
 	user = daviesjamie
+
 [ghi]
 	token = !security find-internet-password -a daviesjamie -s github.com -l 'ghi token' -w
