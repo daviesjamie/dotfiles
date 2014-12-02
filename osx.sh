@@ -20,12 +20,6 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Disable menu bar transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
-# Set highlight colour to green
-defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
-
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -39,9 +33,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Disable the "Are you sure..." dialog when opening downloaded applications
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Enable full keyboard access for all controls
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSAWindowResizeTime -float 0.001
@@ -60,39 +51,8 @@ sudo tmutil disablelocal
 sudo pmset -a sms 0
 
 ################################################################################
-# Input
-################################################################################
-
-# Tap to click for this user and for login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Set a REALLY fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-
-# Set up British English locale
-defaults write NSGlobalDomain AppleLanguages -array "en"
-defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=GBP"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
-
-# Use London timezone
-systemsetup -settimezone "Europe/London" > /dev/null
-
-# Disable automatic emoji substitution in Messages
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
-
-################################################################################
 # Screen
 ################################################################################
-
-# Require password immediately after sleep/screen saver
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
@@ -132,20 +92,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Dock
 ################################################################################
 
-# Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
-
-# Don't show Dashboard as a Space
-defaults write com.apple.dock dashboard-in-overlay -bool true
-
-# Don't rearrange Spaces based on recent use
-defaults write com.apple.dock mru-spaces -bool false
-
 # Remove the Dock auto-hide delay
 defaults write com.apple.dock autohide-delay -float 0
-
-# Enable auto-hide
-defaults write com.apple.dock autohide -bool true
 
 ################################################################################
 # Kill affected applications
