@@ -108,6 +108,12 @@ set -gx EDITOR vim
 set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 
 # }}}
+# VIRTUAL FISH ------------------------------------------------------------- {{{
+
+. ~/.config/fish/virtualfish/virtual.fish
+. ~/.config/fish/virtualfish/auto_activation.fish
+
+# }}}
 # PROMPT ------------------------------------------------------------------- {{{
 
 function pwd_prompt -d 'Print current working directory, using ~ instead of $HOME'
