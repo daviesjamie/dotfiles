@@ -17,6 +17,7 @@
             "~/.config/fish/virtualfish" : "config/fish/virtualfish/",
             "~/.gitconfig"               : "gitconfig",
             "~/.gitignore"               : "gitignore",
+            "~/.hushlogin"               : "hushlogin",
             "~/.latexmkrc"               : "latexmkrc",
             "~/.tmux.conf"               : "tmux.conf",
             "~/.vim/syntax/fish.vim"     : "vim/syntax/fish.vim",
