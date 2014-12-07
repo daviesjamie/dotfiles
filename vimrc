@@ -225,7 +225,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " Colour schemes
-Plugin 'w0ng/vim-hybrid'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'daviesjamie/airline-hybrid-alt'
 
@@ -233,7 +232,7 @@ Plugin 'daviesjamie/airline-hybrid-alt'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 
-" File-based plugins
+" File navigation plugins
 Plugin 'kien/ctrlp.vim'
 
 " Tim Pope goodness
@@ -249,8 +248,6 @@ Plugin 'sirver/ultisnips'
 Plugin 'wellle/targets.vim'
 
 " Experimental plugs
-Plugin 'suan/vim-instant-markdown'
-let g:instant_markdown_slow = 1
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
