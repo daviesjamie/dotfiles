@@ -45,6 +45,7 @@ function pbc; pbcopy; end
 function pbp; pbpaste; end
 
 # Homebrew shortcuts
+function cask; brew cask $argv; end
 function brup; brew update; brew upgrade; brew cleanup; end
 
 # Latex compilation
