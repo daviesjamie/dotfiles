@@ -19,10 +19,9 @@ set ttyfast             " use a fast terminal connection
 set visualbell          " use a visual bell instead of annoying beep
 set title               " update the terminal title with file name
 
-set hidden              " Allow unsaved buffers to exist in the background
+set hidden              " allow unsaved buffers to exist in the background
 
-set relativenumber      " use relative line numbers
-set number              " show absolute line number on current line
+set number              " use line numbers
 set cursorline          " highlight the line the cursor is on
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands at the bottom
@@ -33,11 +32,11 @@ set textwidth=100       " set maximum line width to 80 characters
 set colorcolumn=+1      " draw a right margin at the end of textwidth
 set linebreak           " use soft-wrapping on long lines
 
-set formatoptions=q     " Allow formatting of comments with gq
-set formatoptions+=n    " Recognise numbered lists when formatting
-set formatoptions+=l    " Don't automatically format/wrap already too-long lines
-set formatoptions+=1    " Don't break lines after a one-letter word
-set formatoptions+=j    " Remove comment markup when joining lines
+set formatoptions=q     " allow formatting of comments with gq
+set formatoptions+=n    " recognise numbered lists when formatting
+set formatoptions+=l    " don't automatically format/wrap already too-long lines
+set formatoptions+=1    " don't break lines after a one-letter word
+set formatoptions+=j    " remove comment markup when joining lines
 
 set tabstop=4           " set hard tabstop size to 4
 set softtabstop=4       " set soft tabstop size to 4
@@ -60,7 +59,6 @@ set ttimeoutlen=10      " wait 10ms for a keycode to complete
 
 set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
-
 set spelllang=en_gb     " set spelling to use British English
 
 " Set dictonary files
