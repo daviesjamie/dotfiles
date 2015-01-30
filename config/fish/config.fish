@@ -58,13 +58,13 @@ function ipy; ipython $argv; end
 function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
 
 # Todor shortcuts
-function todor; /Users/jamie/Code/todor/todor.py $argv; end
-function t; todor $argv; end
+# function todor; /Users/jamie/Code/todor/todor.py $argv; end
+# function t; todor $argv; end
 
 # Make `sudo !!` work again!
 function sudo
     if test "$argv" = !!
-        eval command sudo $history[1]
+        eval command sudo $history[2]
     else
         command sudo $argv
     end
