@@ -224,7 +224,6 @@ Plugin 'gmarik/vundle'
 
 " Colour schemes
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'daviesjamie/airline-hybrid-alt'
 
 " Status bar plugins
 Plugin 'bling/vim-airline'
