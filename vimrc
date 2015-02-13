@@ -206,45 +206,43 @@ cabbrev w!! w !sudo tee %
 cabbrev h vert help
 
 " }}}
-" VUNDLE ------------------------------------------------------------------- {{{
+" PLUGINS ------------------------------------------------------------------ {{{
 
 " Install with:
-" $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" :PluginInstall
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" :PlugInstall
 
-" Use Bash as shell (vundle doesn't like fish!)
+" Use Bash as shell (vim-plug doesn't like fish!)
 set shell=/bin/bash
 
+" Initialise vim-plug
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Let vundle manage vundle (required)
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " Colour schemes
-Plugin 'jonathanfilip/vim-lucius'
+Plug 'jonathanfilip/vim-lucius'
 
 " Status bar plugins
-Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
+Plug 'bling/vim-airline'
+Plug 'bling/vim-bufferline'
 
 " File navigation plugins
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Tim Pope goodness
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " Editing plugins
-Plugin 'godlygeek/tabular'
-Plugin 'sirver/ultisnips'
-Plugin 'wellle/targets.vim'
+Plug 'godlygeek/tabular'
+Plug 'sirver/ultisnips'
+Plug 'wellle/targets.vim'
 
-" Experimental plugs
+call plug#end()
 
 " Enable file-specific indenting and plugins
 filetype plugin indent on
