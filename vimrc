@@ -61,6 +61,8 @@ set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
 set spelllang=en_gb     " set spelling to use British English
 
+set laststatus=2        " Always display statusbar, regardless of number of windows
+
 " Set dictonary files
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
@@ -92,10 +94,6 @@ augroup END
 
 " Resize splits when the window is resized
 au VimResized * :wincmd =
-
-" Change cursor to | when in insert mode (for iTerm2)
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
@@ -223,16 +221,8 @@ call plug#begin('~/.vim/plugged')
 " Colour schemes
 Plug 'jonathanfilip/vim-lucius'
 
-" Status bar plugins
-Plug 'bling/vim-airline'
-Plug 'bling/vim-bufferline'
-
-" File navigation plugins
-Plug 'kien/ctrlp.vim'
-
 " Tim Pope goodness
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -258,47 +248,81 @@ colorscheme lucius
 set background=dark
 
 " }}}
-" AIRLINE / BUFFERLINE ----------------------------------------------------- {{{
+" STATUSLINE --------------------------------------------------------------- {{{
 
-set noshowmode      " stop vim displaying the mode, as airline now shows it
-set laststatus=2    " always display the status line
+function! Color(active, num, content)
+    if a:active
+        return '%' . a:num . '*' . a:content . '%*'
+    else
+        return a:content
+    endif
+endfunction
 
-" Use base16 theme
-let g:airline_theme='lucius'
+function! Status(winnr)
+    let stat = ''
+    let active = winnr() == a:winnr
+    let buffer = winbufnr(a:winnr)
 
-" Turn on fancy separators
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+    let modified = getbufvar(buffer, '&modified')
+    let readonly = getbufvar(buffer, '&ro')
+    let filetype = getbufvar(buffer, '&ft')
 
-" Don't collapse left section of airline when inactive
-let g:airline_inactive_collapse=0
+    " Column number
+    let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v') . ' %*'
 
-" Custom airline layout
-" mode | buffers/filename [RO]                  branch | [warnings]
-let g:airline_section_a = '%{airline#util#wrap(airline#parts#mode(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
-let g:airline_section_b = ''
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
+    " Filename
+    let stat .= Color(active, 3, active ? ' [' : '  ')
+    let stat .= ' %<'
+    let stat .= '%f'
+    let stat .= Color(active, 3, active ? ' ]' : '  ')
 
-" Stop airline overwriting bufferline settings
-let g:airline#extensions#bufferline#overwrite_variables = 0
 
-" Stop bufferline showing on command line
-let g:bufferline_echo=0
+    " Modified flag
+    let stat .= Color(active, 2, modified ? ' +' : '')
 
-" Set highlight colors for bufferline
-highlight bufferline_selected gui=bold cterm=bold term=bold
-highlight link bufferline_selected_inactive airline_c_inactive
-let g:bufferline_inactive_highlight = 'airline_c'
-let g:bufferline_active_highlight = 'bufferline_selected'
+    " Read only flag
+    let stat .= Color(active, 2, readonly ? ' !!' : '')
 
-" Put [ ] around the active buffer (but only when there's more than one)
-let g:bufferline_active_buffer_left='['
-let g:bufferline_active_buffer_right=']'
+    " Paste mode flag
+    if active && &paste
+        let stat .= ' %2*' . 'P' . '%*'
+    endif
 
-" Don't display buffer numbers
-let g:bufferline_show_bufnr=0
+    " Switch to right side
+    let stat .= '%='
+
+    " Filetype
+    let stat .= Color(active, 3, ' ← ') . filetype . ' '
+
+    return stat
+endfunction
+
+" Cycle through windows and re-set the statusline
+" Used to provide an 'inactive' colourscheme for inactive windows
+function! SetStatus()
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+    endfor
+endfunction
+
+" Automatically call SetStatus() when necessary
+augroup status
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+augroup END
+
+" Background colour
+hi StatusLine   ctermfg=243 guifg=#767676 ctermbg=237 guibg=#3a3a3a
+hi StatusLineNC ctermfg=238 guifg=#444444 ctermbg=236 guibg=#303030
+
+" Column number colour
+hi User1 ctermfg=243 guifg=#767676  ctermbg=236 guibg=#303030
+
+" Modified/Read-only/Paste colour
+hi User2 ctermfg=197 guifg=#ff005f  ctermbg=237 guibg=#3a3a3a
+
+" [ ] ← colour
+hi User3 ctermfg=136 guifg=#af8700  ctermbg=237 guibg=#3a3a3a
 
 " }}}
 " ULTISNIPS ---------------------------------------------------------------- {{{
