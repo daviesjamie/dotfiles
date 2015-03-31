@@ -3,73 +3,61 @@
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 
-" Recognise function keys that start with <Esc> in insert mode
-" Allows use/mapping of cursor keys, and removes delay when hitting escape
-set noesckeys
+set autoindent          " automatically indent new lines
+set autoread            " re-read an open file that has changed outside vim
+set autowrite           " automatically save before commands like :next and :make
 
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set modelines=0         " explicity turn off vim modelines (for security)
-set encoding=utf-8      " use utf-8 character set by default
-syntax on               " turn on syntax highlighting
-set synmaxcol=800       " don't highlight lines longer than 800 characters
-
-set ttyfast             " use a fast terminal connection
-set visualbell          " use a visual bell instead of annoying beep
-set title               " update the terminal title with file name
-
-set hidden              " allow unsaved buffers to exist in the background
-
-set number              " use line numbers
+set cmdheight=2         " use 2 lines for command-line
 set cursorline          " highlight the line the cursor is on
-set scrolloff=5         " keep 5 lines visible around cursor (if possible)
-set sidescrolloff=5     " keep 5 characters visible around cursor (if possible)
+
+" Set dictonary
+set dictionary=/usr/share/dict/words
 
 set display+=lastline   " display as much as possible of a long last line
-set linebreak           " use soft-wrapping on long lines
-
-set formatoptions=q     " allow formatting of comments with gq
-set formatoptions+=n    " recognise numbered lists when formatting
-set formatoptions+=l    " don't automatically format/wrap already too-long lines
+set encoding=utf-8      " use utf-8 character set by default
+set expandtab           " use spaces instead of <tab>s
 set formatoptions+=1    " don't break lines after a one-letter word
+set formatoptions+=l    " don't automatically format/wrap already too-long lines
+set formatoptions+=n    " recognise numbered lists when formatting
+set formatoptions=q     " allow formatting of comments with gq
 
 " Remove comment markup when joining lines
 if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j
 endif
 
-set tabstop=4           " set hard tabstop size to 4
-set softtabstop=4       " set soft tabstop size to 4
-set shiftwidth=4        " set size of an 'indent' to 4
-set shiftround          " when shifting, always use a multiple of shiftwidth
-set autoindent          " automatically indent new lines
-set expandtab           " use spaces instead of <tab>s
-set smarttab            " make adding/removing tabs (spaces) smarter
-
-set incsearch           " search incrementally as you type
+set hidden              " allow unsaved buffers to exist in the background
 set hlsearch            " highlight search matches
 set ignorecase          " use case-insensitive search
-set smartcase           " automatically decide to search with case or not
-
-set autoread            " re-read an open file that has changed outside vim
-set autowrite           " automatically save before commands like :next and :make
-
+set incsearch           " search incrementally as you type
+set laststatus=2        " Always display statusbar, regardless of number of windows
+set linebreak           " use soft-wrapping on long lines
+set modelines=0         " explicity turn off vim modelines (for security)
 set notimeout           " timeout out on keycodes, but not mappings
-set ttimeout
-set ttimeoutlen=10      " wait 10ms for a keycode to complete
-
+set number              " use line numbers
+set scrolloff=5         " keep 5 lines visible around cursor (if possible)
+set shiftround          " when shifting, always use a multiple of shiftwidth
+set shiftwidth=4        " set size of an 'indent' to 4
+set showcmd             " display incomplete commands at the bottom
+set sidescrolloff=5     " keep 5 characters visible around cursor (if possible)
+set smartcase           " automatically decide to search with case or not
+set smarttab            " make adding/removing tabs (spaces) smarter
+set softtabstop=4       " set soft tabstop size to 4
+set spellfile=~/.vim/custom-dictionary.utf-8.add
+set spelllang=en_gb     " set spelling to use British English
 set splitbelow          " always make new splits below, not above
 set splitright          " always make new splits on the right, not on the left
-set spelllang=en_gb     " set spelling to use British English
-
-set showcmd             " display incomplete commands at the bottom
-set cmdheight=2         " use 2 lines for command-line
-set laststatus=2        " Always display statusbar, regardless of number of windows
-
-" Set dictonary files
-set dictionary=/usr/share/dict/words
-set spellfile=~/.vim/custom-dictionary.utf-8.add
+set synmaxcol=800       " don't highlight lines longer than 800 characters
+set tabstop=4           " set hard tabstop size to 4
+set title               " update the terminal title with file name
+set ttimeout
+set ttimeoutlen=10      " wait 10ms for a keycode to complete
+set ttyfast             " use a fast terminal connection
+set visualbell          " use a visual bell instead of annoying beep
+syntax on               " turn on syntax highlighting
 
 " If using Fish shell, use bash inside vim
 if &shell =~# 'fish$'
