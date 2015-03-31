@@ -11,12 +11,16 @@ set autowrite           " automatically save before commands like :next and :mak
 set backspace=indent,eol,start
 
 set cmdheight=2         " use 2 lines for command-line
+
+" Use '# ' as default comment prefix
+setglobal commentstring=#\ %s
+
 set cursorline          " highlight the line the cursor is on
 
 " Set dictonary
-set dictionary=/usr/share/dict/words
+set dictionary+=/usr/share/dict/words
 
-set display+=lastline   " display as much as possible of a long last line
+set display=lastline    " display as much as possible of a long last line
 set encoding=utf-8      " use utf-8 character set by default
 set expandtab           " use spaces instead of <tab>s
 set formatoptions+=1    " don't break lines after a one-letter word
@@ -29,43 +33,81 @@ if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j
 endif
 
+set foldmethod=marker   " use markers for folding
+set foldopen+=jump      " open folds when jumping (with G, gg, etc.)
 set hidden              " allow unsaved buffers to exist in the background
 set hlsearch            " highlight search matches
-set ignorecase          " use case-insensitive search
 set incsearch           " search incrementally as you type
 set laststatus=2        " Always display statusbar, regardless of number of windows
 set linebreak           " use soft-wrapping on long lines
+
+" Set list characters (used to display whitespace)
+if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
+    let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+    let &fillchars = "vert:\u259a,fold:\u00b7"
+else
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<
+endif
+
 set modelines=0         " explicity turn off vim modelines (for security)
 set notimeout           " timeout out on keycodes, but not mappings
 set number              " use line numbers
 set scrolloff=5         " keep 5 lines visible around cursor (if possible)
-set shiftround          " when shifting, always use a multiple of shiftwidth
-set shiftwidth=4        " set size of an 'indent' to 4
-set showcmd             " display incomplete commands at the bottom
-set sidescrolloff=5     " keep 5 characters visible around cursor (if possible)
-set smartcase           " automatically decide to search with case or not
-set smarttab            " make adding/removing tabs (spaces) smarter
-set softtabstop=4       " set soft tabstop size to 4
-set spellfile=~/.vim/custom-dictionary.utf-8.add
-set spelllang=en_gb     " set spelling to use British English
-set splitbelow          " always make new splits below, not above
-set splitright          " always make new splits on the right, not on the left
-set synmaxcol=800       " don't highlight lines longer than 800 characters
-set tabstop=4           " set hard tabstop size to 4
-set title               " update the terminal title with file name
-set ttimeout
-set ttimeoutlen=10      " wait 10ms for a keycode to complete
-set ttyfast             " use a fast terminal connection
-set visualbell          " use a visual bell instead of annoying beep
-syntax on               " turn on syntax highlighting
 
 " If using Fish shell, use bash inside vim
 if &shell =~# 'fish$'
     set shell=/bin/bash
 endif
 
+set shiftround          " when shifting, always use a multiple of shiftwidth
+set shiftwidth=4        " set size of an 'indent' to 4
+set showcmd             " display incomplete commands at the bottom
+set showmatch           " show matching brackets
+set sidescrolloff=5     " keep 5 characters visible around cursor (if possible)
+set smartcase           " automatically decide to search with case or not
+set smarttab            " make adding/removing tabs (spaces) smarter
+set softtabstop=4       " set soft tabstop size to 4
+
+" Use a spellfile to store a custom dictionary
+set spellfile=~/.vim/spell/en.utf-8.add
+
+set spelllang=en_gb     " set spelling to use British English
+set splitbelow          " always make new splits below, not above
+set splitright          " always make new splits on the right, not on the left
+set synmaxcol=800       " don't highlight lines longer than 800 characters
+set tabstop=4           " set hard tabstop size to 4
+set title               " update the terminal title with file name
+set ttimeoutlen=10      " wait 10ms for a keycode to complete
+set ttyfast             " use a fast terminal connection
+
+" Viminfo settings:
+"   !  Save and restore global variables starting with an uppercase letter
+" '20  Remember marks for 20 most recent files
+" <50  Save 50 lines for each register
+" s10  Save a maximum of 10kb for each item
+"   h  Disable 'hlsearch' when loading viminfo
+if v:version >= 700
+    set viminfo=!,'20,<50,s10,h
+endif
+
+set visualbell          " use a visual bell instead of annoying beep
+set wildmenu            " use a menu for command-line completion
+
+" On completion, complete longest common string and open wildmenu
+set wildmode=longest:full,full
+
+" Don't auto-complete some file types
+set wildignore+=*DS_Store*,*.pyc
+
 " }}}
 " ADVANCED OPTIONS --------------------------------------------------------- {{{
+
+" Protect home directory permissions during sudo vim
+if !empty($SUDO_USER) && $USER !=# $SUDO_USER
+    set viminfo=
+    set directory-=~/tmp
+    set backupdir-=~/tmp
+endif
 
 " Highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -121,21 +163,6 @@ set foldlevelstart=0
 
 " Use space to toggle folds
 nnoremap <Space> za
-
-" }}}
-" COMPLETION --------------------------------------------------------------- {{{
-
-" When tab-completing with more than one match, list all matches and complete
-" till longest common string
-set wildmode=list:longest
-
-" Use a menu for command-line completion
-set wildmenu
-
-" Stuff to ignore when tab-completing
-set wildignore+=*DS_Store*
-set wildignore+=*.pyc
-set wildignore+=*.png,*.jpg,*.gif
 
 " }}}
 " KEY BINDINGS ------------------------------------------------------------- {{{
