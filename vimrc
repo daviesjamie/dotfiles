@@ -23,10 +23,10 @@ set dictionary+=/usr/share/dict/words
 set display=lastline    " display as much as possible of a long last line
 set encoding=utf-8      " use utf-8 character set by default
 set expandtab           " use spaces instead of <tab>s
+set formatoptions=q     " allow formatting of comments with gq
+set formatoptions+=n    " recognise numbered lists when formatting
 set formatoptions+=1    " don't break lines after a one-letter word
 set formatoptions+=l    " don't automatically format/wrap already too-long lines
-set formatoptions+=n    " recognise numbered lists when formatting
-set formatoptions=q     " allow formatting of comments with gq
 
 " Remove comment markup when joining lines
 if v:version > 703 || v:version == 703 && has("patch541")
@@ -49,6 +49,7 @@ else
     set listchars=tab:>\ ,trail:-,extends:>,precedes:<
 endif
 
+set matchtime=3         " highlight matching parens for 3 seconds
 set modelines=0         " explicity turn off vim modelines (for security)
 set notimeout           " timeout out on keycodes, but not mappings
 set number              " use line numbers
@@ -77,6 +78,7 @@ set splitright          " always make new splits on the right, not on the left
 set synmaxcol=800       " don't highlight lines longer than 800 characters
 set tabstop=4           " set hard tabstop size to 4
 set title               " update the terminal title with file name
+set ttimeout
 set ttimeoutlen=10      " wait 10ms for a keycode to complete
 set ttyfast             " use a fast terminal connection
 
