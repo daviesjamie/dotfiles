@@ -1,49 +1,30 @@
-[user]
-    name = Jamie Davies
-    email = jamie@jamiedavies.me
-
-[core]
-    pager = cat
-    editor = vim
-    excludesfile = /Users/jamie/.gitignore
-
 [alias]
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
-    commits = shortlog -s -n
-
     a = add
-
+    branches = branch -a
     c = commit
-    cm = commit -m
-
     co = checkout
-
     d = difftool
     dk = difftool -y -t Kaleidoscope
-
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit
+    remotes = remote -v
     s = status
-
-    unstage = reset HEAD
+    tags = tag -l
     uns = reset HEAD
-
+    unstage = reset HEAD
     untrack = rm --cached
-    unt = rm --cached
-
-    l = log -18 --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
-    ll = log --color=always --all --topo-order --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(black bold)(by %an)%Creset'
-    gl = log -12 --color=always --all --graph --topo-order --pretty='format:%Cgreen%h%Creset %s %C(black bold)(by %an)%Creset%C(yellow bold)%d%Creset%n'
-    gll = log --color=always --all --graph --topo-order --pretty='format:%Cgreen%h%Creset %s %C(black bold)(%cr by %an)%Creset%C(yellow bold)%d%Creset%n'
-
-[push]
-    default = current
 
 [color]
     branch = auto
     diff = auto
+    grep = auto
     interactive = auto
     status = auto
+    ui = auto
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    pager = less -S
 
 [credential]
     helper = osxkeychain
@@ -57,6 +38,27 @@
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
+[filter "hawser"]
+	clean = git hawser clean %f
+	required = true
+	smudge = git hawser smudge %f
+
+[filter "lfs"]
+	clean = git lfs clean %f
+	required = true
+	smudge = git lfs smudge %f
+
+[filter "media"]
+	clean = git media clean %f
+	required = true
+	smudge = git media smudge %f
+
+[ghi]
+	token = !security find-internet-password -a daviesjamie -s github.com -l 'ghi token' -w
+
+[github]
+	user = daviesjamie
+
 [merge]
     tool = Kaleidoscope
 
@@ -67,23 +69,12 @@
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustExitCode = true
 
-[github]
-	user = daviesjamie
+[pull]
+    rebase = true
 
-[ghi]
-	token = !security find-internet-password -a daviesjamie -s github.com -l 'ghi token' -w
+[push]
+    default = upstream
 
-[filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
-
-[filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
-	required = true
-
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+[user]
+    name = Jamie Davies
+    email = jamie@jamiedavies.me
