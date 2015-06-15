@@ -1,17 +1,13 @@
 # ALIASES ------------------------------------------------------------------ {{{
 
-# Directories
-function ..; cd ..; end
-function ...; cd ../..; end
-function ....; cd ../../..; end
-function .....; cd ../../../..; end
-function take; mkdir -p $argv; cd $argv; end
-
 # Directory listings
-function l; ls -p $argv; end
-function la; ls -Ap $argv; end
-function ll; ls -hlp $argv; end
-function lla; ls -Alp $argv; end
+function l --wraps 'ls'; ls -p $argv; end
+function la --wraps 'ls'; ls -Ap $argv; end
+function ll --wraps 'ls'; ls -hlp $argv; end
+function lla --wraps 'ls'; ls -Alp $argv; end
+
+# Make a new directory and move into it
+function take; mkdir -p $argv; cd $argv; end
 
 # Dotfiles shortcuts
 function reloadf; source ~/.config/fish/config.fish; end
@@ -22,7 +18,7 @@ function essh; eval $EDITOR ~/.ssh/config; end
 
 # Git shortcuts
 function git; hub $argv; end
-function g
+function g --wraps 'git'
     if test (count $argv) -gt 0
         git $argv
     else
@@ -30,57 +26,29 @@ function g
     end
 end
 
-# Gitignore.io CLI
-function gi
-    set -l params (echo $argv|tr ' ' ',')
-    if test "$params" = list
-        curl -s https://www.gitignore.io/api/$params | tr ',' '\n' | column
-    else
-        curl -s https://www.gitignore.io/api/$params
-    end
-end
-
 # Clipboard
-function pbc; pbcopy; end
-function pbp; pbpaste; end
+function pbc; pbcopy $argv; end
+function pbp; pbpaste $argv; end
 
 # Homebrew shortcuts
-function cask; brew cask $argv; end
 function brup; brew update; brew upgrade --all; brew cleanup; end
+function cask; brew cask $argv; end
 
-# Latex compilation
+# LaTeX compilation
 function mtex; latexmk -pdf -pvc $argv; end
-function mtexs; latexmk -pdf -pvc $argv >- ^- &; end
 
 # Python shortcuts
-function py; python $argv; end
-function ipy; ipython $argv; end
-function pipup; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U; end
-
-# Todor shortcuts
-# function todor; /Users/jamie/Code/todor/todor.py $argv; end
-# function t; todor $argv; end
+function py --wraps 'python'; python $argv; end
+function ipy --wraps 'python'; ipython $argv; end
 
 # Make `sudo !!` work again!
 function sudo
-    if test "$argv" = !!
+    if test "$argv" = "!!"
         eval command sudo $history[2]
     else
         command sudo $argv
     end
 end
-
-# }}}
-# COMPLETIONS -------------------------------------------------------------- {{{
-
-function make_completion --argument alias command
-    complete -c $alias -xa "(
-        set -l cmd (commandline -pc | sed -e 's/^ *\S\+ *//' );
-        complete -C\"$command \$cmd\";
-    )"
-end
-
-make_completion g "git"
 
 # }}}
 # ENVIRONMENT VARIABLES ---------------------------------------------------- {{{
@@ -102,71 +70,36 @@ _prepend_to_path "/usr/local/bin"
 _prepend_to_path "/usr/local/opt/ruby/bin"
 _prepend_to_path "$HOME/bin"
 
-set BROWSER open
-set -gx fish_greeting ''
+set -gx BROWSER open
 set -gx EDITOR vim
 
-set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
+# }}}
+# PROMPT ------------------------------------------------------------------- {{{
+
+# Remove greeting message
+set -g fish_greeting
+
+# Configure __fish_git_prompt
+set -g __fish_git_prompt_showdirtystate true
+set -g __fish_git_prompt_showstashstate true
+set -g __fish_git_prompt_showuntrackedfiles true
+set -g __fish_git_prompt_showcolorhints true
+set -g __fish_git_prompt_color_branch magenta
+set -g __fish_git_prompt_color_flags red
+set -g __fish_git_prompt_char_untrackedfiles '?'
+
+# Configure prompt
+set -g __fish_prompt_color_venv yellow
+set -g __fish_prompt_color_path cyan
+set -g __fish_prompt_color_char normal
+set -g __fish_prompt_color_char_error red
+set -g __fish_prompt_char_user '→'
+set -g __fish_prompt_char_root '⇉'
 
 # }}}
 # VIRTUAL FISH ------------------------------------------------------------- {{{
 
 . ~/.config/fish/virtualfish/virtual.fish
 . ~/.config/fish/virtualfish/auto_activation.fish
-
-# }}}
-# PROMPT ------------------------------------------------------------------- {{{
-
-function pwd_prompt -d 'Print current working directory, using ~ instead of $HOME'
-    echo $PWD | sed -e "s|^$HOME|~|"
-end
-
-function git_prompt
-    if command git rev-parse --show-toplevel >/dev/null 2>&1
-        set_color normal
-        printf ' on '
-        set_color magenta
-        printf '%s' (command git rev-parse --abbrev-ref HEAD ^/dev/null)
-        set_color red
-        git_prompt_status
-        set_color normal
-    end
-end
-
-function virtualenv_prompt
-    if [ -n "$VIRTUAL_ENV" ]
-        printf '%s ' (basename "$VIRTUAL_ENV")
-    end
-end
-
-function fish_prompt
-    echo
-
-    set_color magenta
-    printf '%s' (whoami)
-    set_color normal
-    printf ' at '
-
-    set_color yellow
-    printf '%s' (hostname | cut -d . -f 1)
-    set_color normal
-    printf ' in '
-
-    set_color green
-    printf '%s' (pwd_prompt)
-    set_color normal
-
-    git_prompt
-
-    echo
-
-    set_color blue
-    virtualenv_prompt
-    set_color normal
-
-    printf '→ '
-
-    set_color normal
-end
 
 # }}}
