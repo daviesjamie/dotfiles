@@ -1,0 +1,9 @@
+[user]
+    name = Jamie Davies
+    email = jamie@jamiedavies.me
+
+[core]
+    editor = vim
+
+[push]
+    default = simple
