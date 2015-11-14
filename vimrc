@@ -54,3 +54,13 @@ endif
 
 " On completion, complete longest common string and open wildmenu
 set wildmode=longest:full,full
+
+" Automatically install vim-plug if it's not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+call plug#end()
