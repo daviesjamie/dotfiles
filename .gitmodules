@@ -1,6 +1,0 @@
-[submodule "dotbot"]
-	path = .dotbot
-	url = git://github.com/anishathalye/dotbot.git
-[submodule "config/fish/virtualfish"]
-	path = config/fish/virtualfish
-	url = git://github.com/adambrenecki/virtualfish.git
