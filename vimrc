@@ -80,6 +80,18 @@ set background=dark
 colorscheme base16-tomorrow
 
 " }}}
+" KEY BINDINGS ------------------------------------------------------------ {{{
+
+" Set leader key to space
+let mapleader="\<Space>"
+
+" Toggle folds with double-space
+nmap <leader><leader> za
+
+" Use enter to clear search highlighting
+nmap <CR> :nohlsearch<CR>
+
+" }}}
 " FILETYPE-SPECIFIC ------------------------------------------------------- {{{
 
 if has('autocmd')
