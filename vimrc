@@ -1,3 +1,5 @@
+" GENERAL ----------------------------------------------------------------- {{{
+
 " Don't try to be compatible with vi
 set nocompatible
 
@@ -55,6 +57,9 @@ endif
 " On completion, complete longest common string and open wildmenu
 set wildmode=longest:full,full
 
+" }}}
+" PLUGINS ----------------------------------------------------------------- {{{
+
 " Automatically install vim-plug if it's not already installed
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -66,7 +71,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 call plug#end()
 
+" }}}
+" UI ---------------------------------------------------------------------- {{{
+
 let base16colorspace=256
 set t_Co=256
 set background=dark
 colorscheme base16-tomorrow
+
+" }}}
+" FILETYPE-SPECIFIC ------------------------------------------------------- {{{
+
+if has('autocmd')
+    autocmd FileType vim setlocal foldmethod=marker
+endif
+
+" }}}
