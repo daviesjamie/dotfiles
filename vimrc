@@ -208,6 +208,12 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" Make j and k work on screen lines, not file lines
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 " Toggle folds with double-space
 nmap <leader><leader> za
 
