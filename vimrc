@@ -69,15 +69,60 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " }}}
-" UI ---------------------------------------------------------------------- {{{
+" COLOUR SCHEME ----------------------------------------------------------- {{{
 
+" Allow base16 themes to use 256 colourspace
 let base16colorspace=256
-set t_Co=256
+
 set background=dark
 colorscheme base16-tomorrow
+
+" }}}
+" STATUS LINE ------------------------------------------------------------- {{{
+
+" Always show the statusline
+set laststatus=2
+
+" Configure vim-lightline
+let g:lightline = {
+\     'active' : {
+\         'left':  [ [ 'mode', 'paste' ], [ 'filename' ] ],
+\         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
+\     },
+\     'component_function': {
+\         'mode'    : 'LLMode',
+\         'readonly': 'LLReadonly',
+\         'modified': 'LLModified',
+\         'filename': 'LLFilename',
+\     },
+\ }
+
+function! LLMode()
+    return lightline#mode() == 'NORMAL' ? 'N' :
+         \ lightline#mode() == 'INSERT' ? 'I' :
+         \ lightline#mode() == 'VISUAL' ? 'V' :
+         \ lightline#mode() == 'V-LINE' ? 'V' :
+         \ lightline#mode() == 'V-BLOCK' ? 'V' :
+         \ lightline#mode() == 'REPLACE' ? 'R' : lightline#mode()
+endfunction
+
+function! LLReadonly()
+    return &ft !~? 'help' && &readonly ? '' : ''
+endfunction
+
+function! LLModified()
+    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LLFilename()
+    return ( LLReadonly() != '' ? LLReadonly() . ' ' : '' )
+         \ . ( expand('%:t') != '' ? expand('%:t') : '[No Name]' )
+         \ . ( LLModified() != '' ? ' ' . LLModified() : '')
+endfunction
 
 " }}}
 " KEY BINDINGS ------------------------------------------------------------ {{{
