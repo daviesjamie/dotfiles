@@ -103,29 +103,30 @@ let g:lightline = {
 \         'right': [ [ 'filetype' ] ]
 \     },
 \     'component_function': {
-\         'mode'    : 'LLModeSized',
+\         'mode':     'LLMode',
 \         'readonly': 'LLReadonly',
 \         'modified': 'LLModified',
 \         'fugitive': 'LLFugitive',
 \         'filename': 'LLFilename',
 \     },
+\     'mode_map': {
+\         'n': 'N',
+\         'i': 'I',
+\         'R': 'R',
+\         'v': 'V', 'V': 'V', '\<C-v>': 'V',
+\         'c': 'C',
+\         's': 'S', 'S': 'S', '\<C-s>': 'S',
+\         't': 'T',
+\         '?': ' ',
+\    }
 \ }
 
 function! LLMode()
-    return lightline#mode() == 'NORMAL' ? 'N' :
-         \ lightline#mode() == 'INSERT' ? 'I' :
-         \ lightline#mode() == 'VISUAL' ? 'V' :
-         \ lightline#mode() == 'V-LINE' ? 'V' :
-         \ lightline#mode() == 'V-BLOCK' ? 'V' :
-         \ lightline#mode() == 'REPLACE' ? 'R' : lightline#mode()
-endfunction
-
-function! LLModeSized()
-    let len_mode = strlen( LLMode() ) + 2
-    let len_col  = strlen( line('$') ) + 1
-    return !&number ? LLMode()
-         \ : ( len_mode < len_col ? repeat(' ', len_col - len_mode) . LLMode()
-         \   : LLMode() )
+    let modewidth = strlen(lightline#mode()) + 2
+    let linenowidth = strlen(line('$')) + 1
+    let linenowidth = linenowidth > 4 ? linenowidth : 4
+    return modewidth >= linenowidth ? lightline#mode()
+         \ : repeat(' ', linenowidth - modewidth) . lightline#mode()
 endfunction
 
 function! LLReadonly()
