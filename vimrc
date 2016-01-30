@@ -94,7 +94,7 @@ let g:lightline = {
 \         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
 \     },
 \     'component_function': {
-\         'mode'    : 'LLMode',
+\         'mode'    : 'LLModeSized',
 \         'readonly': 'LLReadonly',
 \         'modified': 'LLModified',
 \         'filename': 'LLFilename',
@@ -108,6 +108,14 @@ function! LLMode()
          \ lightline#mode() == 'V-LINE' ? 'V' :
          \ lightline#mode() == 'V-BLOCK' ? 'V' :
          \ lightline#mode() == 'REPLACE' ? 'R' : lightline#mode()
+endfunction
+
+function! LLModeSized()
+    let len_mode = strlen( LLMode() ) + 2
+    let len_col  = strlen( line('$') ) + 1
+    return !&number ? LLMode()
+         \ : ( len_mode < len_col ? repeat(' ', len_col - len_mode) . LLMode()
+         \   : LLMode() )
 endfunction
 
 function! LLReadonly()
