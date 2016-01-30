@@ -141,7 +141,7 @@ endfunction
 
 function! LLFugitive()
     if exists('*fugitive#head')
-        let head = fugitive#head()
+        let head = fugitive#head(8)
         return strlen(head) ? ' ' . head : ''
     endif
     return ''
