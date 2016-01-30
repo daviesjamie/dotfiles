@@ -5,6 +5,7 @@ set nocompatible
 
 set autoindent          " automatically indent new lines
 set autoread            " re-read an open file that has changed outside vim
+set cursorline          " highlght the line the cursor is on
 set display=lastline    " display as much as possible of a long last line
 set encoding=utf-8      " use utf-8 character set by default
 set expandtab           " use spaces instead of \t
@@ -56,6 +57,16 @@ endif
 
 " On completion, complete longest common string and open wildmenu
 set wildmode=longest:full,full
+
+" }}}
+" HOOKS ------------------------------------------------------------------- {{{
+
+" Only show cursorline in the current window
+augroup cline
+    au!
+    au WinLeave * set nocursorline
+    au WinEnter * set cursorline
+augroup END
 
 " }}}
 " PLUGINS ----------------------------------------------------------------- {{{
