@@ -7,3 +7,14 @@
 
 [push]
     default = simple
+
+[alias]
+    a = add
+    c = commit
+    co = checkout
+    s = status
+    uns = reset HEAD
+
+    branches = branch -a
+    remotes = remote -v
+    tags = tag -l
