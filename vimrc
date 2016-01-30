@@ -68,8 +68,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
 Plug 'chriskempson/base16-vim'
+
 Plug 'itchyny/lightline.vim'
+
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
 " }}}
@@ -90,13 +95,14 @@ set laststatus=2
 " Configure vim-lightline
 let g:lightline = {
 \     'active' : {
-\         'left':  [ [ 'mode', 'paste' ], [ 'filename' ] ],
+\         'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
 \         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
 \     },
 \     'component_function': {
 \         'mode'    : 'LLModeSized',
 \         'readonly': 'LLReadonly',
 \         'modified': 'LLModified',
+\         'fugitive': 'LLFugitive',
 \         'filename': 'LLFilename',
 \     },
 \ }
@@ -124,6 +130,14 @@ endfunction
 
 function! LLModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LLFugitive()
+    if exists('*fugitive#head')
+        let head = fugitive#head()
+        return strlen(head) ? ' ' . head : ''
+    endif
+    return ''
 endfunction
 
 function! LLFilename()
