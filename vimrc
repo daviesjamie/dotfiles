@@ -109,6 +109,8 @@ let g:lightline = {
 \         'fugitive': 'LLFugitive',
 \         'filename': 'LLFilename',
 \     },
+\     'separator': { 'left': '', 'right': '' },
+\     'subseparator': { 'left': '', 'right': '' },
 \     'mode_map': {
 \         'n': 'N',
 \         'i': 'I',
