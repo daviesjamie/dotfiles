@@ -98,6 +98,10 @@ let g:lightline = {
 \         'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
 \         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
 \     },
+\     'inactive' : {
+\         'left':  [ [ 'fugitive', 'filename' ] ],
+\         'right': [ [ 'filetype' ] ]
+\     },
 \     'component_function': {
 \         'mode'    : 'LLModeSized',
 \         'readonly': 'LLReadonly',
