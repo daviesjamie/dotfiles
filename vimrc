@@ -15,6 +15,7 @@ set formatoptions+=1    " don't break lines after a one-letter word
 set formatoptions+=l    " don't automatically format/wrap already too-long lines
 set hidden              " allow unsaved buffers to exist in the background
 set hlsearch            " highlight search matches
+set ignorecase          " search patterns are case-insensitive
 set incsearch           " search incrementally as you type
 set notimeout           " timeout on keycodes, but not mappings
 set number              " use line numbers
