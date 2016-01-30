@@ -71,6 +71,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'daviesjamie/vim-base16-lightline'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 
@@ -93,6 +94,7 @@ set laststatus=2
 
 " Configure vim-lightline
 let g:lightline = {
+\     'colorscheme': 'base16',
 \     'active' : {
 \         'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
 \         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
