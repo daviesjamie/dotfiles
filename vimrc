@@ -202,6 +202,12 @@ endfunction
 " Set leader key to space
 let mapleader="\<Space>"
 
+" Easier navigation between windows
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 " Toggle folds with double-space
 nmap <leader><leader> za
 
