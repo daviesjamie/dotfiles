@@ -69,6 +69,9 @@ augroup cline
     au WinEnter * set cursorline
 augroup END
 
+" Resize splits when the window is resized
+au VimResized * :wincmd = 
+
 " }}}
 " PLUGINS ----------------------------------------------------------------- {{{
 
