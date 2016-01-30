@@ -245,8 +245,8 @@ nnoremap gk k
 " Toggle folds with double-space
 nmap <leader><leader> za
 
-" Use enter to clear search highlighting
-nmap <CR> :nohlsearch<CR>
+" Use enter to toggle search highlighting
+nmap <CR> :set hlsearch! hlsearch?<CR>
 
 " }}}
 " FILETYPE-SPECIFIC ------------------------------------------------------- {{{
