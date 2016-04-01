@@ -72,6 +72,9 @@ if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j
 endif
 
+" Set invisible (list) characters
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+
 " Viminfo settings:
 "   !  Save and restore global variables starting with an uppercase letter
 " '20  Remember marks for 20 most recent files
