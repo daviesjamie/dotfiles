@@ -1,7 +1,33 @@
-" GENERAL ----------------------------------------------------------------- {{{
-
 " Don't try to be compatible with vi
 set nocompatible
+
+" PLUGINS ----------------------------------------------------------------- {{{
+
+" Automatically install vim-plug if it's not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'daviesjamie/vim-base16-lightline'
+Plug 'godlygeek/tabular'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'wellle/targets.vim'
+
+call plug#end()
+
+" }}}
+" GENERAL ----------------------------------------------------------------- {{{
 
 set autoindent          " automatically indent new lines
 set autoread            " re-read an open file that has changed outside vim
@@ -60,6 +86,13 @@ endif
 set wildmode=longest:full,full
 
 " }}}
+" FILETYPE-SPECIFIC ------------------------------------------------------- {{{
+
+if has('autocmd')
+    autocmd FileType vim setlocal foldmethod=marker
+endif
+
+" }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 
 set history=1000                " keep 1000 lines of command line history
@@ -82,6 +115,30 @@ if !isdirectory( expand( &directory ) )
 endif
 
 " }}}
+" KEY BINDINGS ------------------------------------------------------------ {{{
+
+" Set leader key to space
+let mapleader="\<Space>"
+
+" Easier navigation between windows
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" Make j and k work on screen lines, not file lines
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+" Toggle folds with double-space
+nmap <leader><leader> za
+
+" Use enter to toggle search highlighting
+nmap <CR> :set hlsearch! hlsearch?<CR>
+
+" }}}
 " HOOKS ------------------------------------------------------------------- {{{
 
 " Only show cursorline in the current window
@@ -93,32 +150,6 @@ augroup END
 
 " Resize splits when the window is resized
 au VimResized * :wincmd = 
-
-" }}}
-" PLUGINS ----------------------------------------------------------------- {{{
-
-" Automatically install vim-plug if it's not already installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'chriskempson/base16-vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'daviesjamie/vim-base16-lightline'
-Plug 'godlygeek/tabular'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'wellle/targets.vim'
-
-call plug#end()
 
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
@@ -223,36 +254,5 @@ endfunction
 function! CtrlPStatusFunc_2(str)
     return lightline#statusline(0)
 endfunction
-
-" }}}
-" KEY BINDINGS ------------------------------------------------------------ {{{
-
-" Set leader key to space
-let mapleader="\<Space>"
-
-" Easier navigation between windows
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Make j and k work on screen lines, not file lines
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
-
-" Toggle folds with double-space
-nmap <leader><leader> za
-
-" Use enter to toggle search highlighting
-nmap <CR> :set hlsearch! hlsearch?<CR>
-
-" }}}
-" FILETYPE-SPECIFIC ------------------------------------------------------- {{{
-
-if has('autocmd')
-    autocmd FileType vim setlocal foldmethod=marker
-endif
 
 " }}}
