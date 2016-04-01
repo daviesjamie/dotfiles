@@ -149,6 +149,10 @@ nmap <leader><leader> za
 " Use enter to toggle search highlighting
 nmap <CR> :set hlsearch! hlsearch?<CR>
 
+" Re-select selection after indenting in visual mode
+vmap > >gv
+vmap < <gv
+
 " }}}
 " HOOKS ------------------------------------------------------------------- {{{
 
