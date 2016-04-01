@@ -67,6 +67,9 @@ set wildmenu            " use a menu for command-line completion
 " Backspace over everything in insert mode
 set backspace=indent,eol,start
 
+" Enable filetype detection/plugins
+filetype plugin indent on
+
 " Remove comment markup when joining lines
 if v:version > 703 || v:version == 703 && has("patch541")
     set formatoptions+=j
@@ -92,7 +95,12 @@ set wildmode=longest:full,full
 " FILETYPE-SPECIFIC ------------------------------------------------------- {{{
 
 if has('autocmd')
-    autocmd FileType vim setlocal foldmethod=marker
+    " Filetype-specific settings
+    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType vim  setlocal foldmethod=marker
+
+    " Override filetype for certain files
+    autocmd BufNewFile,BufRead *.tt set filetype=html
 endif
 
 " }}}
