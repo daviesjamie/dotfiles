@@ -17,6 +17,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'daviesjamie/vim-base16-lightline'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
