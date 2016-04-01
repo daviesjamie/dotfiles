@@ -6,26 +6,28 @@ else
     /usr/bin/env git clone git://github.com/daviesjamie/dotfiles.git ~/.dotfiles
 fi
 
-for DOTFILE in gitconfig vimrc
+for dotfile in $( find ~/.dotfiles -type f -maxdepth 1 \
+                ! \( -iname '.*' -or -iname 'install.sh' \) \
+                | xargs basename );
 do
-    # If file is already installed, skip
-    if [[ -L ~/.$DOTFILE && "$(readlink $HOME/.$DOTFILE)" -ef "$HOME/.dotfiles/$DOTFILE" ]]
+    # If file is already installed, skip it
+    if [[ -L ~/.$dotfile && "$(readlink $HOME/.$dotfile)" -ef "$HOME/.dotfiles/$dotfile" ]]
     then
-        echo "$DOTFILE is already symlinked from ~/.$DOTFILE"
+        echo "$dotfile is already symlinked from ~/.$dotfile"
         continue
     fi
 
     # If a file (not a symlink) already exists in place, back it up
-    if [[ -f ~/.$DOTFILE && ! -L ~/.$DOTFILE ]]
+    if [[ -f ~/.$dotfile && ! -L ~/.$dotfile ]]
     then
-        echo "Found existing ~/.$DOTFILE - backing up to ~/.$DOTFILE.orig"
-        cp ~/.$DOTFILE ~/.$DOTFILE.orig
-        rm ~/.$DOTFILE
+        echo "Found existing ~/.$dotfile - backing up to ~/.$dotfile.orig"
+        cp ~/.$dotfile ~/.$dotfile.orig
+        rm ~/.$dotfile
     fi
 
     # Link file into place
-    echo "Symlinking $DOTFILE to ~/.$DOTFILE"
-    ln -s ~/.dotfiles/$DOTFILE ~/.$DOTFILE
+    echo "Symlinking $dotfile to ~/.$dotfile"
+    ln -s ~/.dotfiles/$dotfile ~/.$dotfile
 done
 
 echo "Done!"
