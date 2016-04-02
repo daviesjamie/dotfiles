@@ -8,7 +8,10 @@ export ZSH="$DOTFILES/zsh"
 export BASE16_SHELL="$DOTFILES/.config/base16-shell"
 
 # Load all of the config files in ~/.dotfiles/zsh that end in .zsh
-for i in $ZSH/*.zsh; do source $i; done;
+for c in $ZSH/*.zsh; do source $c; done;
+
+# Load all of the custom functions in ~/.dotfiles/zsh/functions
+for i in $ZSH/functions/*; do source $i; done;
 
 # Set editor to vim
 export VISUAL=vim
