@@ -32,3 +32,8 @@ elif command -v xclip > /dev/null 2>&1; then
     alias pbc='xclip -selection clipboard'
     alias pbp='xclip -selection clipboard -o'
 fi
+
+# Alias git to hub, if it's installed
+if command -v hub > /dev/null 2>&1; then
+    eval "$(hub alias -s)"
+fi
