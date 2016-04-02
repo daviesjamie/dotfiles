@@ -1,3 +1,6 @@
+# Load custom completions
+fpath=($ZSH/completions $fpath)
+
 # Set up completion system
 autoload -U compinit
 compinit
