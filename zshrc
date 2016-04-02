@@ -13,10 +13,6 @@ for c in $ZSH/*.zsh; do source $c; done;
 # Load all of the custom functions in ~/.dotfiles/zsh/functions
 for i in $ZSH/functions/*; do source $i; done;
 
-# Set editor to vim
-export VISUAL=vim
-export EDITOR=VISUAL
-
 # Load base16 colourscheme
 [[ -z "$THEME" ]] && export THEME="base16-tomorrow"
 [[ -z "$THEME_BG" ]] && export THEME_BG="dark"
