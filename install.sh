@@ -6,9 +6,9 @@ else
     /usr/bin/env git clone git://github.com/daviesjamie/dotfiles.git ~/.dotfiles
 fi
 
-for dotfile in $( find ~/.dotfiles -type f -maxdepth 1 \
+for dotfile in $( find ~/.dotfiles -maxdepth 1 -type f -print0 \
                 ! \( -iname '.*' -or -iname 'install.sh' \) \
-                | xargs basename );
+                | xargs -0 -n1 basename );
 do
     # If file is already installed, skip it
     if [[ -L ~/.$dotfile && "$(readlink $HOME/.$dotfile)" -ef "$HOME/.dotfiles/$dotfile" ]]
