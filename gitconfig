@@ -1,12 +1,20 @@
 [user]
     name = Jamie Davies
-    email = jamie@jamiedavies.me
+    email = jagd@netcraft.com
 
 [core]
     editor = vim
 
 [push]
     default = simple
+
+[color]
+    branch = auto
+    diff = auto
+    grep = auto
+    interactive = auto
+    status = auto
+    ui = auto
 
 [alias]
     a = add
