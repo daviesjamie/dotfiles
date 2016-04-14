@@ -108,22 +108,27 @@ endif
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 
 set history=1000                " keep 1000 lines of command line history
-set undofile                    " save undo history to a file
-set undoreload=10000            " save 10000 lines of undo history
 
-set undodir=~/.vim/tmp/undo     " save undo files to ~/.vim/tmp/undo
 set backupdir=~/.vim/tmp/backup " save backup files to ~/.vim/tmp/backup
 set directory=~/.vim/tmp/swap   " save swap files to ~/.vim/tmp/swap
 
 " Create temporary folders if they don't already exist
-if !isdirectory( expand( &undodir ) )
-    call mkdir( expand( &undodir ), "p" )
-endif
 if !isdirectory( expand( &backupdir ) )
     call mkdir( expand( &backupdir ), "p" )
 endif
 if !isdirectory( expand( &directory ) )
     call mkdir( expand( &directory ), "p" )
+endif
+
+" Enable saving undo history to a file, if supported
+if has('persistent_undo')
+    set undofile                " save undo history to a file
+    set undoreload=10000        " save 10000 lines of undo history
+    set undodir=~/.vim/tmp/undo " save undo files to ~/.vim/tmp/undo
+
+    if !isdirectory( expand( &undodir ) )
+        call mkdir( expand( &undodir ), "p" )
+    endif
 endif
 
 " }}}
