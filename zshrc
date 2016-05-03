@@ -19,3 +19,6 @@ for i in $ZSH/functions/*; do source $i; done;
 
 BASE16_SCRIPT="$BASE16_SHELL/$THEME.$THEME_BG.sh"
 [[ -s $BASE16_SCRIPT ]] && source $BASE16_SCRIPT
+
+# Load ~/.zshrc.local, if it exists
+[[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
