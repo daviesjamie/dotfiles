@@ -1,7 +1,3 @@
-[user]
-    name = Jamie Davies
-    email = jamie@jamiedavies.me
-
 [core]
     editor = vim
 
@@ -26,3 +22,6 @@
     branches = branch -a
     remotes = remote -v
     tags = tag -l
+
+[include]
+    path = ~/.gitconfig.local
