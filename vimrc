@@ -172,6 +172,14 @@ augroup END
 " Resize splits when the window is resized
 au VimResized * :wincmd = 
 
+" Show trailing whitespace (but not on current line in insert mode)
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+augroup extrawhitespace
+    au!
+    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
+
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
 
