@@ -1,0 +1,8 @@
+# Recursively strip trailing whitespace from all files
+function strip-trailing-whitespace() {
+    if [[ `uname` == 'Darwin' ]]; then
+        find . -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
+    else
+        find . -type f -exec sed --in-place 's/[[:space:]]\+$//' {} \+
+    fi
+}
