@@ -25,6 +25,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 
+" Load local ~/.vimrc.plugs.local if exists
+if filereadable(expand("~/.vimrc.plugs.local"))
+    source ~/.vimrc.plugs.local
+endif
+
 call plug#end()
 
 " }}}
