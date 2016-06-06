@@ -185,6 +185,9 @@ augroup extrawhitespace
     au InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
 
+" Always make sure cursor starts on first line in git commits
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
 
