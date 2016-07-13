@@ -14,15 +14,13 @@
     ui = auto
 
 [alias]
-    a = add
-    c = commit
-    co = checkout
-    s = status
+    c   = commit
+    co  = checkout
     uns = reset HEAD
 
     branches = branch -a
-    remotes = remote -v
-    tags = tag -l
+    remotes  = remote -v
+    tags     = tag -l
 
 [include]
     path = ~/.gitconfig.local
