@@ -5,6 +5,9 @@
 [push]
     default = simple
 
+[pager]
+    log = less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines
+
 [color]
     branch = auto
     diff = auto
