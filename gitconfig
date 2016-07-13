@@ -14,9 +14,15 @@
     ui = auto
 
 [alias]
-    c   = commit
-    co  = checkout
-    uns = reset HEAD
+    aa    = add --all
+    amend = commit --amend
+    c     = commit
+    co    = checkout
+    di    = diff
+    dc    = diff --cached
+    ds    = diff --stat
+    st    = status
+    uns   = reset HEAD
 
     branches = branch -a
     remotes  = remote -v
