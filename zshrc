@@ -14,10 +14,9 @@ for c in $ZSH/*.zsh; do source $c; done;
 for i in $ZSH/functions/*; do source $i; done;
 
 # Load base16 colourscheme
-[[ -z "$THEME" ]] && export THEME="base16-tomorrow"
-[[ -z "$THEME_BG" ]] && export THEME_BG="dark"
+[[ -z "$THEME" ]] && export THEME="base16-tomorrow-night"
 
-BASE16_SCRIPT="$BASE16_SHELL/$THEME.$THEME_BG.sh"
+BASE16_SCRIPT="$BASE16_SHELL/scripts/$THEME.sh"
 [[ -s $BASE16_SCRIPT ]] && source $BASE16_SCRIPT
 
 # Load ~/.zshrc.local, if it exists
