@@ -13,6 +13,9 @@
     status = auto
     ui = auto
 
+[format]
+    pretty = format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+
 [alias]
     aa    = add --all
     amend = commit --amend
@@ -27,6 +30,16 @@
     branches = branch -a
     remotes  = remote -v
     tags     = tag -l
+
+    # Pretty one-line logs:
+    #   l  = all commits, only current branch
+    #   la = all commits, all reachable refs
+    #   r  = recent commits, only current branch
+    #   ra = recent commits, all reachable refs
+    l  = log --graph --abbrev-commit --date=relative
+    la = !git l --all
+    r  = !git l -20
+    ra = !git r --all
 
 [include]
     path = ~/.gitconfig.local
