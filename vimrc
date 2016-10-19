@@ -18,6 +18,7 @@ Plug 'daviesjamie/vim-base16-lightline'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'ledger/vim-ledger', { 'for': 'ledger' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -107,6 +108,7 @@ if has('autocmd')
 
     " Override filetype for certain files
     autocmd BufNewFile,BufRead *.tt set filetype=html
+    autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 endif
 
 " }}}
