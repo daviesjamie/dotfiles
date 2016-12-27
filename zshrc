@@ -21,3 +21,6 @@ BASE16_SCRIPT="$BASE16_SHELL/scripts/$THEME.sh"
 
 # Load ~/.zshrc.local, if it exists
 [[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# End with true, so that prompt isn't discoloured by failing checks above
+true
