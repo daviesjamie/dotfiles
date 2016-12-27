@@ -8,7 +8,7 @@ PROMPT_SYMBOL='❯'
 PROMPT_GIT_DIRTY_SYMBOL='*'
 
 # Max execution time of a process before its run time is shown when it exits
-CMD_MAX_EXEC_TIME=5
+CMD_MAX_EXEC_TIME=10
 
 # Colours to use
 PROMPT_USER_COLOUR=4
