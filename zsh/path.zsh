@@ -4,6 +4,9 @@ typeset -U path
 [ -d "$DOTFILES/bin" ] && path=("$DOTFILES/bin" $path)
 [ -d "$HOME/bin" ] && path=("$HOME/bin" $path)
 
+[ -d "$HOME/.rbenv/bin" ] && path=("$HOME/.rbenv/bin" $path)
+[ -d "$HOME/.rbenv/plugins/ruby-build/bin" ] && path=("$HOME/.rbenv/plugins/ruby-build/bin" $path)
+
 export PATH
 
 # Load rbenv if it's installed
