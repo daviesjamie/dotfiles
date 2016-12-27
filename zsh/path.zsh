@@ -2,6 +2,7 @@
 typeset -U path
 
 [ -d "$DOTFILES/bin" ] && path=("$DOTFILES/bin" $path)
+[ -d "$HOME/bin" ] && path=("$HOME/bin" $path)
 
 export PATH
 
