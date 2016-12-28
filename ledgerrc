@@ -1,0 +1,5 @@
+--file=~/Finance/201617.ledger
+--color
+--date-format=%Y/%m/%d
+--explicit
+--pedantic
