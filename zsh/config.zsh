@@ -1,6 +1,6 @@
 # Set editor to vim
 export VISUAL=vim
-export EDITOR=VISUAL
+export EDITOR=$VISUAL
 
 # Use less as pager
 export PAGER="less"
