@@ -116,6 +116,9 @@ if has('autocmd')
     autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 endif
 
+" Always make sure cursor starts on first line in git commits
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 
@@ -182,7 +185,7 @@ augroup cline
 augroup END
 
 " Resize splits when the window is resized
-au VimResized * :wincmd = 
+au VimResized * :wincmd =
 
 " Show trailing whitespace (but not on current line in insert mode)
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -191,9 +194,6 @@ augroup extrawhitespace
     au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
     au InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
-
-" Always make sure cursor starts on first line in git commits
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
@@ -300,3 +300,13 @@ function! CtrlPStatusFunc_2(str)
 endfunction
 
 " }}}
+" LEDGER ------------------------------------------------------------------ {{{
+
+" Make tab complete accounts and align postings in ledger files
+augroup ledger
+    au!
+    autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
+    autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
+augroup END
+
+let g:ledger_fold_blanks = 1
