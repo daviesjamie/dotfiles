@@ -33,6 +33,9 @@ endif
 
 call plug#end()
 
+" Load built-in matchit.vim plugin
+source $VIMRUNTIME/macros/matchit.vim
+
 " }}}
 " GENERAL ----------------------------------------------------------------- {{{
 
