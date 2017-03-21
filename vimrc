@@ -110,13 +110,14 @@ set wildmode=longest:full,full
 
 if has('autocmd')
     " Filetype-specific settings
-    autocmd FileType css  setlocal ts=2 sts=2 sw=2
-    autocmd FileType html setlocal ts=2 sts=2 sw=2
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType ruby setlocal ts=2 sts=2 sw=2
-    autocmd FileType scss setlocal ts=2 sts=2 sw=2
-    autocmd FileType vim  setlocal foldmethod=marker
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2
+    autocmd FileType css        setlocal ts=2 sts=2 sw=2
+    autocmd FileType html       setlocal ts=2 sts=2 sw=2
+    autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+    autocmd FileType make       setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType ruby       setlocal ts=2 sts=2 sw=2
+    autocmd FileType scss       setlocal ts=2 sts=2 sw=2
+    autocmd FileType vim        setlocal foldmethod=marker
+    autocmd FileType yaml       setlocal ts=2 sts=2 sw=2
 
     " Override filetype for certain files
     autocmd BufNewFile,BufRead *.tt set filetype=html
