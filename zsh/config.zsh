@@ -4,7 +4,7 @@ export EDITOR=$VISUAL
 
 # Use less as pager
 export PAGER="less"
-export LESS="-R"
+export LESS="--quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines"
 
 # List jobs in long format by default
 setopt LONG_LIST_JOBS
