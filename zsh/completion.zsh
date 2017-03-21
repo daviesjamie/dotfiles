@@ -14,10 +14,6 @@ setopt COMPLETE_IN_WORD  # allow completing in the middle of words
 # Enable menu selection
 zstyle ':completion:*:*:*:*:*' menu select
 
-# Use ctrl-o in completion menu to accept current selection and open another
-# menu
-bindkey -M menuselect '^o' accept-and-infer-next-history
-
 # Turn off completion list colours
 zstyle ':completion:*' list-colors ''
 
