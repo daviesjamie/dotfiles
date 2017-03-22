@@ -15,7 +15,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'daviesjamie/vim-base16-lightline'
-Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
@@ -36,9 +35,6 @@ call plug#end()
 
 " Load built-in matchit.vim plugin
 source $VIMRUNTIME/macros/matchit.vim
-
-" Set default completion type for supertab to context
-let g:SuperTabDefaultCompletionType = "context"
 
 " }}}
 " GENERAL ----------------------------------------------------------------- {{{
@@ -314,7 +310,6 @@ endfunction
 augroup ledger
     au!
     autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
-    autocmd FileType ledger let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 augroup END
 
 let g:ledger_fold_blanks = 1
