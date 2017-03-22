@@ -19,6 +19,7 @@ Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'ledger/vim-ledger', { 'for': 'ledger' }
+Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -313,3 +314,13 @@ augroup ledger
 augroup END
 
 let g:ledger_fold_blanks = 1
+
+" }}}
+" SNIPPETS ---------------------------------------------------------------- {{{
+
+" Look for snippets in dotfiles directory
+set runtimepath+=$DOTFILES
+let g:UltiSnipsSnippetsDir=$DOTFILES."/snips"
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'snips']
+
+" }}}
