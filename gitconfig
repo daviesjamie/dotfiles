@@ -27,9 +27,10 @@
     st    = status
     uns   = reset HEAD
 
-    branches = branch -a
-    remotes  = remote -v
-    tags     = tag -l
+    branches   = branch -a
+    committers = shortlog -sn
+    remotes    = remote -v
+    tags       = tag -l
 
     # Pretty one-line logs:
     #   l  = all commits, only current branch
