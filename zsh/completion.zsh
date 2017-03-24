@@ -14,8 +14,8 @@ setopt COMPLETE_IN_WORD  # allow completing in the middle of words
 # Enable menu selection
 zstyle ':completion:*:*:*:*:*' menu select
 
-# Turn off completion list colours
-zstyle ':completion:*' list-colors ''
+# Use the same colours as ls
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Try completing, in order:
 # - case-insensitive matches
