@@ -7,7 +7,56 @@ use warnings;
 $0
 endsnippet
 
+snippet package "insert package header" b
+package ${1:MyPackage};
+
+use strict;
+use warnings;
+
+$0
+
+1;
+endsnippet
+
 snippet dumper "print debug message" b
 use Data::Dumper;
 warn Dumper($0);
+endsnippet
+
+snippet slurp "slurp a file" b
+my $${1:var} = do { local $/ = undef; open my $fh, '<', ${2:$file}; <$fh> };
+endsnippet
+
+snippet podp "pod documentation for package" b
+=head1 NAME
+
+${1:MyPackage}
+
+=head1 SYNOPSIS
+
+  use $1;
+  ${2:my $var = MyPackage::function();}
+
+=head1 DESCRIPTION
+
+${3:Description of package}
+
+=head1 METHODS
+
+=over
+=cut
+
+$0
+
+=back
+=cut
+endsnippet
+
+snippet pods "pod documentation for sub" b
+=item ${1:function_name}
+
+${2:Description of function}
+
+=cut
+$0
 endsnippet
