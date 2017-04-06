@@ -179,6 +179,9 @@ nmap <CR> :set hlsearch! hlsearch?<CR>
 vmap > >gv
 vmap < <gv
 
+" Insert hashrocket with ctrl+l in insert mode
+imap <C-l> <space>=><space>
+
 " }}}
 " HOOKS ------------------------------------------------------------------- {{{
 
