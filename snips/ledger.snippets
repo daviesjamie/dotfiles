@@ -1,0 +1,11 @@
+snippet date "insert date"
+${1:`!v strftime("%Y")`}/${2:`!v strftime("%m")`}/${3:`!v strftime("%d")`} $0
+endsnippet
+
+snippet tr "insert transaction" b
+${1:`!v strftime("%Y")`}/${2:`!v strftime("%m")`}/${3:`!v strftime("%d")`}${4:=}${5:$1}/${6:$2}/${7:$3} ${8:* }${9:Payee}
+    ${10:Expenses}:$11  £${12:10.00}
+	${13:Assets}:$14
+
+$0
+endsnippet
