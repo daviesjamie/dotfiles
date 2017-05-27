@@ -19,6 +19,7 @@ Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'ledger/vim-ledger', { 'for': 'ledger' }
+Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -111,6 +112,7 @@ if has('autocmd')
     autocmd FileType html       setlocal ts=2 sts=2 sw=2
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2
     autocmd FileType make       setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType markdown   setlocal linebreak nonumber spell wrap
     autocmd FileType ruby       setlocal ts=2 sts=2 sw=2
     autocmd FileType scss       setlocal ts=2 sts=2 sw=2
     autocmd FileType vim        setlocal foldmethod=marker
@@ -120,6 +122,11 @@ if has('autocmd')
     autocmd BufNewFile,BufRead *.tt set filetype=html
     autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 endif
+
+augroup pencil
+    autocmd!
+    autocmd FileType markdown call pencil#init()
+augroup END
 
 " Always make sure cursor starts on first line in git commits
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
