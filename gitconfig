@@ -18,6 +18,7 @@
 
 [alias]
     aa    = add --all
+    aanw  = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
     amend = commit --amend
     c     = commit
     co    = checkout
