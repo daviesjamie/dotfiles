@@ -1,11 +1,8 @@
-# Path to my dotfiles
-export DOTFILES="$HOME/.dotfiles"
-
 # Path to my zsh config directory
-export ZSH="$DOTFILES/zsh"
+export ZSH="$HOME/.zsh"
 
 # Path to base16 theme scripts
-export BASE16_SHELL="$DOTFILES/.config/base16-shell"
+export BASE16_SHELL="$HOME/.config/base16-shell"
 
 # Load all of the config files in ~/.dotfiles/zsh that end in .zsh
 for c in $ZSH/*.zsh; do source $c; done;
@@ -22,5 +19,5 @@ BASE16_SCRIPT="$BASE16_SHELL/scripts/$THEME.sh"
 # Load ~/.zshrc.local, if it exists
 [[ -s "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
-# End with true, so that prompt isn't discoloured by failing checks above
+# End with true, so that prompt isn't discoloured by .zshrc.local not existing
 true
