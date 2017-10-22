@@ -17,9 +17,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'daviesjamie/vim-base16-lightline'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-Plug 'ledger/vim-ledger', { 'for': 'ledger' }
-Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -27,11 +24,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
-
-" Load local ~/.vimrc.plugs.local if exists
-if filereadable(expand("~/.vimrc.plugs.local"))
-    source ~/.vimrc.plugs.local
-endif
 
 call plug#end()
 
@@ -313,24 +305,5 @@ endfunction
 function! CtrlPStatusFunc_2(str)
     return lightline#statusline(0)
 endfunction
-
-" }}}
-" LEDGER ------------------------------------------------------------------ {{{
-
-" Make tab complete accounts and align postings in ledger files
-augroup ledger
-    au!
-    autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
-augroup END
-
-let g:ledger_fold_blanks = 1
-
-" }}}
-" SNIPPETS ---------------------------------------------------------------- {{{
-
-" Look for snippets in dotfiles directory
-set runtimepath+=$DOTFILES
-let g:UltiSnipsSnippetsDir=$DOTFILES."/snips"
-let g:UltiSnipsSnippetDirectories=['UltiSnips', 'snips']
 
 " }}}
