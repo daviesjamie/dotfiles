@@ -69,6 +69,9 @@ bindsym $mod+grave floating toggle
 # Change focus between tiling / floating windows
 bindsym $mod+tab focus mode_toggle
 
+# Focus the parent container
+bindsym $mod+a focus parent
+
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
