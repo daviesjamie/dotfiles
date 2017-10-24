@@ -25,6 +25,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 
+" Load local plugins from ~/.vimrc.local.plugins if it exists
+if filereadable(expand("~/.vimrc.local.plugins"))
+    source ~/.vimrc.local.plugins
+endif
+
 call plug#end()
 
 " Load built-in matchit.vim plugin
@@ -307,3 +312,8 @@ function! CtrlPStatusFunc_2(str)
 endfunction
 
 " }}}
+
+" Enable local machine-specific settings with ~/.vimrc.local
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
