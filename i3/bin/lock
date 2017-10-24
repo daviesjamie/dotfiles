@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Pause dunst
+killall -SIGUSR1 dunst
+
+# Lock the screen
+i3lock -c '282a2e' -efn
+
+# Unpause dunst
+killall -SIGUSR2 dunst
