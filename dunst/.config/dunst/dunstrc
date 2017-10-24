@@ -1,5 +1,5 @@
 [global]
-    font = Hack 10
+    font = Hack 9
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -21,7 +21,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<small>%a</small>\n<b>%s</b>\n%b"
 
     # Sort messages by urgency.
     sort = yes
@@ -63,11 +63,11 @@
     # the top and down respectevly.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x1000-30+20"
+    geometry = "250x5-10-25"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
-    shrink = yes
+    shrink = no
 
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing windowmanager is
@@ -103,20 +103,20 @@
     history_length = 50
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     # The height of a single line.  If the height is smaller than the
     # font height, it will get raised to the font height.
     # This adds empty space above and under the text.
     line_height = 0
 
-    # Draw a line of "separatpr_height" pixel height between two
+    # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 8
+    padding = 10
 
     # Horizontal padding.
     horizontal_padding = 8
@@ -132,7 +132,7 @@
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = true
+    startup_notification = false
 
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
@@ -147,7 +147,7 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 3
+    width = 1
     color = "#282a2e"
 
 [shortcuts]
@@ -176,7 +176,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#282a2e"
     foreground = "#969896"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     background = "#373b41"
