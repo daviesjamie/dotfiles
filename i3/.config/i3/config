@@ -16,7 +16,7 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # Split in horizontal direction
-bindsym $mod+t split g
+bindsym $mod+g split h
 
 # Split in vertical direction
 bindsym $mod+v split v
