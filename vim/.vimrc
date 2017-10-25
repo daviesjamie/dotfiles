@@ -187,6 +187,11 @@ vmap < <gv
 " Insert hashrocket with ctrl+l in insert mode
 imap <C-l> <space>=><space>
 
+" Align various characters in visual mode
+vmap <C-l> :Tab /=><cr>
+vmap = :Tab /==\?<cr>
+vmap \| :Tab /\|\|<cr>
+
 " }}}
 " HOOKS ------------------------------------------------------------------- {{{
 
