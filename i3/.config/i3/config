@@ -56,6 +56,7 @@ bindsym $mod+Return exec urxvtc
 
 # Start rofi
 bindsym $mod+space exec "rofi -show run"
+bindsym $mod+Shift+space exec "rofi -show window"
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
