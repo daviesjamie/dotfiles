@@ -1,10 +1,23 @@
 #!/bin/bash
 
-# Pause dunst
+LOCK_SCREEN_COLOUR='282a2e'
+
+# Pause dunst notifications
 killall -SIGUSR1 dunst
 
-# Lock the screen
-i3lock -c '282a2e' -efn
+if [[ $(playerctl status) == Playing* ]]; then
+    # Pause the music
+    playerctl pause
 
-# Unpause dunst
+    # Lock the screen
+    i3lock -c $LOCK_SCREEN_COLOUR -efn
+
+    # Resume the music
+    playerctl play
+else
+    # Just lock the screen
+    i3lock -c $LOCK_SCREEN_COLOUR -efn
+fi
+
+# Unpause dunst notifications
 killall -SIGUSR2 dunst
