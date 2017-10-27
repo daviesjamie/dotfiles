@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Kill any already-running polybar instances
+killall -q polybar
+
+# Wait until they've been killed
+while pgrep -x polybar >/dev/null; do sleep 1; done
+
+# Launch a bar on each monitor, if we have access to xrandr
+if type 'xrandr'; then
+    for m in $(xrandr --query | grep ' connected' | cut -d' ' -f1); do
+        MONITOR=$m polybar daviesjamie &
+    done
+else
+    polybar daviesjamie &
+fi

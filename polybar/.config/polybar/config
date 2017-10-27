@@ -13,6 +13,10 @@ blue = #81a2be
 purple = #b294bb
 
 [bar/daviesjamie]
+; Specify the monitor this bar should run on
+; $MONITOR is set by `launch-polybar` script, to run a bar on each monitor
+monitor = ${env:MONITOR:}
+
 bottom = true
 width = 100%
 height = 20
