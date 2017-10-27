@@ -1,0 +1,76 @@
+[colors]
+background = #1d1f21
+background-alt = #282a2e
+foreground = #e0e0e0
+foreground-alt = #c5c8c6
+
+red = #cc6666
+orange = #de935f
+yellow = #f0c674
+green = #b5bd68
+teal = #8abeb7
+blue = #81a2be
+purple = #b294bb
+
+[bar/daviesjamie]
+bottom = true
+width = 100%
+height = 20
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Space at each end of the bar
+padding-right = 1
+
+; Space between modules
+module-margin = 2
+
+; Fonts
+font-0 = fixed:pixelsize=9
+font-1 = unifont:fontformat=truetype:size=8:antialias=false
+font-2 = siji:pixelsize=9
+
+; The modules to be shown
+modules-left = i3
+modules-right = battery date
+
+; System tray
+tray-position = right
+tray-padding = 2
+
+; Draw bar outside of i3's root
+wm-restack = i3
+
+
+[module/i3]
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+pin-workspaces = true
+
+; Click on a workspace to switch to it
+enable-click = true
+
+; Scroll on workspaces to cycle them
+enable-scroll = true
+
+; Make scrolling on workspaces wrap around
+wrapping-scroll = true
+
+
+[module/battery]
+type = internal/battery
+
+battery = BAT0
+adapter = AC
+
+
+[module/date]
+type = internal/date
+
+interval = 5
+
+date = %d %b %Y
+time = %H:%M
+label = %date% %time%
