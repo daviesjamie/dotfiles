@@ -1,8 +1,6 @@
 [colors]
 background = #1d1f21
-background-alt = #282a2e
 foreground = #e0e0e0
-foreground-alt = #c5c8c6
 
 red = #cc6666
 orange = #de935f
@@ -11,6 +9,8 @@ green = #b5bd68
 teal = #8abeb7
 blue = #81a2be
 purple = #b294bb
+lightgrey = #969896
+darkgrey = #373b41
 
 [bar/daviesjamie]
 ; Specify the monitor this bar should run on
@@ -37,7 +37,7 @@ font-2 = siji:pixelsize=9
 
 ; The modules to be shown
 modules-left = i3
-modules-right = battery date
+modules-right = pavolume battery date
 
 ; System tray
 tray-position = right
@@ -62,6 +62,23 @@ enable-scroll = true
 
 ; Make scrolling on workspaces wrap around
 wrapping-scroll = true
+
+
+[module/pavolume]
+type = custom/script
+tail = true
+label = %output%
+exec = ~/bin/pavolume --listen
+click-right = exec pavucontrol
+click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
+scroll-up = pactl set-sink-volume @DEFAULT_SINK@ +5%
+scroll-down = pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Use volume mapping (similar to amixer -M)
+mapped = true
+
+label-muted = MUTE
+format-muted-foreground = ${colors.lightgrey}
 
 
 [module/battery]
