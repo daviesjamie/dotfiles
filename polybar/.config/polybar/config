@@ -33,7 +33,7 @@ module-margin = 2
 ; Fonts
 font-0 = fixed:pixelsize=9;2
 font-1 = unifont:fontformat=truetype:size=8:antialias=false
-font-2 = siji:pixelsize=9
+font-2 = siji:pixelsize=9;2
 
 ; The modules to be shown
 modules-left = i3
@@ -68,6 +68,7 @@ wrapping-scroll = true
 type = custom/script
 tail = true
 label = %output%
+format-prefix = " "
 exec = ~/bin/pavolume --listen
 click-right = exec pavucontrol
 click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -86,6 +87,14 @@ type = internal/battery
 
 battery = BAT0
 adapter = AC
+
+# Set icon based on battery state
+format-charging = "  <label-charging>"
+format-discharging = <ramp-capacity> <label-discharging>
+format-full-prefix = " "
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
 
 
 [module/date]
