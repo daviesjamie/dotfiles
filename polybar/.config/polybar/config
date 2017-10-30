@@ -31,7 +31,7 @@ padding-right = 1
 module-margin = 2
 
 ; Fonts
-font-0 = fixed:pixelsize=9
+font-0 = fixed:pixelsize=9;2
 font-1 = unifont:fontformat=truetype:size=8:antialias=false
 font-2 = siji:pixelsize=9
 
@@ -42,6 +42,7 @@ modules-right = battery date
 ; System tray
 tray-position = right
 tray-padding = 2
+tray-maxsize = 12
 
 ; Draw bar outside of i3's root
 wm-restack = i3
