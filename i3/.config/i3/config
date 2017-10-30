@@ -1,5 +1,4 @@
-# KEYBINDINGS ------------------------------------------------------------- {{{
-
+# KEYBINDINGS ------------------------------------------------------------- {{{ 
 # Use super key as modifier
 set $mod Mod4
 
@@ -156,11 +155,8 @@ for_window [class="^.*"] border pixel 1
 # }}}
 # STATUS BAR -------------------------------------------------------------- {{{
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command i3status
-}
+# Use `launch-polybar` script to have a polybar on each monitor
+exec_always --no-startup-id "$HOME/bin/launch-polybar"
 
 # }}}
 # STARTUP ----------------------------------------------------------------- {{{
