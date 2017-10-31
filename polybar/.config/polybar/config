@@ -28,7 +28,8 @@ foreground = ${colors.foreground}
 padding-right = 1
 
 ; Space between modules
-module-margin = 2
+module-margin-left = 2
+module-margin-right = 1
 
 ; Fonts
 font-0 = fixed:pixelsize=9;2
