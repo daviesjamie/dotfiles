@@ -4,13 +4,13 @@
 icon_normal=""
 icon_muted=""
 
-# Muted status
+# Colours
+colour_normal="" # Use default
+colour_muted="%{F#969896}"
+
+# STATE
 muted='no'
-
-# Current sink
 active_sink=''
-
-# Current volume
 cur_vol=''
 
 # Get the current volume
@@ -63,11 +63,11 @@ output() {
     get_mute_status
 
     if [[ "$muted" = 'yes' ]]; then
-        echo "$icon_muted MUTE"
+        echo "$colour_muted$icon_muted MUTE"
     elif [[ "$cur_vol" -eq "0" ]]; then
-        echo "$icon_muted $cur_vol%"
+        echo "$colour_muted$icon_muted $cur_vol%"
     else
-        echo "$icon_normal $cur_vol%"
+        echo "$colour_normal$icon_normal $cur_vol%"
     fi
 }
 
