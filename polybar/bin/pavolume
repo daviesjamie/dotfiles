@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Icons
+icon_normal=""
+icon_muted=""
+
 # Muted status
 muted='no'
 
@@ -59,9 +63,11 @@ output() {
     get_mute_status
 
     if [[ "$muted" = 'yes' ]]; then
-        echo "MUTE"
+        echo "$icon_muted MUTE"
+    elif [[ "$cur_vol" -eq "0" ]]; then
+        echo "$icon_muted $cur_vol%"
     else
-        echo "$cur_vol%"
+        echo "$icon_normal $cur_vol%"
     fi
 }
 

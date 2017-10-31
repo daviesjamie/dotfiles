@@ -68,7 +68,6 @@ wrapping-scroll = true
 type = custom/script
 tail = true
 label = %output%
-format-prefix = " "
 exec = ~/bin/pavolume --listen
 click-right = exec pavucontrol
 click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
