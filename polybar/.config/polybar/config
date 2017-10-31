@@ -102,6 +102,11 @@ type = internal/date
 
 interval = 5
 
-date = %d %b %Y
+date = %a %d %b
 time = %H:%M
+
+# Alt labels are shown when module is clicked
+date-alt = %A %d %B %Y
+time-alt = %H:%M
+
 label = %date% %time%
