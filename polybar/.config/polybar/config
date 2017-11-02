@@ -38,7 +38,7 @@ font-2 = siji:pixelsize=9;2
 
 ; The modules to be shown
 modules-left = i3
-modules-right = music pavolume battery date
+modules-right = music wifi pavolume battery date
 
 ; System tray
 tray-position = right
@@ -86,6 +86,24 @@ label-visible-padding = 1
 label-urgent = %index%
 label-urgent-background = ${colors.red}
 label-urgent-padding = 1
+
+
+[module/wifi]
+type = internal/network
+interface = wlp2s0
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+
+label-disconnected = ""
+label-disconnected-foregound = ${colors.lightgrey}
+
+ramp-signal-0 = ""
+ramp-signal-1 = ""
+ramp-signal-2 = ""
+ramp-signal-3 = ""
+ramp-signal-4 = ""
+ramp-signal-5 = ""
 
 
 [module/music]
