@@ -116,6 +116,9 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
+# Take a screenshot with gnome-screenshot
+bindsym $mod+Shift+s exec "gnome-screenshot -i"
+
 # }}}
 # APPEARANCE -------------------------------------------------------------- {{{
 
