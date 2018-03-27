@@ -9,7 +9,7 @@ There are configurations for both Mac and Linux programs, and they are all (hope
 These dotfiles are organised in a format that makes them very easy to manage using [GNU Stow](http://www.gnu.org/software/stow/):
 
 ```
-$ git clone https://github.com/daviesjamie/dotfiles ~/.dotfiles
+$ git clone --recurse-submodules https://github.com/daviesjamie/dotfiles ~/.dotfiles
 $ cd ~/.dotfiles
 
 # Install vim configuration
