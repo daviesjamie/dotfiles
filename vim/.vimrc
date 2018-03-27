@@ -121,11 +121,6 @@ if has('autocmd')
     autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 endif
 
-augroup pencil
-    autocmd!
-    autocmd FileType markdown call pencil#init()
-augroup END
-
 " Always make sure cursor starts on first line in git commits
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
