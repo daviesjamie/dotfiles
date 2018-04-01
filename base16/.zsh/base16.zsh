@@ -22,13 +22,3 @@ function _source_base16_theme {
 
 # Load base16 colourscheme
 _source_base16_theme $BASE16_THEME
-
-# `base16`           -> print current theme name
-# `base16 themename` -> set current theme to themename
-function base16() {
-    if [[ -z "$1" ]]; then
-        echo $BASE16_THEME
-    else
-        _source_base16_theme $1
-    fi
-}
