@@ -1,7 +1,7 @@
 export BASE16_SHELL="$HOME/.config/base16-shell"
 export BASE16_THEME_FILE="$HOME/.base16_theme"
 
-function _source_base16_theme {
+function _source_base16_theme() {
     local script="$BASE16_SHELL/scripts/base16-$1.sh"
 
     if [[ -s "$script" ]]; then
