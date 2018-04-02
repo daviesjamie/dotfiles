@@ -214,8 +214,12 @@ augroup END
 " Allow base16 themes to use 256 colourspace
 let base16colorspace=256
 
-set background=dark
-colorscheme base16-tomorrow-night
+if !empty($BASE16_THEME)
+    let theme = "base16-" . $BASE16_THEME
+    exec "colorscheme " . theme
+else
+    colorscheme base16-tomorrow-night
+endif
 
 " }}}
 " STATUS LINE ------------------------------------------------------------- {{{
