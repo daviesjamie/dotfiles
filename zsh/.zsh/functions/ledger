@@ -1,9 +1,0 @@
-# `ldg edit`   -> `$EDITOR $LEDGER_FILE`
-# `ldg <args>` -> `ledger <args>`
-function ldg() {
-    if [[ $1 = 'edit' ]]; then
-        $EDITOR `sed -En 's/^--file[ =](.*)$/\1/p' ~/.ledgerrc | sed "s|~|$HOME|g"`
-    else
-        ledger "$@"
-    fi
-}
