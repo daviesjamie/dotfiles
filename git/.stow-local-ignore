@@ -1,0 +1,9 @@
+# GNU Stow uses a .stow-local-ignore file to override which files it should
+# ignore when generating symlinks.
+#
+# By having this empty file here, it means that the default behaviour of
+# ignoring a .gitignore file will not apply - meaning that the .gitignore
+# in this directory can be installed correctly.
+#
+# For more information, see:
+# http://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
