@@ -15,7 +15,6 @@ alias ll='ls -hl'
 alias lla='ls -Ahl'
 
 # File system tree
-alias .='pwd'
 alias ..='cd ..'
 alias ...='cd ../..'
 
