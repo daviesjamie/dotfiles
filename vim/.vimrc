@@ -17,6 +17,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'daviesjamie/vim-base16-lightline'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
+Plug 'nathangrigg/vim-beancount'
 Plug 'sirver/ultisnips'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -106,6 +107,7 @@ set wildmode=longest:full,full
 
 if has('autocmd')
     " Filetype-specific settings
+    autocmd FileType beancount  setlocal ts=2 sts=2 sw=2
     autocmd FileType css        setlocal ts=2 sts=2 sw=2
     autocmd FileType html       setlocal ts=2 sts=2 sw=2
     autocmd FileType javascript setlocal ts=2 sts=2 sw=2
@@ -315,6 +317,12 @@ endfunction
 function! CtrlPStatusFunc_2(str)
     return lightline#statusline(0)
 endfunction
+
+" }}}
+" PLUGIN OPTIONS ---------------------------------------------------------- {{{
+
+" vim-beancount
+let g:beancount_separator_col=55
 
 " }}}
 
