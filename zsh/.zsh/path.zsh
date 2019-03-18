@@ -3,6 +3,10 @@ typeset -U path
 
 [ -d "$HOME/bin" ] && path=("$HOME/bin" $path)
 
+# go
+[ -d "$GOPATH/bin" ] && path=("$GOPATH/bin" $path)
+[ -d "$GOROOT/bin" ] && path=("$GOROOT/bin" $path)
+
 # rbenv
 [ -d "$HOME/.rbenv/bin" ] && path=("$HOME/.rbenv/bin" $path)
 [ -d "$HOME/.rbenv/plugins/ruby-build/bin" ] && path=("$HOME/.rbenv/plugins/ruby-build/bin" $path)
