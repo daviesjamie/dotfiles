@@ -171,23 +171,21 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" Make Y behave like D, C, etc instead of dd or cc
+nnoremap Y y$
+
 " Toggle folds with double-space
 nmap <leader><leader> za
-
-" Use enter to toggle search highlighting
-nmap <CR> :set hlsearch! hlsearch?<CR>
 
 " Re-select selection after indenting in visual mode
 vmap > >gv
 vmap < <gv
 
-" Insert hashrocket with ctrl+l in insert mode
-imap <C-l> <space>=><space>
+" Make readline-style Ctrl+U work in insert mode
+inoremap <C-U> <C-G>u<C-U>
 
-" Align various characters in visual mode
-vmap <C-l> :Tab /=><cr>
-vmap = :Tab /==\?<cr>
-vmap \| :Tab /\|\|<cr>
+" Make . repeat last change in visual mode
+vnoremap . :norm.<cr>
 
 " }}}
 " HOOKS ------------------------------------------------------------------- {{{
