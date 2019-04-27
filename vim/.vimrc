@@ -25,6 +25,11 @@ Plug 'wellle/targets.vim'
 
 Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
+if executable('ag') || executable('ack')
+    Plug 'mileszs/ack.vim'
+    cnoreabbrev Ag Ack
+endif
+
 " Load local plugins from ~/.vimrc.local.plugins if it exists
 if filereadable(expand("~/.vimrc.local.plugins"))
     source ~/.vimrc.local.plugins
@@ -253,6 +258,15 @@ set statusline+=\ [%l,%c]           " [line number, column number]
 
 " }}}
 " PLUGIN OPTIONS ---------------------------------------------------------- {{{
+
+" Use silver search for ctrlp.vim and ack.vim, if it's installed
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+    let g:ctrlp_user_command = 'ag %s -l -g ""'
+endif
+
+" ctrlp.vim
+let g:ctrlp_max_height = 30
 
 " vim-beancount
 let g:beancount_separator_col=55
