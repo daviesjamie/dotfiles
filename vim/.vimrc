@@ -107,23 +107,21 @@ set wildmode=longest:full,full
 " }}}
 " FILETYPE-SPECIFIC ------------------------------------------------------- {{{
 
-if has('autocmd')
-    " Filetype-specific settings
-    autocmd FileType beancount  setlocal ts=2 sts=2 sw=2
-    autocmd FileType css        setlocal ts=2 sts=2 sw=2
-    autocmd FileType html       setlocal ts=2 sts=2 sw=2
-    autocmd FileType javascript setlocal ts=2 sts=2 sw=2
-    autocmd FileType make       setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType markdown   setlocal linebreak nonumber spell wrap
-    autocmd FileType ruby       setlocal ts=2 sts=2 sw=2
-    autocmd FileType scss       setlocal ts=2 sts=2 sw=2
-    autocmd FileType vim        setlocal foldmethod=marker
-    autocmd FileType yaml       setlocal ts=2 sts=2 sw=2
+" Filetype-specific settings
+autocmd FileType beancount  setlocal ts=2 sts=2 sw=2
+autocmd FileType css        setlocal ts=2 sts=2 sw=2
+autocmd FileType html       setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType make       setlocal ts=8 sts=8 sw=8 noexpandtab
+autocmd FileType markdown   setlocal linebreak nonumber spell wrap
+autocmd FileType ruby       setlocal ts=2 sts=2 sw=2
+autocmd FileType scss       setlocal ts=2 sts=2 sw=2
+autocmd FileType vim        setlocal foldmethod=marker
+autocmd FileType yaml       setlocal ts=2 sts=2 sw=2
 
-    " Override filetype for certain files
-    autocmd BufNewFile,BufRead *.tt set filetype=html
-    autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
-endif
+" Override filetype for certain files
+autocmd BufNewFile,BufRead *.tt set filetype=html
+autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 
 " Always make sure cursor starts on first line in git commits
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
