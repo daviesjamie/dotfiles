@@ -18,7 +18,6 @@
 
 [alias]
     aa    = add --all
-    aanw  = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
     amend = commit --amend
     c     = commit
     co    = checkout
@@ -38,7 +37,7 @@
     #   la = all commits, all reachable refs
     #   r  = recent commits, only current branch
     #   ra = recent commits, all reachable refs
-    l  = log --graph --abbrev-commit --date=relative --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+    l  = log --pretty='format:%C(yellow)%h %C(reset)%s %C(green)%an%C(reset), %C(cyan)%ar%C(red)%d'
     la = !git l --all
     r  = !git l -20
     ra = !git r --all
