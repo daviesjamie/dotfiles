@@ -209,6 +209,10 @@ augroup extrawhitespace
     au InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
 
+" Jump to last position when reopening a file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
 
