@@ -14,9 +14,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'daviesjamie/vim-base16-lightline'
 Plug 'godlygeek/tabular'
-Plug 'itchyny/lightline.vim'
 Plug 'nathangrigg/vim-beancount'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -228,94 +226,24 @@ endif
 " Always show the statusline
 set laststatus=2
 
-" Configure vim-lightline
-let g:lightline = {
-\     'colorscheme': 'base16',
-\     'active' : {
-\         'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-\         'right': [ [ 'lineinfo' ], [ 'filetype' ] ]
-\     },
-\     'inactive' : {
-\         'left':  [ [ 'fugitive', 'filename' ] ],
-\         'right': [ [ 'filetype' ] ]
-\     },
-\     'component_function': {
-\         'mode':      'LLMode',
-\         'readonly':  'LLReadonly',
-\         'modified':  'LLModified',
-\         'fugitive':  'LLFugitive',
-\         'filename':  'LLFilename',
-\         'ctrlpmark': 'CtrlPMark',
-\     },
-\     'separator': { 'left': '', 'right': '' },
-\     'subseparator': { 'left': '', 'right': '' },
-\     'mode_map': {
-\         'n': 'N',
-\         'i': 'I',
-\         'R': 'R',
-\         'v': 'V', 'V': 'V', "\<C-v>": 'V',
-\         'c': 'C',
-\         's': 'S', 'S': 'S', "\<C-s>": 'S',
-\         't': 'T',
-\         '?': ' ',
-\    }
-\ }
-
-function! LLMode()
-    let modewidth = strlen(lightline#mode()) + 2
-    let linenowidth = strlen(line('$')) + 1
-    let linenowidth = linenowidth > 4 ? linenowidth : 4
-    return modewidth >= linenowidth ? lightline#mode()
-         \ : repeat(' ', linenowidth - modewidth) . lightline#mode()
-endfunction
-
-function! LLReadonly()
-    return &ft !~? 'help' && &readonly ? '' : ''
-endfunction
-
-function! LLModified()
-    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LLFugitive()
+function! StatuslineGit()
     if exists('*fugitive#head')
         let head = fugitive#head(8)
-        return strlen(head) ? ' ' . head : ''
+        return strlen(head) ? '[' . head . ']' : ''
     endif
     return ''
 endfunction
 
-function! LLFilename()
-    if expand('%:t') == 'ControlP'
-        return g:lightline.ctrlp_prev . ' ' . g:lightline.subseparator.left . ' '
-             \ . g:lightline.ctrlp_item . ' ' . g:lightline.subseparator.left . ' '
-             \ . g:lightline.ctrlp_next
-    endif
-    return ( LLReadonly() != '' ? LLReadonly() . ' ' : '' )
-         \ . ( expand('%:t') != '' ? expand('%:t') : '[No Name]' )
-         \ . ( LLModified() != '' ? ' ' . LLModified() : '')
-endfunction
-
-function! CtrlPMark()
-    return expand('%:t') =~ 'ControlP' ? g:lightline.ctrlp_marked : ''
-endfunction
-
-let g:ctrlp_status_func = {
-\    'main': 'CtrlPStatusFunc_1',
-\    'prog': 'CtrlPStatusFunc_2',
-\ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-    let g:lightline.ctrlp_prev = a:prev
-    let g:lightline.ctrlp_item = a:item
-    let g:lightline.ctrlp_next = a:next
-    let g:lightline.ctrlp_marked = a:marked
-    return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-    return lightline#statusline(0)
-endfunction
+set statusline=
+set statusline+=%{StatuslineGit()}  " git branch (if in git repo)
+set statusline+=\ %f                " filename
+set statusline+=\ %h                " help buffer flag
+set statusline+=%w                  " preview window flag
+set statusline+=%m                  " modified flag
+set statusline+=%r                  " readonly flag
+set statusline+=%=
+set statusline+=%y                  " type of file in buffer
+set statusline+=\ [%l,%c]           " [line number, column number]
 
 " }}}
 " PLUGIN OPTIONS ---------------------------------------------------------- {{{
