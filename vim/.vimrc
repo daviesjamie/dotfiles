@@ -75,6 +75,11 @@ set wildmenu            " use a menu for command-line completion
 " Backspace over everything in insert mode
 set backspace=indent,eol,start
 
+" Display the 78th column to hint for line length
+if exists('+colorcolumn')
+    set colorcolumn=80
+endif
+
 " Enable filetype detection/plugins
 filetype plugin indent on
 
