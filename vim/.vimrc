@@ -15,7 +15,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'godlygeek/tabular'
-Plug 'nathangrigg/vim-beancount'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -23,6 +22,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
+
+Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
 " Load local plugins from ~/.vimrc.local.plugins if it exists
 if filereadable(expand("~/.vimrc.local.plugins"))
