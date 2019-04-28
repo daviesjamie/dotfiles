@@ -37,7 +37,7 @@
     #   la = all commits, all reachable refs
     #   r  = recent commits, only current branch
     #   ra = recent commits, all reachable refs
-    l  = log --pretty='format:%C(yellow)%h %C(reset)%s %C(green)%an%C(reset), %C(cyan)%ar%C(red)%d'
+    l  = log --pretty='format:%C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an%C(reset), %C(cyan)%ar'
     la = !git l --all
     r  = !git l -20
     ra = !git r --all
