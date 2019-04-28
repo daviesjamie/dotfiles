@@ -133,9 +133,6 @@ autocmd FileType yaml       setlocal ts=2 sts=2 sw=2
 autocmd BufNewFile,BufRead *.tt set filetype=html
 autocmd BufNewFile,BufRead *.ldg,*.ledger set filetype=ledger
 
-" Always make sure cursor starts on first line in git commits
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
-
 " }}}
 " TEMPORARY FILES ---------------------------------------------------------- {{{
 
@@ -221,6 +218,9 @@ augroup END
 " Jump to last position when reopening a file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
+
+" Always make sure cursor starts on first line in git commits
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
