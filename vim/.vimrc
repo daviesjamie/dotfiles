@@ -64,7 +64,6 @@ set number              " use line numbers
 set scrolloff=5         " keep 5 lines visible above/below cursor (if possible)
 set shiftround          " when shifting, always use a multiple of shiftwidth
 set shiftwidth=4        " set size of an 'indent' to 4 spaces
-set shortmess+=F        " don't show message in commandline when opening files
 set shortmess+=I        " don't show intro screen when opening vim
 set showcmd             " display incomplete commands at the bottom
 set showmatch           " show matching brackets
@@ -100,6 +99,11 @@ endif
 
 " Set invisible (list) characters
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+
+" Don't show message in commandline when editing files
+if v:version > 704 || v:version == 704 && has("patch1570")
+    set shortmess+=F
+endif
 
 " Viminfo settings:
 "   !  Save and restore global variables starting with an uppercase letter
