@@ -19,6 +19,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'farmergreg/vim-lastplace'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
@@ -200,13 +201,6 @@ augroup extrawhitespace
     au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
     au InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
-
-" Jump to last position when reopening a file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
-
-" Always make sure cursor starts on first line in git commits
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " }}}
 " COLOUR SCHEME ----------------------------------------------------------- {{{
