@@ -1,6 +1,6 @@
 setlocal foldmethod=syntax
 
-let g:ledger_extra_options = '--pedantic'
+let g:ledger_extra_options = '--explicit --pedantic'
 
 " Number of columns used to display foldtext
 let g:ledger_maxwidth = 80
