@@ -4,8 +4,8 @@ typeset -U path
 [ -d "$HOME/bin" ] && path=("$HOME/bin" $path)
 
 # go
-[ -d "$GOPATH/bin" ] && path=("$GOPATH/bin" $path)
-[ -d "$GOROOT/bin" ] && path=("$GOROOT/bin" $path)
+[ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ] && path=("$GOPATH/bin" $path)
+[ -n "$GOPATH" ] && [ -d "$GOROOT/bin" ] && path=("$GOROOT/bin" $path)
 
 # rbenv
 [ -d "$HOME/.rbenv/bin" ] && path=("$HOME/.rbenv/bin" $path)
