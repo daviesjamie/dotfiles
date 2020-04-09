@@ -168,6 +168,9 @@ nnoremap gk k
 " Make Y behave like D, C, etc instead of dd or cc
 nnoremap Y y$
 
+" Clear search highlighting with <leader><enter>
+map <silent> <leader><cr> :nohlsearch<cr>
+
 " Toggle folds with double-space
 nmap <leader><leader> za
 
