@@ -1,3 +1,13 @@
+# `g` with no arguments -> `git status`
+#     with arguments    -> `git <args>`
+function g() {
+    if [[ $# -gt 0 ]]; then
+        git "$@"
+    else
+        git status
+    fi
+}
+
 # Recursively strip trailing whitespace from all files
 function strip-trailing-whitespace() {
     if [[ `uname` == 'Darwin' ]]; then
@@ -5,4 +15,9 @@ function strip-trailing-whitespace() {
     else
         find . -type f -exec sed --in-place 's/[[:space:]]\+$//' {} \+
     fi
+}
+
+# Create a new directory and cd into it
+function take() {
+    mkdir -p "$@" && cd "$@";
 }

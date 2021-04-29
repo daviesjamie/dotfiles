@@ -1,9 +1,0 @@
-# `g` with no arguments -> `git status`
-#     with arguments    -> `git <args>`
-function g() {
-    if [[ $# -gt 0 ]]; then
-        git "$@"
-    else
-        git status
-    fi
-}
