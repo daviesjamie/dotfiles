@@ -1,3 +1,9 @@
+# Check if a command exists, can be a binary in PATH or a shell
+# alias/function
+function has() {
+    type $1 &> /dev/null
+}
+
 # `g` with no arguments -> `git status`
 #     with arguments    -> `git <args>`
 function g() {
@@ -8,11 +14,25 @@ function g() {
     fi
 }
 
-# Check if a command exists, can be a binary in PATH or a shell
-# alias/function
-function has() {
-    type $1 &> /dev/null
-}
+# Quickly cd into repositories cloned with `ghq`
+if has ghq; then
+    function gcd() {
+        if [[ $# -ne 1 ]]; then
+            echo "Usage: gcd <repo cloned with ghq>"
+            echo "Example: gcd github.com/daviesjamie/dotfiles"
+            return 1
+        fi
+
+        local full_path=$(ghq list -p -e "$1")
+
+        if [ -n "$full_path" ]; then
+            cd $full_path
+        else
+            echo "Unable to find repo matching '$1'"
+            return 1
+        fi
+    }
+fi
 
 # Recursively strip trailing whitespace from all files
 function strip-trailing-whitespace() {
@@ -25,5 +45,5 @@ function strip-trailing-whitespace() {
 
 # Create a new directory and cd into it
 function take() {
-    mkdir -p "$@" && cd "$@";
+    mkdir -p "$1" && cd "$1";
 }

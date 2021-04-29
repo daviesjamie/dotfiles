@@ -8,6 +8,7 @@ export LC_ALL=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
 
 export FZF_DEFAULT_OPTS="--height=25% --min-height=15 --reverse"
+export GHQ_ROOT="$HOME/src"
 
 # }}}
 # PATH -------------------------------------------------------------------- {{{
