@@ -5,7 +5,3 @@ bindkey -e
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
-
-# Use ctrl-o in completion menu to accept current selection and open another
-# menu
-bindkey -M menuselect '^o' accept-and-infer-next-history

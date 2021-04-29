@@ -20,7 +20,6 @@ PROMPT_EXEC_TIME_COLOUR=3
 PROMPT_SYMBOL_COLOUR=7
 PROMPT_SYMBOL_NON_ZERO_COLOUR=1
 
-
 # Turn seconds into human-readable time, and store it in supplied varible name
 _prompt_human_time_to_var() {
     local human=" " total_seconds=$1 var=$2
