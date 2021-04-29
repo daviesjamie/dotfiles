@@ -24,15 +24,15 @@ if echo | grep --color=auto '' > /dev/null 2>&1; then
 fi
 
 # Clipboard
-if command -v pbcopy > /dev/null 2>&1; then
+if has pbcopy; then
     alias pbc='pbcopy'
     alias pbp='pbpaste'
-elif command -v xclip > /dev/null 2>&1; then
+elif has xclip; then
     alias pbc='xclip -selection clipboard'
     alias pbp='xclip -selection clipboard -o'
 fi
 
 # Alias git to hub, if it's installed
-if command -v hub > /dev/null 2>&1; then
+if has hub; then
     eval "$(hub alias -s)"
 fi

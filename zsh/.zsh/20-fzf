@@ -1,5 +1,5 @@
 # Add fzf keybindings and completions, if fzf is installed
-if command -v fzf > /dev/null 2>&1; then
+if has fzf; then
     # Would ideally like to use $(brew --prefix fzf) for this, but it's too slow
     FZF_DIR="/usr/local/opt/fzf"
 
