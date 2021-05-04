@@ -2,6 +2,9 @@
     editor = vim
     excludesfile = ~/.gitignore
 
+[init]
+    defaultBranch = main
+
 [push]
     default = simple
 
