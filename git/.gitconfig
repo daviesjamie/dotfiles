@@ -6,7 +6,7 @@
     defaultBranch = main
 
 [push]
-    default = simple
+    default = current
 
 [pager]
     log = less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines
