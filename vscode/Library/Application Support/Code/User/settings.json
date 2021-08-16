@@ -1,0 +1,49 @@
+{
+  "explorer.confirmDelete": false,
+  "editor.renderWhitespace": "trailing",
+  "editor.dragAndDrop": false,
+  "editor.renderLineHighlightOnlyWhenFocus": true,
+  "editor.cursorSurroundingLines": 5,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "[css]": {
+    "editor.tabSize": 2,
+  },
+  "[html]": {
+    "editor.tabSize": 2,
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+  },
+  "[json]": {
+    "editor.tabSize": 2,
+  },
+  "[jsonc]": {
+    "editor.tabSize": 2,
+  },
+  "[terraform]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "hashicorp.terraform",
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+  },
+  "files.insertFinalNewline": true,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.defaultTimeFormat": "HH:mm",
+  "gitlens.defaultDateFormat": "MMMM Do, YYYY HH:mm",
+  "gitlens.defaultDateShortFormat": null,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.heatmap.locations": [
+    "gutter"
+  ],
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+}
