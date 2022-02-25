@@ -13,10 +13,14 @@
     "editor.tabSize": 2,
   },
   "[javascript]": {
-    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[javascriptreact]": {
-    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[json]": {
     "editor.tabSize": 2,
@@ -29,10 +33,14 @@
     "editor.defaultFormatter": "hashicorp.terraform",
   },
   "[typescript]": {
-    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[typescriptreact]": {
-    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "files.insertFinalNewline": true,
   "gitlens.codeLens.enabled": false,
@@ -45,5 +53,4 @@
     "gutter"
   ],
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }
