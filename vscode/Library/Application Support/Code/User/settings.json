@@ -6,41 +6,20 @@
   "editor.cursorSurroundingLines": 5,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  "[css]": {
+  "[css][html][json][jsonc]": {
     "editor.tabSize": 2,
   },
-  "[html]": {
-    "editor.tabSize": 2,
-  },
-  "[javascript]": {
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.tabSize": 2
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
-  },
-  "[json]": {
-    "editor.tabSize": 2,
-  },
-  "[jsonc]": {
-    "editor.tabSize": 2,
   },
   "[terraform]": {
-    "editor.tabSize": 2,
     "editor.defaultFormatter": "hashicorp.terraform",
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "files.insertFinalNewline": true,
   "gitlens.codeLens.enabled": false,
@@ -53,4 +32,10 @@
     "gutter"
   ],
   "editor.suggestSelection": "first",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
 }
