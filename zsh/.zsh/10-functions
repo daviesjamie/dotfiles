@@ -17,20 +17,16 @@ function g() {
 # Quickly cd into repositories cloned with `ghq`
 if has ghq; then
     function gcd() {
-        if [[ $# -ne 1 ]]; then
-            echo "Usage: gcd <repo cloned with ghq>"
-            echo "Example: gcd github.com/daviesjamie/dotfiles"
-            return 1
-        fi
+        local repo
+        local repo_path
 
-        local full_path=$(ghq list -p -e "$1")
-
-        if [ -n "$full_path" ]; then
-            cd $full_path
+        if [[ $# -gt 0 ]]; then
+            repo=$(ghq list | fzf -1 -q "$*")
         else
-            echo "Unable to find repo matching '$1'"
-            return 1
+            repo=$(ghq list | fzf)
         fi
+
+        [ $? -eq 0 ] && repo_path=$(ghq list -p -e $repo) && cd $repo_path
     }
 fi
 

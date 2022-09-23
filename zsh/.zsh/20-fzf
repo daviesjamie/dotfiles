@@ -5,10 +5,4 @@ if has fzf; then
         [ -f "$fzf_dir/shell/key-bindings.zsh" ] && source "$fzf_dir/shell/key-bindings.zsh"
         [ -f "$fzf_dir/shell/completion.zsh" ] && source "$fzf_dir/shell/completion.zsh"
     done
-
-    _fzf_complete_gcd() {
-        _fzf_complete --prompt "repo> " -- "$@" < <(
-            ghq list
-        )
-    }
 fi
