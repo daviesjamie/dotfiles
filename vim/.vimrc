@@ -26,6 +26,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+Plug 'LnL7/vim-nix'
+
 Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 Plug 'ledger/vim-ledger',         { 'for': 'ledger'    }
 

@@ -18,6 +18,9 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
+  "[nix]": {
+    "editor.tabSize": 2
+  },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.tabSize": 2,
