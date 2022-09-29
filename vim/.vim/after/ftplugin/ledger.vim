@@ -17,9 +17,12 @@ let g:ledger_fold_blanks = 1
 " Open report buffers in a vertical split on the right
 let g:ledger_winpos = 'r'
 
-" Align commodities with <Tab>
+" Align commodities with <Tab> in normal and visual modes
 nnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
 vnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
+
+" Use <Tab> in insert mode to complete account names and align
+inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 
 " Toggle transaction states with [s and ]s for cleared/pending
 nnoremap <silent> <buffer> [s :call ledger#transaction_state_toggle(line('.'), ' *')<CR>
