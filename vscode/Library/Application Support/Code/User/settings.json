@@ -42,5 +42,6 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
+  "workbench.colorTheme": "Default Dark+ Experimental",
   "editor.copyWithSyntaxHighlighting": false,
 }
