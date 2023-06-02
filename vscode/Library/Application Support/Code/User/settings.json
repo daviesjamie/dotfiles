@@ -42,4 +42,5 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
+  "editor.copyWithSyntaxHighlighting": false,
 }
