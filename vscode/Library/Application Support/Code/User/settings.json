@@ -1,16 +1,29 @@
 {
-  "explorer.confirmDelete": false,
-  "editor.renderWhitespace": "trailing",
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.cursorSurroundingLines": 5,
   "editor.dragAndDrop": false,
   "editor.renderLineHighlightOnlyWhenFocus": true,
-  "editor.cursorSurroundingLines": 5,
+  "editor.renderWhitespace": "trailing",
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": false,
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  "[css][html][json][jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
-  },
-  "[javascript][javascriptreact][typescript][typescriptreact]": {
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.defaultDateFormat": "MMMM Do, YYYY HH:mm",
+  "gitlens.defaultDateShortFormat": null,
+  "gitlens.defaultTimeFormat": "HH:mm",
+  "gitlens.heatmap.locations": ["gutter"],
+  "gitlens.hovers.currentLine.over": "line",
+  "workbench.colorTheme": "Default Dark+ Experimental",
+  "[css][html][json][jsonc][javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
@@ -23,25 +36,6 @@
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
-    "editor.tabSize": 2,
-  },
-  "files.insertFinalNewline": true,
-  "gitlens.codeLens.enabled": false,
-  "gitlens.defaultTimeFormat": "HH:mm",
-  "gitlens.defaultDateFormat": "MMMM Do, YYYY HH:mm",
-  "gitlens.defaultDateShortFormat": null,
-  "gitlens.currentLine.enabled": false,
-  "gitlens.hovers.currentLine.over": "line",
-  "gitlens.heatmap.locations": [
-    "gutter"
-  ],
-  "editor.suggestSelection": "first",
-  "files.exclude": {
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
-  },
-  "workbench.colorTheme": "Default Dark+ Experimental",
-  "editor.copyWithSyntaxHighlighting": false,
+    "editor.tabSize": 2
+  }
 }
