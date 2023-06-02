@@ -4,6 +4,7 @@
   "editor.dragAndDrop": false,
   "editor.renderLineHighlightOnlyWhenFocus": true,
   "editor.renderWhitespace": "trailing",
+  "editor.stickyScroll.enabled": true,
   "editor.suggestSelection": "first",
   "explorer.confirmDelete": false,
   "files.exclude": {
