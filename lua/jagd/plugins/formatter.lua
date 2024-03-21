@@ -56,10 +56,9 @@ return {
 
         require("conform").setup(opts)
 
-        local format_on_write = augroup("format_on_write", { clear = true })
-
+        local formatter_group = augroup("formatter", { clear = true })
         autocmd("BufWritePre", {
-            group = format_on_write,
+            group = formatter_group,
             callback = function(args)
                 organizeImports()
                 require("conform").format({
