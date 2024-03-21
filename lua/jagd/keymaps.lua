@@ -6,12 +6,7 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 M.core = function()
-    vim.keymap.set(
-        "n",
-        "<leader>pv",
-        vim.cmd.Ex,
-        { desc = "Project View: Open Netrw" }
-    )
+    vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Project View: Open Netrw" })
 
     -- Make jumping with Ctrl D/U stay centered in screen
     vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -22,19 +17,9 @@ M.core = function()
     vim.keymap.set("n", "N", "Nzzzv")
 
     -- Make yanking/pasting to/from system clipboard a bit easier
-    vim.keymap.set(
-        { "n", "v" },
-        "<leader>y",
-        [["+y]],
-        { desc = "Copy to system clipboard" }
-    )
+    vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 
-    vim.keymap.set(
-        "n",
-        "<leader>Y",
-        [["+Y]],
-        { desc = "Copy rest of line to system clipboard" }
-    )
+    vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy rest of line to system clipboard" })
 
     vim.keymap.set("x", "<leader>p", [["_dP]], {
         desc = "Paste over visual selection without losing register contents",
@@ -223,19 +208,9 @@ M.fugitive = function()
 end
 
 M.telescope = function(telescope_builtin)
-    vim.keymap.set(
-        "n",
-        "<C-p>",
-        telescope_builtin.find_files,
-        { desc = "Fuzzy find files" }
-    )
+    vim.keymap.set("n", "<C-p>", telescope_builtin.find_files, { desc = "Fuzzy find files" })
 
-    vim.keymap.set(
-        "n",
-        "<leader>pf",
-        telescope_builtin.find_files,
-        { desc = "Project Find: fuzzy find files" }
-    )
+    vim.keymap.set("n", "<leader>pf", telescope_builtin.find_files, { desc = "Project Find: fuzzy find files" })
 
     vim.keymap.set(
         "n",

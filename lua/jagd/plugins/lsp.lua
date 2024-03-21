@@ -53,10 +53,7 @@ return {
                                     globals = { "vim", "require" },
                                 },
                                 workspace = {
-                                    library = vim.api.nvim_get_runtime_file(
-                                        "",
-                                        true
-                                    ),
+                                    library = vim.api.nvim_get_runtime_file("", true),
                                 },
                             },
                         },
@@ -70,17 +67,12 @@ return {
                         commands = {
                             OrganizeImports = {
                                 function()
-                                    vim.lsp.buf_request_sync(
-                                        0,
-                                        "workspace/executeCommand",
-                                        {
-                                            command = "_typescript.organizeImports",
-                                            arguments = {
-                                                vim.api.nvim_buf_get_name(0),
-                                            },
+                                    vim.lsp.buf_request_sync(0, "workspace/executeCommand", {
+                                        command = "_typescript.organizeImports",
+                                        arguments = {
+                                            vim.api.nvim_buf_get_name(0),
                                         },
-                                        500
-                                    )
+                                    }, 500)
                                 end,
                                 description = "Organize Imports",
                             },
