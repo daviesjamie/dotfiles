@@ -1,49 +1,209 @@
 vim.g.mapleader = " "
 
-vim.keymap.set(
-    "n",
-    "<leader>pv",
-    vim.cmd.Ex,
-    { desc = "Project View: Open Netrw" }
-)
+local M = {}
 
--- Make jumping with Ctrl D/U stay centered in screen
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
--- Open folds when jumping between seach results
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+M.core = function()
+    vim.keymap.set(
+        "n",
+        "<leader>pv",
+        vim.cmd.Ex,
+        { desc = "Project View: Open Netrw" }
+    )
 
--- Make yanking/pasting to/from system clipboard a bit easier
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>y",
-    [["+y]],
-    { desc = "Copy to system clipboard" }
-)
+    -- Make jumping with Ctrl D/U stay centered in screen
+    vim.keymap.set("n", "<C-d>", "<C-d>zz")
+    vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
-vim.keymap.set(
-    "n",
-    "<leader>Y",
-    [["+Y]],
-    { desc = "Copy rest of line to system clipboard" }
-)
+    -- Open folds when jumping between seach results
+    vim.keymap.set("n", "n", "nzzzv")
+    vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set(
-    "x",
-    "<leader>p",
-    [["_dP]],
-    { desc = "Paste over visual selection without losing register contents" }
-)
+    -- Make yanking/pasting to/from system clipboard a bit easier
+    vim.keymap.set(
+        { "n", "v" },
+        "<leader>y",
+        [["+y]],
+        { desc = "Copy to system clipboard" }
+    )
 
--- Stop accidentally pressing Q
-vim.keymap.set("n", "Q", "<nop>")
+    vim.keymap.set(
+        "n",
+        "<leader>Y",
+        [["+Y]],
+        { desc = "Copy rest of line to system clipboard" }
+    )
 
--- Quickly move visual selection up/down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+    vim.keymap.set("x", "<leader>p", [["_dP]], {
+        desc = "Paste over visual selection without losing register contents",
+    })
 
--- Re-select selection after indenting in visual mode
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
+    -- Stop accidentally pressing Q
+    vim.keymap.set("n", "Q", "<nop>")
+
+    -- Quickly move visual selection up/down
+    vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+    vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+    -- Re-select selection after indenting in visual mode
+    vim.keymap.set("v", ">", ">gv")
+    vim.keymap.set("v", "<", "<gv")
+end
+
+M.lsp = function(buffer)
+    vim.keymap.set("n", "gd", function()
+        vim.lsp.buf.definition()
+    end, {
+        buffer = buffer,
+        desc = "Go to Definition",
+    })
+
+    vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover()
+    end, { buffer = buffer })
+
+    vim.keymap.set("n", "<leader>ls", function()
+        vim.lsp.buf.workspace_symbol()
+    end, {
+        buffer = buffer,
+        desc = "LSP: Search workspace for Symbol",
+    })
+
+    vim.keymap.set("n", "<leader>ld", function()
+        vim.diagnostic.open_float()
+    end, {
+        buffer = buffer,
+        desc = "LSP: view Diagnostic float",
+    })
+
+    vim.keymap.set("n", "<leader>lca", function()
+        vim.lsp.buf.code_action()
+    end, {
+        buffer = buffer,
+        desc = "LSP: select a Code Action",
+    })
+
+    vim.keymap.set("n", "<leader>.", function()
+        vim.lsp.buf.code_action()
+    end, {
+        buffer = buffer,
+        desc = "LSP: select a code action",
+    })
+
+    vim.keymap.set("n", "<leader>lr", function()
+        vim.lsp.buf.references()
+    end, {
+        buffer = buffer,
+        desc = "LSP: find symbol References",
+    })
+
+    vim.keymap.set("n", "<leader>lR", function()
+        vim.lsp.buf.rename()
+    end, {
+        buffer = buffer,
+        desc = "LSP: Rename symbol",
+    })
+
+    vim.keymap.set("i", "<C-h>", function()
+        vim.lsp.buf.signature_help()
+    end, { buffer = buffer })
+
+    vim.keymap.set("n", "[d", function()
+        vim.diagnostic.goto_prev()
+    end, {
+        buffer = buffer,
+        desc = "Go to previous diagnostic",
+    })
+
+    vim.keymap.set("n", "]d", function()
+        vim.diagnostic.goto_next()
+    end, {
+        buffer = buffer,
+        desc = "Go to next diagnostic",
+    })
+end
+
+M.fugitive = function()
+    vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status" })
+
+    local jagd_fugitive_group = augroup("jagd_fugitive", { clear = true })
+    autocmd("BufWinEnter", {
+        group = jagd_fugitive_group,
+        pattern = "*",
+        callback = function()
+            if vim.bo.ft ~= "fugitive" then
+                return
+            end
+
+            local bufnr = vim.api.nvim_get_current_buf()
+
+            vim.keymap.set("n", "<leader>gp", function()
+                vim.cmd.Git("push")
+            end, {
+                buffer = bufnr,
+                remap = false,
+                desc = "Git Push",
+            })
+
+            vim.keymap.set("n", "<leader>gP", function()
+                vim.cmd.Git("push --force-with-lease")
+            end, {
+                buffer = bufnr,
+                remap = false,
+                desc = "Git Push --Force-with-lease",
+            })
+
+            vim.keymap.set("n", "<leader>gu", function()
+                vim.cmd.Git({ "pull", "--rebase" })
+            end, {
+                buffer = bufnr,
+                remap = false,
+                desc = "Git Pull --rebase",
+            })
+        end,
+    })
+end
+
+M.telescope = function(telescope_builtin)
+    vim.keymap.set(
+        "n",
+        "<C-p>",
+        telescope_builtin.find_files,
+        { desc = "Fuzzy find files" }
+    )
+
+    vim.keymap.set(
+        "n",
+        "<leader>pf",
+        telescope_builtin.find_files,
+        { desc = "Project Find: fuzzy find files" }
+    )
+
+    vim.keymap.set(
+        "n",
+        "<leader>ps",
+        telescope_builtin.live_grep,
+        { desc = "Project Search: search project for string" }
+    )
+
+    vim.keymap.set(
+        "n",
+        "<leader>p/",
+        telescope_builtin.live_grep,
+        { desc = "Project Search: search project for string" }
+    )
+
+    vim.keymap.set("n", "<leader>pw", function()
+        local word = vim.fn.expand("<cword>")
+        telescope_builtin.grep_string({ search = word })
+    end, { desc = "Project Word: search project for word" })
+
+    vim.keymap.set("n", "<leader>pW", function()
+        local word = vim.fn.expand("<cWORD>")
+        telescope_builtin.grep_string({ search = word })
+    end, { desc = "Project WORD: search project for WORD" })
+end
+
+return M
