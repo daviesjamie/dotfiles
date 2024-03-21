@@ -119,7 +119,76 @@ return {
         autocmd("LspAttach", {
             group = jagd_lsp_group,
             callback = function(args)
-                require("jagd/keymaps").lsp(args.buf)
+                vim.keymap.set("n", "gd", function()
+                    vim.lsp.buf.definition()
+                end, {
+                    buffer = args.buf,
+                    desc = "Go to Definition",
+                })
+
+                vim.keymap.set("n", "K", function()
+                    vim.lsp.buf.hover()
+                end, { buffer = args.buf })
+
+                vim.keymap.set("n", "<leader>ls", function()
+                    vim.lsp.buf.workspace_symbol()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: Search workspace for Symbol",
+                })
+
+                vim.keymap.set("n", "<leader>ld", function()
+                    vim.diagnostic.open_float()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: view Diagnostic float",
+                })
+
+                vim.keymap.set("n", "<leader>lca", function()
+                    vim.lsp.buf.code_action()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: select a Code Action",
+                })
+
+                vim.keymap.set("n", "<leader>.", function()
+                    vim.lsp.buf.code_action()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: select a code action",
+                })
+
+                vim.keymap.set("n", "<leader>lr", function()
+                    vim.lsp.buf.references()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: find symbol References",
+                })
+
+                vim.keymap.set("n", "<leader>lR", function()
+                    vim.lsp.buf.rename()
+                end, {
+                    buffer = args.buf,
+                    desc = "LSP: Rename symbol",
+                })
+
+                vim.keymap.set("i", "<C-h>", function()
+                    vim.lsp.buf.signature_help()
+                end, { buffer = args.buf })
+
+                vim.keymap.set("n", "[d", function()
+                    vim.diagnostic.goto_prev()
+                end, {
+                    buffer = args.buf,
+                    desc = "Go to previous diagnostic",
+                })
+
+                vim.keymap.set("n", "]d", function()
+                    vim.diagnostic.goto_next()
+                end, {
+                    buffer = args.buf,
+                    desc = "Go to next diagnostic",
+                })
             end,
         })
     end,

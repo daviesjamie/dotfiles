@@ -35,10 +35,6 @@ vim.opt.signcolumn = "yes"
 -- Make keys repeat faster
 vim.opt.updatetime = 50
 
--- Reduce wait for key sequence to complete
-vim.opt.timeout = true
-vim.opt.timeoutlen = 500
-
 -- Draw a hint for manually wrapping lines
 vim.opt.colorcolumn = "80"
 

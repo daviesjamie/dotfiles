@@ -1,4 +1,4 @@
 require("jagd.options")
-require("jagd.keymaps").core()
+require("jagd.keymaps")
 require("jagd.hooks")
 require("jagd.lazy")
