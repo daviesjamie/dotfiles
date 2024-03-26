@@ -37,6 +37,22 @@ return {
                     vim.keymap.set("n", "<leader>gu", function()
                         vim.cmd.Git("pull --rebase")
                     end, { buffer = bufnr, remap = false, desc = "Git Pull --rebase" })
+
+                    vim.keymap.set({ "n", "v" }, "<leader>gb", function()
+                        vim.cmd(":GBrowse<CR>")
+                    end, {
+                        buffer = bufnr,
+                        remap = false,
+                        desc = "Git Browse: Open line/selection in web UI",
+                    })
+
+                    vim.keymap.set({ "n", "v" }, "<leader>gB", function()
+                        vim.cmd(":GBrowse!<CR>")
+                    end, {
+                        buffer = bufnr,
+                        remap = false,
+                        desc = "Git Browse: Copy URL to line/selection in web UI",
+                    })
                 end,
             })
         end,
