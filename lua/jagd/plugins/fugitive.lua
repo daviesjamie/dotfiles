@@ -25,14 +25,17 @@ return {
                     desc = "Git Push",
                 })
 
-                vim.keymap.set(
-                    "n",
-                    "<leader>gP",
-                    function()
-                        vim.cmd.Git({ "pull", "--rebase" })
-                    end,
-                    { buffer = bufnr, remap = false, desc = "Git Pull --rebase" }
-                )
+                vim.keymap.set("n", "<leader>gP", function()
+                    vim.cmd.Git("push --force-with-lease")
+                end, {
+                    buffer = bufnr,
+                    remap = false,
+                    desc = "Git Push --force",
+                })
+
+                vim.keymap.set("n", "<leader>gu", function()
+                    vim.cmd.Git("pull --rebase")
+                end, { buffer = bufnr, remap = false, desc = "Git Pull --rebase" })
             end,
         })
     end,
