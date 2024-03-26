@@ -13,4 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = "jagd.plugins",
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
 })
