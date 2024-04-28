@@ -2,6 +2,9 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Enable mouse in all modes
+vim.opt.mouse = "a"
+
 -- Use 4-space tabs
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -10,6 +13,7 @@ vim.opt.expandtab = true
 
 -- Automatically indent new lines
 vim.opt.autoindent = true
+vim.opt.breakindent = true
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 
@@ -22,18 +26,28 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- Show some whitespace characters
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
 -- Don't highlight search matches, but do show matches whilst typing
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+-- Preview substitutions live
+vim.opt.inccommand = "split"
+
 -- Keep lines visible above/below cursor
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 
 -- Always leave a gap for signs in number gutter
 vim.opt.signcolumn = "yes"
 
 -- Make keys repeat faster
 vim.opt.updatetime = 50
+
+-- Decrease wait time between keys in mapped sequences
+vim.opt.timeoutlen = 300
 
 -- Draw a hint for manually wrapping lines
 vim.opt.colorcolumn = "80"
@@ -44,6 +58,9 @@ vim.opt.cursorline = true
 -- Search ignoring case unless search contains uppercase characters
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- Highlight search results (cleared with <Esc> in normal mode)
+vim.opt.hlsearch = true
 
 -- Prefer splitting windows to the right and the bottom
 vim.opt.splitright = true

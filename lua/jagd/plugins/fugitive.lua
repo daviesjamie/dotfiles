@@ -5,7 +5,7 @@ return {
     {
         "tpope/vim-fugitive",
         config = function()
-            vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git Status" })
+            vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
 
             local jagd_fugitive_group = augroup("jagd_fugitive", { clear = true })
             autocmd("BufWinEnter", {
@@ -23,7 +23,7 @@ return {
                     end, {
                         buffer = bufnr,
                         remap = false,
-                        desc = "Git Push",
+                        desc = "[G]it [P]ush",
                     })
 
                     vim.keymap.set("n", "<leader>gP", function()
@@ -31,27 +31,27 @@ return {
                     end, {
                         buffer = bufnr,
                         remap = false,
-                        desc = "Git Push --force",
+                        desc = "[G]it [P]ush --force",
                     })
 
                     vim.keymap.set("n", "<leader>gu", function()
                         vim.cmd.Git("pull --rebase")
-                    end, { buffer = bufnr, remap = false, desc = "Git Pull --rebase" })
+                    end, { buffer = bufnr, remap = false, desc = "Git P[u]ll --rebase" })
 
-                    vim.keymap.set({ "n", "v" }, "<leader>gb", function()
+                    vim.keymap.set({ "n", "x" }, "<leader>gw", function()
                         vim.cmd(":GBrowse<CR>")
                     end, {
                         buffer = bufnr,
                         remap = false,
-                        desc = "Git Browse: Open line/selection in web UI",
+                        desc = "Open line/selection in [G]it [W]eb UI",
                     })
 
-                    vim.keymap.set({ "n", "v" }, "<leader>gB", function()
+                    vim.keymap.set({ "n", "x" }, "<leader>gW", function()
                         vim.cmd(":GBrowse!<CR>")
                     end, {
                         buffer = bufnr,
                         remap = false,
-                        desc = "Git Browse: Copy URL to line/selection in web UI",
+                        desc = "Copy URL to line/selection in [G]it [W]eb UI",
                     })
                 end,
             })

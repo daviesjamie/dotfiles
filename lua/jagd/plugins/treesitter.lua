@@ -2,29 +2,33 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash",
-                    "javascript",
-                    "jsdoc",
-                    "lua",
-                    "typescript",
-                    "vimdoc",
-                },
+        opts = {
+            ensure_installed = {
+                "bash",
+                "html",
+                "javascript",
+                "jsdoc",
+                "lua",
+                "luadoc",
+                "markdown",
+                "typescript",
+                "vim",
+                "vimdoc",
+            },
 
-                sync_install = false,
-                auto_install = true,
+            auto_install = true,
+            sync_install = false,
 
-                indent = {
-                    enable = true,
-                },
-
-                highlight = {
-                    enable = true,
-                },
-            })
+            highlight = { enable = true },
+            indent = { enable = true },
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.install").prefer_git = true
+            require("nvim-treesitter.configs").setup(opts)
         end,
     },
-    { "nvim-treesitter/nvim-treesitter-context" },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = { max_lines = 5 },
+    },
 }

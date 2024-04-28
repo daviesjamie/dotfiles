@@ -9,6 +9,7 @@ end
 
 return {
     "stevearc/conform.nvim",
+    lazy = false,
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     keys = {
@@ -18,7 +19,7 @@ return {
                 organizeImports()
                 require("conform").format({ async = true, lsp_fallback = true })
             end,
-            desc = "Format buffer/selection",
+            desc = "[F]ormat buffer/selection",
             mode = { "n", "x" },
         },
     },
