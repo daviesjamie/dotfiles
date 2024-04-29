@@ -88,7 +88,24 @@ return {
         capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
         local servers = {
-            tsserver = {},
+            tsserver = {
+                commands = {
+                    OrganizeImports = {
+                        function()
+                            vim.lsp.buf_request_sync(
+                                0,
+                                "workspace/executeCommand",
+                                {
+                                    command = "_typescript.organizeImports",
+                                    arguments = { vim.api.nvim_buf_get_name(0) },
+                                },
+                                500
+                            )
+                        end,
+                        description = "Organize Imports",
+                    },
+                },
+            },
             lua_ls = {
                 settings = {
                     Lua = {
