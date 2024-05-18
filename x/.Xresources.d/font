@@ -1,7 +1,0 @@
-! Set some basic font configuration
-! See https://wiki.archlinux.org/index.php/Font_configuration#Fontconfig_configuration
-Xft.autohint: 0
-Xft.antialias: 1
-Xft.hinting: true
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
