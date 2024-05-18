@@ -1,8 +1,0 @@
-# Add fzf keybindings and completions, if fzf is installed
-if has fzf; then
-    # Would ideally like to use $(brew --prefix fzf) for this, but it's too slow
-    for fzf_dir in "/usr/local/opt/fzf" "/opt/homebrew/opt/fzf"; do
-        [ -f "$fzf_dir/shell/key-bindings.zsh" ] && source "$fzf_dir/shell/key-bindings.zsh"
-        [ -f "$fzf_dir/shell/completion.zsh" ] && source "$fzf_dir/shell/completion.zsh"
-    done
-fi

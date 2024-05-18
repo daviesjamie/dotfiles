@@ -1,0 +1,19 @@
+# Load custom completions
+fpath=("$HOME/.zsh/completions" $fpath)
+
+autoload -U compinit && compinit
+
+unsetopt MENU_COMPLETE   # don't autoselect the first completion entry
+setopt ALWAYS_TO_END     # always move cursor to end of work after completion
+setopt AUTO_MENU         # show completion menu on successive tab press
+setopt COMPLETE_IN_WORD  # allow completing the middle of words
+
+# Enable menu selections
+zstyle ':completion:*:*:*:*:*' menu select
+
+# Try completing, in order:
+# - case-insensitive matches
+# - partial-word matches
+# - substring matches
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+

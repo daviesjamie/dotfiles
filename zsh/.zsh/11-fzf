@@ -1,0 +1,4 @@
+# Add fzf keybindings and completions, if fzf is installed
+if has fzf; then
+    eval "$(fzf --zsh)"
+fi

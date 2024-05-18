@@ -7,8 +7,8 @@ HISTSIZE=10000
 # Keep 10,000 lines of history in HISTFILE
 SAVEHIST=10000
 
-# Append to the history file, rather than replace it
-setopt APPEND_HISTORY
+# Write lines to $HISTFILE once they've finished executing
+setopt INC_APPEND_HISTORY_TIME
 
 # Save start/end timestamps for each command in history
 setopt EXTENDED_HISTORY
@@ -32,3 +32,6 @@ setopt INC_APPEND_HISTORY
 
 # Share command-line history between open sessions
 setopt SHARE_HISTORY
+
+# Lock using `fcntl` when writing to $HISTFILE
+setopt HIST_FCNTL_LOCK

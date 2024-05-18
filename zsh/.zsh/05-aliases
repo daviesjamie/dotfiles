@@ -1,6 +1,5 @@
 # Detect which colour flag to use for ls
-# Unix = `--color`
-# BSD/OSX = `-G`
+# Unix = `--color`, BSD/OSX = `-G`
 if ls --color > /dev/null 2>&1; then
     colorflag='--color'
 else
@@ -13,10 +12,6 @@ alias l='ls'
 alias la='ls -A'
 alias ll='ls -hl'
 alias lla='ls -Ahl'
-
-# File system tree
-alias ..='cd ..'
-alias ...='cd ../..'
 
 # Grep with colour
 if echo | grep --color=auto '' > /dev/null 2>&1; then
@@ -35,4 +30,9 @@ fi
 # Alias git to hub, if it's installed
 if has hub; then
     eval "$(hub alias -s)"
+fi
+
+# Alias vim to nvim, if it's installed
+if has nvim; then
+    alias vim=nvim
 fi

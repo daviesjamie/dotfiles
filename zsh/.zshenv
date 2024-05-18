@@ -1,14 +1,21 @@
 # ENVIRONMENT ------------------------------------------------------------- {{{
 
-export EDITOR=vim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
 
-export FZF_DEFAULT_OPTS="--height=25% --min-height=15 --reverse"
 export GHQ_ROOT="$HOME/src"
+
+# Homebrew
+# Generated with `brew shellenv`
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 # }}}
 # PATH -------------------------------------------------------------------- {{{
@@ -21,15 +28,24 @@ _add_to_path() {
 
 # Homebrew
 _add_to_path "/opt/homebrew/bin"
-_add_to_path "/usr/local/bin"
-
-# Go
-[[ -n "$GOPATH" ]] && _add_to_path "$GOPATH/bin"
-[[ -n "$GOROOT" ]] && _add_to_path "$GOROOT/bin"
 
 # Make sure things in ~ take precedence
 _add_to_path "$HOME/bin"
 
 export PATH
+
+# }}}
+# FPATH -------------------------------------------------------------------- {{{
+
+typeset -U fpath
+
+ZSH_PROFILES=(
+  "/usr/share"
+  "/opt/homebrew/share/zsh"
+)
+
+for profile in ${ZSH_PROFILES}; do
+  fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
+done
 
 # }}}

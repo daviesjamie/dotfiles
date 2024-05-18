@@ -1,0 +1,11 @@
+if has direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
+if has fnm; then
+    eval "$(fnm env --use-on-cd)"
+fi
+
+if has tinty; then
+    tinty init
+fi
