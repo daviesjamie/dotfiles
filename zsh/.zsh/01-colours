@@ -1,6 +1,3 @@
-########################################################################
-# LS COLOURS
-
 # Attributes	   ;    Text	           ;     Background
 # 00 none	            30 black                 40  black
 # 01 bold               31 red                   41  red
@@ -43,11 +40,3 @@ LS_COLORS="${LS_COLORS}:or=00;91"
 LS_COLORS="${LS_COLORS}:ex=00;92"
 
 export LS_COLORS
-
-########################################################################
-# BASE16
-
-BASE16_THEME_DEFAULT="tomorrow-night"
-[ -n "$PS1"] && \
-  [ -s "$HOME/.base16-shell/profile_helper.sh" ] && \
-    source "$HOME/.base16-shell/profile_helper.sh"

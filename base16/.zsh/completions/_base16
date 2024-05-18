@@ -1,7 +1,0 @@
-#compdef base16
-
-_base16_available_themes() {
-    print $(find $BASE16_SHELL/scripts/ -maxdepth 1 -type f | xargs basename | sed 's/base16-//g' | sed 's/\.sh$//g' )
-}
-
-_values 'themes' $(_base16_available_themes)

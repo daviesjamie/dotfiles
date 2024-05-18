@@ -1,0 +1,2 @@
+shell = "zsh -c '{}'"
+default-scheme = "base16-tomorrow-night"

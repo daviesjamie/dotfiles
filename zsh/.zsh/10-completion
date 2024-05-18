@@ -16,4 +16,3 @@ zstyle ':completion:*:*:*:*:*' menu select
 # - partial-word matches
 # - substring matches
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
