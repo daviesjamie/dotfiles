@@ -1,0 +1,43 @@
+format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$character"
+
+[character]
+error_symbol = "[❯](red)"
+success_symbol = "❯"
+
+[cmd_duration]
+format = " [$duration]($style)"
+min_time = 5000
+style = "yellow"
+
+[directory]
+format = " [$path]($style)[$read_only]($read_only_style) "
+style = "cyan"
+truncate_to_repo = false
+truncation_length = 8
+truncation_symbol = "…/"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "bright-black"
+
+[git_state]
+format = "([$state( $progress_current/$progress_total)]($style))"
+style = "bright-black"
+
+[git_status]
+conflicted = "!"
+format = "([$modified$staged$untracked$conflicted]($style))"
+modified = "*"
+staged = "+"
+style = "bright-black"
+untracked = "?"
+
+[hostname]
+format = "[@$hostname]($style)"
+ssh_symbol = ""
+style = "purple"
+
+[username]
+format = "[user]($style)"
+style_root = "red"
+style_user = "blue"
