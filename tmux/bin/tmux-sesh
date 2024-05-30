@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+if ! type tmux &> /dev/null || ! type ghq &> /dev/null; then
+    echo "`ghq` and `tmux` are required" >&2
+    exit 1
+fi
+
+if [[ -d "$*" ]]; then
+    repo_path="$*"
+else
+    if [[ $# -gt 0 ]]; then
+        repo_href=$(ghq list | fzf -1 -q "$*")
+    else
+        repo_href=$(ghq list | fzf)
+    fi
+
+    if [[ -z $repo_href ]]; then
+        echo "Couldn't find repo $repo_href" >&2
+        exit 1
+    fi
+
+    repo_path=$(ghq list -p -e $repo_href)
+fi
+
+repo_name=$(basename $repo_path)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $tmux_running ]]; then
+    # If tmux isn't running, then start tmux with a new session for the repo
+    tmux new-session -s $repo_name -c $repo_path
+    exit 0
+fi
+
+if ! tmux has-session -t=$repo_name 2> /dev/null; then
+    # If tmux doesn't already have a session for the repo, then create it
+    tmux new-session -d -s $repo_name -c $repo_path
+fi
+
+# Attach or switch to the session
+ if [[ -z $TMUX ]]; then
+     tmux attach -t $repo_name
+ else
+     tmux switch-client -t $repo_name
+ fi
