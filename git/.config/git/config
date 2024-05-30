@@ -18,7 +18,6 @@
 
 [commit]
     gpgsign = true
-    template = ~/.gitmessage
 
 [core]
     editor = "nvim"
@@ -38,6 +37,4 @@
     signingkey = ~/.ssh/id_ed25519
 
 [include]
-    path = ~/.gitconfig-delta
-[include]
-    path = ~/.gitconfig.local
+    path = ~/.config/git/delta
