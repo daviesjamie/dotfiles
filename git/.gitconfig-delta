@@ -1,0 +1,23 @@
+[core]
+    pager = "delta"
+
+[delta]
+    dark = true
+    features = "jagd-theme"
+    line-numbers = true
+    navigate = true
+    side-by-side = false
+
+[delta "jagd-theme"]
+    hunk-header-decoration-style = "blue"
+    hunk-header-style = "file line-number"
+    line-numbers-minus-style = "red"
+    line-numbers-plus-style = "green"
+    minus-emph-style = "reverse red"
+    minus-style = "red"
+    plus-emph-style = "reverse green"
+    plus-style = "green"
+    zero-style = "normal"
+
+[interactive]
+    diffFilter = "delta --color-only"

@@ -18,6 +18,7 @@ $BREW install direnv
 $BREW install fzf
 $BREW install ghq
 $BREW install git
+$BREW install git-delta
 $BREW install jq
 $BREW install neovim
 $BREW install reattach-to-user-namespace

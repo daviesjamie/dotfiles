@@ -1,58 +1,43 @@
-[core]
-    editor = vim
-    excludesfile = ~/.gitignore
+[alias]
+    aa = "add --all"
+    amend = "commit --amend"
+    c = "commit"
+    co = "checkout"
+    dc = "diff --cached"
+    di = "diff"
+    ds = "diff --stat"
+    l = "log --pretty='format:%C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an%C(reset), %C(cyan)%ar'"
+    la = "!git l --all"
+    r = "!git l -25"
+    ra = "!git r --all"
+    st = "status"
+    uns = "restore --staged"
+
+[branch]
+    sort = -committerdate
 
 [commit]
-	template = ~/.gitmessage
+    gpgsign = true
+    template = ~/.gitmessage
+
+[core]
+    editor = "nvim"
+
+[fetch]
+    prune = true
+
+[gpg]
+    format = "ssh"
 
 [init]
-    defaultBranch = main
+    defaultBranch = "main"
 
-[push]
-    default = current
+[user]
+    email = "jamie@jagd.me"
+    name = "Jamie Davies"
+    signingkey = ~/.ssh/id_ed25519
 
-[pager]
-    log = less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines
-
-[color]
-    branch = auto
-    diff = auto
-    grep = auto
-    interactive = auto
-    status = auto
-    ui = auto
-
-[alias]
-    aa    = add --all
-    amend = commit --amend
-    c     = commit
-    co    = checkout
-    di    = diff
-    dc    = diff --cached
-    ds    = diff --stat
-    st    = status
-    uns   = reset HEAD
-
-    branches   = branch -a
-    committers = shortlog -sn
-    remotes    = remote -v
-    tags       = tag -l
-
-    # Pretty one-line logs:
-    #   l  = all commits, only current branch
-    #   la = all commits, all reachable refs
-    #   r  = recent commits, only current branch
-    #   ra = recent commits, all reachable refs
-    l  = log --pretty='format:%C(yellow)%h%C(red)%d %C(reset)%s %C(green)%an%C(reset), %C(cyan)%ar'
-    la = !git l --all
-    r  = !git l -20
-    ra = !git r --all
-
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
-
+[include]
+    path = ~/.gitconfig-delta
 [include]
     path = ~/.gitconfig.local
