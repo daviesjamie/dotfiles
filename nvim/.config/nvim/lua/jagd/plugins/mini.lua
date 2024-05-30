@@ -25,8 +25,5 @@ return {
             window     = { suffix = "" },
             yank       = { suffix = "" },
         })
-
-        -- Add/delete/replace text surroundings
-        require("mini.surround").setup()
     end,
 }
