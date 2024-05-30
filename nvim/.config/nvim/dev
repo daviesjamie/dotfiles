@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -ex
-
-rm -rf ~/.config/nvim
-ln -s $(pwd) ~/.config/nvim
