@@ -3,7 +3,8 @@ if has direnv; then
 fi
 
 if has fnm; then
-    eval "$(fnm env --use-on-cd)"
+    eval "$(fnm env --shell zsh --use-on-cd)"
+    eval "$(fnm completions --shell zsh)"
 fi
 
 if has tinty; then

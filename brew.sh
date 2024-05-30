@@ -29,8 +29,12 @@ $BREW install tree
 $BREW install wget
 $BREW install zsh
 
+# base16 colours
 $BREW tap tinted-theming/tinted
 $BREW install tinty
+
+# node/npm
+$BREW install fnm
 
 $BREW install --cask 1password
 $BREW install --cask iterm2
