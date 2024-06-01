@@ -1,48 +1,50 @@
 #!/usr/bin/env bash
 set -e
 
-BREW=/opt/homebrew/bin/brew
-
-if ! command -v $BREW &> /dev/null
-then
+if ! command -v brew &> /dev/null; then
     echo "Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	if ! command -v brew &> /dev/null; then
+		echo "Failed to install homebrew" >&2
+		exit 1
+	fi
 fi
 
-$BREW analytics off
+brew analytics off
 
-$BREW update
-$BREW upgrade
+brew update
+brew upgrade
 
-$BREW install direnv
-$BREW install fzf
-$BREW install ghq
-$BREW install git
-$BREW install git-delta
-$BREW install jq
-$BREW install neovim
-$BREW install reattach-to-user-namespace
-$BREW install ripgrep
-$BREW install starship
-$BREW install stow
-$BREW install tmux
-$BREW install tree
-$BREW install wget
-$BREW install zsh
+brew install direnv
+brew install fzf
+brew install ghq
+brew install git
+brew install git-delta
+brew install jq
+brew install neovim
+brew install reattach-to-user-namespace
+brew install ripgrep
+brew install starship
+brew install stow
+brew install tmux
+brew install tree
+brew install wget
+brew install zsh
 
 # base16 colours
-$BREW tap tinted-theming/tinted
-$BREW install tinty
+brew tap tinted-theming/tinted
+brew install tinty
 
 # node/npm
-$BREW install fnm
+brew install fnm
 
-$BREW install --cask 1password
-$BREW install --cask iterm2
-$BREW install --cask monodraw
-$BREW install --cask raycast
-$BREW install --cask slack
-$BREW install --cask sonos
-$BREW install --cask spotify
-$BREW install --cask tableplus
-$BREW install --cask visual-studio-code
+brew install --cask 1password
+brew install --cask iterm2
+brew install --cask monodraw
+brew install --cask raycast
+brew install --cask slack
+brew install --cask sonos
+brew install --cask spotify
+brew install --cask tableplus
+brew install --cask visual-studio-code
