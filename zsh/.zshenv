@@ -49,3 +49,8 @@ for profile in ${ZSH_PROFILES}; do
 done
 
 # }}}
+# RUST --------------------------------------------------------------------- {{{
+
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# }}}
