@@ -48,3 +48,7 @@ brew install --cask sonos
 brew install --cask spotify
 brew install --cask tableplus
 brew install --cask visual-studio-code
+
+# App Store
+brew install mas
+mas install 904280696  # Things 3
