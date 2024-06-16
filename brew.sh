@@ -5,10 +5,10 @@ if ! command -v brew &> /dev/null; then
     echo "Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	if ! command -v brew &> /dev/null; then
-		echo "Failed to install homebrew" >&2
-		exit 1
-	fi
+    if ! command -v brew &> /dev/null; then
+        echo "Failed to install homebrew" >&2
+        exit 1
+    fi
 fi
 
 brew analytics off
@@ -33,8 +33,7 @@ brew install wget
 brew install zsh
 
 # base16 colours
-brew tap tinted-theming/tinted
-brew install tinty
+brew install tinted-theming/tinted/tinty
 
 # node/npm
 brew install fnm
@@ -48,6 +47,9 @@ brew install --cask sonos
 brew install --cask spotify
 brew install --cask tableplus
 brew install --cask visual-studio-code
+
+# Aerospace window manager
+brew install --cask nikitabobko/tap/aerospace
 
 # App Store
 brew install mas
