@@ -31,6 +31,12 @@
 [init]
     defaultBranch = "main"
 
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+    default = current
 [user]
     email = "jamie@jagd.me"
     name = "Jamie Davies"
