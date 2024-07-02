@@ -31,6 +31,9 @@ _add_to_path() {
 # Homebrew
 _add_to_path "/opt/homebrew/bin"
 
+# pipx
+_add_to_path "$HOME/.local/bin"
+
 # Make sure things in ~ take precedence
 _add_to_path "$HOME/bin"
 
