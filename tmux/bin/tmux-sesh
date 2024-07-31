@@ -22,7 +22,7 @@ else
     repo_path=$(ghq list -p -e $repo_href)
 fi
 
-repo_name=$(basename $repo_path)
+repo_name=$(basename $repo_path | sed 's/\.git$//' | sed 's/^\.//' | tr '.' '_')
 tmux_running=$(pgrep tmux)
 
 if [[ -z $tmux_running ]]; then
