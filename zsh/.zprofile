@@ -20,9 +20,11 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 # }}}
 # PATH -------------------------------------------------------------------- {{{
 
+typeset -U path
+
 _add_to_path() {
     if [[ -d "$1" ]] && [[ ! $PATH =~ "$1" ]]; then
-        PATH="$1:$PATH"
+        path=("$1" $path)
     fi
 }
 
