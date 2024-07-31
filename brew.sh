@@ -17,6 +17,7 @@ brew update
 brew upgrade
 
 brew install direnv
+brew install fd
 brew install fzf
 brew install ghq
 brew install git
