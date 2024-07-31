@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+EXTRA_FOLDERS=(
+    "$HOME/notes"
+    "$HOME/.dotfiles"
+)
+
 if ! type tmux &> /dev/null || ! type ghq &> /dev/null; then
     echo "`ghq` and `tmux` are required" >&2
     exit 1
@@ -8,10 +13,18 @@ fi
 if [[ -d "$*" ]]; then
     repo_path="$*"
 else
+    for folder in "${EXTRA_FOLDERS[@]}"; do
+        if [[ -d $folder ]]; then
+            repos+="$folder\n"
+        fi
+    done
+
+    repos+=$(ghq list)
+
     if [[ $# -gt 0 ]]; then
-        repo_href=$(ghq list | fzf -1 -q "$*")
+        repo_href=$(printf "$repos" | fzf -1 -q "$*")
     else
-        repo_href=$(ghq list | fzf)
+        repo_href=$(printf "$repos" | fzf)
     fi
 
     if [[ -z $repo_href ]]; then
@@ -19,7 +32,13 @@ else
         exit 1
     fi
 
-    repo_path=$(ghq list -p -e $repo_href)
+    if [[ $repo_href == /* ]]; then
+        # If the href starts with a slash, assume it's an absolute path
+        # (i.e. from the EXTRA_FOLDERS)
+        repo_path=$repo_href
+    else
+        repo_path=$(ghq list -p -e $repo_href)
+    fi
 fi
 
 repo_name=$(basename $repo_path | sed 's/\.git$//' | sed 's/^\.//' | tr '.' '_')
