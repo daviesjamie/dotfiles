@@ -50,6 +50,8 @@ brew install --cask spotify
 brew install --cask tableplus
 brew install --cask visual-studio-code
 
+brew install --cask nikitabobko/tap/aerospace
+
 # App Store
 brew install mas
 mas install 904280696  # Things 3
