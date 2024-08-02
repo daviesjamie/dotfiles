@@ -1,0 +1,7 @@
+[window]
+decorations = "buttonless"
+padding = { x = 4, y = 5 }
+
+[font]
+normal = { family = "MonoLisa" }
+size = 13
