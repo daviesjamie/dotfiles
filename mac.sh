@@ -43,6 +43,10 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
+# Enable font smoothing in Alacritty
+# See https://github.com/alacritty/alacritty/issues/4033
+defaults write org.alacritty AppleFontSmoothing -int 0
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
