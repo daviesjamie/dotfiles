@@ -41,6 +41,7 @@ brew install tinty
 brew install fnm
 
 brew install --cask 1password
+brew install --cask arc
 brew install --cask iterm2
 brew install --cask monodraw
 brew install --cask raycast
