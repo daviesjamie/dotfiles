@@ -133,9 +133,9 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- mini.animate will also be disabled.
 vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
-vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
 vim.opt.foldmethod = "expr"
-vim.opt.foldtext = ""
+vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+vim.o.foldenable = false
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
