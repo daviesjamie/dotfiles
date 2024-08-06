@@ -1,33 +1,70 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local map = function(mode, keys, func, desc)
+    map(mode, keys, func, { desc = desc })
+end
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+map("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", "Escape and clear hlsearch")
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "[P]roject [V]iew: Open Netrw" })
+map("n", "<leader>pv", vim.cmd.Ex, "[P]roject [V]iew: Open Netrw")
 
 -- Make jumping with Ctrl D/U stay centered in screen
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
--- Open folds when jumping between seach results
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- Open folds when jumping between search results
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- Make yanking/pasting to/from system clipboard a bit easier
-vim.keymap.set({ "n", "x" }, "<leader>y", [["+y]], { desc = "[Y]ank to system clipboard" })
-
-vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank rest of line to system clipboard" })
-
-vim.keymap.set({ "n", "x" }, "<leader>d", [["_d]], { desc = "[D]elete without losing register contents" })
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "[P]aste over visual selection without losing register contents" })
+map({ "n", "x" }, "<leader>y", [["+y]], "[Y]ank to system clipboard")
+map("n", "<leader>Y", [["+Y]], "[Y]ank rest of line to system clipboard")
+map({ "n", "x" }, "<leader>d", [["_d]], "[D]elete without losing register contents")
+map("x", "<leader>p", [["_dP]], "[P]aste over visual selection without losing register contents")
 
 -- Stop accidentally pressing Q
-vim.keymap.set("n", "Q", "<nop>")
+map("n", "Q", "<nop>")
 
--- Quickly move visual selection up/down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Quickly move lines up/down with Alt + j/k
+map("n", "<A-j>", "<cmd>m .+1<cr>==", "Move line down")
+map("n", "<A-k>", "<cmd>m .-2<cr>==", "Move line up")
+map("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
+map("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
 
 -- Re-select selection after indenting in visual mode
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
+map("v", ">", ">gv")
+map("v", "<", "<gv")
+
+-- Buffer navigation
+map("n", "[b", vim.cmd.bprevious, "Previous [B]uffer")
+map("n", "]b", vim.cmd.bnext, "Next [B]uffer")
+map("n", "<leader>bd", "<cmd>%bd|e#|bd#", "[D]elete all [B]uffers except this one")
+
+-- Quickfix navigation
+map("<leader>xq", vim.cmd.cwindow, "Toggle [Q]uickfix window")
+map("n", "[Q", vim.cmd.cfirst, "First [Q]uickfix entry")
+map("n", "[q", vim.cmd.cprevious, "Previous [Q]uickfix entry")
+map("n", "]q", vim.cmd.cnext, "Next [Q]uickfix entry")
+map("n", "[Q", vim.cmd.clast, "Last [Q]uickfix entry")
+
+-- Location list navigation
+map("<leader>xl", vim.cmd.lwindow, "Toggle [L]ocation list window")
+map("n", "[L", vim.cmd.lfirst, "First [L]ocation list entry")
+map("n", "[l", vim.cmd.lprevious, "Previous [L]ocation list entry")
+map("n", "]l", vim.cmd.lnext, "Next [L]ocation list entry")
+map("n", "[l", vim.cmd.llast, "Last [L]ocation list entry")
+
+local diagnostic_goto = function(next, severity)
+    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    severity = severity and vim.diagnostic.severity[severity] or nil
+    return function()
+        go({ severity = severity })
+    end
+end
+
+-- Diagnostic navigation
+map("n", "<leader>cd", vim.diagnostic.open_float, "[C]ode [D]iagnostic")
+map("n", "[d", diagnostic_goto(true), "Next [D]iagnostic")
+map("n", "]d", diagnostic_goto(false), "Previous [D]iagnostic")
+map("n", "[e", diagnostic_goto(true, "ERROR"), "Next [E]rror")
+map("n", "]e", diagnostic_goto(false, "ERROR"), "Previous [E]rror")
+map("n", "[w", diagnostic_goto(true, "WARN"), "Next [W]arning")
+map("n", "]w", diagnostic_goto(false, "WARN"), "Previous [W]arning")

@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Show relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -10,6 +13,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.shiftround = true
 
 -- Automatically indent new lines
 vim.opt.autoindent = true
@@ -35,10 +39,16 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 -- Preview substitutions live
-vim.opt.inccommand = "split"
+vim.opt.inccommand = "nosplit"
+
+-- Make scrolling work with screen lines
+vim.opt.smoothscroll = true
 
 -- Keep lines visible above/below cursor
 vim.opt.scrolloff = 10
+
+-- Keep columns visible before/after cursor
+vim.opt.sidescrolloff = 8
 
 -- Always leave a gap for signs in number gutter
 vim.opt.signcolumn = "yes"
@@ -48,9 +58,6 @@ vim.opt.updatetime = 50
 
 -- Decrease wait time between keys in mapped sequences
 vim.opt.timeoutlen = 300
-
--- Draw a hint for manually wrapping lines
-vim.opt.colorcolumn = "80"
 
 -- Highlight the line the cursor is on
 vim.opt.cursorline = true
@@ -66,6 +73,9 @@ vim.opt.hlsearch = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Use British spellings
+vim.opt.spelllang = { "en_gb" }
+
 vim.opt.formatoptions = vim.opt.formatoptions
     - "a" -- Don't automatically format
     - "t" -- Don't auto-wrap text
@@ -76,6 +86,19 @@ vim.opt.formatoptions = vim.opt.formatoptions
     - "n" -- Recognise numbered lists when formatting
     + "j" -- Remove comment leaders when joining lines
     - "2" -- Don't allow paragraphs to have a different indent on first line
+
+-- Wrap lines at nice breaking points
+vim.opt.linebreak = true
+
+-- Hide * markup for bold and italic, but not markers with substitutions
+vim.opt.conceallevel = 2
+
+-- Show a popup menu for insert mode completions, even if there's only one,
+-- and don't auto-select an option.
+vim.opt.completeopt = "menu,menuone,noselect"
+
+-- Maximum number of items to show in a popup menu
+vim.opt.pumheight = 10
 
 -- Use 24-bit colors in the terminal
 vim.opt.termguicolors = true
