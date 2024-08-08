@@ -6,6 +6,14 @@ return {
     },
   },
   {
+    "folke/which-key.nvim",
+    opts = {
+      icons = {
+        mappings = false,
+      },
+    },
+  },
+  {
     "nvim-telescope/telescope.nvim",
     keys = {
       { "<leader><space>", false },
