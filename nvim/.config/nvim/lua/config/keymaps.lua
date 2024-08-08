@@ -63,12 +63,12 @@ end
 
 -- Diagnostic navigation
 map("n", "<leader>cd", vim.diagnostic.open_float, "[C]ode [D]iagnostic")
-map("n", "[d", diagnostic_goto(true), "Next [D]iagnostic")
-map("n", "]d", diagnostic_goto(false), "Previous [D]iagnostic")
-map("n", "[e", diagnostic_goto(true, "ERROR"), "Next [E]rror")
-map("n", "]e", diagnostic_goto(false, "ERROR"), "Previous [E]rror")
-map("n", "[w", diagnostic_goto(true, "WARN"), "Next [W]arning")
-map("n", "]w", diagnostic_goto(false, "WARN"), "Previous [W]arning")
+map("n", "]d", diagnostic_goto(true), "Next [D]iagnostic")
+map("n", "[d", diagnostic_goto(false), "Previous [D]iagnostic")
+map("n", "]e", diagnostic_goto(true, "ERROR"), "Next [E]rror")
+map("n", "[e", diagnostic_goto(false, "ERROR"), "Previous [E]rror")
+map("n", "]w", diagnostic_goto(true, "WARN"), "Next [W]arning")
+map("n", "[w", diagnostic_goto(false, "WARN"), "Previous [W]arning")
 
 -- Code formatting
 map({ "n", "v" }, "<leader>cf", function()
