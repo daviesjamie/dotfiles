@@ -1,4 +1,6 @@
 return {
+  { "tpope/vim-sleuth" },
+  { "tpope/vim-surround" },
   {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
