@@ -1,6 +1,3 @@
-# Load custom completions
-fpath=("$HOME/.zsh/completions" $fpath)
-
 autoload -U compinit && compinit
 
 unsetopt MENU_COMPLETE   # don't autoselect the first completion entry

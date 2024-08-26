@@ -10,48 +10,43 @@ export LC_CTYPE=en_GB.UTF-8
 export GHQ_ROOT="$HOME/src"
 
 # Homebrew
-# Generated with `brew shellenv`
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+eval "$(brew shellenv)"
 
 # }}}
 # PATH -------------------------------------------------------------------- {{{
 
+path=(
+  "$HOME/bin"
+  "$HOME/.local/bin"      # pipx
+  "$HOME/.rd/bin"         # Rancher desktop
+  "$HOMEBREW_PREFIX/bin"  # Homebrew
+  $path
+)
+
+# Remove duplicates
 typeset -U path
 
-_add_to_path() {
-    if [[ -d "$1" ]] && [[ ! $PATH =~ "$1" ]]; then
-        path=("$1" $path)
-    fi
-}
-
-# Homebrew
-_add_to_path "/opt/homebrew/bin"
-
-# pipx
-_add_to_path "$HOME/.local/bin"
-
-# Make sure things in ~ take precedence
-_add_to_path "$HOME/bin"
+# Remove non-existent directories
+path=($^path(N-/))
 
 export PATH
 
 # }}}
 # FPATH -------------------------------------------------------------------- {{{
 
-typeset -U fpath
-
-ZSH_PROFILES=(
-  "/usr/share"
-  "/opt/homebrew/share/zsh"
+fpath=(
+    "$HOME/zsh/completions"
+    "$HOMEBREW_PREFIX/share/zsh/site-functions"
+    $fpath
 )
 
-for profile in ${ZSH_PROFILES}; do
-  fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
-done
+# Remove duplicates
+typeset -U fpath
+
+# Remove non-existent directories
+fpath=($^fpath(N-/))
+
+export FPATH
 
 # }}}
 # RUST --------------------------------------------------------------------- {{{

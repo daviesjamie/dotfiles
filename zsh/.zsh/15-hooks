@@ -9,4 +9,5 @@ fi
 
 if has tinty; then
     tinty init
+    eval "$(tinty generate-completion zsh)"
 fi
