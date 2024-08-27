@@ -148,11 +148,28 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader><space>", false },
+      -- Find
+      { "<C-p>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>fF", false },
+      { "<leader>fR", false },
+
+      -- Git
+      { "<leader>gC", "<cmd>Telescope git_bcommits<CR>", desc = "Commits (buffer)" },
       { "<leader>gs", false },
 
-      { "<C-p>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { "<leader>gC", "<cmd>Telescope git_bcommits<CR>", desc = "Commits (buffer)" },
+      -- Search
+      { "<leader>/", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sC", false },
+      { "<leader>sg", false },
+      { "<leader>sG", false },
+      { "<leader><space>", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>sR", false },
+      { "<leader>sw", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
+      { "<leader>sW", false },
+      { "<leader>sw", LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
+      { "<leader>sW", false, mode = "v" },
     },
     opts = function()
       local actions = require("telescope.actions")
