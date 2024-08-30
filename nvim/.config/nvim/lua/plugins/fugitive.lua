@@ -7,6 +7,16 @@ return {
     config = function()
       vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
 
+      vim.keymap.set({ "n", "x" }, "<leader>gw", ":GBrowse<CR>", {
+        remap = false,
+        desc = "Open line/selection in [G]it [W]eb UI",
+      })
+
+      vim.keymap.set({ "n", "x" }, "<leader>gW", ":GBrowse!<CR>", {
+        remap = false,
+        desc = "Copy URL to line/selection in [G]it [W]eb UI",
+      })
+
       autocmd("BufWinEnter", {
         group = augroup("jagd_fugitive", { clear = true }),
         pattern = "*",
@@ -36,25 +46,10 @@ return {
           vim.keymap.set("n", "<leader>gu", function()
             vim.cmd.Git("pull --rebase")
           end, { buffer = bufnr, remap = false, desc = "Git P[u]ll --rebase" })
-
-          vim.keymap.set({ "n", "x" }, "<leader>gw", function()
-            vim.cmd(":GBrowse<CR>")
-          end, {
-            buffer = bufnr,
-            remap = false,
-            desc = "Open line/selection in [G]it [W]eb UI",
-          })
-
-          vim.keymap.set({ "n", "x" }, "<leader>gW", function()
-            vim.cmd(":GBrowse!<CR>")
-          end, {
-            buffer = bufnr,
-            remap = false,
-            desc = "Copy URL to line/selection in [G]it [W]eb UI",
-          })
         end,
       })
     end,
   },
+  { "tpope/vim-rhubarb" },
   { "shumphrey/fugitive-gitlab.vim" },
 }
