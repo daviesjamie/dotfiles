@@ -149,8 +149,8 @@ return {
     "nvim-telescope/telescope.nvim",
     keys = {
       -- Find
-      { "<C-p>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<C-p>", LazyVim.pick("files", { root = false, hidden = true }), desc = "Find Files (cwd)" },
+      { "<leader>ff", LazyVim.pick("files", { root = false, hidden = true }), desc = "Find Files (cwd)" },
       { "<leader>fF", false },
       { "<leader>fR", false },
 
@@ -189,6 +189,7 @@ return {
 
       return {
         defaults = {
+          file_ignore_patterns = { "^.git/" },
           mappings = {
             i = {
               ["<M-t>"] = false,
