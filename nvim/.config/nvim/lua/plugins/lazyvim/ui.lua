@@ -2,6 +2,46 @@ return {
   { "folke/noice.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
   {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = {
+        section_separators = "",
+        component_separators = "┃",
+      },
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch" },
+        lualine_c = { LazyVim.lualine.pretty_path({ relative = "cwd", length = 6 }) },
+
+        lualine_x = {
+          {
+            "diagnostics",
+            symbols = {
+              error = LazyVim.config.icons.diagnostics.Error,
+              warn = LazyVim.config.icons.diagnostics.Warn,
+              info = LazyVim.config.icons.diagnostics.Info,
+              hint = LazyVim.config.icons.diagnostics.Hint,
+            },
+          },
+          {
+            function()
+              return "  " .. require("dap").status()
+            end,
+            cond = function()
+              return package.loaded["dap"] and require("dap").status() ~= ""
+            end,
+            color = function()
+              return LazyVim.ui.fg("Debug")
+            end,
+          },
+        },
+        lualine_y = { "filetype" },
+        lualine_z = { "location" },
+      },
+      extensions = { "fugitive", "lazy" },
+    },
+  },
+  {
     "echasnovski/mini.starter",
     opts = function()
       local starter = require("mini.starter")
