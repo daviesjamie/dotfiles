@@ -49,6 +49,15 @@ autocmd("FileType", {
   end,
 })
 
+-- Turn on wrapping in some filetypes
+autocmd("FileType", {
+  group = augroup("spelling"),
+  pattern = { "gitcommit" },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
+
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
