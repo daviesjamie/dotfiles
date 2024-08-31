@@ -7,11 +7,11 @@ end
 
 map({ "n", "i" }, "<Esc>", "<cmd>nohlsearch<CR><Esc>", "Escape and clear hlsearch")
 
--- Make jumping with Ctrl D/U stay centered in screen
+-- Make jumping with Ctrl D/U stay centred in screen
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- Open folds when jumping between search results
+-- Open folds and centre cursor when jumping between search results
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
@@ -27,8 +27,8 @@ map("n", "Q", "<nop>")
 -- Quickly move lines up/down with Alt + j/k
 map("n", "<A-j>", "<cmd>m .+1<CR>==", "Move line down")
 map("n", "<A-k>", "<cmd>m .-2<CR>==", "Move line up")
-map("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
-map("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
+map("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv", "Move selection down")
+map("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv", "Move selection up")
 
 -- Re-select selection after indenting in visual mode
 map("v", ">", ">gv")
@@ -74,3 +74,19 @@ map("n", "[w", diagnostic_goto(false, "WARN"), "Previous [W]arning")
 map({ "n", "v" }, "<leader>cf", function()
   LazyVim.format({ force = true })
 end, "[C]ode [F]ormat")
+
+-- The gross keybindings below are because I need my terminal emulator on Mac
+-- OS to treat Option + char with the default Mac behaviour of producing
+-- extra symbols, rather than actually passing Option through as Alt (because
+-- Option + 3 is how you type '#' on an en_GB mac keyboard).
+
+-- Therefore these keybindings are the equivalents to the Alt keybindings
+-- above, but mapped using the characters produced by Mac OS when pressing
+-- that keybinding, rather than mapping the Alt modifier directly.
+
+-- ∆ = Option/Alt + j
+-- ˚ = Option/Alt + k
+map("n", "∆", "<cmd>m .+1<CR>==", "Move line down")
+map("n", "˚", "<cmd>m .-2<CR>==", "Move line up")
+map("v", "∆", "<cmd>m '>+1<CR>gv=gv", "Move selection down")
+map("v", "˚", "<cmd>m '<-2<CR>gv=gv", "Move selection up")
