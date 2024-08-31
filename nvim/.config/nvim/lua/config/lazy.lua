@@ -24,7 +24,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.mini-starter" },
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    { import = "plugins" },
+    { import = "plugins.lazyvim" },
+    { import = "plugins.custom" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
