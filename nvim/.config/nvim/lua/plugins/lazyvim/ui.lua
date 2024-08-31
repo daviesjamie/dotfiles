@@ -79,7 +79,15 @@ return {
 
       return {
         evaluate_single = true,
-        header = greeting(),
+        header = function()
+          local parts = { greeting() }
+
+          if vim.fn.executable("fortune") then
+            table.insert(parts, vim.fn.system("fortune -s"))
+          end
+
+          return table.concat(parts, "\n\n\n")
+        end,
         items = {
           starter.sections.recent_files(5, true),
           telescope_actions,
