@@ -84,11 +84,13 @@ return {
       end
 
       local find_files_in_current_dir = function()
-        require("telescope.builtin").find_files({ cwd = require("mini.files").get_latest_path() })
+        require("mini.files").close()
+        LazyVim.pick("files", { root = false, hidden = true, cwd = require("mini.files").get_latest_path() })()
       end
 
       local grep_in_current_dir = function()
-        require("telescope.builtin").live_grep({ cwd = require("mini.files").get_latest_path() })
+        require("mini.files").close()
+        LazyVim.pick("live_grep", { root = false, cwd = require("mini.files").get_latest_path() })()
       end
 
       vim.api.nvim_create_autocmd("User", {
