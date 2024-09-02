@@ -13,6 +13,9 @@ bold_italic = { style = "ExtraBold Italic" }
 builtin_box_drawing = false
 size = 13
 
+[mouse]
+hide_when_typing = true
+
 [[hints.enabled]]
 action = "Copy"
 hyperlinks = true
