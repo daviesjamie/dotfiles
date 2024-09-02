@@ -46,14 +46,6 @@ autocmd("FileType", {
   pattern = { "text", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.spell = true
-  end,
-})
-
--- Turn on wrapping in some filetypes
-autocmd("FileType", {
-  group = augroup("spelling"),
-  pattern = { "gitcommit" },
-  callback = function()
     vim.opt_local.wrap = true
   end,
 })
