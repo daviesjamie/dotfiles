@@ -12,3 +12,21 @@ italic = { style = "Italic" }
 bold_italic = { style = "ExtraBold Italic" }
 builtin_box_drawing = false
 size = 13
+
+[[hints.enabled]]
+action = "Copy"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse = { enabled = true, mods = "Command|Control|Shift" }
+binding = { key = "U", mods = "Command|Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse = { enabled = true, mods = "Command|Shift" }
+binding = { key = "U", mods = "Command|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
