@@ -82,7 +82,7 @@ return {
         header = function()
           local parts = { greeting() }
 
-          if vim.fn.executable("fortune") then
+          if vim.fn.executable("fortune") == 1 then
             table.insert(parts, vim.fn.system("fortune -s"))
           end
 
