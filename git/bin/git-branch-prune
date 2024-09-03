@@ -1,3 +1,0 @@
-#!/bin/bash -xe
-
-git branch --merged | egrep -v "(^\*|master|main)" | xargs git branch -d
