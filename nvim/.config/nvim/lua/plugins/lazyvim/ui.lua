@@ -70,6 +70,13 @@ return {
       end
 
       local telescope_actions = {
+        {
+          name = "- Explore files",
+          action = function()
+            require("mini.files").open(vim.uv.cwd(), true)
+          end,
+          section = "Telescope",
+        },
         { name = "Find file", action = LazyVim.pick("files", { root = false, hidden = true }), section = "Telescope" },
         { name = "Recent files", action = LazyVim.pick("oldfiles", { root = false }), section = "Telescope" },
         { name = "Search", action = LazyVim.pick("live_grep", { root = false }), section = "Telescope" },
