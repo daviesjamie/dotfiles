@@ -18,6 +18,7 @@ eval "$(brew shellenv)"
 path=(
   "$HOME/bin"
   "$HOME/.local/bin"      # pipx
+  "$HOME/go/bin"          # Go
   "$HOME/.rd/bin"         # Rancher desktop
   "$HOMEBREW_PREFIX/bin"  # Homebrew
   $path
