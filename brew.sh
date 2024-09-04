@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-if ! command -v brew &> /dev/null; then
-    echo "Installing homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &>/dev/null; then
+	echo "Installing homebrew"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	if ! command -v brew &> /dev/null; then
+	if ! command -v brew &>/dev/null; then
 		echo "Failed to install homebrew" >&2
 		exit 1
 	fi
@@ -55,4 +55,8 @@ brew install --cask nikitabobko/tap/aerospace
 
 # App Store
 brew install mas
-mas install 904280696  # Things 3
+mas install 904280696 # Things 3
+
+# Go tools
+brew install go
+go install github.com/open-pomodoro/openpomodoro-cli/cmd/pomodoro@latest

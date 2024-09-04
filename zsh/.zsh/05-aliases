@@ -27,12 +27,14 @@ elif has xclip; then
     alias pbp='xclip -selection clipboard -o'
 fi
 
-# Alias git to hub, if it's installed
 if has hub; then
     eval "$(hub alias -s)"
 fi
 
-# Alias vim to nvim, if it's installed
 if has nvim; then
     alias vim=nvim
+fi
+
+if has pomodoro; then
+    alias pomo=pomodoro
 fi
