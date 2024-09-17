@@ -4,3 +4,5 @@ Neovim
 inline
 ok
 vim
+plugin
+rebase
