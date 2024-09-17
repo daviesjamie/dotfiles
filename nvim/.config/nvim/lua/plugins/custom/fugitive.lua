@@ -6,6 +6,7 @@ return {
     "tpope/vim-fugitive",
     config = function()
       vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
+      vim.keymap.set("n", "<leader>gS", "<cmd>vertical Git<CR>", { desc = "Vertical [G]it [S]tatus" })
 
       vim.keymap.set({ "n", "x" }, "<leader>gw", ":GBrowse<CR>", {
         remap = false,
