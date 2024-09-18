@@ -60,7 +60,7 @@ return {
       local go_in_plus_split = function(direction)
         return function()
           local new_target_window
-          local cur_target_window = require("mini.files").get_target_window()
+          local cur_target_window = require("mini.files").get_explorer_state().cur_target_window
           if cur_target_window ~= nil then
             vim.api.nvim_win_call(cur_target_window, function()
               vim.cmd("belowright " .. direction .. " split")
