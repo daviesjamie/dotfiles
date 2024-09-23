@@ -78,7 +78,11 @@ return {
           section = "Telescope",
         },
         { name = "Find file", action = LazyVim.pick("files", { root = false, hidden = true }), section = "Telescope" },
-        { name = "Recent files", action = LazyVim.pick("oldfiles", { root = false }), section = "Telescope" },
+        {
+          name = "Recent files",
+          action = LazyVim.pick("oldfiles", { root = false, cwd = vim.fn.getcwd() }),
+          section = "Telescope",
+        },
         { name = "Search", action = LazyVim.pick("live_grep", { root = false }), section = "Telescope" },
         { name = "Git commits", action = LazyVim.pick("git_commits", { root = false }), section = "Telescope" },
         { name = "Help", action = LazyVim.pick("help_tags"), section = "Telescope" },
