@@ -2,9 +2,17 @@ if has direnv; then
     eval "$(direnv hook zsh)"
 fi
 
+if has flux; then
+    eval "$(flux completion zsh)"
+fi
+
 if has fnm; then
     eval "$(fnm env --shell zsh --use-on-cd)"
     eval "$(fnm completions --shell zsh)"
+fi
+
+if has talosctl; then
+    eval "$(talosctl completion zsh)"
 fi
 
 if has tinty; then
