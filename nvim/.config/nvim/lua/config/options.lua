@@ -31,6 +31,9 @@ vim.opt.undofile = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Don't fold when opening a file
+vim.opt.foldenable = false
+
 -- Don't highlight search matches, but do show matches whilst typing
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -71,6 +74,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Use British spellings
+vim.opt.spell = true
 vim.opt.spelllang = { "en_gb" }
 
 vim.opt.formatoptions = vim.opt.formatoptions
