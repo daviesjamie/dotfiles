@@ -14,10 +14,9 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Make yanking/pasting to/from system clipboard a bit easier
-map({ "n", "x" }, "<leader>y", [["+y]], "[Y]ank to system clipboard")
-map("n", "<leader>Y", [["+Y]], "[Y]ank rest of line to system clipboard")
-map({ "n", "x" }, "<leader>d", [["_d]], "[D]elete without losing register contents")
-map("x", "<leader>p", [["_dP]], "[P]aste over visual selection without losing register contents")
+map({ "n", "x" }, "<leader>y", [["+y]], "Yank to system clipboard")
+map("n", "<leader>Y", [["+Y]], "Yank rest of line to system clipboard")
+map({ "n", "x" }, "<leader>d", [["_d]], "Delete without losing register contents")
 
 -- Stop accidentally pressing Q
 map("n", "Q", "<nop>")
@@ -33,23 +32,23 @@ map("v", ">", ">gv")
 map("v", "<", "<gv")
 
 -- Buffer navigation
-map("n", "[b", vim.cmd.bprevious, "Previous [B]uffer")
-map("n", "]b", vim.cmd.bnext, "Next [B]uffer")
--- map("n", "<leader>bd", LazyVim.ui.bufremove, "[D]elete [B]uffer")
+map("n", "[b", vim.cmd.bprevious, "Previous buffer")
+map("n", "]b", vim.cmd.bnext, "Next buffer")
+-- map("n", "<leader>bd", LazyVim.ui.bufremove, "Delete buffer")
 
 -- Quickfix navigation
-map("n", "<leader>xq", vim.cmd.cwindow, "Toggle [Q]uickfix window")
-map("n", "[Q", vim.cmd.cfirst, "First [Q]uickfix entry")
-map("n", "[q", vim.cmd.cprevious, "Previous [Q]uickfix entry")
-map("n", "]q", vim.cmd.cnext, "Next [Q]uickfix entry")
-map("n", "]Q", vim.cmd.clast, "Last [Q]uickfix entry")
+map("n", "<leader>xq", vim.cmd.cwindow, "Toggle quickfix window")
+map("n", "[Q", vim.cmd.cfirst, "First quickfix entry")
+map("n", "[q", vim.cmd.cprevious, "Previous quickfix entry")
+map("n", "]q", vim.cmd.cnext, "Next quickfix entry")
+map("n", "]Q", vim.cmd.clast, "Last quickfix entry")
 
 -- Location list navigation
-map("n", "<leader>xl", vim.cmd.lwindow, "Toggle [L]ocation list window")
-map("n", "[L", vim.cmd.lfirst, "First [L]ocation list entry")
-map("n", "[l", vim.cmd.lprevious, "Previous [L]ocation list entry")
-map("n", "]l", vim.cmd.lnext, "Next [L]ocation list entry")
-map("n", "]L", vim.cmd.llast, "Last [L]ocation list entry")
+map("n", "<leader>xl", vim.cmd.lwindow, "Toggle location list window")
+map("n", "[L", vim.cmd.lfirst, "First location list entry")
+map("n", "[l", vim.cmd.lprevious, "Previous location list entry")
+map("n", "]l", vim.cmd.lnext, "Next location list entry")
+map("n", "]L", vim.cmd.llast, "Last location list entry")
 
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -60,15 +59,15 @@ local diagnostic_goto = function(next, severity)
 end
 
 -- Diagnostic navigation
-map("n", "<leader>cd", vim.diagnostic.open_float, "[C]ode [D]iagnostic")
-map("n", "]d", diagnostic_goto(true), "Next [D]iagnostic")
-map("n", "[d", diagnostic_goto(false), "Previous [D]iagnostic")
-map("n", "]e", diagnostic_goto(true, "ERROR"), "Next [E]rror")
-map("n", "[e", diagnostic_goto(false, "ERROR"), "Previous [E]rror")
-map("n", "]w", diagnostic_goto(true, "WARN"), "Next [W]arning")
-map("n", "[w", diagnostic_goto(false, "WARN"), "Previous [W]arning")
+map("n", "<leader>cd", vim.diagnostic.open_float, "Code diagnostic")
+map("n", "]d", diagnostic_goto(true), "Next diagnostic")
+map("n", "[d", diagnostic_goto(false), "Previous diagnostic")
+map("n", "]e", diagnostic_goto(true, "ERROR"), "Next error")
+map("n", "[e", diagnostic_goto(false, "ERROR"), "Previous error")
+map("n", "]w", diagnostic_goto(true, "WARN"), "Next warning")
+map("n", "[w", diagnostic_goto(false, "WARN"), "Previous warning")
 
 -- Code formatting
 -- map({ "n", "v" }, "<leader>cf", function()
 --   LazyVim.format({ force = true })
--- end, "Code [F]ormat")
+-- end, "Code format")
