@@ -7,6 +7,10 @@ if has fnm; then
     eval "$(fnm completions --shell zsh)"
 fi
 
+if has talosctl; then
+    eval "$(talosctl completion zsh)"
+fi
+
 if has tinty; then
     tinty init
     eval "$(tinty generate-completion zsh)"
