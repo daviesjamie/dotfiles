@@ -18,14 +18,17 @@ map({ "n", "x" }, "<leader>y", [["+y]], "Yank to system clipboard")
 map("n", "<leader>Y", [["+Y]], "Yank rest of line to system clipboard")
 map({ "n", "x" }, "<leader>d", [["_d]], "Delete without losing register contents")
 
+-- Never overwrite register contents when pasting over selection
+map("x", "p", [["_dP]], "Paste over visual selection without losing register contents")
+
 -- Stop accidentally pressing Q
 map("n", "Q", "<nop>")
 
--- Quickly move lines up/down with Alt + j/k
-map("n", "<A-j>", "<cmd>m .+1<CR>==", "Move line down")
-map("n", "<A-k>", "<cmd>m .-2<CR>==", "Move line up")
-map("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv", "Move selection down")
-map("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv", "Move selection up")
+-- Quickly move lines up/down with <up> and <down>
+map("n", "<up>", "<cmd>m .+1<CR>==", "Move line down")
+map("n", "<down>", "<cmd>m .-2<CR>==", "Move line up")
+map("v", "<up>", "<cmd>m '>+1<CR>gv=gv", "Move selection down")
+map("v", "<down>", "<cmd>m '<-2<CR>gv=gv", "Move selection up")
 
 -- Re-select selection after indenting in visual mode
 map("v", ">", ">gv")
