@@ -1,8 +1,3 @@
--- Options are automatically loaded before lazy.nvim startup
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- Show relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -107,40 +102,3 @@ vim.opt.termguicolors = true
 
 -- Hide netrw banner
 vim.g.netrw_banner = 0
-
-------------------------------------------------------------------------------
--- LazyVim-specific options
-
--- LazyVim auto format
-vim.g.autoformat = true
-
--- LazyVim picker to use.
--- Can be one of: telescope, fzf
--- Leave it to "auto" to automatically use the picker
--- enabled with `:LazyExtras`
-vim.g.lazyvim_picker = "telescope"
-
--- LazyVim root dir detection
--- Each entry can be:
--- * the name of a detector function like `lsp` or `cwd`
--- * a pattern or array of patterns like `.git` or `lua`.
--- * a function with signature `function(buf) -> string|string[]`
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-
--- Set filetype to `bigfile` for files larger than 1.5 MB
--- Only vim syntax will be enabled (with the correct filetype)
--- LSP, treesitter and other ft plugins will be disabled.
-vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
-
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-vim.o.foldenable = false
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
-
--- Use LazyVim's statuscolumn to allow toggling line numbers
-vim.opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
-
--- Use LazyVim's formatexpr for the `gq` operator
-vim.opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
