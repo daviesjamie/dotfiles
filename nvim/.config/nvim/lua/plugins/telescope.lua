@@ -146,10 +146,7 @@ return {
 
       telescope.load_extension("fzf")
 
-      local map = function(mode, keys, func, desc)
-        local opts = desc and { desc = desc } or {}
-        vim.keymap.set(mode, keys, func, opts)
-      end
+      local map = require("utils").map
 
       -- stylua: ignore start
 

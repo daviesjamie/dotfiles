@@ -1,7 +1,4 @@
-local map = function(mode, keys, func, desc)
-  local opts = desc and { desc = desc } or {}
-  vim.keymap.set(mode, keys, func, opts)
-end
+local map = require("utils").map
 
 map({ "n", "i" }, "<Esc>", "<cmd>nohlsearch<CR><Esc>", "Escape and clear hlsearch")
 
