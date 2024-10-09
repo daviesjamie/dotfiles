@@ -66,8 +66,3 @@ map("n", "]e", diagnostic_goto(true, "ERROR"), "Next error")
 map("n", "[e", diagnostic_goto(false, "ERROR"), "Previous error")
 map("n", "]w", diagnostic_goto(true, "WARN"), "Next warning")
 map("n", "[w", diagnostic_goto(false, "WARN"), "Previous warning")
-
--- Code formatting
--- map({ "n", "v" }, "<leader>cf", function()
---   LazyVim.format({ force = true })
--- end, "Code format")
