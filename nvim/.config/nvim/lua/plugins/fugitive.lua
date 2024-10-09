@@ -1,5 +1,5 @@
-local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = require("utils").augroup
 
 return {
   {
@@ -19,7 +19,7 @@ return {
       })
 
       autocmd("BufWinEnter", {
-        group = augroup("jagd_fugitive", { clear = true }),
+        group = augroup("fugitive"),
         pattern = "*",
         callback = function()
           if vim.bo.ft ~= "fugitive" then

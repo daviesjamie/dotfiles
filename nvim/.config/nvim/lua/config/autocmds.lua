@@ -1,7 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
-local function augroup(name)
-  return vim.api.nvim_create_augroup("jagd_" .. name, { clear = true })
-end
+local augroup = require("utils").augroup
 
 -- Only show cursor line in current split
 local cursorline_group = augroup("cursorline")
