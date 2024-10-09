@@ -1,3 +1,22 @@
+local prettier_filetypes = {
+  "css",
+  "graphql",
+  "handlebars",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "less",
+  "markdown",
+  "markdown.mdx",
+  "scss",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "yaml",
+}
+
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -6,37 +25,37 @@ return {
     { "<leader>f", "<cmd>Format<cr>", mode = "n", desc = "Format buffer" },
     { "<leader>f", "<cmd>Format<cr>", mode = "v", desc = "Format selection" },
   },
-  opts = {
-    default_format_opts = {
-      lsp_format = "fallback",
-      timeout_ms = 3000,
-    },
-    format_on_save = function(bufnr)
-      -- Allow disabling autoformat with a global or buffer-local variable
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
+  opts = function()
+    local opts = {
+      default_format_opts = {
+        lsp_format = "fallback",
+        timeout_ms = 3000,
+      },
+      format_on_save = function(bufnr)
+        -- Allow disabling autoformat with a global or buffer-local variable
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
 
-      return { timeout_ms = 500, lsp_fallback = true }
-    end,
-    formatters = {
-      injected = { options = { ignore_errors = true } },
-    },
-    formatters_by_ft = {
-      css = { "prettierd", "prettier", stop_after_first = true },
-      html = { "prettierd", "prettier", stop_after_first = true },
-      javascript = { "prettierd", "prettier", stop_after_first = true },
-      json = { "prettierd", "prettier", stop_after_first = true },
-      lua = { "stylua" },
-      rust = { "rustfmt" },
-      scss = { "prettierd", "prettier", stop_after_first = true },
-      sh = { "shfmt" },
-      sql = { "pg_format" },
-      toml = { "prettierd", "prettier", stop_after_first = true },
-      typescript = { "prettierd", "prettier", stop_after_first = true },
-      yaml = { "prettierd", "prettier", stop_after_first = true },
-    },
-  },
+        return { timeout_ms = 500, lsp_format = "fallback" }
+      end,
+      formatters = {
+        injected = { options = { ignore_errors = true } },
+      },
+      formatters_by_ft = {
+        lua = { "stylua" },
+        rust = { "rustfmt" },
+        sh = { "shfmt" },
+        sql = { "pg_format" },
+      },
+    }
+
+    for _, ft in ipairs(prettier_filetypes) do
+      opts.formatters_by_ft[ft] = { "prettierd", "prettier", stop_after_first = true }
+    end
+
+    return opts
+  end,
   init = function()
     vim.api.nvim_create_user_command("Format", function(args)
       local range = nil
