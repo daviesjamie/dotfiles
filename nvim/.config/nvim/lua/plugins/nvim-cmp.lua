@@ -15,11 +15,26 @@ return {
     local cmp = require("cmp")
     local context = require("cmp.config.context")
 
+    local disabled_buftype = function()
+      local disabled = {
+        nofile = true,
+        prompt = true,
+      }
+      return disabled[vim.bo.buftype] or false
+    end
+
+    local in_comment = function()
+      return context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
+    end
+
     local in_spell = function()
       return context.in_treesitter_capture("spell")
     end
 
     return {
+      enabled = function()
+        return not in_comment() and not disabled_buftype()
+      end,
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "lazydev" },
