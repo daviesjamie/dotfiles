@@ -70,40 +70,51 @@ return {
       },
     },
     keys = {
-      "<C-p>",
-      "<leader>,",
-      "<leader>/",
-      "<leader>:",
-      "<leader><space>",
-      "<leader>fc",
-      "<leader>ff",
-      "<leader>fr",
-      "<leader>gb",
-      "<leader>gc",
-      "<leader>gC",
-      "<leader>sa",
-      "<leader>sc",
-      "<leader>sd",
-      "<leader>sD",
-      "<leader>sh",
-      "<leader>sH",
-      "<leader>sj",
-      "<leader>sk",
-      "<leader>sl",
-      "<leader>sm",
-      "<leader>sM",
-      "<leader>so",
-      "<leader>sq",
-      "<leader>ss",
-      "<leader>sS",
-      "<leader>sw",
-      "<leader>sw",
-      '<leader>s"',
+      { "<C-p>", find_files_with_scope, desc = "Find files" },
+      { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch buffer" },
+      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command history" },
+      { "<leader><space>", "<cmd>Telescope resume<cr>", desc = "Resume" },
+
+      -- Find
+      {
+        "<leader>fc",
+        function()
+          find_files_with_scope({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Find config file",
+      },
+      { "<leader>ff", find_files_with_scope, desc = "Find files" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+
+      -- Git
+      { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
+      { "<leader>gc", "<cmd>Telescope git_bcommits<cr>", desc = "Commits (buffer)" },
+      { "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "Commits (repo)" },
+
+      -- Search
+      { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto commands" },
+      { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Diagnostics (buffer)" },
+      { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics (workspace)" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+      { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlight groups" },
+      { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+      { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location list" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man pages" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix list" },
+      { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols (buffer)" },
+      { "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols (workspace)" },
+      { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", desc = "Current word" },
+      { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", mode = "v", desc = "Selection" },
+      { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
     },
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
-      local builtin = require("telescope.builtin")
 
       telescope.setup({
         defaults = {
@@ -145,48 +156,6 @@ return {
       })
 
       telescope.load_extension("fzf")
-
-      local map = require("utils").map
-
-      -- stylua: ignore start
-
-      map("n", "<C-p>", find_files_with_scope, "Find files")
-      map("n", "<leader>,", function() builtin.buffers({ sort_mru = true, sort_lastused = true }) end, "Switch buffer")
-      map("n", "<leader>/", builtin.live_grep, "Grep")
-      map("n", "<leader>:", builtin.command_history, "Command history")
-      map("n", "<leader><space>", builtin.resume, "Resume")
-
-      -- Find
-      map("n", "<leader>fc", function() find_files_with_scope({ cwd = vim.fn.stdpath("config") }) end, "Find config file")
-      map("n", "<leader>ff", find_files_with_scope, "Find files")
-      map("n", "<leader>fr", builtin.oldfiles, "Recent")
-
-      -- Git
-      map("n", "<leader>gb", builtin.git_branches, "Branches")
-      map("n", "<leader>gc", builtin.git_bcommits, "Commits (buffer)")
-      map("n", "<leader>gC", builtin.git_commits, "Commits (repo)")
-
-      -- Search
-      map("n", "<leader>sa", builtin.autocommands, "Auto commands")
-      map("n", "<leader>sc", builtin.commands, "Commands")
-      map("n", "<leader>sd", function() builtin.diagnostics({ bufnr = 0 }) end, "Diagnostics (buffer)")
-      map("n", "<leader>sD", builtin.diagnostics, "Diagnostics (workspace)")
-      map("n", "<leader>sh", builtin.help_tags, "Help tags")
-      map("n", "<leader>sH", builtin.highlights, "Highlight groups")
-      map("n", "<leader>sj", builtin.jumplist, "Jumplist")
-      map("n", "<leader>sk", builtin.keymaps, "Keymaps")
-      map("n", "<leader>sl", builtin.loclist, "Location list")
-      map("n", "<leader>sm", builtin.marks, "Marks")
-      map("n", "<leader>sM", builtin.man_pages, "Man pages")
-      map("n", "<leader>so", builtin.vim_options, "Options")
-      map("n", "<leader>sq", builtin.quickfix, "Quickfix list")
-      map("n", "<leader>ss", builtin.lsp_document_symbols, "Symbols (buffer)")
-      map("n", "<leader>sS", builtin.lsp_dynamic_workspace_symbols, "Symbols (workspace)")
-      map("n", "<leader>sw", function() builtin.grep_string({ word_match = "-w" }) end, "Current word")
-      map("v", "<leader>sw", function() builtin.grep_string({ word_match = "-w" }) end, "Selection")
-      map("n", '<leader>s"', builtin.registers, "Registers")
-
-      -- stylua: ignore end
     end,
   },
 }
