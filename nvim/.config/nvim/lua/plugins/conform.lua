@@ -22,8 +22,8 @@ return {
   event = { "BufWritePre" },
   cmd = { "ConformInfo", "Format", "FormatDisable", "FormatEnable" },
   keys = {
-    { "<leader>f", "<cmd>Format<cr>", mode = "n", desc = "Format buffer" },
-    { "<leader>f", "<cmd>Format<cr>", mode = "v", desc = "Format selection" },
+    { "<leader>cf", "<cmd>Format<cr>", mode = "n", desc = "Format buffer" },
+    { "<leader>cf", "<cmd>Format<cr>", mode = "v", desc = "Format selection" },
   },
   opts = function()
     local opts = {
