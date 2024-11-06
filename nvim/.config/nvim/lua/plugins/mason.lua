@@ -1,6 +1,5 @@
 return {
   "williamboman/mason.nvim",
-  opts = {},
   cmd = {
     "Mason",
     "MasonInstall",
@@ -9,4 +8,5 @@ return {
     "MasonUninstallAll",
     "MasonUpdate",
   },
+  opts = {},
 }

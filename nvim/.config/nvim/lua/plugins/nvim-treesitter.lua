@@ -1,12 +1,12 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "VeryLazy" },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    build = ":TSUpdate",
+    event = "VeryLazy",
+    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", mode = "x", desc = "Increment selection" },
       { "<bs>", mode = "x", desc = "Decrement selection" },

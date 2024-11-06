@@ -59,103 +59,101 @@ local send_selected_or_all_to_qflist = function(prompt_bufnr)
 end
 
 return {
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-      },
+  "nvim-telescope/telescope.nvim",
+  dependencies = {
+    { "nvim-lua/plenary.nvim" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
     },
-    keys = {
-      { "<C-p>", find_files_with_scope, desc = "Find files" },
-      { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch buffer" },
-      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
-      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command history" },
-      { "<leader><space>", "<cmd>Telescope resume<cr>", desc = "Resume" },
-
-      -- Find
-      {
-        "<leader>fc",
-        function()
-          find_files_with_scope({ cwd = vim.fn.stdpath("config") })
-        end,
-        desc = "Find config file",
-      },
-      { "<leader>ff", find_files_with_scope, desc = "Find files" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-
-      -- Git
-      { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
-      { "<leader>gc", "<cmd>Telescope git_bcommits<cr>", desc = "Commits (buffer)" },
-      { "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "Commits (repo)" },
-
-      -- Search
-      { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto commands" },
-      { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
-      { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Diagnostics (buffer)" },
-      { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics (workspace)" },
-      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-      { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlight groups" },
-      { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
-      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
-      { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location list" },
-      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
-      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man pages" },
-      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix list" },
-      { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols (buffer)" },
-      { "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols (workspace)" },
-      { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", desc = "Current word" },
-      { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", mode = "v", desc = "Selection" },
-      { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-    },
-    config = function()
-      local telescope = require("telescope")
-      local actions = require("telescope.actions")
-
-      telescope.setup({
-        defaults = {
-          mappings = {
-            i = {
-              ["<C-b>"] = actions.preview_scrolling_up,
-              ["<C-e>"] = actions.results_scrolling_up,
-              ["<C-f>"] = actions.preview_scrolling_down,
-              ["<C-q>"] = send_selected_or_all_to_qflist,
-              ["<C-t>"] = require("trouble.sources.telescope").open,
-              ["<C-u>"] = false, -- allow <C-u> to clear the line
-              ["<C-y>"] = actions.results_scrolling_down,
-              ["<C-{>"] = actions.cycle_previewers_prev,
-              ["<C-}>"] = actions.cycle_previewers_next,
-              ["<Down>"] = actions.cycle_history_next,
-              ["<Up>"] = actions.cycle_history_prev,
-              ["<esc>"] = actions.close,
-            },
-          },
-          pickers = {
-            buffers = {
-              mappings = {
-                i = {
-                  ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
-                },
-              },
-            },
-            git_branches = {
-              mappings = {
-                i = {
-                  ["<C-d>"] = actions.git_delete_branch + actions.move_to_top,
-                },
-              },
-            },
-          },
-          prompt_prefix = " ",
-          selection_caret = " ",
-        },
-      })
-
-      telescope.load_extension("fzf")
-    end,
   },
+  cmd = "Telescope",
+  keys = {
+    { "<C-p>", find_files_with_scope, desc = "Find files" },
+    { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch buffer" },
+    { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
+    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command history" },
+    { "<leader><space>", "<cmd>Telescope resume<cr>", desc = "Resume" },
+
+    -- Find
+    {
+      "<leader>fc",
+      function()
+        find_files_with_scope({ cwd = vim.fn.stdpath("config") })
+      end,
+      desc = "Find config file",
+    },
+    { "<leader>ff", find_files_with_scope, desc = "Find files" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+
+    -- Git
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
+    { "<leader>gc", "<cmd>Telescope git_bcommits<cr>", desc = "Commits (buffer)" },
+    { "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "Commits (repo)" },
+
+    -- Search
+    { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto commands" },
+    { "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Diagnostics (buffer)" },
+    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics (workspace)" },
+    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+    { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlight groups" },
+    { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location list" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
+    { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man pages" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+    { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix list" },
+    { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols (buffer)" },
+    { "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols (workspace)" },
+    { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", desc = "Current word" },
+    { "<leader>sw", "<cmd>Telescope grep_string word_match='-w'<cr>", mode = "v", desc = "Selection" },
+    { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
+  },
+  config = function()
+    local telescope = require("telescope")
+    local actions = require("telescope.actions")
+
+    telescope.setup({
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-b>"] = actions.preview_scrolling_up,
+            ["<C-e>"] = actions.results_scrolling_up,
+            ["<C-f>"] = actions.preview_scrolling_down,
+            ["<C-q>"] = send_selected_or_all_to_qflist,
+            ["<C-t>"] = require("trouble.sources.telescope").open,
+            ["<C-u>"] = false, -- allow <C-u> to clear the line
+            ["<C-y>"] = actions.results_scrolling_down,
+            ["<C-{>"] = actions.cycle_previewers_prev,
+            ["<C-}>"] = actions.cycle_previewers_next,
+            ["<Down>"] = actions.cycle_history_next,
+            ["<Up>"] = actions.cycle_history_prev,
+            ["<esc>"] = actions.close,
+          },
+        },
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+              },
+            },
+          },
+          git_branches = {
+            mappings = {
+              i = {
+                ["<C-d>"] = actions.git_delete_branch + actions.move_to_top,
+              },
+            },
+          },
+        },
+        prompt_prefix = " ",
+        selection_caret = " ",
+      },
+    })
+
+    telescope.load_extension("fzf")
+  end,
 }
