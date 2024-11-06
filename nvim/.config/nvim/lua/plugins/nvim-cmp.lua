@@ -8,6 +8,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
     "nvim-treesitter/nvim-treesitter",
+    "onsails/lspkind.nvim",
     "ray-x/cmp-treesitter",
   },
   event = "InsertEnter",
@@ -35,18 +36,21 @@ return {
       enabled = function()
         return not in_comment() and not disabled_buftype()
       end,
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "lazydev" },
-      }, {
-        { name = "spell", option = { enable_in_context = in_spell } },
-      }, {
-        { name = "treesitter", keyword_length = 3 },
-        { name = "path" },
-        { name = "calc" },
-      }, {
-        { name = "buffer", keyword_length = 3 },
-      }),
+      formatting = {
+        format = require("lspkind").cmp_format({
+          mode = "symbol",
+          ellipsis_char = "…",
+          menu = {
+            nvim_lsp = "[LSP]",
+            lazydev = "[LUA]",
+            spell = "[SPELL]",
+            treesitter = "[TREE]",
+            path = "[PATH]",
+            calc = "[CALC]",
+            buffer = "[BUF]",
+          },
+        }),
+      },
       mapping = {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-e>"] = cmp.mapping({
@@ -66,6 +70,18 @@ return {
           vim.snippet.expand(args.body)
         end,
       },
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "lazydev" },
+      }, {
+        { name = "spell", option = { enable_in_context = in_spell } },
+      }, {
+        { name = "treesitter", keyword_length = 3 },
+        { name = "path" },
+        { name = "calc" },
+      }, {
+        { name = "buffer", keyword_length = 3 },
+      }),
     }
   end,
 }
