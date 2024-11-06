@@ -4,20 +4,20 @@ local augroup = require("utils").augroup
 return {
   {
     "tpope/vim-fugitive",
+    cmd = { "Git" },
+    dependencies = {
+      "tpope/vim-rhubarb",
+      "shumphrey/fugitive-gitlab.vim",
+    },
+    keys = {
+      { "<leader>gs", vim.cmd.Git, desc = "Git status" },
+      { "<leader>gS", "<cmd>Git<cr>", desc = "Git status (vertical)" },
+      { "<leader>gw", "<cmd>GBrowse<cr>", desc = "Open line in git web UI" },
+      { "<leader>gW", "<cmd>GBrowse!<cr>", desc = "Copy URL to line in git web UI" },
+      { "<leader>gw", "<cmd>GBrowse<cr>", mode = "v", desc = "Open selection in git web UI" },
+      { "<leader>gW", "<cmd>GBrowse!<cr>", mode = "v", desc = "Copy URL to selection in git web UI" },
+    },
     config = function()
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
-      vim.keymap.set("n", "<leader>gS", "<cmd>vertical Git<CR>", { desc = "Vertical [G]it [S]tatus" })
-
-      vim.keymap.set({ "n", "x" }, "<leader>gw", ":GBrowse<CR>", {
-        remap = false,
-        desc = "Open line/selection in [G]it [W]eb UI",
-      })
-
-      vim.keymap.set({ "n", "x" }, "<leader>gW", ":GBrowse!<CR>", {
-        remap = false,
-        desc = "Copy URL to line/selection in [G]it [W]eb UI",
-      })
-
       autocmd("BufWinEnter", {
         group = augroup("fugitive"),
         pattern = "*",
@@ -51,6 +51,4 @@ return {
       })
     end,
   },
-  { "tpope/vim-rhubarb" },
-  { "shumphrey/fugitive-gitlab.vim" },
 }
