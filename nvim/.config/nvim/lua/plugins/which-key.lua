@@ -8,9 +8,10 @@ return {
           mode = { "n", "v" },
 
           { "<leader>c", group = "code" },
-          { "<leader>f", group = "file/find" },
+          { "<leader>f", group = "files" },
           { "<leader>g", group = "git" },
           { "<leader>gh", group = "hunks" },
+          { "<leader>n", group = "notes" },
           { "<leader>s", group = "search" },
           { "<leader>x", group = "diagnostics/quickfix" },
 
@@ -22,6 +23,9 @@ return {
           -- better descriptions
           { "gx", desc = "Open with system app" },
         },
+      },
+      icons = {
+        mappings = false,
       },
     },
     keys = {
