@@ -18,11 +18,12 @@ return {
       callback = function(event)
         local map = require("utils").buffer_map(event.buf)
 
-        map("n", "gd", vim.lsp.buf.definition, "Goto definition")
+        -- These are superseded by the Telescope equivalents
+        -- map("n", "gd", vim.lsp.buf.definition, "Goto definition")
         map("n", "gD", vim.lsp.buf.declaration, "Goto declaration")
-        map("n", "gI", vim.lsp.buf.implementation, "Goto implementation")
-        map("n", "gr", vim.lsp.buf.references, "Find references")
-        map("n", "gy", vim.lsp.buf.type_definition, "Goto type definition")
+        -- map("n", "gI", vim.lsp.buf.implementation, "Goto implementation")
+        -- map("n", "gr", vim.lsp.buf.references, "Find references")
+        -- map("n", "gy", vim.lsp.buf.type_definition, "Goto type definition")
 
         map("n", "K", vim.lsp.buf.hover, "Hover")
         map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
