@@ -1,4 +1,5 @@
-local map = require("utils").map
+local utils = require("utils")
+local map = utils.map
 
 map({ "n", "i" }, "<Esc>", "<cmd>nohlsearch<CR><Esc>", "Escape and clear hlsearch")
 
@@ -34,7 +35,7 @@ map("v", "<", "<gv")
 -- Buffer navigation
 map("n", "[b", vim.cmd.bprevious, "Previous buffer")
 map("n", "]b", vim.cmd.bnext, "Next buffer")
--- map("n", "<leader>bd", LazyVim.ui.bufremove, "Delete buffer")
+map("n", "<leader>bd", utils.buffer_delete, "Delete buffer")
 
 -- Quickfix navigation
 map("n", "<leader>xq", vim.cmd.cwindow, "Toggle quickfix window")
