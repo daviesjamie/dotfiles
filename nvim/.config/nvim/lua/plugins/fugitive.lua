@@ -4,10 +4,10 @@ return {
     "tpope/vim-rhubarb",
     "shumphrey/fugitive-gitlab.vim",
   },
-  cmd = "Git",
+  cmd = { "Git", "Gclog", "Gdiffsplit", "Gedit", "Ggrep", "Gread", "Gsplit", "Gvsplit", "Gwrite" },
   keys = {
     { "<leader>gs", vim.cmd.Git, desc = "Git status" },
-    { "<leader>gS", "<cmd>Git<cr>", desc = "Git status (vertical)" },
+    { "<leader>gS", "<cmd>vertical Git<cr>", desc = "Git status (vertical)" },
     { "<leader>gw", "<cmd>GBrowse<cr>", desc = "Open line in git web UI" },
     { "<leader>gW", "<cmd>GBrowse!<cr>", desc = "Copy URL to line in git web UI" },
     { "<leader>gw", "<cmd>GBrowse<cr>", mode = "v", desc = "Open selection in git web UI" },
