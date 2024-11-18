@@ -9,7 +9,7 @@ return {
     sections = {
       lualine_a = { "mode" },
       lualine_b = { "branch" },
-      lualine_c = { require("utils").pretty_path({ length = 7 }) },
+      lualine_c = { "%f" },
 
       lualine_x = {
         { "diagnostics" },
