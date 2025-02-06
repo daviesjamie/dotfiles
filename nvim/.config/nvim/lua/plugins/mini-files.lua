@@ -1,5 +1,6 @@
 return {
   "echasnovski/mini.files",
+  lazy = false, -- Required to get `use_as_default_explorer` to work with arglist
   keys = {
     {
       "-",
@@ -7,7 +8,7 @@ return {
         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
         require("mini.files").reveal_cwd()
       end,
-      desc = "Open mini.files (Directory of Current File)",
+      desc = "Open mini.files (dir of current file)",
     },
     {
       "_",
@@ -27,9 +28,10 @@ return {
       use_as_default_explorer = true,
     },
     mappings = {
-      go_in = "",
+      close = "<Esc>",
+      go_in = "L",
       go_in_plus = "l",
-      go_out = "",
+      go_out = "H",
       go_out_plus = "h",
     },
   },
@@ -50,88 +52,65 @@ return {
       require("mini.files").refresh({ content = { filter = new_filter } })
     end
 
-    local go_in_plus = function()
-      for _ = 1, vim.v.count1 do
+    local map_split = function(buf_id, lhs, direction)
+      local rhs = function()
+        local cur_target = MiniFiles.get_explorer_state().target_window
+        local new_target = vim.api.nvim_win_call(cur_target, function()
+          vim.cmd(direction .. " split")
+          return vim.api.nvim_get_current_win()
+        end)
+
+        MiniFiles.set_target_window(new_target)
         MiniFiles.go_in({ close_on_file = true })
       end
-    end
 
-    local go_in_plus_split = function(direction)
-      return function()
-        local new_target_window
-        local cur_target_window = require("mini.files").get_explorer_state().cur_target_window
-        if cur_target_window ~= nil then
-          vim.api.nvim_win_call(cur_target_window, function()
-            vim.cmd("belowright " .. direction .. " split")
-            new_target_window = vim.api.nvim_get_current_win()
-          end)
-
-          require("mini.files").set_target_window(new_target_window)
-          require("mini.files").go_in({ close_on_file = true })
-        end
-      end
+      vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = "Split " .. direction })
     end
 
     local find_files_in_current_dir = function()
-      require("mini.files").close()
-      LazyVim.pick("files", { root = false, hidden = true, cwd = require("mini.files").get_latest_path() })()
+      local path = (MiniFiles.get_fs_entry() or {}).path
+      if path == nil then
+        return vim.notify("Cursor is not on a valid entry")
+      end
+
+      local dir = vim.fn.isdirectory(path) ~= 0 and path or vim.fs.dirname(path)
+
+      MiniFiles.close()
+      require("telescope.builtin").find_files({ cwd = dir })
     end
 
     local grep_in_current_dir = function()
-      require("mini.files").close()
-      LazyVim.pick("live_grep", { root = false, cwd = require("mini.files").get_latest_path() })()
+      local path = (MiniFiles.get_fs_entry() or {}).path
+      if path == nil then
+        return vim.notify("Cursor is not on a valid entry")
+      end
+
+      local dir = vim.fn.isdirectory(path) ~= 0 and path or vim.fs.dirname(path)
+
+      MiniFiles.close()
+      require("telescope.builtin").find_files({ cwd = dir })
     end
 
+    -- Add mappings
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
         local buf_id = args.data.buf_id
 
-        vim.keymap.set("n", "<CR>", go_in_plus, { buffer = buf_id, desc = "Go in entry plus" })
-        vim.keymap.set("n", "<Esc>", MiniFiles.close, { buffer = buf_id, desc = "Close" })
+        vim.keymap.set("n", "<C-\\>", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
 
-        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
+        map_split(buf_id, "<C-x>", "horizontal")
+        map_split(buf_id, "<C-v>", "vertical")
 
-        vim.keymap.set(
-          "n",
-          "<C-w>s",
-          go_in_plus_split("horizontal"),
-          { buffer = buf_id, desc = "Open in horizontal split and close" }
-        )
-        vim.keymap.set(
-          "n",
-          "<C-x>",
-          go_in_plus_split("horizontal"),
-          { buffer = buf_id, desc = "Open in horizontal split and close" }
-        )
-        vim.keymap.set(
-          "n",
-          "<C-w>v",
-          go_in_plus_split("vertical"),
-          { buffer = buf_id, desc = "Open in vertical split and close" }
-        )
-        vim.keymap.set(
-          "n",
-          "<C-v>",
-          go_in_plus_split("vertical"),
-          { buffer = buf_id, desc = "Open in vertical split and close" }
-        )
+        vim.keymap.set("n", "<leader>/", grep_in_current_dir, { buffer = buf_id, desc = "Grep in current dir" })
 
+        vim.keymap.set("n", "<C-p>", find_files_in_current_dir, { buffer = buf_id, desc = "Find files in current dir" })
         vim.keymap.set(
           "n",
           "<leader>ff",
           find_files_in_current_dir,
-          { buffer = buf_id, desc = "Find files in this directory" }
+          { buffer = buf_id, desc = "Find files in current dir" }
         )
-
-        vim.keymap.set("n", "<leader>/", grep_in_current_dir, { buffer = buf_id, desc = "Grep in this directory" })
-      end,
-    })
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "MiniFilesActionRename",
-      callback = function(event)
-        LazyVim.lsp.on_rename(event.data.from, event.data.to)
       end,
     })
   end,
