@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Set repository-specific git author info with interactive prompts
+
+old_name=$(git config user.name)
+read -p "Name [$old_name]> " new_name
+new_name=${new_name:-$old_name}
+
+old_email=$(git config user.email)
+read -p "Email [$old_email]> " new_email
+new_email=${new_email:-$old_email}
+
+if [[ "$new_name" != "$old_name" ]]; then
+    git config --local user.name "$new_name"
+fi
+
+if [[ "$old_email" != "$new_email" ]]; then
+    git config --local user.email "$new_email"
+fi
