@@ -16,7 +16,7 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP actions",
       callback = function(event)
-        local map = require("utils").buffer_map(event.buf)
+        local map = require("jagd.utils").buffer_map(event.buf)
 
         -- These are superseded by the Telescope equivalents
         -- map("n", "gd", vim.lsp.buf.definition, "Goto definition")
