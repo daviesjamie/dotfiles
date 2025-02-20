@@ -15,7 +15,7 @@ return {
   },
   config = function()
     local autocmd = vim.api.nvim_create_autocmd
-    local augroup = require("utils").augroup
+    local augroup = require("jagd.utils").augroup
 
     autocmd("BufWinEnter", {
       group = augroup("fugitive"),

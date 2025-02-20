@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("jagd.utils")
 local map = utils.map
 
 map({ "n", "i" }, "<Esc>", "<cmd>nohlsearch<CR><Esc>", "Escape and clear hlsearch")

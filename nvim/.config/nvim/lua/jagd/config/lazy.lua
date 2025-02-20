@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "plugins" },
+    { import = "jagd.plugins" },
   },
   defaults = { lazy = true, version = nil },
   change_detection = { notify = false },

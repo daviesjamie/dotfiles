@@ -17,7 +17,7 @@ return {
     options = {
       always_show_bufferline = false,
       close_command = function(n)
-        require("utils").buffer_delete(n)
+        require("jagd.utils").buffer_delete(n)
       end,
     },
   },
