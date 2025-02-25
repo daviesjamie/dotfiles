@@ -18,25 +18,46 @@
 
 [commit]
     gpgsign = true
+    verbose = true
 
 [core]
-    editor = "nvim"
+    editor = nvim
+
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 
 [fetch]
+    all = true
     prune = true
+    pruneTags = true
 
 [gpg]
-    format = "ssh"
+    format = ssh
 
 [init]
-    defaultBranch = "main"
+    defaultBranch = main
+
+[merge]
+    conflictStyle = zdiff3
 
 [pull]
     rebase = true
 
 [push]
     autoSetupRemote = true
-    default = current
+    default = simple
+    followTags = true
+
+[rebase]
+    autoStash = true
+    updateRefs = true
+
+[tag]
+    sort = -version:refname
+
 [user]
     email = "jamie@jagd.me"
     name = "Jamie Davies"
