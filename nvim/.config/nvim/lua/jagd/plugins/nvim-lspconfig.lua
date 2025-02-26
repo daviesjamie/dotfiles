@@ -1,9 +1,14 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
+    "b0o/schemastore.nvim",
     "saghen/blink.cmp",
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    {
+      "williamboman/mason-lspconfig.nvim",
+      dependencies = {
+        "williamboman/mason.nvim",
+      },
+    },
   },
   event = { "BufReadPre", "BufNewFile" },
   cmd = { "LspInfo", "LspInstall", "LspStart" },
@@ -37,10 +42,38 @@ return {
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = {},
+      automatic_installation = true,
+      ensure_installed = {
+        "lua_ls",
+      },
       handlers = {
         function(server_name)
           require("lspconfig")[server_name].setup({})
+        end,
+        ["jsonls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.jsonls.setup({
+            settings = {
+              json = {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+              },
+            },
+          })
+        end,
+        ["yamlls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.yamlls.setup({
+            settings = {
+              yaml = {
+                schemaStore = {
+                  enable = false,
+                  url = "",
+                },
+                schemas = require("schemastore").yaml.schemas(),
+              },
+            },
+          })
         end,
       },
     })
