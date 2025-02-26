@@ -12,20 +12,20 @@ These dotfiles are organised in a format that makes them very easy to manage usi
 $ git clone https://github.com/daviesjamie/dotfiles ~/.dotfiles
 $ cd ~/.dotfiles
 
-# Install vim configuration
-$ stow vim
+# Install neovim configuration
+$ stow nvim
 
-# Uninstall vim configuration
-$ stow -D vim
+# Uninstall neovim configuration
+$ stow -D nvim
 
-# Reinstall vim configuration (useful for removing obsolete symlinks)
-$ stow -R vim
+# Reinstall neovim configuration (useful for removing obsolete symlinks)
+$ stow -R nvim
 ```
 
 If you don't want to install Stow, manually symlinking them into place should also suffice:
 
 ```sh
-$ ln -s ~/.dotfiles/vim/.vimrc ~/.vimrc
+$ ln -s ~/.dotfiles/alacritty/.config/alacritty.toml ~/.config/alacritty.toml
 ```
 
 [stow]: http://www.gnu.org/software/stow/
