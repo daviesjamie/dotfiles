@@ -1,42 +1,65 @@
-local prettier_filetypes = {
-  "css",
-  "graphql",
-  "handlebars",
-  "html",
-  "javascript",
-  "javascriptreact",
-  "json",
-  "jsonc",
-  "less",
-  "markdown",
-  "markdown.mdx",
-  "scss",
-  "typescript",
-  "typescriptreact",
-  "vue",
-  "yaml",
-}
-
 return {
   "stevearc/conform.nvim",
   event = "BufWritePre",
-  cmd = { "ConformInfo", "Format", "FormatDisable", "FormatEnable" },
+  cmd = { "ConformInfo", "FormatDisable", "FormatEnable" },
   keys = {
-    { "<leader>cf", "<cmd>Format<cr>", mode = "n", desc = "Format buffer" },
-    { "<leader>cf", "<cmd>Format<cr>", mode = "v", desc = "Format selection" },
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({ async = true }, function(err)
+          if not err then
+            local mode = vim.api.nvim_get_mode().mode
+            if vim.startswith(string.lower(mode), "v") then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+          end
+        end)
+      end,
+      mode = { "n", "v" },
+      desc = "Format buffer/selection",
+    },
   },
-  init = function()
-    vim.api.nvim_create_user_command("Format", function(args)
-      local range = nil
-      if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-        range = {
-          start = { args.line1, 0 },
-          ["end"] = { args.line2, end_line:len() },
-        }
-      end
-      require("conform").format({ async = true, lsp_fallback = true, range = range })
-    end, { range = true })
+  config = function()
+    require("conform").setup({
+      default_format_opts = {
+        lsp_format = "fallback",
+        timeout_ms = 3000,
+      },
+      format_on_save = function(bufnr)
+        -- Allow disabling autoformat with a global or buffer-local variable
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+
+        return { timeout_ms = 1000 }
+      end,
+      formatters = {
+        injected = { options = { ignore_errors = true } },
+      },
+      -- stylua: ignore
+      formatters_by_ft = {
+        lua = { "stylua" },
+        sh  = { "shfmt" },
+        sql = { "pg_format" },
+
+        css              = {"prettierd", "prettier", stop_after_first = true},
+        graphql          = {"prettierd", "prettier", stop_after_first = true},
+        handlebars       = {"prettierd", "prettier", stop_after_first = true},
+        html             = {"prettierd", "prettier", stop_after_first = true},
+        javascript       = {"prettierd", "prettier", stop_after_first = true},
+        javascriptreact  = {"prettierd", "prettier", stop_after_first = true},
+        json             = {"prettierd", "prettier", stop_after_first = true},
+        jsonc            = {"prettierd", "prettier", stop_after_first = true},
+        less             = {"prettierd", "prettier", stop_after_first = true},
+        markdown         = {"prettierd", "prettier", stop_after_first = true},
+        ["markdown.mdx"] = {"prettierd", "prettier", stop_after_first = true},
+        scss             = {"prettierd", "prettier", stop_after_first = true},
+        typescript       = {"prettierd", "prettier", stop_after_first = true},
+        typescriptreact  = {"prettierd", "prettier", stop_after_first = true},
+        vue              = {"prettierd", "prettier", stop_after_first = true},
+        yaml             = {"prettierd", "prettier", stop_after_first = true},
+      },
+    })
 
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       -- :FormatDisable will disable autoformatting in the local buffer,
@@ -52,42 +75,12 @@ return {
     })
 
     vim.api.nvim_create_user_command("FormatEnable", function()
+      vim.b.disable_autoformat = false
       vim.g.disable_autoformat = false
     end, {
       desc = "Re-enable autoformat-on-save",
     })
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
-  opts = function()
-    local opts = {
-      default_format_opts = {
-        lsp_format = "fallback",
-        timeout_ms = 3000,
-      },
-      format_on_save = function(bufnr)
-        -- Allow disabling autoformat with a global or buffer-local variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
-
-        return { timeout_ms = 500, lsp_format = "fallback" }
-      end,
-      formatters = {
-        injected = { options = { ignore_errors = true } },
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-        rust = { "rustfmt" },
-        sh = { "shfmt" },
-        sql = { "pg_format" },
-      },
-    }
-
-    for _, ft in ipairs(prettier_filetypes) do
-      opts.formatters_by_ft[ft] = { "prettierd", "prettier", stop_after_first = true }
-    end
-
-    return opts
   end,
 }
