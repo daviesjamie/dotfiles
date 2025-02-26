@@ -56,7 +56,3 @@ brew install --cask nikitabobko/tap/aerospace
 # App Store
 brew install mas
 mas install 904280696 # Things 3
-
-# Go tools
-brew install go
-go install github.com/open-pomodoro/openpomodoro-cli/cmd/pomodoro@latest
