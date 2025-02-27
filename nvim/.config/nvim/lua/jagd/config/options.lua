@@ -106,3 +106,10 @@ vim.opt.termguicolors = true
 
 -- Hide netrw banner
 vim.g.netrw_banner = 0
+
+-- Make diagnostics use bordered floats
+vim.diagnostic.config({
+  float = {
+    border = "rounded",
+  },
+})
