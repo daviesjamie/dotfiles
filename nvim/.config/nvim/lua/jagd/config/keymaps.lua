@@ -22,12 +22,6 @@ map("x", "p", [["_dP]], "Paste over visual selection without losing register con
 -- Stop accidentally pressing Q
 map("n", "Q", "<nop>")
 
--- Quickly move lines up/down with <up> and <down>
-map("n", "<up>", "<cmd>m .+1<CR>==", "Move line down")
-map("n", "<down>", "<cmd>m .-2<CR>==", "Move line up")
-map("v", "<up>", "<cmd>m '>+1<CR>gv=gv", "Move selection down")
-map("v", "<down>", "<cmd>m '<-2<CR>gv=gv", "Move selection up")
-
 -- Re-select selection after indenting in visual mode
 map("v", ">", ">gv")
 map("v", "<", "<gv")
