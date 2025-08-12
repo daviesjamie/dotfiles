@@ -65,3 +65,4 @@
 
 [include]
     path = ~/.config/git/delta
+    path = ~/.gitconfig.local
