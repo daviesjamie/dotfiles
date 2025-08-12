@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
+for i in "$@"; do
+  case $i in
+    -n|--dry-run)
+      DRY_RUN=1
+      shift
+      ;;
+    *)
+      ;;
+  esac
+done
+
 # Fetch info for all remotes and remove any remote-tracking references
 # that no longer exist on the remote
 git fetch --all --prune
@@ -8,4 +19,10 @@ git fetch --all --prune
 # Delete all branches marked as gone in `git branch` output
 # For example:
 # fix/bump-zero-mq fab5e3dc [origin/fix/bump-zero-mq: gone] Bump version of zeromq library
-git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+if [ $DRY_RUN -eq 1 ]; then
+  echo "Would delete:"
+  git branch -vv | awk '/: gone]/{print $1}'
+else
+  git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+fi
+
