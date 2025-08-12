@@ -62,8 +62,7 @@ return {
           })
         end,
         ["yamlls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.yamlls.setup({
+          require("lspconfig").yamlls.setup({
             settings = {
               yaml = {
                 schemaStore = {

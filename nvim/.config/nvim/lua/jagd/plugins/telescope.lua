@@ -85,7 +85,7 @@ return {
         desc = "Find config file",
       },
       { "<leader>ff", find_files_with_scope, desc = "Find files" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>fr", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "Recent" },
 
       -- Git
       { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
