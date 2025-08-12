@@ -1,0 +1,192 @@
+" Show relative line numbers
+set number
+set relativenumber
+
+" Don't wrap lines
+set nowrap
+
+" Keep lines visible above/below the cursor
+set scrolloff=10
+
+" Keep columns visible before/after the cursor
+set sidescrolloff=8
+
+" Highlight the line the cursor is on
+set cursorline
+
+" Highlight search results (cleared with <Esc> in normal mode)
+set hlsearch
+set incsearch
+
+" Search ignoring case unless search contains uppercase characters
+set ignorecase
+set smartcase
+
+" Handle joins with IDE's "smart join"
+set ideajoin
+
+" Synchronise vim's global marks (capitals) with IDE bookmarks
+set ideamarks
+
+" Dim the IdeaVim icon in the status bar
+set ideastatusicon=gray
+
+" Set leader key
+let mapleader=' '
+
+" Configure which-key
+set which-key
+set notimeout
+
+" Plugins
+Plug 'chrisbra/matchit'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+" Clear search with <Esc>
+nnoremap <Esc> :nohlsearch<cr><Esc>
+let g:WhichKeyDesc_esc = "<Esc> escape and clear hlsearch"
+
+" Accept completions with Ctrl Y
+imap <C-y> <Action>(EditorChooseLookupItem)
+
+" Make jumping with Ctrl D/U stay centred in screen
+noremap <C-d> <C-d>zz
+let g:WhichKeyDesc_ctrl_d = "<C-d>"
+noremap <C-u> <C-u>zz
+let g:WhichKeyDesc_ctrl_u = "<C-u>"
+
+" Make yanking/pasting to/from system clipboard a bit easier
+noremap <leader>y "+y
+noremap <leader>Y "+Y
+let g:WhichKeyDesc_yank_system_clipboard = "<leader>y yank to system clipboard"
+let g:WhichKeyDesc_yank_rest_line_system_clipboard = "<leader>Y yank rest of line to system clipboard"
+
+" Use \ to specify black hole register and prevent overwriting register contents
+" e.g. \dw will delete the word but not store the content in the register
+map \ "_
+let g:WhichKeyDesc_black_hole_register = "\ blackhole register"
+
+" Never overwrite register contents when pasting over selection
+xnoremap p "_dP
+let g:WhichKeyDesc_paste_keep_register = "p paste over visual selection without losing register contents"
+
+" Stop accidentally pressing Q
+noremap Q <nop>
+let g:WhichKeyDesc_Q = "Q"
+
+" Re-select selection after indenting in visual mode
+xnoremap > >gv
+xnoremap < <gv
+let g:WhichKeyDesc_increase_indent = ">"
+let g:WhichKeyDesc_decrease_indent = "<"
+
+" Tab (buffer) navigation
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+nmap <leader>bd <Action>(CloseContent)
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+nmap <leader>bl <Action>(CloseAllToTheLeft)
+nmap <leader>br <Action>(CloseAllToTheRight)
+nmap <leader>bp <Action>(PinActiveEditorTab)
+let g:WhichKeyDesc_buffer = "<leader>b buffer"
+let g:WhichKeyDesc_prev_tab = "[b previous tab"
+let g:WhichKeyDesc_next_tab = "]b next tab"
+let g:WhichKeyDesc_close_editor = "<leader>bd close editor"
+let g:WhichKeyDesc_close_to_left = "<leader>bl close all to the left"
+let g:WhichKeyDesc_close_to_right = "<leader>bd close all to the right"
+let g:WhichKeyDesc_close_all_other_editors = "<leader>bp pin tab"
+
+" Error navigation
+map [e <Action>(GotoPreviousError)
+map ]e <Action>(GotoNextError)
+let g:WhichKeyDesc_prev_error = "[e previous error"
+let g:WhichKeyDesc_next_error = "]e next error"
+
+" 'LSP' navigation actions
+nmap gd <Action>(GotoDeclaration)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gt <Action>(GotoTest)
+nmap gr <Action>(ShowUsages)
+nmap gh <Action>(Go to request handler)
+let g:WhichKeyDesc_goto_declaration = "gd goto declaration"
+let g:WhichKeyDesc_goto_type_declaration = "gy goto type declaration"
+let g:WhichKeyDesc_goto_implementation = "gi goto implementation"
+let g:WhichKeyDesc_goto_test = "gt goto test"
+let g:WhichKeyDesc_find_references = "gr find references"
+let g:WhichKeyDesc_goto_request_handler = "gh goto request handler"
+
+" 'Hover' popups
+nmap K <Action>(QuickJavaDoc)
+nmap gK <Action>(QuickImplementations)
+let g:WhichKeyDesc_hover = "K documentation hover"
+let g:WhichKeyDesc_hover = "gK implementation hover"
+
+" Code actions
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cf <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>cg <Action>(Generate)
+map <leader>cr <Action>(RenameElement)
+nmap <leader>cR <Action>(RenameFile)
+map <leader>cs <Action>(SurroundWith)
+map <leader>cu <Action>(Unwrap)
+let g:WhichKeyDesc_code = "<leader>c code"
+let g:WhichKeyDesc_code_action = "<leader>ca code action"
+let g:WhichKeyDesc_code_refactor = "<leader>cf refactor code"
+let g:WhichKeyDesc_code_generate = "<leader>cg generate code"
+let g:WhichKeyDesc_rename_symbol = "<leader>cr rename symbol"
+let g:WhichKeyDesc_rename_file = "<leader>cR rename file"
+let g:WhichKeyDesc_surround_with = "<leader>cs surround with"
+let g:WhichKeyDesc_unwrap = "<leader>cu unwrap"
+
+" Grow/shrink selections
+set lookupkeys+="<C-space>"
+map <C-space> <Action>(EditorSelectWord)
+map <bs> <Action>(EditorUnSelectWord)
+let g:WhichKeyDesc_grow_selection = "<C-space> grow selection"
+let g:WhichKeyDesc_shrink_selection = "<bs> shrink selection"
+
+" Function navigation
+map [f <Action>(MethodUp)
+map ]f <Action>(MethodDown)
+let g:WhichKeyDesc_prev_func = "[f previous function"
+let g:WhichKeyDesc_next_func = "]f next function"
+
+" Debugging actions
+map <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>dd <Action>(Debug)
+nmap <leader>ds <Action>(Stop)
+let g:WhichKeyDesc_debug = "<leader>d debug"
+let g:WhichKeyDesc_toggle_breakpoint = "<leader>db toggle breakpoint"
+let g:WhichKeyDesc_run_debugger = "<leader>dd run debugger"
+let g:WhichKeyDesc_stop = "<leader>dd stop execution"
+
+" File navigation
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>ff <Action>(GotoFile)
+nmap <C-p> <Action>(GotoFile)
+nmap - <Action>(ShowNavBar)
+let g:WhichKeyDesc_files = "<leader>f files"
+let g:WhichKeyDesc_recent_files = "<leader>fr recent files"
+let g:WhichKeyDesc_find_file = "<leader>ff find file"
+let g:WhichKeyDesc_quick_find_file = "<C-p> find file"
+let g:WhichKeyDesc_open_navbar = "- open navbar"
+
+" Search
+map <leader>/ <Action>(FindInPath)
+map <leader>sa <Action>(GotoAction)
+nmap <leader>sc <Action>(GotoClass)
+map <leader>sg <Action>(FindInPath)
+nmap <leader>sl <Action>(RecentLocations)
+map <leader>sr <Action>(ReplaceInPath)
+nmap <leader>ss <Action>(GotoSymbol)
+let g:WhichKeyDesc_search = "<leader>s search"
+let g:WhichKeyDesc_quick_search = "<leader>/ grep"
+let g:WhichKeyDesc_search_actions = "<leader>sa search actions"
+let g:WhichKeyDesc_search_class = "<leader>sc search classes/types"
+let g:WhichKeyDesc_search_grep = "<leader>sg grep"
+let g:WhichKeyDesc_search_locations = "<leader>sl search location list"
+let g:WhichKeyDesc_search_replace = "<leader>sr find + replace"
+let g:WhichKeyDesc_search_symbol = "<leader>ss search symbols"
