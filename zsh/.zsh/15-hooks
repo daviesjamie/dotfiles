@@ -11,6 +11,10 @@ if has fnm; then
     eval "$(fnm completions --shell zsh)"
 fi
 
+if has mise; then
+    eval "$(mise activate zsh)"
+fi
+
 if has talosctl; then
     eval "$(talosctl completion zsh)"
 fi
