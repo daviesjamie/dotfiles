@@ -44,7 +44,9 @@ return {
     require("mason-lspconfig").setup({
       automatic_installation = true,
       ensure_installed = {
+        "jsonls",
         "lua_ls",
+        "yamlls",
       },
       handlers = {
         function(server_name)
