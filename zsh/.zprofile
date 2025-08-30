@@ -8,6 +8,7 @@ export LC_ALL=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
 
 export GHQ_ROOT="$HOME/src"
+export PNPM_HOME="/Users/jagd/Library/pnpm"
 
 # }}}
 # HOMEBREW ---------------------------------------------------------------- {{{
@@ -27,6 +28,7 @@ path=(
   "$HOME/go/bin"          # Go
   "$HOME/.rd/bin"         # Rancher desktop
   "$HOMEBREW_PREFIX/bin"  # Homebrew
+  "$PNPM_HOME"            # pnpm
   $path
 )
 
@@ -43,6 +45,7 @@ export PATH
 
 fpath=(
     "$HOME/zsh/completions"
+    "$HOME/.docker/completions"
     "$HOMEBREW_PREFIX/share/zsh/site-functions"
     $fpath
 )
