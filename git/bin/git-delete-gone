@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+DRY_RUN=0
+
 for i in "$@"; do
   case $i in
     -n|--dry-run)
@@ -14,7 +16,7 @@ done
 
 # Fetch info for all remotes and remove any remote-tracking references
 # that no longer exist on the remote
-git fetch --all --prune
+git fetch --all --prune &> /dev/null
 
 # Delete all branches marked as gone in `git branch` output
 # For example:
