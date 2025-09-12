@@ -104,6 +104,16 @@ map ]e <Action>(GotoNextError)
 let g:WhichKeyDesc_prev_error = "[e previous error"
 let g:WhichKeyDesc_next_error = "]e next error"
 
+" Git (hunk)
+map [h <Action>(VcsShowPrevChangeMarker)
+map ]h <Action>(VcsShowNextChangeMarker)
+map <leader>ghr <Action>(Vcs.RollbackChangedLines)
+let g:WhichKeyDesc_prev_hunk = "[h previous hunk"
+let g:WhichKeyDesc_next_hunk = "]h next hunk"
+let g:WhichKeyDesc_git = "<leader>g git"
+let g:WhichKeyDesc_hunk = "<leader>gh hunk"
+let g:WhichKeyDesc_reset_hunk = "<leader>ghr reset hunk"
+
 " 'LSP' navigation actions
 nmap gd <Action>(GotoDeclaration)
 nmap gy <Action>(GotoTypeDeclaration)
