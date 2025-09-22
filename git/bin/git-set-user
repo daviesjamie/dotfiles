@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Set repository-specific git author info with interactive prompts
 

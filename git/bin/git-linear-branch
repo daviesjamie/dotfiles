@@ -1,11 +1,12 @@
-#!/bin/bash -x
+#!/usr/bin/env bash
+set -e
 
 LINEAR_BRANCH=$1
 TRIMMED_BRANCH="${LINEAR_BRANCH#jamiedavies-}"
 
 if [[ -z "$TRIMMED_BRANCH" ]]; then
-  echo "Usage: git linear-branch <branch-name-copied-from-linear>"
-  exit 1
+    echo "Usage: git linear-branch <branch-name-copied-from-linear>"
+    exit 1
 fi
 
 git checkout -b "${TRIMMED_BRANCH}"

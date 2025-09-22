@@ -1,4 +1,5 @@
-#!/bin/bash -xe
+#!/usr/bin/env bash
+set -e
 
 if [ -z "$OLD_EMAIL" ]; then
     echo '$OLD_EMAIL needs to be set'
