@@ -6,7 +6,7 @@ return {
   },
   cmd = { "Git", "GBrowse", "Gclog", "Gdiffsplit", "Gedit", "Ggrep", "Gread", "Gsplit", "Gvsplit", "Gwrite" },
   keys = {
-    { "<leader>gs", vim.cmd.Git, desc = "Git status" },
+    { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
     { "<leader>gS", "<cmd>vertical Git<cr>", desc = "Git status (vertical)" },
     { "<leader>gw", "<cmd>GBrowse<cr>", desc = "Open line in git web UI" },
     { "<leader>gW", "<cmd>GBrowse!<cr>", desc = "Copy URL to line in git web UI" },
@@ -14,20 +14,14 @@ return {
     { "<leader>gW", "<cmd>GBrowse!<cr>", mode = "v", desc = "Copy URL to selection in git web UI" },
   },
   config = function()
-    vim.api.nvim_create_autocmd("BufWinEnter", {
-      group = vim.api.nvim_create_augroup("jagd_fugitive", { clear = true }),
-      pattern = "*",
-      callback = function()
-        if vim.bo.ft ~= "fugitive" then
-          return
-        end
-
-        local bufnr = vim.api.nvim_get_current_buf()
-
+    vim.api.nvim_create_autocmd("User", {
+      group = vim.api.nvim_create_augroup("jagd_fugitive_index_keymaps", { clear = true }),
+      pattern = "FugitiveIndex",
+      callback = function(event)
         vim.keymap.set("n", "<leader>gp", function()
           vim.cmd.Git("push")
         end, {
-          buffer = bufnr,
+          buffer = true,
           remap = false,
           desc = "git push",
         })
@@ -35,14 +29,18 @@ return {
         vim.keymap.set("n", "<leader>gP", function()
           vim.cmd.Git("push --force-with-lease")
         end, {
-          buffer = bufnr,
+          buffer = true,
           remap = false,
           desc = "git push --force-with-lease",
         })
 
         vim.keymap.set("n", "<leader>gu", function()
           vim.cmd.Git("pull --rebase")
-        end, { buffer = bufnr, remap = false, desc = "git pull --rebase" })
+        end, {
+          buffer = true,
+          remap = false,
+          desc = "git pull --rebase",
+        })
       end,
     })
   end,
