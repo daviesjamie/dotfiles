@@ -16,6 +16,9 @@ vim.opt.spelloptions:append("camel")
 -- Only allow mouse in normal and visual mode
 vim.opt.mouse = "nv"
 
+-- Scroll one vertical line at a time with the mouse
+vim.opt.mousescroll = "ver:1,hor:4"
+
 -- When closing a tab, go to the next most recently used tab
 vim.opt.tabclose:append({ "uselast" })
 
