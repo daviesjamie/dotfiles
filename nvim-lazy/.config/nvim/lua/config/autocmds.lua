@@ -1,0 +1,20 @@
+-- Only show cursor line in active window, and not in insert mode
+local auto_cursorline_group = vim.api.nvim_create_augroup("jagd_auto_cursorline", { clear = true })
+vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+  group = auto_cursorline_group,
+  callback = function()
+    if vim.w.auto_cursorline then
+      vim.wo.cursorline = true
+      vim.w.auto_cursorline = nil
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
+  group = auto_cursorline_group,
+  callback = function()
+    if vim.wo.cursorline then
+      vim.w.auto_cursorline = true
+      vim.wo.cursorline = false
+    end
+  end,
+})
