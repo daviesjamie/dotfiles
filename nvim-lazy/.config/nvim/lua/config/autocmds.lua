@@ -18,3 +18,15 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
     end
   end,
 })
+
+-- Add some extra filetypes that can be closed with `q`
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("lazyvim_close_with_q", { clear = false }),
+  pattern = { "fugitive", "minifiles" },
+  callback = function(event)
+    local lazyvim_close_callback = vim.api.nvim_get_autocmds({ group = "lazyvim_close_with_q" })[1].callback
+    if lazyvim_close_callback then
+      lazyvim_close_callback(event)
+    end
+  end,
+})
