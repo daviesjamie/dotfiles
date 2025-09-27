@@ -37,9 +37,10 @@ return {
         keys = {
           { icon = " ", key = "f", desc = "files", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "s", desc = "search", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "g", desc = "git", action = ":Git | :only" },
+          { icon = " ", key = "g", desc = "git", action = ":Git | :only" },
+          { icon = " ", key = "p", desc = "pr", action = ":Octo pr list" },
           {
-            icon = " ",
+            icon = "󰖟 ",
             key = "r",
             desc = "repo",
             action = function()
