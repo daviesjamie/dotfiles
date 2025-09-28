@@ -58,9 +58,17 @@ return {
   "snacks.nvim",
   opts = {},
   keys = {
+    -- Custom directory tab picker
     { "<C-t>", pick_directory, desc = "Open directory in new tab" },
     { "<leader>ft", pick_directory, desc = "Open directory in new tab" },
+
+    -- Add extra keybindings for file picker
     { "<C-p>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
     { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+
+    -- Disable git picker keybindings
+    { "<leader>gd", false },
+    { "<leader>gs", false },
+    { "<leader>gS", false },
   },
 }
