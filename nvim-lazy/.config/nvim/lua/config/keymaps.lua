@@ -29,3 +29,14 @@ vim.keymap.del({ "n", "x" }, "<leader>gY")
 -- Disable snacks keybinding for git blame
 -- (using gitsigns for this)
 vim.keymap.del("n", "<leader>gb")
+
+-- Add toggle for AI ghost text suggestions
+Snacks.toggle({
+  name = "AI suggestions",
+  get = function()
+    return vim.g.ai_cmp
+  end,
+  set = function(state)
+    vim.g.ai_cmp = state
+  end,
+}):map("<leader>uy")
