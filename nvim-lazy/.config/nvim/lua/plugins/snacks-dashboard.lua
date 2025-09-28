@@ -42,14 +42,13 @@ return {
           { icon = " ", key = "g", desc = "git", action = ":Git | :only" },
           { icon = " ", key = "p", desc = "pr", action = ":Octo pr list" },
           {
-            icon = "󰖟 ",
+            icon = " ",
             key = "r",
             desc = "repo",
             action = function()
               Snacks.gitbrowse()
             end,
           },
-          { icon = "󰒲 ", key = "l", desc = "lazy", action = ":Lazy" },
         },
       },
       formats = {
