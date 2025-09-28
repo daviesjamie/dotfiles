@@ -56,7 +56,22 @@ end
 
 return {
   "snacks.nvim",
-  opts = {},
+  opts = {
+    picker = {
+      win = {
+        input = {
+          keys = {
+            ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+          },
+        },
+        list = {
+          keys = {
+            ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+          },
+        },
+      },
+    },
+  },
   keys = {
     -- Custom directory tab picker
     { "<C-t>", pick_directory, desc = "Open directory in new tab" },
