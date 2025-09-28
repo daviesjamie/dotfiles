@@ -2,6 +2,11 @@ return {
   "zbirenbaum/copilot.lua",
   optional = true,
   opts = {
-    filetypes = { ["*"] = true },
+    filetypes = {
+      ["*"] = true,
+      ["gitcommit"] = false,
+      ["markdown"] = false,
+      ["text"] = false,
+    },
   },
 }
