@@ -22,7 +22,9 @@ local shorten_filepath = function(item, ctx)
   if dir and file then
     file = file:sub(-(ctx.width - #dir - 2))
     fname = dir .. "/…" .. file
-    return fname
+    if #fname <= ctx.width then
+      return fname
+    end
   end
 
   return vim.fn.pathshorten(fname)
