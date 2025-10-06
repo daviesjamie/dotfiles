@@ -62,11 +62,17 @@ return {
         input = {
           keys = {
             ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+            ["<C-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+            ["gh"] = { "toggle_hidden" },
+            ["gi"] = { "toggle_ignored" },
           },
         },
         list = {
           keys = {
             ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+            ["<C-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+            ["gh"] = { "toggle_hidden" },
+            ["gi"] = { "toggle_ignored" },
           },
         },
       },
@@ -76,9 +82,13 @@ return {
     -- Custom directory tab picker
     { "<C-t>", pick_directory, desc = "Open directory in new tab" },
 
-    -- Add extra keybindings for file picker
-    { "<C-p>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-    { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    -- Remap keybindings for file picker
+    -- getcwd(0, 0) = current tab/window's directory (as set by :tcd) = "cwd" in the lingo used by other keybindings
+    -- getcwd(-1, -1) = global working directory (as set when opening vim) = "root" in the lingo used by other keybindings
+    { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+    { "<leader>fF", LazyVim.pick("files", { cwd = vim.fn.getcwd(-1, -1) }), desc = "Find Files (root)" },
+    { "<C-p>", LazyVim.pick("files", { root = false }), desc = "Find files (cwd)" },
+    { "<leader><space>", LazyVim.pick("files", { cwd = vim.fn.getcwd(-1, -1) }), desc = "Find Files (root)" },
 
     -- Disable git picker keybindings
     { "<leader>gd", false },
