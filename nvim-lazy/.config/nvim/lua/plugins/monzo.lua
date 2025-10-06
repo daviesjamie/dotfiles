@@ -132,6 +132,18 @@ return {
         yamlls = {
           filetypes = { "yaml", "promql" },
           root_markers = root_markers,
+          settings = {
+            yaml = {
+              format = {
+                enable = true,
+              },
+              schemas = {
+                [vim.fn.expand("~") .. "/src/github.com/monzo/wearedev/libraries/cassandra/schema/schema.bundled.generated.json"] = "*/config/schema.{yaml,yml}",
+                [vim.fn.expand("~") .. "/src/github.com/monzo/wearedev/libraries/fincrime/ruleslib/schemas/combined.json"] = "*.rule.{yaml,yml}",
+              },
+              validate = true,
+            },
+          },
         },
       },
     },
