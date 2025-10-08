@@ -24,11 +24,9 @@ fi
 
 path=(
   "$HOME/bin"
-  "$HOME/.local/bin"      # pipx
-  "$HOME/go/bin"          # Go
-  "$HOME/.rd/bin"         # Rancher desktop
-  "$HOMEBREW_PREFIX/bin"  # Homebrew
-  "$PNPM_HOME"            # pnpm
+  "$HOME/.local/share/bob/nvim-bin"  # bob
+  "$HOME/go/bin"                     # Go
+  "$HOMEBREW_PREFIX/bin"             # Homebrew
   $path
 )
 

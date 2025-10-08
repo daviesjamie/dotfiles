@@ -16,6 +16,7 @@ brew analytics off
 brew update
 brew upgrade
 
+brew insatll bob
 brew install direnv
 brew install fd
 brew install fzf
