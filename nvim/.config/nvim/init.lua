@@ -1,6 +1,0 @@
-require("jagd.config.leader")
-require("jagd.config.lazy")
-require("jagd.config.options")
-require("jagd.config.autocmds")
-require("jagd.config.keymaps")
-require("jagd.config.colorscheme")
