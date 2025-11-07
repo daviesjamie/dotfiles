@@ -53,6 +53,10 @@
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "snacks.nvim": {
+      "rev": "b0a95a0",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "telescope-ui-select.nvim": {
       "rev": "6e51d7d",
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"

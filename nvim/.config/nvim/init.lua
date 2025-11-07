@@ -2,8 +2,6 @@
 -- OPTIONS
 -------------------------------------------------------------------------------
 
-local vim = vim
-
 -- Show relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -161,19 +159,15 @@ autocmd("TextYankPost", {
 -------------------------------------------------------------------------------
 
 vim.pack.add({
+  "https://github.com/folke/snacks.nvim",
   "https://github.com/folke/tokyonight.nvim",
   "https://github.com/kylechui/nvim-surround",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/linrongbin16/gitlinker.nvim",
   "https://github.com/sindrets/diffview.nvim",
   "https://github.com/stevearc/oil.nvim",
   "https://github.com/tpope/vim-fugitive",
 
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/nvim-telescope/telescope.nvim",
-  "https://github.com/nvim-telescope/telescope-ui-select.nvim",
 
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
@@ -243,37 +237,65 @@ autocmd("FileType", {
   end,
 })
 
--- Telescope
-require("telescope").setup({
-  defaults = {
-    sorting_strategy = "ascending",
-    layout_config = {
-      prompt_position = "top"
+-- Snacks
+require("snacks").setup({
+  gitbrowse = { enabled = true, notify = false },
+  indent = { enabled = true },
+  input = { enabled = true },
+  scope = { enabled = true },
+  words = { enabled = true },
+  picker = {
+    enabled = true,
+    win = {
+      input = {
+        keys = {
+          ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+          ["<C-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+          ["g."] = { "toggle_hidden" },
+          ["gi"] = { "toggle_ignored" },
+        },
+      },
+      list = {
+        keys = {
+          ["<C-x>"] = { "edit_split", mode = { "i", "n" } },
+          ["<C-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+          ["g."] = { "toggle_hidden" },
+          ["gi"] = { "toggle_ignored" },
+        },
+      },
     },
   },
-  ["ui-select"] = {
-    require("telescope.themes").get_dropdown({})
+  scroll = {
+    enabled = true,
+    animate = { duration = { step = 10, total = 100 } },
   },
 })
-require("telescope").load_extension("ui-select")
 
-map("n", "<C-p>", "<cmd>Telescope find_files<cr>", "Find files")
-map("n", "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", "Switch buffer")
-map("n", "<leader>:", "<cmd>Telescope command_history<cr>", "Search command history" )
-map("n", "<leader><space>", "<cmd>Telescope resume<cr>", "Resume last Telescope" )
-map("n", "<leader>/", "<cmd>Telescope live_grep<cr>", "Grep")
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Find files" )
-map("n", "<leader>fr", "<cmd>Telescope oldfiles only_cwd=true<cr>", "Recent files")
-map("n", "<leader>sc", "<cmd>Telescope commands<cr>", "Search commands" )
-map("n", "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", "Search diagnostics" )
-map("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", "Search help" )
-map("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", "Search keymaps" )
-map("n", "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", "Search symbols (buffer)" )
-map("n", "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Search symbols (workspace)" )
-map("v", "<leader>/", function()
-  local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { mode = vim.fn.mode() })
-  require("telescope.builtin").live_grep({ default_text = table.concat(selection) })
-end, "Grep for selection")
+-- Snacks gitbrowse
+local copy_to_clipboard = function(s) vim.fn.setreg("+", s) end
+map({ "n", "v" }, "<leader>gll", function() Snacks.gitbrowse({ what = "permalink", open = copy_to_clipboard }) end, "Copy git permalink")
+map({ "n", "v" }, "<leader>glL", function() Snacks.gitbrowse({ what = "permalink" }) end, "Open git permalink")
+map({ "n", "v" }, "<leader>glf", function() Snacks.gitbrowse({ what = "file", open = copy_to_clipboard }) end, "Copy link to git file")
+map({ "n", "v" }, "<leader>glF", function() Snacks.gitbrowse({ what = "file" }) end, "Open link to git file")
+map("n", "<leader>glr", function() Snacks.gitbrowse({ what = "repo", open = copy_to_clipboard }) end, "Copy link to git repo")
+map("n", "<leader>glR", function() Snacks.gitbrowse({ what = "repo" }) end, "Open link to git repo")
+map("n", "<leader>glc", function() Snacks.gitbrowse({ what = "commit", open = copy_to_clipboard }) end, "Copy link to git commit")
+map("n", "<leader>glC", function() Snacks.gitbrowse({ what = "commit" }) end, "Open link to git commit")
+
+-- Snacks picker
+map("n", "<C-p>", function() Snacks.picker.smart() end, "Smart find files")
+map("n", "<leader>,", function() Snacks.picker.buffers() end, "Find buffer")
+map("n", "<leader>:", function() Snacks.picker.command_history() end, "Search command history")
+map("n", "<leader>/", function() Snacks.picker.grep() end, "Grep")
+map("x", "<leader>/", function() Snacks.picker.grep_word({ live = true }) end, "Grep")
+map("n", "<leader><space>", function() Snacks.picker.resume() end, "Resume last picker")
+map("n", "<leader>ff", function() Snacks.picker.files() end, "Find files")
+map("n", "<leader>fr", function() Snacks.picker.recent() end, "Recent files")
+map("n", "<leader>sc", function() Snacks.picker.commands() end, "Search commands")
+map("n", "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, "Search diagnostics")
+map("n", "<leader>sh", function() Snacks.picker.help() end, "Search help")
+map("n", "<leader>sk", function() Snacks.picker.keymaps() end, "Search keymaps")
+map("n", "<leader>sm", function() Snacks.picker.man() end, "Search man pages")
 
 -- LSP
 require("mason").setup()
@@ -286,12 +308,14 @@ autocmd("LspAttach", {
   group = augroup("lsp_completion"),
   callback = function(ev)
     local bufopts = { silent = true, buffer = ev.buf }
-    local builtin = require("telescope.builtin")
-    map("n", "grr", builtin.lsp_references, "Go to references", bufopts)
-    map("n", "grt", builtin.lsp_type_definitions, "Go to type definitions", bufopts)
-    map("n", "gri", builtin.lsp_implementations, "Go to implementations", bufopts)
+    map("n", "grr", function() Snacks.picker.lsp_references() end, "Go to references", bufopts)
+    map("n", "grt", function() Snacks.picker.lsp_type_definitions() end, "Go to type definition", bufopts)
+    map("n", "gri", function() Snacks.picker.lsp_implementations() end, "Go to implementation", bufopts)
 
-    map("n", "grd", builtin.lsp_definitions, "Go to definition", bufopts)
+    map("n", "grd", function() Snacks.picker.lsp_definitions() end, "Go to definition", bufopts)
+    map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, "Search symbols (buffer)", bufopts)
+    map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, "Search symbols (workspace)", bufopts)
+
     map("i", "<C-space>", vim.lsp.completion.get, "Trigger completion", bufopts)
 
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
@@ -336,15 +360,6 @@ require("gitsigns").setup({
     changedelete = { text = "▎" },
   },
 })
-
--- Git Linker (copy/open links to git web UI)
-require("gitlinker").setup()
-map({ "n", "v" }, "<leader>gll", require("gitlinker").link, "Copy git link for current commit")
-map({ "n", "v" }, "<leader>glL", function() require("gitlinker").link({ action = require("gitlinker.actions").system }) end, "Open git link for current commit")
-map({ "n", "v" }, "<leader>glm", function() require("gitlinker").link({ router_type = "default_branch" }) end, "Copy git link for default branch")
-map({ "n", "v" }, "<leader>glM", function() require("gitlinker").link({ router_type = "default_branch", action = require("gitlinker.actions").system }) end, "Open git link for default branch")
-map({ "n", "v" }, "<leader>glb", function() require("gitlinker").link({ router_type = "blame" }) end, "Copy git link for blame")
-map({ "n", "v" }, "<leader>glB", function() require("gitlinker").link({ router_type = "blame", action = require("gitlinker.actions").system }) end, "Open git link for blame")
 
 -- Fugitive
 map("n", "<leader>gs", "<cmd>Git<cr>", "Git status")
