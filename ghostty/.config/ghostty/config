@@ -1,10 +1,8 @@
+copy-on-select = true
 font-family = "MonoLisa"
-
+font-size = 14
+macos-titlebar-style = "hidden"
 mouse-hide-while-typing = true
-
+theme = "TokyoNight Moon"
 window-padding-x = 4
 window-padding-y = 4
-
-macos-titlebar-style = "hidden"
-
-copy-on-select = true
