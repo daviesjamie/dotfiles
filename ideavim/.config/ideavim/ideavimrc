@@ -28,15 +28,9 @@ set ideajoin
 " Synchronise vim's global marks (capitals) with IDE bookmarks
 set ideamarks
 
-" Dim the IdeaVim icon in the status bar
-set ideastatusicon=gray
-
 " Set leader key
-let mapleader=' '
-
-" Configure which-key
-set which-key
-set notimeout
+let mapleader=" "
+let maplocalleader="\\"
 
 " Plugins
 Plug 'chrisbra/matchit'
@@ -44,18 +38,46 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
+" Configure which-key
+set which-key
+set notimeout
+
+" Which key categories
+let g:WhichKeyDesc_buffer = "<leader>b buffer"
+let g:WhichKeyDesc_code = "<leader>c code"
+let g:WhichKeyDesc_debug = "<leader>d debug"
+let g:WhichKeyDesc_file_find = "<leader>f file/find"
+let g:WhichKeyDesc_git = "<leader>g git"
+let g:WhichKeyDesc_git_hunk = "<leader>gh hunk"
+let g:WhichKeyDesc_search = "<leader>s search"
+let g:WhichKeyDesc_test = "<leader>t test"
+let g:WhichKeyDesc_ui = "<leader>u ui"
+
+" BASIC KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Clear search with <Esc>
 nnoremap <Esc> :nohlsearch<cr><Esc>
-let g:WhichKeyDesc_esc = "<Esc> escape and clear hlsearch"
-
-" Accept completions with Ctrl Y
-imap <C-y> <Action>(EditorChooseLookupItem)
 
 " Make jumping with Ctrl D/U stay centred in screen
 noremap <C-d> <C-d>zz
-let g:WhichKeyDesc_ctrl_d = "<C-d>"
 noremap <C-u> <C-u>zz
-let g:WhichKeyDesc_ctrl_u = "<C-u>"
+
+" Never overwrite register contents when pasting over selection
+xnoremap p "_dP
+
+" Stop accidentally pressing Q
+noremap Q <nop>
+
+" Re-select selection after indenting in visual mode
+xnoremap > >gv
+xnoremap < <gv
+
+" Make Y work the same as D, C, etc
+nnoremap Y y$
+
+" BASIC LEADER KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Make yanking/pasting to/from system clipboard a bit easier
 noremap <leader>y "+y
@@ -63,140 +85,238 @@ noremap <leader>Y "+Y
 let g:WhichKeyDesc_yank_system_clipboard = "<leader>y yank to system clipboard"
 let g:WhichKeyDesc_yank_rest_line_system_clipboard = "<leader>Y yank rest of line to system clipboard"
 
-" Use \ to specify black hole register and prevent overwriting register contents
-" e.g. \dw will delete the word but not store the content in the register
-map \ "_
-let g:WhichKeyDesc_black_hole_register = "\ blackhole register"
-
-" Never overwrite register contents when pasting over selection
-xnoremap p "_dP
-let g:WhichKeyDesc_paste_keep_register = "p paste over visual selection without losing register contents"
-
-" Stop accidentally pressing Q
-noremap Q <nop>
-let g:WhichKeyDesc_Q = "Q"
-
-" Re-select selection after indenting in visual mode
-xnoremap > >gv
-xnoremap < <gv
-let g:WhichKeyDesc_increase_indent = ">"
-let g:WhichKeyDesc_decrease_indent = "<"
-
-" Tab (buffer) navigation
-nmap [b <Action>(PreviousTab)
-nmap ]b <Action>(NextTab)
-nmap <leader>bd <Action>(CloseContent)
-nmap <leader>bo <Action>(CloseAllEditorsButActive)
-nmap <leader>bl <Action>(CloseAllToTheLeft)
-nmap <leader>br <Action>(CloseAllToTheRight)
-nmap <leader>bp <Action>(PinActiveEditorTab)
-let g:WhichKeyDesc_buffer = "<leader>b buffer"
-let g:WhichKeyDesc_prev_tab = "[b previous tab"
-let g:WhichKeyDesc_next_tab = "]b next tab"
-let g:WhichKeyDesc_close_editor = "<leader>bd close editor"
-let g:WhichKeyDesc_close_to_left = "<leader>bl close all to the left"
-let g:WhichKeyDesc_close_to_right = "<leader>bd close all to the right"
-let g:WhichKeyDesc_close_all_other_editors = "<leader>bp pin tab"
-
-" Error navigation
-map [e <Action>(GotoPreviousError)
-map ]e <Action>(GotoNextError)
-let g:WhichKeyDesc_prev_error = "[e previous error"
-let g:WhichKeyDesc_next_error = "]e next error"
-
-" Git (hunk)
-map [h <Action>(VcsShowPrevChangeMarker)
-map ]h <Action>(VcsShowNextChangeMarker)
-map <leader>ghr <Action>(Vcs.RollbackChangedLines)
-let g:WhichKeyDesc_prev_hunk = "[h previous hunk"
-let g:WhichKeyDesc_next_hunk = "]h next hunk"
-let g:WhichKeyDesc_git = "<leader>g git"
-let g:WhichKeyDesc_hunk = "<leader>gh hunk"
-let g:WhichKeyDesc_reset_hunk = "<leader>ghr reset hunk"
-
-" 'LSP' navigation actions
-nmap gd <Action>(GotoDeclaration)
-nmap gy <Action>(GotoTypeDeclaration)
-nmap gi <Action>(GotoImplementation)
-nmap gt <Action>(GotoTest)
-nmap gr <Action>(ShowUsages)
-nmap gh <Action>(Go to request handler)
-let g:WhichKeyDesc_goto_declaration = "gd goto declaration"
-let g:WhichKeyDesc_goto_type_declaration = "gy goto type declaration"
-let g:WhichKeyDesc_goto_implementation = "gi goto implementation"
-let g:WhichKeyDesc_goto_test = "gt goto test"
-let g:WhichKeyDesc_find_references = "gr find references"
-let g:WhichKeyDesc_goto_request_handler = "gh goto request handler"
-
-" 'Hover' popups
-nmap K <Action>(QuickJavaDoc)
-nmap gK <Action>(QuickImplementations)
-let g:WhichKeyDesc_hover = "K documentation hover"
-let g:WhichKeyDesc_hover = "gK implementation hover"
-
-" Code actions
-map <leader>ca <Action>(ShowIntentionActions)
-map <leader>cf <Action>(Refactorings.QuickListPopupAction)
-nmap <leader>cg <Action>(Generate)
-map <leader>cr <Action>(RenameElement)
-nmap <leader>cR <Action>(RenameFile)
-map <leader>cs <Action>(SurroundWith)
-map <leader>cu <Action>(Unwrap)
-let g:WhichKeyDesc_code = "<leader>c code"
-let g:WhichKeyDesc_code_action = "<leader>ca code action"
-let g:WhichKeyDesc_code_refactor = "<leader>cf refactor code"
-let g:WhichKeyDesc_code_generate = "<leader>cg generate code"
-let g:WhichKeyDesc_rename_symbol = "<leader>cr rename symbol"
-let g:WhichKeyDesc_rename_file = "<leader>cR rename file"
-let g:WhichKeyDesc_surround_with = "<leader>cs surround with"
-let g:WhichKeyDesc_unwrap = "<leader>cu unwrap"
-
 " Grow/shrink selections
-set lookupkeys+="<C-space>"
+sethandler <C-Space> n:vim v:vim i:ide
 map <C-space> <Action>(EditorSelectWord)
 map <bs> <Action>(EditorUnSelectWord)
 let g:WhichKeyDesc_grow_selection = "<C-space> grow selection"
 let g:WhichKeyDesc_shrink_selection = "<bs> shrink selection"
 
-" Function navigation
+nmap <leader>r <Action>(ActivateRunToolWindow)
+let g:WhichKeyDesc_run = "<leader>r run"
+
+nmap <leader>e <Action>(SelectInProjectView)
+let g:WhichKeyDesc_explorer = "<leader>e explorer"
+
+nmap <leader>, <Action>(Switcher)
+let g:WhichKeyDesc_buffers = "<leader>, buffers"
+
+nmap - <Action>(ShowNavBar)
+let g:WhichKeyDesc_open_navbar = "- open navbar"
+
+" NAVIGATION KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+let g:WhichKeyDesc_prev_tab = "[b previous tab"
+let g:WhichKeyDesc_next_tab = "]b next tab"
+
+nmap [e <Action>(GotoPreviousError)
+nmap ]e <Action>(GotoNextError)
+let g:WhichKeyDesc_prev_error = "[e previous error"
+let g:WhichKeyDesc_next_error = "]e next error"
+
 map [f <Action>(MethodUp)
 map ]f <Action>(MethodDown)
 let g:WhichKeyDesc_prev_func = "[f previous function"
 let g:WhichKeyDesc_next_func = "]f next function"
 
-" Debugging actions
+map [h <Action>(VcsShowPrevChangeMarker)
+map ]h <Action>(VcsShowNextChangeMarker)
+let g:WhichKeyDesc_prev_hunk = "[h previous hunk"
+let g:WhichKeyDesc_next_hunk = "]h next hunk"
+
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
+let g:WhichKeyDesc_prev_reference = "[[ prev reference"
+let g:WhichKeyDesc_next_reference = "]] next reference"
+
+" LSP KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap gd <Action>(GotoDeclaration)
+let g:WhichKeyDesc_goto_declaration = "gd goto declaration"
+
+nmap gD <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_goto_type_declaration = "gD goto type declaration"
+
+nmap gh <Action>(Go to request handler)
+let g:WhichKeyDesc_goto_request_handler = "gh goto request handler"
+
+nmap gi <Action>(GotoImplementation)
+let g:WhichKeyDesc_goto_implementation = "gi goto implementation"
+
+nmap gI <Action>(GotoSuperMethod)
+let g:WhichKeyDesc_goto_implementation = "gI goto super method"
+
+nmap gt <Action>(GotoTest)
+let g:WhichKeyDesc_goto_test = "gt goto test"
+
+nmap gr <Action>(ShowUsages)
+let g:WhichKeyDesc_find_references = "gr find references"
+
+nmap K <Action>(QuickJavaDoc)
+let g:WhichKeyDesc_hover = "K documentation hover"
+
+nmap gK <Action>(QuickImplementations)
+let g:WhichKeyDesc_hover = "gK implementation hover"
+
+" BUFFER KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <leader>bd <Action>(CloseContent)
+let g:WhichKeyDesc_close_editor = "<leader>bd close editor"
+
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+let g:WhichKeyDesc_close_to_left = "<leader>bo close all to the left"
+
+nmap <leader>bl <Action>(CloseAllToTheLeft)
+let g:WhichKeyDesc_close_to_left = "<leader>bl close all to the left"
+
+nmap <leader>br <Action>(CloseAllToTheRight)
+let g:WhichKeyDesc_close_to_right = "<leader>br close all to the right"
+
+nmap <leader>bp <Action>(PinActiveEditorTab)
+let g:WhichKeyDesc_close_all_other_editors = "<leader>bp pin tab"
+
+" CODE KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map <leader>ca <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_code_action = "<leader>ca code action"
+
+map <leader>cA <Action>(Refactorings.QuickListPopupAction)
+let g:WhichKeyDesc_code_refactor = "<leader>cA refactor"
+
+nmap <leader>cf <Action>(ReformatCode)
+let g:WhichKeyDesc_code_format = "<leader>cf format code"
+
+nmap <leader>ci <Action>(ImplementMethods)
+let g:WhichKeyDesc_code_implement = "<leader>ci implement methods"
+
+nmap <leader>cg <Action>(Generate)
+let g:WhichKeyDesc_code_generate = "<leader>cg generate code"
+
+map <leader>cr <Action>(RenameElement)
+let g:WhichKeyDesc_rename_symbol = "<leader>cr rename symbol"
+
+nmap <leader>cR <Action>(RenameFile)
+let g:WhichKeyDesc_rename_file = "<leader>cR rename file"
+
+map <leader>cs <Action>(SurroundWith)
+let g:WhichKeyDesc_surround_with = "<leader>cs surround with"
+
+map <leader>cu <Action>(Unwrap)
+let g:WhichKeyDesc_unwrap = "<leader>cu unwrap"
+
+" DEBUG KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 map <leader>db <Action>(ToggleLineBreakpoint)
-nmap <leader>dd <Action>(Debug)
-nmap <leader>ds <Action>(Stop)
-let g:WhichKeyDesc_debug = "<leader>d debug"
 let g:WhichKeyDesc_toggle_breakpoint = "<leader>db toggle breakpoint"
+
+nmap <leader>dd <Action>(Debug)
 let g:WhichKeyDesc_run_debugger = "<leader>dd run debugger"
-let g:WhichKeyDesc_stop = "<leader>dd stop execution"
 
-" File navigation
+nmap <leader>ds <Action>(Stop)
+let g:WhichKeyDesc_stop = "<leader>ds stop execution"
+
+" FILE/FIND KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 nmap <leader>fr <Action>(RecentFiles)
-nmap <leader>ff <Action>(GotoFile)
-nmap <C-p> <Action>(GotoFile)
-nmap - <Action>(ShowNavBar)
-let g:WhichKeyDesc_files = "<leader>f files"
 let g:WhichKeyDesc_recent_files = "<leader>fr recent files"
-let g:WhichKeyDesc_find_file = "<leader>ff find file"
-let g:WhichKeyDesc_quick_find_file = "<C-p> find file"
-let g:WhichKeyDesc_open_navbar = "- open navbar"
 
-" Search
+nmap <leader>ff <Action>(GotoFile)
+let g:WhichKeyDesc_find_file = "<leader>ff find file"
+
+nmap <leader>fn <Action>(NewElementSamePlace)
+let g:WhichKeyDesc_file_new = "<leader>fn new file"
+
+nmap <leader>fs <Action>(FileStructurePopup)
+let g:WhichKeyDesc_find_symbol = "<leader>fs find symbol"
+
+nmap <C-p> <Action>(GotoFile)
+let g:WhichKeyDesc_quick_find_file = "<C-p> find file"
+
+" GIT KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <leader>gs <Action>(ActivateCommitToolWindow)
+let g:WhichKeyDesc_status = "<leader>gs status"
+
+nmap <leader>gb <Action>(Annotate)
+let g:WhichKeyDesc_blame = "<leader>gb blame"
+
+nmap <leader>gl <Action>(Vcs.Show.Log)
+let g:WhichKeyDesc_log = "<leader>gl log"
+
+nmap <leader>gL <Action>(Vcs.ShowTabbedFileHistory)
+let g:WhichKeyDesc_log_file = "<leader>gL log for file"
+
+map <leader>ghr <Action>(Vcs.RollbackChangedLines)
+let g:WhichKeyDesc_reset_hunk = "<leader>ghr reset hunk"
+
+map <leader>gw <Action>(Github.Open.In.Browser)
+let g:WhichKeyDesc_open_web = "<leader>gw open in browser"
+
+" SEARCH KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 map <leader>/ <Action>(FindInPath)
-map <leader>sa <Action>(GotoAction)
-nmap <leader>sc <Action>(GotoClass)
-map <leader>sg <Action>(FindInPath)
-nmap <leader>sl <Action>(RecentLocations)
-map <leader>sr <Action>(ReplaceInPath)
-nmap <leader>ss <Action>(GotoSymbol)
-let g:WhichKeyDesc_search = "<leader>s search"
 let g:WhichKeyDesc_quick_search = "<leader>/ grep"
+
+map <leader>sa <Action>(GotoAction)
 let g:WhichKeyDesc_search_actions = "<leader>sa search actions"
+
+nmap <leader>sc <Action>(GotoClass)
 let g:WhichKeyDesc_search_class = "<leader>sc search classes/types"
+
+map <leader>sg <Action>(FindInPath)
 let g:WhichKeyDesc_search_grep = "<leader>sg grep"
+
+nmap <leader>sl <Action>(RecentLocations)
 let g:WhichKeyDesc_search_locations = "<leader>sl search location list"
+
+map <leader>sr <Action>(ReplaceInPath)
 let g:WhichKeyDesc_search_replace = "<leader>sr find + replace"
+
+nmap <leader>ss <Action>(GotoSymbol)
 let g:WhichKeyDesc_search_symbol = "<leader>ss search symbols"
+
+nmap <leader>st <Action>(ActivateTODOToolWindow)
+let g:WhichKeyDesc_search_todo = "<leader>st search todos"
+
+" TEST KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <leader>td <Action>(ChooseDebugConfiguration)
+let g:WhichKeyDesc_test_debug = "<leader>td debug nearest"
+
+nmap <leader>tl <Action>(Run)
+let g:WhichKeyDesc_test_last = "<leader>tl run last tests"
+
+nmap <leader>to <Action>(ActivateRunToolWindow)
+let g:WhichKeyDesc_test_output = "<leader>to show test output"
+
+nmap <leader>tr <Action>(RunClass)
+let g:WhichKeyDesc_test_nearest = "<leader>tr run nearest tests"
+
+" UI KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <leader>uC <Action>(QuickChangeScheme)
+let g:WhichKeyDesc_ui_colorscheme = "<leader>uC colorscheme"
+
+nmap <leader>uh <Action>(ToggleInlayHintsGloballyAction)
+let g:WhichKeyDesc_ui_inlay_hints = "<leader>uh inlay hints"
+
+nmap <leader>ul :set relativenumber!<CR>
+let g:WhichKeyDesc_ui_relative_number = "<leader>ul relative line numbers"
+
+nmap <leader>uL :set number!<CR>
+let g:WhichKeyDesc_ui_line_numbers = "<leader>uL line numbers"
+
+nmap <leader>un <Action>(ClearAllNotifications)
+let g:WhichKeyDesc_ui_notifications = "<leader>un dismiss all notifications"
