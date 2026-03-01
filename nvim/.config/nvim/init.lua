@@ -246,6 +246,10 @@ require("snacks").setup({
   words = { enabled = true },
   picker = {
     enabled = true,
+    icons = {
+      files = { enabled = false },
+      git = { enabled = false },
+    },
     win = {
       input = {
         keys = {
@@ -265,10 +269,6 @@ require("snacks").setup({
       },
     },
   },
-  scroll = {
-    enabled = true,
-    animate = { duration = { step = 10, total = 100 } },
-  },
 })
 
 -- Snacks gitbrowse
@@ -283,14 +283,14 @@ map("n", "<leader>glc", function() Snacks.gitbrowse({ what = "commit", open = co
 map("n", "<leader>glC", function() Snacks.gitbrowse({ what = "commit" }) end, "Open link to git commit")
 
 -- Snacks picker
-map("n", "<C-p>", function() Snacks.picker.smart() end, "Smart find files")
+map("n", "<C-p>", function() Snacks.picker.smart({ filter = { cwd = true } }) end, "Smart find files")
 map("n", "<leader>,", function() Snacks.picker.buffers() end, "Find buffer")
 map("n", "<leader>:", function() Snacks.picker.command_history() end, "Search command history")
 map("n", "<leader>/", function() Snacks.picker.grep() end, "Grep")
 map("x", "<leader>/", function() Snacks.picker.grep_word({ live = true }) end, "Grep")
 map("n", "<leader><space>", function() Snacks.picker.resume() end, "Resume last picker")
 map("n", "<leader>ff", function() Snacks.picker.files() end, "Find files")
-map("n", "<leader>fr", function() Snacks.picker.recent() end, "Recent files")
+map("n", "<leader>fr", function() Snacks.picker.recent({ filter = { cwd = true } }) end, "Recent files")
 map("n", "<leader>sc", function() Snacks.picker.commands() end, "Search commands")
 map("n", "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, "Search diagnostics")
 map("n", "<leader>sh", function() Snacks.picker.help() end, "Search help")
