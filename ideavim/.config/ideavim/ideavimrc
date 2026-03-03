@@ -92,11 +92,14 @@ map <bs> <Action>(EditorUnSelectWord)
 let g:WhichKeyDesc_grow_selection = "<C-space> grow selection"
 let g:WhichKeyDesc_shrink_selection = "<bs> shrink selection"
 
-nmap <leader>r <Action>(ActivateRunToolWindow)
+nmap <leader>r <Action>(Run)
 let g:WhichKeyDesc_run = "<leader>r run"
 
 nmap <leader>e <Action>(SelectInProjectView)
 let g:WhichKeyDesc_explorer = "<leader>e explorer"
+
+nmap <leader>z <Action>(ToggleDistractionFreeMode)
+let g:WhichKeyDesc_explorer = "<leader>z zen mode"
 
 nmap <leader>, <Action>(Switcher)
 let g:WhichKeyDesc_buffers = "<leader>, buffers"
@@ -138,8 +141,8 @@ let g:WhichKeyDesc_next_reference = "]] next reference"
 nmap gd <Action>(GotoDeclaration)
 let g:WhichKeyDesc_goto_declaration = "gd goto declaration"
 
-nmap gD <Action>(GotoTypeDeclaration)
-let g:WhichKeyDesc_goto_type_declaration = "gD goto type declaration"
+nmap gy <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_goto_type_declaration = "gy goto type declaration"
 
 nmap gh <Action>(Go to request handler)
 let g:WhichKeyDesc_goto_request_handler = "gh goto request handler"
@@ -189,7 +192,7 @@ let g:WhichKeyDesc_code_action = "<leader>ca code action"
 map <leader>cA <Action>(Refactorings.QuickListPopupAction)
 let g:WhichKeyDesc_code_refactor = "<leader>cA refactor"
 
-nmap <leader>cf <Action>(ReformatCode)
+map <leader>cf <Action>(ReformatCode)
 let g:WhichKeyDesc_code_format = "<leader>cf format code"
 
 nmap <leader>ci <Action>(ImplementMethods)
