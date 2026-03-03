@@ -6,3 +6,7 @@ mouse-hide-while-typing = true
 theme = "TokyoNight Moon"
 window-padding-x = 4
 window-padding-y = 4
+
+# Rebind cmd + K to send the literal ctrl + L escape sequence (so that clearing
+# the screen works in tmux too)
+keybind = super+k=text:\x0c
