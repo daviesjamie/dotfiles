@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+git changed "$@" | cut -d'/' -f1 | uniq

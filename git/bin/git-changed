@@ -12,9 +12,5 @@ if [[ -z "$BRANCH" ]]; then
   BRANCH="HEAD"
 fi
 
-if [[ -z "$MERGE_BASE" || -z "$BRANCH" ]]; then
-  echo "Usage: git files-changed [merge_base] [branch]"
-  exit 1
-fi
-
-git diff --name-only $(git merge-base $MERGE_BASE $BRANCH) | sort
+REF=$(git merge-base "$MERGE_BASE" "$BRANCH")
+git diff --name-only "$REF" | sort
