@@ -192,3 +192,7 @@ on-mode-changed = []
     shift-j = ['join-with down', 'mode main']
     shift-k = ['join-with up', 'mode main']
     shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+    if.app-id = 'com.monzo.ios.retail-staging'
+    run = 'layout floating'
