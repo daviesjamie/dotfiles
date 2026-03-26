@@ -1,5 +1,5 @@
 format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$character"
-command_timeout = 1000
+command_timeout = 3000
 
 [character]
 error_symbol = "[❯](red)"
