@@ -1,23 +1,37 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-if [ -z "$OLD_EMAIL" ]; then
-    echo '$OLD_EMAIL needs to be set'
-    exit 1
+USAGE="
+usage: $(basename "$0") <old_email> <new_email>
+
+Recursively rewrites git history to replace an old email with a new one.
+
+arguments:
+  <old_email>  The email to get rid of
+  <new_email>  The email to replace it with
+"
+
+old_email=${1:-}
+if [ -z "$old_email" ]; then
+  echo >&2 '<old_email> is required!'
+  echo "$USAGE"
+  exit 1
 fi
 
-if [ -z "$NEW_EMAIL" ]; then
-    echo '$NEW_EMAIL needs to be set'
-    exit 1
+new_email=${2:-}
+if [ -z "$new_email" ]; then
+  echo >&2 '<new_email> is required!'
+  echo "$USAGE"
+  exit 1
 fi
 
 git filter-branch --env-filter '
-if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+if [ "$GIT_COMMITTER_EMAIL" = "$old_email" ]
 then
-    export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+    export GIT_COMMITTER_EMAIL="$new_email"
 fi
-if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+if [ "$GIT_AUTHOR_EMAIL" = "$old_email" ]
 then
-    export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+    export GIT_AUTHOR_EMAIL="$new_email"
 fi
 ' --tag-name-filter cat -- --branches --tags

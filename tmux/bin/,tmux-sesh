@@ -1,63 +1,64 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 EXTRA_FOLDERS=(
-    "$HOME/notes"
-    "$HOME/.dotfiles"
+  "$HOME/notes"
+  "$HOME/.dotfiles"
 )
 
-if ! type tmux &> /dev/null || ! type ghq &> /dev/null; then
-    echo "`ghq` and `tmux` are required" >&2
-    exit 1
+if ! type tmux &>/dev/null || ! type ghq &>/dev/null; then
+  echo >&2 "'ghq' and 'tmux' are required"
+  exit 1
 fi
 
 if [[ -d "$*" ]]; then
-    repo_path="$*"
+  repo_path="$*"
 else
-    for folder in "${EXTRA_FOLDERS[@]}"; do
-        if [[ -d $folder ]]; then
-            repos+="$folder\n"
-        fi
-    done
-
-    repos+=$(ghq list)
-
-    if [[ $# -gt 0 ]]; then
-        repo_href=$(printf "$repos" | fzf -1 -q "$*")
-    else
-        repo_href=$(printf "$repos" | fzf)
+  for folder in "${EXTRA_FOLDERS[@]}"; do
+    if [[ -d $folder ]]; then
+      repos+="$folder\n"
     fi
+  done
 
-    if [[ -z $repo_href ]]; then
-        echo "Couldn't find repo $repo_href" >&2
-        exit 1
-    fi
+  repos+=$(ghq list)
 
-    if [[ $repo_href == /* ]]; then
-        # If the href starts with a slash, assume it's an absolute path
-        # (i.e. from the EXTRA_FOLDERS)
-        repo_path=$repo_href
-    else
-        repo_path=$(ghq list -p -e $repo_href)
-    fi
+  if [[ $# -gt 0 ]]; then
+    repo_href=$(printf "%s" "$repos" | fzf -1 -q "$*")
+  else
+    repo_href=$(printf "%s" "$repos" | fzf)
+  fi
+
+  if [[ -z $repo_href ]]; then
+    echo "Couldn't find repo $repo_href" >&2
+    exit 1
+  fi
+
+  if [[ $repo_href == /* ]]; then
+    # If the href starts with a slash, assume it's an absolute path
+    # (i.e. from the EXTRA_FOLDERS)
+    repo_path=$repo_href
+  else
+    repo_path=$(ghq list -p -e "$repo_href")
+  fi
 fi
 
-repo_name=$(basename $repo_path | sed 's/\.git$//' | sed 's/^\.//' | tr '.' '_')
+repo_name=$(basename "$repo_path" | sed 's/\.git$//' | sed 's/^\.//' | tr '.' '_')
 tmux_running=$(pgrep tmux)
 
 if [[ -z $tmux_running ]]; then
-    # If tmux isn't running, then start tmux with a new session for the repo
-    tmux new-session -s $repo_name -c $repo_path
-    exit 0
+  # If tmux isn't running, then start tmux with a new session for the repo
+  tmux new-session -s "$repo_name" -c "$repo_path"
+  exit 0
 fi
 
-if ! tmux has-session -t=$repo_name 2> /dev/null; then
-    # If tmux doesn't already have a session for the repo, then create it
-    tmux new-session -d -s $repo_name -c $repo_path
+if ! tmux has-session -t="$repo_name" 2>/dev/null; then
+  # If tmux doesn't already have a session for the repo, then create it
+  tmux new-session -d -s "$repo_name" -c "$repo_path"
 fi
 
 # Attach or switch to the session
- if [[ -z $TMUX ]]; then
-     tmux attach -t $repo_name
- else
-     tmux switch-client -t $repo_name
- fi
+if [[ -z "$TMUX" ]]; then
+  tmux attach -t "$repo_name"
+else
+  tmux switch-client -t "$repo_name"
+fi

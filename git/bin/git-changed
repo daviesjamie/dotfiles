@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-MERGE_BASE=$1
-BRANCH=$2
+USAGE="
+usage: $(basename "$0") [old_ref] [new_ref]
 
-if [[ -z "$MERGE_BASE" ]]; then
-  MERGE_BASE=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+Lists the files that have changed between two git references.
+
+arguments:
+  [old_ref]  The git ref to start the diff at. Defaults to the origin's HEAD.
+  [new_ref]  The git ref to end the diff at. Defaults to HEAD.
+"
+
+old_ref=${1:-}
+if [[ -z "$old_ref" ]]; then
+  old_ref=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 fi
 
-if [[ -z "$BRANCH" ]]; then
-  BRANCH="HEAD"
+new_ref=${2:-}
+if [[ -z "$new_ref" ]]; then
+  new_ref="HEAD"
 fi
 
-REF=$(git merge-base "$MERGE_BASE" "$BRANCH")
-git diff --name-only "$REF" | sort
+merge_base=$(git merge-base "$old_ref" "$new_ref")
+git diff --name-only "$merge_base" "$new_ref" | sort

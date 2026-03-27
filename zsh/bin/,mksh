@@ -13,24 +13,24 @@ arguments:
             automatically reruns 'stow' to generate symlink.
 "
 
-NAME=${1:-}
-if [ -z "$NAME" ]; then
+name=${1:-}
+if [ -z "$name" ]; then
   echo >&2 "<name> is required!"
   echo "$USAGE"
   exit 1
 fi
 
-DIR=${2:-"$HOME/.dotfiles/zsh/bin"}
-SCRIPT_PATH="$DIR/$NAME"
+dir=${2:-"$HOME/.dotfiles/zsh/bin"}
+script_name="$dir/$name"
 
-if [ -f "$SCRIPT_PATH" ]; then
-  echo >&2 "$SCRIPT_PATH already exists!"
+if [ -f "$script_name" ]; then
+  echo >&2 "$script_name already exists!"
   exit 1
 fi
 
-echo "Creating script $SCRIPT_PATH"
+echo "Creating script $script_name"
 
-cat >"$SCRIPT_PATH" <<EOF
+cat >"$script_name" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -44,26 +44,26 @@ arguments:
   [bar]   Description of bar
 "
 
-FOO="\${1:-}"
-if [ -z "\$FOO" ]; then
+foo="\${1:-}"
+if [ -z "\$foo" ]; then
   echo >&2 "<foo> is required!"
   echo "\$USAGE"
   exit
 fi
 
-BAR=\${2:-"default_bar"}
+bar=\${2:-"default_bar"}
 
-echo "\$FOO" "\$BAR"
+echo "\$foo" "\$bar"
 EOF
 
-chmod +x "$SCRIPT_PATH"
+chmod +x "$script_name"
 
 # If we're editing within ~/.dotfiles, link the file into place with `stow`
-DOTFILES_REGEX="^$HOME/.dotfiles/([^/]+)"
-if [[ $SCRIPT_PATH =~ $DOTFILES_REGEX ]]; then
-  STOW_PACKAGE="${BASH_REMATCH[1]}"
-  echo "Restowing $STOW_PACKAGE"
-  stow -d ~/.dotfiles -R "$STOW_PACKAGE"
+dotfiles_regex="^$HOME/.dotfiles/([^/]+)"
+if [[ $script_name =~ $dotfiles_regex ]] && type stow &>/dev/null; then
+  stow_package="${BASH_REMATCH[1]}"
+  echo "Restowing $stow_package"
+  stow -d ~/.dotfiles -R "$stow_package"
 fi
 
-${VISUAL:-${EDITOR:-vi}} "${SCRIPT_PATH}"
+${VISUAL:-${EDITOR:-vi}} "${script_name}"

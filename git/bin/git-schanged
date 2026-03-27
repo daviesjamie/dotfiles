@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-git changed "$@" | cut -d'/' -f1 | uniq
+USAGE="
+usage: $(basename "$0") [old_ref] [new_ref]
+
+Lists the top-level directories that have changed between two git references.
+
+arguments:
+  [old_ref]  The git ref to start the diff at. Defaults to the origin's HEAD.
+  [new_ref]  The git ref to end the diff at. Defaults to HEAD.
+"
+
+./git-changed "$@" | cut -d'/' -f1 | uniq

@@ -1,16 +1,26 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-DRY_RUN=0
+USAGE="
+usage: $(basename "$0") [-n|--dry-run]
+
+Deletes all local branches that have been deleted on the remote.
+
+arguments:
+  [-n|--dry-run]   If specified, only prints the branches that would be
+                   removed, without actually deleting them.
+"
+
+dry_run=0
 
 for i in "$@"; do
-    case $i in
-        -n | --dry-run)
-            DRY_RUN=1
-            shift
-            ;;
-        *) ;;
-    esac
+  case $i in
+  -n | --dry-run)
+    dry_run=1
+    shift
+    ;;
+  *) ;;
+  esac
 done
 
 # Fetch info for all remotes and remove any remote-tracking references
@@ -20,9 +30,9 @@ git fetch --all --prune &>/dev/null
 # Delete all branches marked as gone in `git branch` output
 # For example:
 # fix/bump-zero-mq fab5e3dc [origin/fix/bump-zero-mq: gone] Bump version of zeromq library
-if [ $DRY_RUN -eq 1 ]; then
-    echo "Would delete:"
-    git branch -vv | awk '/: gone]/{print $1}'
+if [ $dry_run -eq 1 ]; then
+  echo "Would delete:"
+  git branch -vv | awk '/: gone]/{print $1}'
 else
-    git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+  git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
 fi
