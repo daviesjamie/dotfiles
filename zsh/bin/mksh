@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: $(basename "$0") <name> [dir]
+
+Creates a new executable shell script from a template.
+
+arguments:
+  <name>    The name of the script
+  [dir]     An optional place to create the script.
+            Defaults to ~/.dotfiles/zsh/bin. If dir is in ~/.dotfiles,
+            automatically reruns 'stow' to generate symlink.
+"
+
+NAME=${1:-}
+if [ -z "$NAME" ]; then
+  echo >&2 "<name> is required!"
+  echo "$USAGE"
+  exit 1
+fi
+
+DIR=${2:-"$HOME/.dotfiles/zsh/bin"}
+SCRIPT_PATH="$DIR/$NAME"
+
+if [ -f "$SCRIPT_PATH" ]; then
+  echo >&2 "$SCRIPT_PATH already exists!"
+  exit 1
+fi
+
+echo "Creating script $SCRIPT_PATH"
+
+cat >"$SCRIPT_PATH" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: \$(basename "\$0") <foo> [bar]
+
+Does something fun.
+
+arguments:
+  <foo>   Description of foo
+  [bar]   Description of bar
+"
+
+FOO="\${1:-}"
+if [ -z "\$FOO" ]; then
+  echo >&2 "<foo> is required!"
+  echo "\$USAGE"
+  exit
+fi
+
+BAR=\${2:-"default_bar"}
+
+echo "\$FOO" "\$BAR"
+EOF
+
+chmod +x "$SCRIPT_PATH"
+
+# If we're editing within ~/.dotfiles, link the file into place with `stow`
+DOTFILES_REGEX="^$HOME/.dotfiles/([^/]+)"
+if [[ $SCRIPT_PATH =~ $DOTFILES_REGEX ]]; then
+  STOW_PACKAGE="${BASH_REMATCH[1]}"
+  echo "Restowing $STOW_PACKAGE"
+  stow -d ~/.dotfiles -R "$STOW_PACKAGE"
+fi
+
+${VISUAL:-${EDITOR:-vi}} "${SCRIPT_PATH}"
