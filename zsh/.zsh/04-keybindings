@@ -6,6 +6,6 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 
-if has tmux-sesh; then
-  bindkey -s ^g "tmux-sesh\n"
+if has ,tmux-sesh; then
+  bindkey -s ^g ",tmux-sesh\n"
 fi
