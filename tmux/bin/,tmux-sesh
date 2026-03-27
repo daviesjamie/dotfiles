@@ -23,9 +23,9 @@ else
   repos+=$(ghq list)
 
   if [[ $# -gt 0 ]]; then
-    repo_href=$(printf "%s" "$repos" | fzf -1 -q "$*")
+    repo_href=$(printf "$repos" | fzf -1 -q "$*")
   else
-    repo_href=$(printf "%s" "$repos" | fzf)
+    repo_href=$(printf "$repos" | fzf)
   fi
 
   if [[ -z $repo_href ]]; then
@@ -43,9 +43,9 @@ else
 fi
 
 repo_name=$(basename "$repo_path" | sed 's/\.git$//' | sed 's/^\.//' | tr '.' '_')
-tmux_running=$(pgrep tmux)
+tmux_running=$(pgrep tmux || exit 0)
 
-if [[ -z $tmux_running ]]; then
+if [[ -z "$tmux_running" ]]; then
   # If tmux isn't running, then start tmux with a new session for the repo
   tmux new-session -s "$repo_name" -c "$repo_path"
   exit 0
@@ -57,7 +57,8 @@ if ! tmux has-session -t="$repo_name" 2>/dev/null; then
 fi
 
 # Attach or switch to the session
-if [[ -z "$TMUX" ]]; then
+tmux_session=${TMUX:-}
+if [[ -z "$tmux_session" ]]; then
   tmux attach -t "$repo_name"
 else
   tmux switch-client -t "$repo_name"
