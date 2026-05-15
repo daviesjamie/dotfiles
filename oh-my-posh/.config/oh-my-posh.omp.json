@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "blue",
+          "style": "plain",
+          "template": "{{ if or .SSHSession .Root }}{{ .UserName }}{{ end }}",
+          "type": "session"
+        },
+        {
+          "foreground": "magenta",
+          "style": "plain",
+          "template": "{{ if .SSHSession }}{{ .HostName }}{{ end }}",
+          "type": "session"
+        },
+        {
+          "foreground": "cyan",
+          "options": {
+            "style": "full"
+          },
+          "style": "plain",
+          "template": "{{ .Path }} ",
+          "type": "path"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "darkGray",
+          "options": {
+            "branch_icon": "",
+            "fetch_status": true
+          },
+          "style": "plain",
+          "template": "{{ .HEAD }}{{ if .Working.Changed }}*{{ end }}{{ if .Staging.Changed }}+{{ end }}{{ if gt .Working.Untracked 0 }}?{{ end }}{{ if gt .Working.Unmerged 0 }}!{{ end }}",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "yellow",
+          "options": {
+            "style": "round",
+            "threshold": 5000
+          },
+          "style": "plain",
+          "template": " {{ .FormattedMs }} ",
+          "type": "executiontime"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "lightWhite",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}red{{ end }}"
+          ],
+          "options": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "❯",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "streaming": 100,
+  "transient_prompt": {
+    "foreground": "darkGray",
+    "newline": true,
+    "template": "{{now | date \"15:04:05\"}}\n❯ "
+  },
+  "version": 4
+}
