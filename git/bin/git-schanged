@@ -11,4 +11,4 @@ arguments:
   [new_ref]  The git ref to end the diff at. Defaults to HEAD.
 "
 
-./git-changed "$@" | cut -d'/' -f1 | uniq
+git-changed "$@" | cut -d'/' -f1 | uniq
