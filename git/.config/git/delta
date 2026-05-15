@@ -6,7 +6,7 @@
     features = "jagd-theme"
     line-numbers = true
     navigate = true
-    side-by-side = false
+    side-by-side = true
 
 [delta "jagd-theme"]
     hunk-header-decoration-style = "blue"
