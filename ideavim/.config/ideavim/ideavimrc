@@ -240,6 +240,9 @@ let g:WhichKeyDesc_file_new = "<leader>fn new file"
 nmap <leader>fs <Action>(FileStructurePopup)
 let g:WhichKeyDesc_find_symbol = "<leader>fs find symbol"
 
+nmap <leader>fy <Action>(CopyReferencePopupGroup)
+let g:WhichKeyDesc_file_copy_reference = "<leader>fy yank file reference"
+
 nmap <C-p> <Action>(GotoFile)
 let g:WhichKeyDesc_quick_find_file = "<C-p> find file"
 
