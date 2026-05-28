@@ -6,7 +6,7 @@ EXTRA_FOLDERS=(
   "$HOME/.dotfiles"
 )
 
-if ! type tmux &>/dev/null || ! type ghq &>/dev/null; then
+if ! command -v tmux &>/dev/null || ! command -v ghq &>/dev/null; then
   echo >&2 "'ghq' and 'tmux' are required"
   exit 1
 fi

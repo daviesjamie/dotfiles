@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: $(basename "$0")
+
+Copies the current directory to the system clipboard.
+"
+
+pwd | ,pbc

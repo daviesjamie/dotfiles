@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: $(basename "$0") > some_file.txt
+
+Writes the contents of the system clipboard to standard out.
+"
+
+if command -v pbpaste &>/dev/null; then
+  cmd='pbpaste'
+elif command -v xclip &>/dev/null; then
+  cmd='xclip -selection clipboard -o'
+else
+  echo >&2 'cannot find a paste utility'
+  exit 1
+fi
+
+exec $cmd

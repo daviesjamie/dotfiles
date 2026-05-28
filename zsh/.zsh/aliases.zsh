@@ -17,15 +17,6 @@ if echo | grep --color=auto '' > /dev/null 2>&1; then
     alias grep='grep --color=auto'
 fi
 
-# Clipboard
-if has pbcopy; then
-    alias pbc='pbcopy'
-    alias pbp='pbpaste'
-elif has xclip; then
-    alias pbc='xclip -selection clipboard'
-    alias pbp='xclip -selection clipboard -o'
-fi
-
 if has hub; then
     eval "$(hub alias -s)"
 fi

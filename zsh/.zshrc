@@ -32,7 +32,7 @@ bindkey "^[[3~" delete-char
 # HOOKS ------------------------------------------------------------------- {{{
 
 function has() {
-  command -v $1 > /dev/null 2>&1
+  command -v "$1" > /dev/null 2>&1
 }
 
 if has ,tmux-sesh; then

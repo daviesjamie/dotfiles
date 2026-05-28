@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: $(basename "$0") > all_copies.txt
+
+Writes clipboard content to standard out every time it changes.
+"
+
+trap 'exit 0' SIGINT
+
+last_value=''
+
+while true; do
+  value="$(,pbp)"
+
+  if [ "$last_value" != "$value" ]; then
+    echo "$value"
+    last_value="$value"
+  fi
+
+  sleep 0.1
+done

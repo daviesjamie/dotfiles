@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: echo "foo" | $(basename "$0")
+
+Copies standard input into the system clipboard.
+"
+
+if type pbcopy &>/dev/null; then
+  cmd='pbcopy'
+elif type xclip &>/dev/null; then
+  cmd='xclip -selection clipboard'
+else
+  echo >&2 'cannot find a copy utility'
+  exit 1
+fi
+
+exec $cmd

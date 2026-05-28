@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="
+usage: $(basename "$0") <script>
+
+Edits an executable shell script on the $$PATH in $$EDITOR.
+
+arguments:
+  <script>   The name of the script
+"
+
+script="${1:-}"
+if [ -z "$script" ]; then
+  echo >&2 "<script> is required!"
+  echo "$USAGE"
+  exit 1
+fi
+
+if ! which "$script"; then
+  echo >&2 "'$script' not found"
+  exit 1
+fi
+
+script_path=$(which "$script")
+
+${VISUAL:-${EDITOR:-vi}} "${script_path}"

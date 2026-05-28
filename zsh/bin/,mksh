@@ -48,7 +48,7 @@ foo="\${1:-}"
 if [ -z "\$foo" ]; then
   echo >&2 "<foo> is required!"
   echo "\$USAGE"
-  exit
+  exit 1
 fi
 
 bar=\${2:-"default_bar"}
