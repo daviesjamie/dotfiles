@@ -7,8 +7,7 @@ else
 fi
 
 # Directory listings
-alias ls='ls -p ${colorflag}'
-alias l='ls'
+alias ls="ls -p ${colorflag}"
 alias la='ls -A'
 alias ll='ls -hl'
 alias lla='ls -Ahl'

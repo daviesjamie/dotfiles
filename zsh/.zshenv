@@ -1,3 +1,74 @@
+# ENVIRONMENT ------------------------------------------------------------- {{{
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export LANG="en_GB.UTF-8"
+export LC_ALL="en_GB.UTF-8"
+export LC_CTYPE="en_GB.UTF-8"
+
+export DOTFILES="$HOME/.dotfiles"
+export GHQ_ROOT="$HOME/src"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# }}}
+# ZSH --------------------------------------------------------------------- {{{
+
+# Save command-line history to ~/.zsh_history
+HISTFILE=$HOME/.zsh_history
+
+# Keep 10,000 lines of history in a session
+HISTSIZE=10000
+
+# Keep 10,000 lines of history in HISTFILE
+SAVEHIST=10000
+
+# }}}
+# HOMEBREW ---------------------------------------------------------------- {{{
+
+# This should probably be loaded in .zshrc,
+# but I want to use $HOMEBREW_PREFIX for the PATH variables below
+
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"  # aarch
+elif [ -f "/usr/local/bin/brew" ]; then
+  eval "$(/usr/local/bin/brew shellenv)"     # x86
+fi
+
+# }}}
+# PATH -------------------------------------------------------------------- {{{
+
+path=(
+  "$HOME/bin"
+  "$HOME/.local/bin"
+  "$HOME/go/bin"
+  "$HOMEBREW_PREFIX/bin"
+  $path
+)
+
+# Remove duplicates and non-existent dirs
+typeset -U path
+path=($^path(N-/))
+
+export PATH
+
+# }}}
+# FPATH -------------------------------------------------------------------- {{{
+
+fpath=(
+    "$HOMEBREW_PREFIX/share/zsh/site-functions"
+    $fpath
+)
+
+# Remove duplicates and non-existent dirs
+typeset -U fpath
+fpath=($^fpath(N-/))
+
+export FPATH
+
+# }}}
+# LS_COLORS ---------------------------------------------------------------- {{{
+
 # Attributes	   ;    Text	           ;     Background
 # 00 none	            30 black                 40  black
 # 01 bold               31 red                   41  red
@@ -40,3 +111,7 @@ LS_COLORS="${LS_COLORS}:or=00;91"
 LS_COLORS="${LS_COLORS}:ex=00;92"
 
 export LS_COLORS
+
+# }}}
+
+[[ -f "$HOME/.zshenv.local" ]] && source "$HOME/.zshenv.local"
