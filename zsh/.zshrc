@@ -1,3 +1,6 @@
+# Uncomment this line and the line at the bottom to profile zsh startup
+#zmodload zsh/zprof
+
 # OPTIONS ----------------------------------------------------------------- {{{
 
 # Write lines to $HISTFILE once they've finished executing
@@ -39,7 +42,7 @@ if has ,tmux-sesh; then
   bindkey -s ^g ",tmux-sesh\n"
 fi
 
-# `brew shellenv` is called from .zprofile
+# `brew shellenv` is called from .zshenv
 
 if has direnv; then
     eval "$(direnv hook zsh)"
@@ -94,3 +97,6 @@ for f in $files; do
 done
 
 # }}}
+
+# Uncomment this line and the line at the top to profile zsh startup
+#zprof
