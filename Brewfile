@@ -1,0 +1,30 @@
+brew "direnv"
+brew "fd"
+brew "fzf"
+brew "ghq"
+brew "git"
+brew "git-delta"
+brew "jq"
+brew "mise"
+brew "neovim"
+brew "oh-my-posh"
+brew "reattach-to-user-namespace"
+brew "ripgrep"
+brew "stow"
+brew "tmux"
+brew "tree"
+brew "wget"
+brew "zsh"
+
+cask "1password"
+cask "ghostty"
+cask "monodraw"
+cask "obsidian"
+cask "raycast"
+cask "slack"
+cask "spotify"
+
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace", trusted: true
+
+mas "Things", id: 904280696
