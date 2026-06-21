@@ -1,6 +1,9 @@
 # Uncomment this line and the line at the bottom to profile zsh startup
 #zmodload zsh/zprof
 
+autoload -Uz compinit
+compinit
+
 # OPTIONS ----------------------------------------------------------------- {{{
 
 # Write lines to $HISTFILE once they've finished executing
@@ -93,7 +96,9 @@ files=(
 )
 
 for f in $files; do
-  [[ -f $f ]] && source $f
+  if [[ -f $f ]]; then
+    source $f
+  fi
 done
 
 # }}}

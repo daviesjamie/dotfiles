@@ -1,5 +1,4 @@
 zmodload zsh/complist
-autoload -U compinit; compinit
 
 setopt MENU_COMPLETE     # autoselect the first completion entry
 setopt AUTO_MENU         # show completion menu on successive tab press
