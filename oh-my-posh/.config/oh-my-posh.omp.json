@@ -92,7 +92,7 @@
   "transient_prompt": {
     "foreground": "darkGray",
     "newline": true,
-    "template": "<blue>{{ .Segments.UserName.Text }}</><magenta>{{ .Segments.HostName.Text }}</><cyan>{{ .Segments.Path.Text }}</>{{ now | date \"15:04:05\" }}\n{{ .Segments.PromptChar.Text }} "
+    "template": "<blue>{{ .Segments.UserName.Text }}</><magenta>{{ .Segments.HostName.Text }}</><cyan>{{ .Segments.Path.Text }}</>{{ .Segments.GitInfo.Text }} [{{ now | date \"15:04:05\" }}]\n{{ .Segments.PromptChar.Text }} "
   },
   "version": 4
 }
