@@ -255,17 +255,20 @@ let g:WhichKeyDesc_status = "<leader>gs status"
 nmap <leader>gb <Action>(Annotate)
 let g:WhichKeyDesc_blame = "<leader>gb blame"
 
-nmap <leader>gl <Action>(Vcs.Show.Log)
-let g:WhichKeyDesc_log = "<leader>gl log"
+nmap <leader>gl <Action>(Vcs.ShowTabbedFileHistory)
+let g:WhichKeyDesc_log_file = "<leader>gl log for file"
 
-nmap <leader>gL <Action>(Vcs.ShowTabbedFileHistory)
-let g:WhichKeyDesc_log_file = "<leader>gL log for file"
+nmap <leader>gL <Action>(Vcs.Show.Log)
+let g:WhichKeyDesc_log = "<leader>gL log for branch"
 
 map <leader>ghr <Action>(Vcs.RollbackChangedLines)
 let g:WhichKeyDesc_reset_hunk = "<leader>ghr reset hunk"
 
 map <leader>gw <Action>(Github.Open.In.Browser)
 let g:WhichKeyDesc_open_web = "<leader>gw open in browser"
+
+map <leader>gp <Action>(Github.View.Pull.Request)
+let g:WhichKeyDesc_view_prs = "<leader>gp view PRs"
 
 " SEARCH KEYMAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
