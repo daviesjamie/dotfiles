@@ -64,6 +64,10 @@ if has fzf; then
     eval "$(fzf --zsh)"
 fi
 
+if has hugo; then
+    eval "$(hugo completion zsh)"
+fi
+
 if has mise; then
     eval "$(mise activate zsh)"
 fi
