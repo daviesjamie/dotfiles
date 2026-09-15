@@ -4,6 +4,7 @@ set -euo pipefail
 EXTRA_FOLDERS=(
   "$HOME/notes"
   "$HOME/.dotfiles"
+  "$HOME/Library/Application Support/pico-8/carts"
 )
 
 if ! command -v tmux &>/dev/null || ! command -v ghq &>/dev/null; then
