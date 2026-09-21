@@ -33,6 +33,12 @@ vim.o.mouse = "nv"
 -- Make mouse scrolling smoother
 vim.o.mousescroll = "ver:1,hor:4"
 
+-- Keep lines visible above/below cursor
+vim.opt.scrolloff = 10
+
+-- Keep columns visible before/after cursor
+vim.opt.sidescrolloff = 8
+
 -- Confirm to save changes before closing buffer
 vim.o.confirm = true
 
@@ -44,7 +50,7 @@ vim.o.cursorline = true
 
 -- Display some whitespace characters explicitly
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Highlight search results (cleared with <Esc> in normal mode)
 vim.o.hlsearch = true
@@ -80,10 +86,10 @@ vim.o.foldmethod = "indent"
 -- Make sure all folds are open when opening a buffer
 vim.o.foldlevelstart = 99
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
+  float = { border = "rounded", source = "if_many" },
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Don't show text at the end of the line
@@ -95,14 +101,14 @@ vim.diagnostic.config {
   -- Auto open the float, so you can easily read the errors when jumping
   jump = {
     on_jump = function(_, bufnr)
-      vim.diagnostic.open_floater {
+      vim.diagnostic.open_floater({
         bufnr = bufnr,
-        scope = 'cursor',
+        scope = "cursor",
         focus = false,
-      }
+      })
     end,
   },
-}
+})
 
 -------------------------------------------------------------------------------
 -- KEYMAPS
@@ -144,8 +150,13 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Override builtin diagnostic keymaps to versions that open the diagnostic
-map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Jump to the next diagnostic in the current buffer")
-map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Jump to the previous diagnostic in the current buffer")
+map("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, "Jump to the next diagnostic in the current buffer")
+
+map("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, "Jump to the previous diagnostic in the current buffer")
 
 -- Show list of diagnostics
 map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostic list")
@@ -220,7 +231,7 @@ require("gitsigns").setup({
     changedelete = { text = "▎" },
   },
   on_attach = function(bufnr)
-    local gitsigns = require('gitsigns')
+    local gitsigns = require("gitsigns")
     map("n", "]c", function()
       if vim.wo.diff then
         vim.cmd.normal({ "]c", bang = true })
@@ -239,7 +250,9 @@ require("gitsigns").setup({
 
     map("n", "<leader>ghp", gitsigns.preview_hunk, "git preview hunk", { buf = bufnr })
     map("n", "<leader>ghi", gitsigns.preview_hunk_inline, "git preview hunk inline", { buf = bufnr })
-    map("n", "<leader>ghb", function() gitsigns.blame_line({ full = true }) end, "git blame line", { buf = bufnr })
+    map("n", "<leader>ghb", function()
+      gitsigns.blame_line({ full = true })
+    end, "git blame line", { buf = bufnr })
   end,
 })
 
@@ -280,11 +293,15 @@ require("oil").setup({
 })
 map("n", "-", "<cmd>Oil --float --preview<cr>", "Open parent directory")
 
+-- Useful status updates for LSP.
+vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
+require("fidget").setup({})
+
 -- Snacks
 vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 require("snacks").setup({
   gitbrowse = { enabled = true, notify = false }, -- git links
-  indent = { enabled = true }, -- indent guides
+  indent = { enabled = true, animate = { enabled = false } }, -- indent guides
   input = { enabled = true }, -- better vim.ui.input windows
   scope = { enabled = true }, -- scope detection
   scratch = { enabled = true }, -- scratch buffers
@@ -317,70 +334,247 @@ require("snacks").setup({
 })
 
 -- Snacks - copy/open git links
-local copy_to_clipboard = function(s) vim.fn.setreg("+", s) end
-map({ "n", "v" }, "<leader>gww", function() Snacks.gitbrowse({ what = "permalink", open = copy_to_clipboard }) end, "Copy git permalink")
-map({ "n", "v" }, "<leader>gwL", function() Snacks.gitbrowse({ what = "permalink" }) end, "Open git permalink")
-map({ "n", "v" }, "<leader>gwf", function() Snacks.gitbrowse({ what = "file", open = copy_to_clipboard }) end, "Copy link to git file")
-map({ "n", "v" }, "<leader>gwF", function() Snacks.gitbrowse({ what = "file" }) end, "Open link to git file")
-map("n", "<leader>gwr", function() Snacks.gitbrowse({ what = "repo", open = copy_to_clipboard }) end, "Copy link to git repo")
-map("n", "<leader>gwR", function() Snacks.gitbrowse({ what = "repo" }) end, "Open link to git repo")
-map("n", "<leader>gwc", function() Snacks.gitbrowse({ what = "commit", open = copy_to_clipboard }) end, "Copy link to git commit")
-map("n", "<leader>gwC", function() Snacks.gitbrowse({ what = "commit" }) end, "Open link to git commit")
+local copy_to_clipboard = function(s)
+  vim.fn.setreg("+", s)
+end
+
+map({ "n", "v" }, "<leader>gww", function()
+  Snacks.gitbrowse({ what = "permalink", open = copy_to_clipboard })
+end, "Copy git permalink")
+
+map({ "n", "v" }, "<leader>gwW", function()
+  Snacks.gitbrowse({ what = "permalink" })
+end, "Open git permalink")
+
+map({ "n", "v" }, "<leader>gwf", function()
+  Snacks.gitbrowse({ what = "file", open = copy_to_clipboard })
+end, "Copy link to git file")
+
+map({ "n", "v" }, "<leader>gwF", function()
+  Snacks.gitbrowse({ what = "file" })
+end, "Open link to git file")
+
+map("n", "<leader>gwr", function()
+  Snacks.gitbrowse({ what = "repo", open = copy_to_clipboard })
+end, "Copy link to git repo")
+
+map("n", "<leader>gwR", function()
+  Snacks.gitbrowse({ what = "repo" })
+end, "Open link to git repo")
+
+map("n", "<leader>gwc", function()
+  Snacks.gitbrowse({ what = "commit", open = copy_to_clipboard })
+end, "Copy link to git commit")
+
+map("n", "<leader>gwC", function()
+  Snacks.gitbrowse({ what = "commit" })
+end, "Open link to git commit")
 
 -- Snacks - scratch buffer
-map("n", "<leader>.", function() Snacks.scratch() end, "Toggle scratch buffer")
-map("n", "<leader>S", function() Snacks.scratch.select() end, "Select scratch buffer")
+map("n", "<leader>.", function()
+  Snacks.scratch()
+end, "Toggle scratch buffer")
+
+map("n", "<leader>S", function()
+  Snacks.scratch.select()
+end, "Select scratch buffer")
 
 -- Snacks - picker
-map("n", "<C-p>", function() Snacks.picker.smart({ filter = { cwd = true } }) end, "Smart find files")
-map("n", "<leader>,", function() Snacks.picker.buffers() end, "Find buffer")
-map("n", "<leader>:", function() Snacks.picker.command_history() end, "Search command history")
-map("n", "<leader>/", function() Snacks.picker.grep() end, "Grep")
-map("x", "<leader>/", function() Snacks.picker.grep_word({ live = true }) end, "Grep")
-map("n", "<leader><space>", function() Snacks.picker.resume() end, "Resume last picker")
-map("n", "<leader>ff", function() Snacks.picker.files() end, "Find files")
-map("n", "<leader>fr", function() Snacks.picker.recent({ filter = { cwd = true } }) end, "Recent files")
-map("n", "<leader>sc", function() Snacks.picker.commands() end, "Search commands")
-map("n", "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, "Search diagnostics")
-map("n", "<leader>sh", function() Snacks.picker.help() end, "Search help")
-map("n", "<leader>sk", function() Snacks.picker.keymaps() end, "Search keymaps")
-map("n", "<leader>sm", function() Snacks.picker.man() end, "Search man pages")
+map("n", "<C-p>", function()
+  Snacks.picker.smart({ filter = { cwd = true } })
+end, "Smart find files")
+
+map("n", "<leader>,", function()
+  Snacks.picker.buffers()
+end, "Find buffer")
+
+map("n", "<leader>:", function()
+  Snacks.picker.command_history()
+end, "Search command history")
+
+map("n", "<leader>/", function()
+  Snacks.picker.grep()
+end, "Grep")
+
+map("x", "<leader>/", function()
+  Snacks.picker.grep_word({ live = true })
+end, "Grep")
+
+map("n", "<leader><space>", function()
+  Snacks.picker.resume()
+end, "Resume last picker")
+
+map("n", "<leader>ff", function()
+  Snacks.picker.files()
+end, "Find files")
+
+map("n", "<leader>fr", function()
+  Snacks.picker.recent({ filter = { cwd = true } })
+end, "Recent files")
+
+map("n", "<leader>sc", function()
+  Snacks.picker.commands()
+end, "Search commands")
+
+map("n", "<leader>sd", function()
+  Snacks.picker.diagnostics_buffer()
+end, "Search diagnostics")
+
+map("n", "<leader>sh", function()
+  Snacks.picker.help()
+end, "Search help")
+
+map("n", "<leader>sk", function()
+  Snacks.picker.keymaps()
+end, "Search keymaps")
+
+map("n", "<leader>sm", function()
+  Snacks.picker.man()
+end, "Search man pages")
 
 -------------------------------------------------------------------------------
 -- LSP
 -------------------------------------------------------------------------------
-vim.pack.add({
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
-})
-
-require("mason").setup()
-require("mason-lspconfig").setup({
-  automatic_enable = true,
-  ensure_installed = { "lua_ls" },
-})
-
 autocmd("LspAttach", {
   group = augroup("lsp_attach"),
   callback = function(ev)
     local bufopts = { silent = true, buffer = ev.buf }
-    map("n", "grr", function() Snacks.picker.lsp_references() end, "Go to references", bufopts)
-    map("n", "grt", function() Snacks.picker.lsp_type_definitions() end, "Go to type definition", bufopts)
-    map("n", "gri", function() Snacks.picker.lsp_implementations() end, "Go to implementation", bufopts)
 
-    map("n", "grd", function() Snacks.picker.lsp_definitions() end, "Go to definition", bufopts)
-    map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, "Search symbols (buffer)", bufopts)
-    map("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, "Search symbols (workspace)", bufopts)
+    map("n", "grr", function()
+      Snacks.picker.lsp_references()
+    end, "Go to references", bufopts)
 
-    map("i", "<C-space>", vim.lsp.completion.get, "Trigger completion", bufopts)
+    map("n", "grd", function()
+      Snacks.picker.lsp_definitions()
+    end, "Go to definition", bufopts)
 
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    local methods = vim.lsp.protocol.Methods
-    if client:supports_method(methods.textDocument_completion) then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    map("n", "grt", function()
+      Snacks.picker.lsp_type_definitions()
+    end, "Go to type definition", bufopts)
+
+    map("n", "gri", function()
+      Snacks.picker.lsp_implementations()
+    end, "Go to implementation", bufopts)
+
+    map("n", "grn", vim.lsp.buf.rename, "Rename current file")
+    map({ "n", "x" }, "gra", vim.lsp.buf.code_action, "Run code action")
+    map("n", "grD", vim.lsp.buf.declaration, "Go to declaration")
+
+    map("n", "<leader>ss", function()
+      Snacks.picker.lsp_symbols()
+    end, "Search symbols (buffer)", bufopts)
+
+    map("n", "<leader>sS", function()
+      Snacks.picker.lsp_workspace_symbols()
+    end, "Search symbols (workspace)", bufopts)
+  end,
+})
+
+local servers = {
+  stylua = {},
+  lua_ls = {
+    on_init = function(client)
+      client.server_capabilities.documentFormattingProvider = false -- Disable formatting (done by stylua instead)
+
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if
+          path ~= vim.fn.stdpath("config")
+          and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+        then
+          return
+        end
+      end
+
+      local current_settings = client.config.settings --[[@as lspconfig.settings.lua_ls]]
+      client.config.settings.Lua = vim.tbl_deep_extend("force", current_settings.Lua, {
+        runtime = {
+          version = "LuaJIT",
+          path = { "lua/?.lua", "lua/?/init.lua" },
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+      })
+    end,
+    ---@type lspconfig.settings.lua_ls
+    settings = {
+      Lua = {
+        format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+      },
+    },
+  },
+}
+
+vim.pack.add({
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+})
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+  automatic_enable = false,
+})
+
+local ensure_installed = vim.tbl_keys(servers)
+require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
+for name, server in pairs(servers) do
+  vim.lsp.config(name, server)
+  vim.lsp.enable(name)
+end
+
+-------------------------------------------------------------------------------
+-- Formatting
+-------------------------------------------------------------------------------
+
+vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+require("conform").setup({
+  notify_on_error = false,
+  format_on_save = function(bufnr)
+    local filetypes = {
+      lua = true,
+    }
+    if filetypes[vim.bo[bufnr].filetype] then
+      return { timeout_ms = 500 }
+    else
+      return nil
     end
   end,
+  default_format_opts = {
+    -- Use external formatters if configured below, otherwise use LSP
+    lsp_format = "fallback",
+  },
+  formatters_by_ft = {
+    lua = { "stylua" },
+  },
+})
+
+map({ "n", "v" }, "<leader>f", function()
+  require("conform").format({ async = true })
+end, "Format")
+
+-------------------------------------------------------------------------------
+-- Autocomplete
+-------------------------------------------------------------------------------
+
+vim.pack.add({ { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") } })
+require("blink.cmp").setup({
+  keymap = {
+    preset = "default",
+  },
+  completion = {
+    documentation = { auto_show = false, auto_show_delay_ms = 500 },
+  },
+  sources = {
+    default = { "lsp", "path" },
+  },
+  signature = {
+    enabled = true,
+  },
 })
 
 -------------------------------------------------------------------------------
@@ -393,7 +587,9 @@ autocmd("PackChanged", {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     if name == "nvim-treesitter" and kind == "update" then
-      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+      if not ev.data.active then
+        vim.cmd.packadd("nvim-treesitter")
+      end
       vim.cmd("TSUpdate")
     end
   end,
@@ -435,16 +631,56 @@ require("nvim-treesitter").install({
   "yaml",
 })
 
+local function treesitter_try_attach(buf, language)
+  -- Check if a parser exists and load it
+  if not vim.treesitter.language.add(language) then
+    return
+  end
+
+  -- Check if the buffer is valid (might not be after install completes)
+  if not vim.api.nvim_buf_is_valid(buf) then
+    return
+  end
+
+  -- Enable syntax highlighting and other treesitter features
+  vim.treesitter.start(buf, language)
+
+  -- Enable treesitter based folds
+  vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.wo.foldmethod = "expr"
+
+  -- Check if treesitter indentation is available for this language, and if so enable it
+  -- in case there is no indent query, the indentexpr will fallback to the vim's built in one
+  local has_indent_query = vim.treesitter.query.get(language, "indents") ~= nil
+  if has_indent_query then
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end
+end
+
 -- Enable highlighting, folding and indenting
+local available_parsers = require("nvim-treesitter").get_available()
 autocmd("FileType", {
   group = augroup("treesitter_filetype"),
-  callback = function(ev)
-    local filetype = ev.match
+  callback = function(args)
+    local buf, filetype = args.buf, args.match
     local lang = vim.treesitter.language.get_lang(filetype)
-    if vim.treesitter.language.add(lang) then
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.treesitter.start()
+    if not lang then
+      return
+    end
+
+    local installed_parsers = require("nvim-treesitter").get_installed("parsers")
+
+    if vim.tbl_contains(installed_parsers, lang) then
+      -- Enable the parser if it is already installed
+      treesitter_try_attach(buf, lang)
+    elseif vim.tbl_contains(available_parsers, lang) then
+      -- If a parser is available in `nvim-treesitter`, auto-install it and enable it after the installation is done
+      require("nvim-treesitter").install(lang):await(function()
+        treesitter_try_attach(buf, lang)
+      end)
+    else
+      -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+      treesitter_try_attach(buf, lang)
     end
   end,
 })
@@ -454,6 +690,6 @@ autocmd("FileType", {
 -------------------------------------------------------------------------------
 
 -- Load local overrides if they exist
-if(vim.fn.filereadable(vim.fn.expand("~/.nvimrc.local")) == 1) then
+if vim.fn.filereadable(vim.fn.expand("~/.nvimrc.local")) == 1 then
   vim.cmd("luafile " .. vim.fn.expand("~/.nvimrc.local"))
 end
