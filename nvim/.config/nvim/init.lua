@@ -297,6 +297,20 @@ map("n", "-", "<cmd>Oil --float --preview<cr>", "Open parent directory")
 vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
 require("fidget").setup({})
 
+-- Which-key
+vim.pack.add({ "https://github.com/folke/which-key.nvim" })
+require("which-key").setup({
+  icons = { mappings = false },
+  spec = {
+    { "<leader>f", group = "Files", mode = { "n" } },
+    { "<leader>g", group = "Git", mode = { "n", "v" } },
+    { "<leader>gh", group = "Git Hunk", mode = { "n" } },
+    { "<leader>gw", group = "Git Web", mode = { "n", "v" } },
+    { "<leader>s", group = "Search", mode = { "n" } },
+    { "gr", group = "LSP Actions", mode = { "n" } },
+  },
+})
+
 -- Snacks
 vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 require("snacks").setup({
@@ -552,10 +566,6 @@ require("conform").setup({
     lua = { "stylua" },
   },
 })
-
-map({ "n", "v" }, "<leader>f", function()
-  require("conform").format({ async = true })
-end, "Format")
 
 -------------------------------------------------------------------------------
 -- Autocomplete
