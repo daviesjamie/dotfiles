@@ -5,6 +5,10 @@
 -- Enable faster startup by caching compiled Lua modules
 vim.loader.enable()
 
+-- Disable netrw (in favour of nvim-tree added below)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -274,24 +278,99 @@ autocmd("User", {
 vim.pack.add({ "https://github.com/kylechui/nvim-surround" })
 require("nvim-surround").setup({})
 
--- Oil file explorer
-vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
-require("oil").setup({
-  keymaps = {
-    ["<C-s>"] = false,
-    ["<C-h>"] = false,
-    ["<C-v>"] = { "actions.select", opts = { vertical = true } },
-    ["<C-x>"] = { "actions.select", opts = { horizontal = true } },
-    ["gh"] = { "h", mode = "n" },
-    ["gl"] = { "l", mode = "n" },
-    ["h"] = { "actions.parent", mode = "n" },
-    ["l"] = { "actions.select", mode = "n" },
-    ["-"] = { "actions.close", mode = "n" },
-    ["q"] = { "actions.close", mode = "n" },
-    ["<Esc>"] = { "actions.close", mode = "n" },
-  },
+-- Nvim-tree file explorer
+vim.pack.add({
+  { src = "https://github.com/nvim-tree/nvim-tree.lua" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
-map("n", "-", "<cmd>Oil --float --preview<cr>", "Open parent directory")
+
+local function jagd_nvim_tree_attach(bufnr)
+  local api = require("nvim-tree.api")
+  api.map.on_attach.default(bufnr)
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  local open_and_select_first_child = function()
+    local node_at_cursor = api.tree.get_node_under_cursor()
+    if node_at_cursor.nodes and not node_at_cursor.open then
+      -- It's a directory, so expand and go down one
+      api.node.open.edit()
+      vim.api.nvim_feedkeys("j", "n", false)
+      return
+    end
+
+    -- It's a directory, so just open
+    api.node.open.edit()
+  end
+
+  vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
+  vim.keymap.set("n", "l", open_and_select_first_child, opts("Open"))
+end
+
+-- Customise colours (see :NvimTreeHiTest)
+vim.cmd([[
+  :hi link NvimTreeGitDirty          Type
+  :hi link NvimTreeGitDirtyIcon      Type
+  :hi link NvimTreeGitDirtyFileHL    Type
+  :hi link NvimTreeGitDirtyFolderHL  Type
+
+  :hi link NvimTreeGitStaged         Include
+  :hi link NvimTreeGitStagedIcon     Include
+  :hi link NvimTreeGitStagedFileHL   Include
+  :hi link NvimTreeGitStagedFolderHL Include
+
+  :hi link NvimTreeExecFile          NvimTreeNormal
+  :hi link NvimTreeFolderName        NvimTreeNormal
+]])
+
+require("nvim-tree").setup({
+  actions = {
+    change_dir = {
+      restrict_above_cwd = true,
+    },
+  },
+  filters = {
+    dotfiles = false,
+    custom = { "^.git$" },
+  },
+  git = {
+    enable = true,
+    timeout = 5000,
+  },
+  hijack_cursor = true,
+  live_filter = {
+    always_show_folders = false,
+  },
+  modified = {
+    enable = false,
+  },
+  reload_on_bufenter = true,
+  renderer = {
+    add_trailing = true,
+    full_name = true,
+    highlight_git = "name",
+    icons = {
+      show = {
+        git = false,
+      },
+    },
+    indent_markers = {
+      enable = true,
+    },
+    indent_width = 2,
+    root_folder_label = function(path)
+      return vim.fn.fnamemodify(path, ":t")
+    end,
+    special_files = {},
+  },
+  on_attach = jagd_nvim_tree_attach,
+})
+
+map("n", "<leader>e", function()
+  require("nvim-tree.api").tree.toggle({ find_file = true })
+end, "Toggle file tree")
 
 -- Useful status updates for LSP.
 vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
