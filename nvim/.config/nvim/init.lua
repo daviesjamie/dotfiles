@@ -374,7 +374,13 @@ end, "Toggle file tree")
 
 -- Useful status updates for LSP.
 vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
-require("fidget").setup({})
+require("fidget").setup({
+  progress = {
+    suppress_on_insert = true,
+    ignore_done_already = true,
+    ignore_empty_message = true,
+  },
+})
 
 -- Which-key
 vim.pack.add({ "https://github.com/folke/which-key.nvim" })
