@@ -114,6 +114,35 @@ vim.diagnostic.config({
   },
 })
 
+-- Statusline
+vim.o.statusline = table.concat({
+  "%<", -- Where to truncate the line if it's too long
+
+  -- Path to the file in the buffer (relative to cwd)
+  [[%{% luaeval('(vim.fn.expand("%:~:.") == "" or vim.bo.buftype ~= "") ? "%t" : vim.fn.expand("%:~:.")') %}]],
+
+  " ",
+  "%h", -- Help buffer flag ("[Help]")
+  "%w", -- Preview window flag ("[Preview]")
+  "%m", -- Modified flag ("[+]" or "[-]" if non-modifiable)
+  "%r", -- Readonly flag ("[RO]")
+
+  "%=", -- Separation point between left/right parts
+
+  -- Show a symbol if the buffer is marked as busy
+  "%{% &busy > 0 ? ' ◐ ' : '' %}",
+
+  -- Show LSP diagnostic information
+  "%{% luaeval('(package.loaded[''vim.diagnostic''] and next(vim.diagnostic.count()) and vim.diagnostic.status() .. '' '') or '''' ') %}",
+
+  "%y", -- Type of file in the buffer ("[vim]")
+  "%q", -- Show quickfix/location list flag ("[Quickfix List]")
+  " ",
+  "%l", -- Line number
+  ":",
+  "%c", -- Column number
+}, "")
+
 -------------------------------------------------------------------------------
 -- KEYMAPS
 -------------------------------------------------------------------------------
