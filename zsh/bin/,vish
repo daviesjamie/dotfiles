@@ -4,7 +4,7 @@ set -euo pipefail
 USAGE="
 usage: $(basename "$0") <script>
 
-Edits an executable shell script on the $$PATH in $$EDITOR.
+Edits an executable shell script on the \$PATH in \$EDITOR.
 
 arguments:
   <script>   The name of the script
